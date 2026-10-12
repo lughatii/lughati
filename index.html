@@ -126,18 +126,19 @@ function translateText(value){
 }
 const originalTextNodes=new WeakMap();
 const originalAttributes=new WeakMap();
+function translateTextNode(node){
+ const raw=node.nodeValue;
+ if(!raw.trim())return;
+ if(!originalTextNodes.has(node))originalTextNodes.set(node,raw);
+ const source=originalTextNodes.get(node),trimmed=source.trim();
+ const translated=siteLang==='en'?translateText(trimmed):trimmed;
+ const next=source.replace(trimmed,translated);
+ if(node.nodeValue!==next)node.nodeValue=next;
+}
 function translateSite(root=document.body){
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
  let node;
- while((node=walker.nextNode())){
-  const raw=node.nodeValue;
-  if(!raw.trim())continue;
-  if(!originalTextNodes.has(node))originalTextNodes.set(node,raw);
-  const source=originalTextNodes.get(node),trimmed=source.trim();
-  const translated=siteLang==='en'?translateText(trimmed):trimmed;
-  const next=source.replace(trimmed,translated);
-  if(node.nodeValue!==next)node.nodeValue=next;
- }
+ while((node=walker.nextNode()))translateTextNode(node);
  root.querySelectorAll('input[placeholder],input[aria-label],button[title],select[aria-label]').forEach(el=>{
   ['placeholder','aria-label','title'].forEach(a=>{
    if(!el.hasAttribute(a))return;
@@ -169,7 +170,7 @@ function setSiteLanguage(value){
 $('siteLanguage').innerHTML='<option value="ar">العربية</option><option value="en">English</option>';
 $('siteLanguage').value=siteLang;
 $('siteLanguage').addEventListener('change',e=>setSiteLanguage(e.target.value));
-const siteObserver=new MutationObserver(records=>{if(siteLang==='en')records.forEach(record=>record.addedNodes&&record.addedNodes.forEach(n=>{if(n.nodeType===Node.TEXT_NODE){const holder=document.createElement('span');holder.appendChild(n.cloneNode(true));translateSite(holder);n.nodeValue=holder.textContent}else if(n.nodeType===Node.ELEMENT_NODE)translateSite(n)}))});
+const siteObserver=new MutationObserver(records=>{if(siteLang==='en')records.forEach(record=>record.addedNodes&&record.addedNodes.forEach(n=>{if(n.nodeType===Node.TEXT_NODE)translateTextNode(n);else if(n.nodeType===Node.ELEMENT_NODE)translateSite(n)}))});
 siteObserver.observe(document.body,{subtree:true,childList:true});
 
 let state={xp:0,favs:[],known:[],streak:0,last:'',currentLevel:1,passedLevels:[],trainerSeen:[]};try{state=Object.assign(state,JSON.parse(localStorage.getItem('lughati')||'{}'))}catch(e){} state.currentLevel=Math.min(100,Math.max(1,Number(state.currentLevel)||1));state.passedLevels=Array.isArray(state.passedLevels)?state.passedLevels:[];state.trainerSeen=Array.isArray(state.trainerSeen)?state.trainerSeen:[];
