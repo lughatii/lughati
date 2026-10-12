@@ -121,7 +121,7 @@ async function authRequest(payload){
 }
 $('sendLoginCode').onclick=async()=>{
  const email=$('loginEmail').value.trim().toLowerCase();
- if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){$('loginStatus').textContent='اكتب بريد إلكتروني صحيح الأول.';return}
+ if(!/^[^\s@]+@[^\s@]+\\.[^\s@]+$/.test(email)){$('loginStatus').textContent='اكتب بريد إلكتروني صحيح الأول.';return}
  $('sendLoginCode').disabled=true;$('loginStatus').textContent='جاري إرسال رمز التحقق…';
  try{const d=await authRequest({action:'sendCode',email});$('codeArea').style.display='block';$('loginStatus').textContent=d.message||'لو البريد صحيح، راجع صندوق الوارد والرسائل غير المرغوب فيها.'}
  catch(e){$('loginStatus').textContent='ماقدرناش نقرأ ردّ الخادم من المتصفح. '+String(e)+' — لو ظهر الخطأ ده، هنحتاج نحل مشكلة الاتصال بين GitHub Pages وApps Script.'}
