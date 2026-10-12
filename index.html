@@ -104,6 +104,21 @@ button:focus-visible{outline-color:#72cfb4}
 .app-bottom-nav a:hover,.app-bottom-nav a:focus-visible{background:linear-gradient(120deg,#e0f8ef,#e6f4ff);color:#177e68}
 
 </style>
+<style id="performance-navigation-final">
+html{scroll-behavior:auto!important;scroll-padding-top:90px;scroll-padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+body{background-attachment:scroll!important}
+.top{backdrop-filter:blur(6px) saturate(125%);-webkit-backdrop-filter:blur(6px) saturate(125%)}
+.stat,.card,.skill,.path-item,.letter,.lesson-panel{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+nav.app-bottom-nav{position:fixed!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important;left:8px!important;right:8px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:560px!important;margin:0 auto!important;box-sizing:border-box!important;min-width:0!important;height:auto!important;padding:6px!important;gap:4px!important;overflow:visible!important;z-index:99999!important;transform:none!important;visibility:visible!important;opacity:1!important;border-radius:22px;background:rgba(249,252,253,.92);border:1px solid rgba(255,255,255,.95);box-shadow:0 6px 18px rgba(17,42,53,.12);backdrop-filter:blur(6px) saturate(135%);-webkit-backdrop-filter:blur(6px) saturate(135%)}
+nav.app-bottom-nav a{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;min-width:0!important;width:100%!important;min-height:52px!important;height:auto!important;margin:0!important;padding:6px 2px!important;gap:3px!important;white-space:normal!important;text-align:center!important;text-decoration:none!important;border-radius:16px;color:#607783;font-size:clamp(10px,2.8vw,12px)!important;line-height:1.2!important;font-weight:750}
+nav.app-bottom-nav a span{display:block!important;min-width:0!important;max-width:100%!important;overflow:visible!important;white-space:normal!important}
+nav.app-bottom-nav a span:first-child{font-size:20px!important;line-height:1!important;flex:none!important}
+nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
+@media(max-width:760px){body{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important;touch-action:pan-y!important}.top,.app-bottom-nav{backdrop-filter:blur(5px) saturate(125%)!important;-webkit-backdrop-filter:blur(5px) saturate(125%)!important}.hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel,.hero .bubble{animation:none!important;backface-visibility:visible!important}.stat,.card,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action,.app-bottom-nav,.app-bottom-nav a{transition:none!important;will-change:auto!important}.stat,.card,.skill,.path-item,.lesson-panel{box-shadow:0 2px 7px rgba(23,48,60,.04)!important}.letter{box-shadow:0 2px 8px rgba(23,48,60,.045)!important}}
+@media(max-width:350px){nav.app-bottom-nav{left:5px!important;right:5px!important;padding:4px!important;gap:2px!important}nav.app-bottom-nav a{min-height:49px!important;padding:5px 1px!important;font-size:10px!important}nav.app-bottom-nav a span:first-child{font-size:18px!important}}
+@media(prefers-color-scheme:dark){nav.app-bottom-nav{background:rgba(15,32,41,.94);border-color:#ffffff25;box-shadow:0 6px 18px #0005}nav.app-bottom-nav a{color:#c0d1d6}.stat,.card,.skill,.path-item,.lesson-panel{background:rgba(18,34,43,.92)!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
 <header class="top"><div class="brand"><span class="logo">ل</span><span>لُغتي</span></div><span class="top-note">✨ رحلتك في الإنجليزية تبدأ هنا</span></header>
@@ -178,13 +193,14 @@ try{learned=new Set(JSON.parse(localStorage.getItem('lughati-learned-letters')||
 function saveProgress(){try{localStorage.setItem('lughati-learned-letters',JSON.stringify([...learned]));localStorage.setItem('lughati-visited-letters',JSON.stringify([...visited]))}catch(e){}}
 function renderAlphabet(){$('alphabet').innerHTML=letters.map((l,i)=>'<button class="letter" type="button" data-letter="'+i+'" aria-pressed="'+(i===selected)+'" aria-label="الحرف '+l[0]+' الصغير '+l[1]+(learned.has(i)?'، اتعلّمته':'')+'"><span class="big-letter">'+l[0]+'</span><span class="small-letter">'+l[1]+'</span><span class="letter-name">'+(learned.has(i)?'✓ اتعلّمته':l[2])+'</span></button>').join('')}
 function updateProgress(){const count=learned.size,pct=Math.round(count/letters.length*100);$('learnedCount').textContent=count+' / 26';$('progressPercent').textContent=pct+'%';$('visitedCount').textContent=visited.size;$('coursePercent').textContent=pct+'%';$('courseProgressFill').style.width=pct+'%';$('courseProgress').setAttribute('aria-valuenow',pct);$('lettersSkillState').textContent=count===26?'خلصت كل الحروف! 🎉':count+' من 26 حرف';$('markLearned').textContent=learned.has(selected)?'✓ الحرف اتعلّم':'✓ اتعلّمت الحرف';$('markLearned').setAttribute('aria-pressed',String(learned.has(selected)))}
-function chooseLetter(i){selected=(i+letters.length)%letters.length;visited.add(selected);const l=letters[selected];$('focusLetter').textContent=l[0]+' '+l[1];$('letterPosition').textContent='الحرف '+(selected+1)+' من 26';$('letterPill').textContent='الحرف '+(selected+1)+' من 26';$('letterTitle').textContent='حرف '+l[0]+' '+l[1];$('letterName').textContent=l[2];$('exampleWord').textContent=l[3];$('exampleMeaning').textContent=l[4];document.querySelectorAll('[data-letter]').forEach((b,j)=>{b.setAttribute('aria-pressed',String(selected===j));b.querySelector('.letter-name').textContent=learned.has(j)?'✓ اتعلّمته':letters[j][2]});saveProgress();updateProgress()}
+function updateLetterButton(i){const b=$('alphabet').querySelector('[data-letter="'+i+'"]');if(!b)return;b.setAttribute('aria-pressed',String(i===selected));const label=b.querySelector('.letter-name');if(label)label.textContent=learned.has(i)?'✓ اتعلّمته':letters[i][2];b.setAttribute('aria-label','الحرف '+letters[i][0]+' الصغير '+letters[i][1]+(learned.has(i)?'، اتعلّمته':''))}
+function chooseLetter(i){const previous=selected;selected=(i+letters.length)%letters.length;visited.add(selected);const l=letters[selected];$('focusLetter').textContent=l[0]+' '+l[1];$('letterPosition').textContent='الحرف '+(selected+1)+' من 26';$('letterPill').textContent='الحرف '+(selected+1)+' من 26';$('letterTitle').textContent='حرف '+l[0]+' '+l[1];$('letterName').textContent=l[2];$('exampleWord').textContent=l[3];$('exampleMeaning').textContent=l[4];if(previous!==selected)updateLetterButton(previous);updateLetterButton(selected);saveProgress();updateProgress()}
 function goToLesson(){ $('lessonArea').scrollIntoView({behavior:'smooth',block:'start'}) }
 function speak(text){if(!('speechSynthesis' in window)){alert('ميزة النطق مش متاحة في المتصفح ده.');return}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.78;window.speechSynthesis.speak(u)}
 $('alphabet').addEventListener('click',e=>{const b=e.target.closest('[data-letter]');if(b)chooseLetter(Number(b.dataset.letter))});
 $('hearLetter').addEventListener('click',()=>speak(letters[selected][0]));$('hearExample').addEventListener('click',()=>speak(letters[selected][3]));
 $('nextLetter').addEventListener('click',()=>chooseLetter((selected+1)%letters.length));$('previousLetter').addEventListener('click',()=>chooseLetter((selected-1+letters.length)%letters.length));
-$('markLearned').addEventListener('click',()=>{if(learned.has(selected))learned.delete(selected);else learned.add(selected);saveProgress();renderAlphabet();chooseLetter(selected)});
+$('markLearned').addEventListener('click',()=>{if(learned.has(selected))learned.delete(selected);else learned.add(selected);saveProgress();updateLetterButton(selected);updateProgress()});
 $('continueLearning').addEventListener('click',goToLesson);$('startLetters').addEventListener('click',goToLesson);$('pathLetters').addEventListener('click',goToLesson);if($('viewPath'))$('viewPath').addEventListener('click',()=>$('learningPath').scrollIntoView({behavior:'smooth',block:'start'}));
 $('pickLetter').addEventListener('click',()=>{const candidates=letters.map((_,i)=>i).filter(i=>!learned.has(i));chooseLetter(candidates.length?candidates[Math.floor(Math.random()*candidates.length)]:Math.floor(Math.random()*letters.length));goToLesson()});
 renderAlphabet();chooseLetter(0);
@@ -262,157 +278,6 @@ body{background:radial-gradient(ellipse at 5% 3%,#103c3a 0,transparent 34%),radi
 }
 </style>
 
-
-<style id="bottom-nav-mobile-fix">
-/* Stable mobile navigation: three equal columns, independent of older flex/grid rules. */
-html{scroll-padding-bottom:calc(100px + env(safe-area-inset-bottom))}
-body{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
-nav.app-bottom-nav{
- position:fixed!important;display:grid!important;
- grid-template-columns:repeat(3,minmax(0,1fr))!important;
- align-items:stretch!important;justify-content:initial!important;
- left:8px!important;right:8px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;
- width:auto!important;max-width:560px!important;margin:0 auto!important;
- box-sizing:border-box!important;min-width:0!important;height:auto!important;
- padding:6px!important;gap:4px!important;overflow:visible!important;
- z-index:99999!important;transform:none!important;
- visibility:visible!important;opacity:1!important;
- border-radius:22px;background:rgba(249,252,253,.92);
- border:1px solid rgba(255,255,255,.95);
- box-shadow:0 10px 32px rgba(17,42,53,.2);
- backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
-}
-nav.app-bottom-nav a{
- display:flex!important;flex-direction:column!important;
- align-items:center!important;justify-content:center!important;
- box-sizing:border-box!important;min-width:0!important;width:100%!important;
- min-height:52px!important;height:auto!important;margin:0!important;padding:6px 2px!important;
- gap:3px!important;overflow:visible!important;white-space:normal!important;
- text-align:center!important;text-decoration:none!important;
- border-radius:16px;color:#607783;font-size:clamp(10px,2.8vw,12px)!important;
- line-height:1.2!important;font-weight:750;
-}
-nav.app-bottom-nav a span{display:block!important;min-width:0!important;max-width:100%!important;overflow:visible!important;text-overflow:clip!important;white-space:normal!important}
-nav.app-bottom-nav a span:first-child{font-size:20px!important;line-height:1!important;flex:none!important}
-nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
-nav.app-bottom-nav a:hover,nav.app-bottom-nav a:focus-visible{background:linear-gradient(120deg,#e0f8ef,#e6f4ff);color:#177e68}
-@media(max-width:350px){
- nav.app-bottom-nav{left:5px!important;right:5px!important;padding:4px!important;gap:2px!important}
- nav.app-bottom-nav a{min-height:49px!important;padding:5px 1px!important;font-size:10px!important}
- nav.app-bottom-nav a span:first-child{font-size:18px!important}
-}
-@media(prefers-color-scheme:dark){
- nav.app-bottom-nav{background:rgba(15,32,41,.94);border-color:#ffffff25;box-shadow:0 10px 32px #0007}
- nav.app-bottom-nav a{color:#c0d1d6}
- nav.app-bottom-nav a:hover,nav.app-bottom-nav a:focus-visible{background:#173f3b;color:#9af2d8}
-}
-</style>
-
-<style id="alive-scroll-motion">
-/* Fast, lightweight motion that makes the page feel responsive while scrolling. */
-html{scroll-behavior:smooth}
-body{--scroll-progress:0%;background-attachment:scroll}
-body:before{content:"";position:fixed;z-index:100000;top:0;left:0;width:var(--scroll-progress);height:3px;pointer-events:none;background:linear-gradient(90deg,#59d9b7,#80cdf4,#ffcf70);box-shadow:0 0 10px #59d9b766;transition:width .08s linear}
-.hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel{backface-visibility:hidden}
-@media(prefers-reduced-motion:no-preference){
- .card,.stat,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action{transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease,border-color .2s ease,background-color .2s ease}
- .card:active,.stat:active,.skill:active,.path-item:active,.letter:active{transform:scale(.985)}
- .btn:active,.path-action:active,.app-bottom-nav a:active{transform:scale(.96)}
- .hero .bubble{animation:float-gently 4.5s ease-in-out infinite}
- .hero .bubble.b{animation-delay:-1.4s}.hero .bubble.c{animation-delay:-2.7s}
-}
-@keyframes float-gently{0%,100%{translate:0 0}50%{translate:0 -5px}}
-.app-bottom-nav{transition:background .25s ease,box-shadow .25s ease}
-.app-bottom-nav a{transition:background .18s ease,color .18s ease,transform .18s ease}
-@media(max-width:760px){
- /* Keep the premium glass appearance, but use moderate blur on small screens. */
- .top,.stat,.card,.skill,.path-item,.letter,.lesson-panel,.app-bottom-nav{backdrop-filter:blur(10px) saturate(145%);-webkit-backdrop-filter:blur(10px) saturate(145%)}
- .stat,.card,.skill,.path-item,.letter,.lesson-panel{box-shadow:0 6px 20px rgba(23,48,60,.07)}
- body{background-attachment:scroll!important}
-}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}body:before{transition:none}.hero .bubble{animation:none!important}}
-</style>
-<script id="alive-scroll-motion-script">
-/* Keep scrolling native: no reveal animations or per-frame visual work. */
-(()=> {
- const root=document.documentElement;
- let queued=false;
- const update=()=>{
-  const max=root.scrollHeight-root.clientHeight;
-  const percent=max>0?Math.min(100,Math.max(0,root.scrollTop/max*100)):0;
-  document.body.style.setProperty('--scroll-progress',percent+'%');
-  queued=false;
- };
- const onScroll=()=>{if(!queued){queued=true;requestAnimationFrame(update)}};
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
- function init(){update();window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll,{passive:true})}
-})();
-</script>
-
-
-<style id="mobile-speed-pass">
-/* Keep the glass aesthetic while avoiding expensive blur on dozens of tiles. */
-@media(max-width:760px){
-  .letter{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 2px 8px rgba(23,48,60,.045)!important}
-  .stat,.card,.skill,.path-item,.lesson-panel{backdrop-filter:blur(5px) saturate(125%)!important;-webkit-backdrop-filter:blur(5px) saturate(125%)!important}
-  .top,.app-bottom-nav{backdrop-filter:blur(8px) saturate(140%)!important;-webkit-backdrop-filter:blur(8px) saturate(140%)!important}
-  .card,.stat,.skill,.path-item,.lesson-panel,.letter{transition:transform .16s ease,border-color .16s ease!important}
-  .hero .bubble{animation-duration:6s!important}
-}
-</style>
-
-<style id="touch-scroll-priority">
-html{scroll-behavior:auto!important;overscroll-behavior-y:contain}
-body{touch-action:pan-y;overscroll-behavior-y:contain}
-@media(max-width:760px){
- .hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel,.hero .bubble{animation:none!important}
- .stat,.card,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action,.app-bottom-nav,.app-bottom-nav a{transition:none!important;will-change:auto!important}
- body:before{display:none!important}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style>
-
-<style id="mobile-scroll-smoothness-pass">
-/* Reduce repeated GPU compositing while preserving the main iOS glass navigation. */
-@media(max-width:760px){
-  html,body{-webkit-overflow-scrolling:touch;scroll-behavior:auto!important}
-  .top,.app-bottom-nav{
-    backdrop-filter:blur(6px) saturate(135%)!important;
-    -webkit-backdrop-filter:blur(6px) saturate(135%)!important;
-  }
-  .stat,.card,.skill,.path-item,.lesson-panel{
-    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
-    background:rgba(255,255,255,.88)!important;
-    box-shadow:0 3px 10px rgba(23,48,60,.045)!important;
-  }
-  .letter{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
-  .hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel,.hero .bubble{
-    animation:none!important;backface-visibility:visible!important
-  }
-  .stat,.card,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action,.app-bottom-nav,.app-bottom-nav a{
-    transition:none!important;will-change:auto!important
-  }
-  body:before{display:none!important}
-}
-@media(prefers-color-scheme:dark) and (max-width:760px){
-  .stat,.card,.skill,.path-item,.lesson-panel{background:rgba(18,34,43,.9)!important}
-}
-</style>
-
-
-<style id="frame-pacing-pass">
-/* Prefer native high-refresh-rate scrolling and avoid extra paint work. */
-html{scroll-behavior:auto!important}
-body{background-attachment:scroll!important}
-@media(max-width:760px){
-  body{touch-action:pan-y!important;overscroll-behavior-y:auto!important}
-  .top,.app-bottom-nav{backdrop-filter:blur(5px) saturate(125%)!important;-webkit-backdrop-filter:blur(5px) saturate(125%)!important}
-  .hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel,.hero .bubble{animation:none!important;backface-visibility:visible!important}
-  .stat,.card,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action,.app-bottom-nav,.app-bottom-nav a{transition:none!important;will-change:auto!important}
-  .stat,.card,.skill,.path-item,.lesson-panel{box-shadow:0 2px 7px rgba(23,48,60,.04)!important}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style>
 
 </body>
 </html>
