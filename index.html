@@ -178,6 +178,7 @@ function setSiteLanguage(value){
  document.documentElement.lang=siteLang;document.documentElement.dir=siteLang==='en'?'ltr':'rtl';
  translateSite();renderWords();renderFlash();renderTrainer();renderLevelGrid();newQuiz();
 }
+const $=id=>document.getElementById(id);
 $('siteLanguage').innerHTML='<option value="ar">العربية</option><option value="en">English</option>';
 $('siteLanguage').value=siteLang;
 $('siteLanguage').addEventListener('change',e=>setSiteLanguage(e.target.value));
@@ -185,7 +186,7 @@ const siteObserver=new MutationObserver(records=>{if(siteLang==='en')records.for
 siteObserver.observe(document.body,{subtree:true,childList:true});
 
 let state={xp:0,favs:[],known:[],streak:0,last:'',currentLevel:1,passedLevels:[],trainerSeen:[]};try{state=Object.assign(state,JSON.parse(localStorage.getItem('lughati')||'{}'))}catch(e){} state.currentLevel=Math.min(100,Math.max(1,Number(state.currentLevel)||1));state.passedLevels=Array.isArray(state.passedLevels)?state.passedLevels:[];state.trainerSeen=Array.isArray(state.trainerSeen)?state.trainerSeen:[];
-const $=id=>document.getElementById(id), all=()=>db[lang], id=(w)=>lang+db[lang].indexOf(w), safe=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const all=()=>db[lang], id=(w)=>lang+db[lang].indexOf(w), safe=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function save(){localStorage.setItem('lughati',JSON.stringify(state));stats()}
 function stats(){$('xp').textContent=state.xp+' نجمة';$('level').textContent='المستوى '+state.currentLevel;$('saved').textContent=state.favs.length+' كلمة';$('streak').textContent=state.streak+' يوم';if($('levelBadge'))$('levelBadge').textContent='المستوى '+state.currentLevel+' من 100'}
 function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1800)}
