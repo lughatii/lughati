@@ -75,7 +75,7 @@ function setSiteLanguage(value){
  document.documentElement.lang=siteLang;document.documentElement.dir=siteLang==='de'?'ltr':'rtl';
  $('siteLanguage').value=siteLang;
  translateSite();
- renderWords();renderFlash();renderTrainer();renderLevelGrid();
+ renderWords();renderFlash();renderTrainer();renderLevelGrid();newQuiz();
 }
 $('siteLanguage').value=siteLang;
 $('siteLanguage').addEventListener('change',e=>setSiteLanguage(e.target.value));
