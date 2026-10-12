@@ -140,8 +140,14 @@ nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
       <div class="eyebrow" id="letterPosition">الدرس الأول</div>
       <h2 id="letterTitle">حرف A a</h2>
       <p>اسم الحرف بالعربي تقريبًا: <strong id="letterName">إيه</strong></p>
+      <div class="example-card">
+        <span class="example-label">مثال على الحرف</span>
+        <p class="example-line"><span class="word" id="exampleWord">Apple</span><span class="example-separator">—</span><span id="exampleMeaning">تفاحة</span></p>
+      </div>
       <div class="actions lesson-audio-actions">
         <button class="btn primary" id="hearLesson" type="button">🔊 اسمع اسم الحرف</button>
+        <button class="btn secondary" id="hearLetter" type="button">اسمع الحرف</button>
+        <button class="btn secondary" id="hearExample" type="button">اسمع المثال</button>
       </div>
       <div class="actions lesson-controls">
         <button class="btn done-button" id="markLearned" type="button">✓ اتعلّمت الحرف</button>
@@ -204,6 +210,8 @@ function speak(text){
 function speakWholeLesson(){
  speak(letters[selected][0]);
 }
+$('hearLetter').addEventListener('click',()=>speak(letters[selected][0]));
+$('hearExample').addEventListener('click',()=>speak(letters[selected][3]));
 $('hearLesson').addEventListener('click',speakWholeLesson);
 $('nextLetter').addEventListener('click',()=>{if(selected<letters.length-1)chooseLetter(selected+1)});
 $('previousLetter').addEventListener('click',()=>{if(selected>0)chooseLetter(selected-1)});
