@@ -122,63 +122,46 @@ nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
 </head>
 <body>
 <header class="top"><div class="brand"><span class="logo">ل</span><span>لُغتي</span></div><span class="top-note">✨ رحلتك في الإنجليزية تبدأ هنا</span></header>
-<main>
-<section class="hero">
-  <div class="hero-copy">
-    <div class="eyebrow">🌈 خطوة صغيرة كل يوم</div>
-    <h1>أهلًا بيك في رحلتك لتعلّم الإنجليزي!</h1>
-    <p>ابدأ من الصفر، اتعلّم على مهلك، وشوف تقدّمك خطوة بخطوة. النهارده ممكن يكون أول يوم في رحلتك.</p>
-    <div class="hero-actions"><button class="btn primary" id="continueLearning" type="button">يلا نكمّل التعلّم ←</button><button class="btn secondary" id="viewPath" type="button">شوف مسار الدروس</button></div>
+<main class="lesson-first-main">
+<section class="lesson-area" id="lessonArea" aria-labelledby="pageTitle">
+  <div class="lesson-intro">
+    <span class="lesson-kicker">رحلتك في الإنجليزية</span>
+    <h1 id="pageTitle">يلا نتعلّم أول حرف!</h1>
+    <p>اسمع اسم الحرف، واتعرّف على كلمة بتبدأ بيه. ولما تكون جاهز، انتقل للحرف اللي بعده.</p>
+    <span class="pill" id="letterPill">الدرس 1 من 26</span>
   </div>
-  <div class="hero-art" aria-hidden="true"><span class="spark one">✦</span><span class="spark two">✧</span><span class="bubble a">Aa</span><span class="bubble b">B</span><span class="bubble c">C</span></div>
-</section>
-<section class="stats" aria-label="تقدّمك">
-  <div class="stat"><span class="stat-icon">🎯</span><div><strong id="learnedCount">0 / 26</strong><span>حروف اتعلّمتها</span></div></div>
-  <div class="stat"><span class="stat-icon">🚀</span><div><strong id="progressPercent">0%</strong><span>تقدّمك في الحروف</span></div></div>
-  <div class="stat"><span class="stat-icon">🔥</span><div><strong id="visitedCount">0</strong><span>حروف استكشفتها</span></div></div>
-</section>
-<section id="dashboard">
-  <div class="section-head"><div><h2>نكمل من آخر مرة؟ 💜</h2><p>دروسك ومهاراتك كلها في مكان واحد.</p></div><span class="tiny-label">مسارك الشخصي</span></div>
-  <div class="dashboard-grid">
-    <article class="card continue-card">
-      <div class="card-top"><span class="pill">المرحلة ١ · البداية</span><span class="unit-icon">🔤</span></div>
-      <h3>مغامرة الحروف الإنجليزية</h3>
-      <p>اتعرّف على الحروف الكبيرة والصغيرة، اسمع نطقها، واكتشف كلمة جديدة مع كل حرف.</p>
-      <div class="progress-row"><span>تقدّمك في المرحلة</span><strong id="coursePercent">0%</strong></div>
-      <div class="progress-track" role="progressbar" aria-label="تقدّم تعلّم الحروف" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="courseProgress"><div class="progress-fill" id="courseProgressFill"></div></div>
-      <button class="btn primary" id="startLetters" type="button">ابدأ درس الحروف ←</button>
-    </article>
-    <article class="card daily-card">
-      <div><div class="card-top"><span class="pill" style="background:#ffebae;color:#76510b">تحدّي بسيط</span><span class="unit-icon">⭐</span></div><h3>كل حرف بيفرق!</h3><p>اختار حرف، اسمع اسمه، جرّب تنطق المثال، وبعدها علّم عليه إنك اتعلّمته.</p></div>
-      <button class="btn secondary" id="pickLetter" type="button">اختار حرف عشوائي 🎲</button>
-    </article>
+  <div class="lesson-progress" aria-label="تقدم الدروس">
+    <div class="lesson-progress-track"><div class="lesson-progress-fill" id="lessonProgressFill"></div></div>
+    <p id="lessonProgressText">الدرس 1 من 26 · 0 حرف مكتمل</p>
   </div>
-  <div class="section-head"><div><h2>المهارات اللي هتتعلّمها 🧠</h2><p>بنقوّي كل مهارة واحدة واحدة.</p></div></div>
-  <div class="skills">
-    <article class="skill"><span class="skill-icon">🔠</span><div><h3>التعرّف على الحروف</h3><p>الشكل الكبير والصغير واسم كل حرف.</p></div><span class="skill-state" id="lettersSkillState">بدأناها سوا ✓</span></article>
-    <article class="skill"><span class="skill-icon">🔊</span><div><h3>الاستماع والنطق</h3><p>اسمع اسم الحرف والكلمة بالإنجليزي.</p></div><span class="skill-state">متاحة في الدرس</span></article>
-    <article class="skill"><span class="skill-icon">🍎</span><div><h3>الكلمات ومعانيها</h3><p>اربط كل حرف بمثال ومعناه بالعربي.</p></div><span class="skill-state">متاحة في الدرس</span></article>
-  </div>
-  <div class="section-head" id="learningPath"><div><h2>مسار التعلّم 🗺️</h2><p>هنفتح المراحل بالتدريج عشان تتعلّم من غير لخبطة.</p></div></div>
-  <div class="path-list">
-    <article class="path-item"><span class="path-number">١</span><div class="path-copy"><h3>حروف الإنجليزي من A إلى Z</h3><p>اتعلّم الحروف ونطقها وأمثلتها.</p></div><button class="path-action" id="pathLetters" type="button">افتح الدرس</button></article>
-    <article class="path-item locked"><span class="path-number">٢</span><div class="path-copy"><h3>كلماتك الأولى</h3><p>هنبدأ نبني مفرداتك بعد مرحلة الحروف.</p></div><span class="pill">قريبًا 🔒</span></article>
-    <article class="path-item locked"><span class="path-number">٣</span><div class="path-copy"><h3>جُمل بسيطة</h3><p>هنركّب أول جمل مفيدة خطوة بخطوة.</p></div><span class="pill">قريبًا 🔒</span></article>
-  </div>
-</section>
-<section class="lesson-area" id="lessonArea">
-  <div class="section-head"><div><h2>درس الحروف 🔤</h2><p>اختار أي حرف من الشبكة، أو استخدم السابق والتالي.</p></div><span class="pill" id="letterPill">الحرف 1 من 26</span></div>
-  <div class="tip"><strong>💡 افتكر:</strong> الحرف الكبير والصغير بيمثّلوا نفس الحرف، زي A و a. لما تتدرّب على حرف، اضغط «اتعلّمت الحرف» عشان يتحسب في تقدّمك.</div>
-  <section class="alphabet" id="alphabet" aria-label="الحروف الإنجليزية"></section>
   <section class="lesson-panel" aria-live="polite">
     <div class="focus-letter" id="focusLetter">A a</div>
-    <div class="lesson-copy"><div class="eyebrow" id="letterPosition">الحرف الأول من 26</div><h3 id="letterTitle">حرف A a</h3><p>اسم الحرف بالعربي تقريبًا: <strong id="letterName">إيه</strong></p><p>مثال: <span class="word" id="exampleWord">Apple</span> — <span id="exampleMeaning">تفاحة</span></p>
-      <div class="actions"><button class="btn primary" id="hearLetter" type="button">🔊 اسمع اسم الحرف</button><button class="btn secondary" id="hearExample" type="button">🔊 اسمع المثال</button><button class="btn done-button" id="markLearned" type="button">✓ اتعلّمت الحرف</button></div>
-      <div class="actions"><button class="btn secondary" id="previousLetter" type="button">→ الحرف السابق</button><button class="btn primary" id="nextLetter" type="button">الحرف التالي ←</button></div>
+    <div class="lesson-copy">
+      <div class="eyebrow" id="letterPosition">الدرس الأول</div>
+      <h2 id="letterTitle">حرف A a</h2>
+      <p>اسم الحرف بالعربي تقريبًا: <strong id="letterName">إيه</strong></p>
+      <div class="example-card">
+        <span class="example-label">كلمة على الحرف</span>
+        <p class="example-line"><span class="word" id="exampleWord">Apple</span><span class="example-separator">—</span><span id="exampleMeaning">تفاحة</span></p>
+      </div>
+      <div class="actions lesson-audio-actions">
+        <button class="btn primary" id="hearLesson" type="button">🔊 اسمع الدرس كامل</button>
+        <button class="btn secondary" id="hearLetter" type="button">اسمع الحرف</button>
+        <button class="btn secondary" id="hearExample" type="button">اسمع الكلمة</button>
+      </div>
+      <div class="actions lesson-controls">
+        <button class="btn done-button" id="markLearned" type="button">✓ اتعلّمت الحرف</button>
+        <span class="learned-status" id="learnedStatus" aria-live="polite">اسمع وكرّر براحتك</span>
+      </div>
     </div>
   </section>
+  <div class="lesson-navigation">
+    <button class="btn secondary" id="previousLetter" type="button" disabled>→ الحرف السابق</button>
+    <span class="navigation-hint">A <span aria-hidden="true">→</span> B <span aria-hidden="true">→</span> C <span aria-hidden="true">…</span> Z</span>
+    <button class="btn primary" id="nextLetter" type="button">الحرف التالي: B ←</button>
+  </div>
 </section>
-<div class="foot">لُغتي 💜 — خطوة خطوة، من غير استعجال.</div>
+<footer class="lesson-footer">لُغتي · خطوة خطوة، حرف ورا حرف.</footer>
 </main>
 <script>
 const letters=[
@@ -189,27 +172,57 @@ const letters=[
 ['Y','y','واي','Yellow','أصفر'],['Z','z','زي','Zoo','حديقة حيوان']];
 const $=id=>document.getElementById(id);
 let selected=0, learned=new Set(), visited=new Set([0]);
-try{learned=new Set(JSON.parse(localStorage.getItem('lughati-learned-letters')||'[]').filter(n=>Number.isInteger(n)&&n>=0&&n<26));visited=new Set(JSON.parse(localStorage.getItem('lughati-visited-letters')||'[0]').filter(n=>Number.isInteger(n)&&n>=0&&n<26));visited.add(0)}catch(e){learned=new Set();visited=new Set([0])}
+try{
+ learned=new Set(JSON.parse(localStorage.getItem('lughati-learned-letters')||'[]').filter(n=>Number.isInteger(n)&&n>=0&&n<26));
+ visited=new Set(JSON.parse(localStorage.getItem('lughati-visited-letters')||'[0]').filter(n=>Number.isInteger(n)&&n>=0&&n<26));
+}catch(e){learned=new Set();visited=new Set([0])}
+visited.add(0);
 function saveProgress(){try{localStorage.setItem('lughati-learned-letters',JSON.stringify([...learned]));localStorage.setItem('lughati-visited-letters',JSON.stringify([...visited]))}catch(e){}}
-function renderAlphabet(){$('alphabet').innerHTML=letters.map((l,i)=>'<button class="letter" type="button" data-letter="'+i+'" aria-pressed="'+(i===selected)+'" aria-label="الحرف '+l[0]+' الصغير '+l[1]+(learned.has(i)?'، اتعلّمته':'')+'"><span class="big-letter">'+l[0]+'</span><span class="small-letter">'+l[1]+'</span><span class="letter-name">'+(learned.has(i)?'✓ اتعلّمته':l[2])+'</span></button>').join('')}
-function updateProgress(){const count=learned.size,pct=Math.round(count/letters.length*100);$('learnedCount').textContent=count+' / 26';$('progressPercent').textContent=pct+'%';$('visitedCount').textContent=visited.size;$('coursePercent').textContent=pct+'%';$('courseProgressFill').style.width=pct+'%';$('courseProgress').setAttribute('aria-valuenow',pct);$('lettersSkillState').textContent=count===26?'خلصت كل الحروف! 🎉':count+' من 26 حرف';$('markLearned').textContent=learned.has(selected)?'✓ الحرف اتعلّم':'✓ اتعلّمت الحرف';$('markLearned').setAttribute('aria-pressed',String(learned.has(selected)))}
-function updateLetterButton(i){const b=$('alphabet').querySelector('[data-letter="'+i+'"]');if(!b)return;b.setAttribute('aria-pressed',String(i===selected));const label=b.querySelector('.letter-name');if(label)label.textContent=learned.has(i)?'✓ اتعلّمته':letters[i][2];b.setAttribute('aria-label','الحرف '+letters[i][0]+' الصغير '+letters[i][1]+(learned.has(i)?'، اتعلّمته':''))}
-function chooseLetter(i){const previous=selected;selected=(i+letters.length)%letters.length;visited.add(selected);const l=letters[selected];$('focusLetter').textContent=l[0]+' '+l[1];$('letterPosition').textContent='الحرف '+(selected+1)+' من 26';$('letterPill').textContent='الحرف '+(selected+1)+' من 26';$('letterTitle').textContent='حرف '+l[0]+' '+l[1];$('letterName').textContent=l[2];$('exampleWord').textContent=l[3];$('exampleMeaning').textContent=l[4];if(previous!==selected)updateLetterButton(previous);updateLetterButton(selected);saveProgress();updateProgress()}
-function goToLesson(){ $('lessonArea').scrollIntoView({behavior:'smooth',block:'start'}) }
-function speak(text){if(!('speechSynthesis' in window)){alert('ميزة النطق مش متاحة في المتصفح ده.');return}window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.78;window.speechSynthesis.speak(u)}
-$('alphabet').addEventListener('click',e=>{const b=e.target.closest('[data-letter]');if(b)chooseLetter(Number(b.dataset.letter))});
-$('hearLetter').addEventListener('click',()=>speak(letters[selected][0]));$('hearExample').addEventListener('click',()=>speak(letters[selected][3]));
-$('nextLetter').addEventListener('click',()=>chooseLetter((selected+1)%letters.length));$('previousLetter').addEventListener('click',()=>chooseLetter((selected-1+letters.length)%letters.length));
-$('markLearned').addEventListener('click',()=>{if(learned.has(selected))learned.delete(selected);else learned.add(selected);saveProgress();updateLetterButton(selected);updateProgress()});
-$('continueLearning').addEventListener('click',goToLesson);$('startLetters').addEventListener('click',goToLesson);$('pathLetters').addEventListener('click',goToLesson);if($('viewPath'))$('viewPath').addEventListener('click',()=>$('learningPath').scrollIntoView({behavior:'smooth',block:'start'}));
-$('pickLetter').addEventListener('click',()=>{const candidates=letters.map((_,i)=>i).filter(i=>!learned.has(i));chooseLetter(candidates.length?candidates[Math.floor(Math.random()*candidates.length)]:Math.floor(Math.random()*letters.length));goToLesson()});
-renderAlphabet();chooseLetter(0);
+function updateProgress(){
+ const done=learned.has(selected),pct=Math.round(((selected+1)/letters.length)*100);
+ $('letterPill').textContent='الدرس '+(selected+1)+' من 26';
+ $('lessonProgressText').textContent='الدرس '+(selected+1)+' من 26 · '+learned.size+' حرف مكتمل';
+ $('lessonProgressFill').style.width=pct+'%';
+ $('markLearned').textContent=done?'✓ الحرف اتعلّم':'✓ اتعلّمت الحرف';
+ $('markLearned').setAttribute('aria-pressed',String(done));
+ $('learnedStatus').textContent=done?'ممتاز! الحرف ده اتعلّم 🎉':'اسمع وكرّر براحتك';
+ $('previousLetter').disabled=selected===0;
+ $('nextLetter').disabled=selected===letters.length-1;
+ $('nextLetter').textContent=selected===letters.length-1?'خلصت الحروف! 🎉':'الحرف التالي: '+letters[selected+1][0]+' ←';
+}
+function chooseLetter(i){
+ selected=Math.max(0,Math.min(letters.length-1,i));
+ visited.add(selected);
+ const l=letters[selected];
+ $('focusLetter').textContent=l[0]+' '+l[1];
+ $('letterPosition').textContent='الدرس رقم '+(selected+1);
+ $('letterTitle').textContent='حرف '+l[0]+' '+l[1];
+ $('letterName').textContent=l[2];
+ $('exampleWord').textContent=l[3];
+ $('exampleMeaning').textContent=l[4];
+ saveProgress();updateProgress();
+}
+function speak(text){
+ if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){alert('ميزة النطق مش متاحة في المتصفح ده.');return}
+ window.speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.78;window.speechSynthesis.speak(u);
+}
+function speakWholeLesson(){
+ if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){alert('ميزة النطق مش متاحة في المتصفح ده.');return}
+ window.speechSynthesis.cancel();
+ const a=new SpeechSynthesisUtterance(letters[selected][0]);a.lang='en-US';a.rate=.78;
+ const b=new SpeechSynthesisUtterance(letters[selected][3]);b.lang='en-US';b.rate=.78;
+ window.speechSynthesis.speak(a);window.speechSynthesis.speak(b);
+}
+$('hearLetter').addEventListener('click',()=>speak(letters[selected][0]));
+$('hearExample').addEventListener('click',()=>speak(letters[selected][3]));
+$('hearLesson').addEventListener('click',speakWholeLesson);
+$('nextLetter').addEventListener('click',()=>{if(selected<letters.length-1)chooseLetter(selected+1)});
+$('previousLetter').addEventListener('click',()=>{if(selected>0)chooseLetter(selected-1)});
+$('markLearned').addEventListener('click',()=>{if(learned.has(selected))learned.delete(selected);else learned.add(selected);saveProgress();updateProgress()});
+chooseLetter(0);
 </script>
-<nav class="app-bottom-nav" aria-label="التنقل الرئيسي">
-<a href="#dashboard"><span>⌂</span><span>الرئيسية</span></a>
-<a href="#lessonArea"><span>✎</span><span>الدروس</span></a>
-<a href="#learningPath"><span>◉</span><span>المسار</span></a>
-</nav>
+
 
 <style id="ios-premium-refresh">
 :root{color-scheme:light;--ink:#172b35;--muted:#71818b;--line:#e1e9ec;--bg:#f2f6f7;--white:#fff;--shadow:0 10px 32px rgba(18,39,51,.08);--purple:#087f8c;--purple-dark:#075d68;--mint:#78e0c0;--sky:#83c9f4}
@@ -279,5 +292,74 @@ body{background:radial-gradient(ellipse at 5% 3%,#103c3a 0,transparent 34%),radi
 </style>
 
 
+<style id="lesson-first-design">
+:root{--ink:#173842;--muted:#71858c;--line:#dce9e9;--purple:#087f8c;--purple-dark:#075d68;--shadow:0 10px 30px rgba(16,58,66,.07)}
+html{scroll-behavior:auto!important;background:#f2f7f7}
+body{min-height:100vh;background:radial-gradient(ellipse at 8% 0%,#d8f6e9 0,transparent 34%),radial-gradient(ellipse at 94% 22%,#dceeff 0,transparent 32%),#f2f7f7;color:#173842;padding-bottom:24px}
+.top{position:relative;min-height:68px;background:rgba(250,253,253,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:12px max(calc((100% - 880px)/2),18px)}
+.top-note{font-size:12px}
+.lesson-first-main{max-width:880px;padding:clamp(18px,4vw,42px) 18px 24px;margin:auto}
+.lesson-area{margin:0;scroll-margin-top:16px}
+.lesson-intro{text-align:center;margin:0 auto 18px;max-width:650px}
+.lesson-kicker{display:inline-flex;padding:7px 12px;border-radius:999px;background:#d8f6eb;color:#087568;font-size:12px;font-weight:850}
+.lesson-intro h1{margin:14px 0 8px;font-size:clamp(27px,5vw,42px);line-height:1.25;letter-spacing:-.7px}
+.lesson-intro p{margin:0 auto 14px;color:#6b8188;font-size:14px;line-height:1.8;max-width:520px}
+.lesson-intro .pill{background:#dceeff;color:#176b9c;font-size:12px}
+.lesson-progress{max-width:560px;margin:0 auto 18px}
+.lesson-progress-track{height:7px;border-radius:99px;overflow:hidden;background:#dce9e9}
+.lesson-progress-fill{height:100%;width:4%;border-radius:99px;background:linear-gradient(90deg,#0b8790,#54d6b3);transition:width .2s ease}
+#lessonProgressText{text-align:center;margin:7px 0 0;color:#748990;font-size:12px;font-weight:750}
+.lesson-panel{grid-template-columns:minmax(105px,180px) minmax(0,1fr);gap:clamp(16px,4vw,32px);padding:clamp(18px,4vw,32px);border-radius:28px;background:rgba(255,255,255,.94);border:1px solid #dce9e9;box-shadow:0 12px 32px rgba(23,56,66,.07);backdrop-filter:none;-webkit-backdrop-filter:none}
+.focus-letter{width:100%;max-width:180px;height:auto;aspect-ratio:1;border-radius:26px;background:linear-gradient(145deg,#d8f6eb,#dceeff);color:#087f8c;font-size:clamp(48px,9vw,76px);box-shadow:inset 0 0 0 1px #ffffffa8}
+.lesson-copy h2{font-size:clamp(23px,4vw,31px);margin:0 0 9px;color:#173842}
+.lesson-copy p{font-size:14px}
+.example-card{margin-top:14px;padding:15px 17px;border-radius:19px;background:linear-gradient(120deg,#f0fbf7,#f0f7ff);border:1px solid #e0eeed}
+.example-label{font-size:11px;font-weight:850;color:#16877f}
+.example-line{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin:5px 0 0!important}
+.example-line .word{font-size:clamp(24px,4vw,32px);color:#087f8c}
+.example-separator{color:#94a7ad}
+.actions{gap:8px}
+.actions .btn{font-size:12px;padding:11px 15px}
+.btn{transition:none!important;box-shadow:none!important}
+.primary{background:linear-gradient(135deg,#a5f2d9,#63d9c1);color:#103a3d}
+.secondary{background:#f1f7f8;color:#31545d;border:1px solid #dbe8e9;backdrop-filter:none;-webkit-backdrop-filter:none}
+.done-button{background:#d8f6eb;color:#087568}
+.learned-status{align-self:center;color:#71858c;font-size:12px;font-weight:750}
+.lesson-navigation{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px}
+.lesson-navigation .btn{min-height:46px;padding:11px 16px}
+.navigation-hint{color:#8ba0a5;font-size:12px;font-weight:850;white-space:nowrap}
+button:disabled{opacity:.38!important}
+.lesson-footer{text-align:center;color:#8a9da2;font-size:12px;padding:18px 0 0}
+@media(max-width:600px){
+ .top{padding-inline:15px}.lesson-first-main{padding:23px 13px 20px}
+ .lesson-intro{margin-bottom:15px}.lesson-intro h1{font-size:29px}.lesson-intro p{font-size:13px}
+ .lesson-panel{grid-template-columns:1fr;gap:15px;padding:17px;border-radius:24px}
+ .focus-letter{max-width:126px;margin:0 auto;border-radius:23px}
+ .lesson-copy{text-align:center}.lesson-copy .eyebrow{text-align:center;display:block;margin-bottom:7px}
+ .example-card{text-align:center}.example-line{justify-content:center}
+ .lesson-audio-actions,.lesson-controls{justify-content:center}
+ .lesson-audio-actions .btn{flex:1 1 42%;min-width:0}
+ .lesson-controls .btn{flex:1 1 100%}.learned-status{width:100%}
+ .lesson-navigation{gap:6px}.lesson-navigation .btn{font-size:11px;padding:10px 11px;min-width:0}
+ .navigation-hint{font-size:10px}
+}
+@media(prefers-color-scheme:dark){
+ html,body{background:#0c1920;color:#e9f4f5}
+ body{background:radial-gradient(ellipse at 8% 0%,#103c3a 0,transparent 34%),radial-gradient(ellipse at 94% 22%,#12344b 0,transparent 32%),#0c1920}
+ .top{background:rgba(13,29,37,.92);border-bottom-color:#ffffff12}.top-note{color:#a5b8bf}
+ .lesson-kicker{background:#173f3b;color:#9af2d8}
+ .lesson-intro p,#lessonProgressText,.learned-status{color:#a5b8bf}
+ .lesson-intro .pill{background:#173746;color:#a7d9f5}
+ .lesson-progress-track{background:#29434b}
+ .lesson-panel{background:rgba(19,39,48,.94);border-color:#29434b;box-shadow:0 10px 28px #0003}
+ .lesson-copy h2{color:#e9f4f5}.lesson-copy p{color:#b7c8cc}
+ .example-card{background:linear-gradient(120deg,#142f31,#152b3a);border-color:#294b4b}
+ .example-label{color:#9af2d8}.example-line .word{color:#9af2d8}
+ .secondary{background:#192e36;color:#d6e6e8;border-color:#29434b}
+ .done-button{background:#173f3b;color:#9af2d8}
+ .lesson-footer{color:#82979d}
+}
+@media(prefers-reduced-motion:reduce){.lesson-progress-fill{transition:none!important}}
+</style>
 </body>
 </html>
