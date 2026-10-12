@@ -142,7 +142,7 @@ nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
       <p>اسم الحرف بالعربي تقريبًا: <strong id="letterName">إيه</strong></p>
       <div class="example-card">
         <span class="example-label">مثال على الحرف</span>
-        <p class="example-line"><span class="word" id="exampleWord">Apple</span><span class="example-separator">—</span><span id="exampleMeaning">تفاحة</span></p>
+        <img class="example-image" id="exampleImage" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34e.png" alt="Apple — تفاحة" width="112" height="112" loading="eager" decoding="async"><p class="example-line"><span class="word" id="exampleWord">Apple</span><span class="example-separator">—</span><span id="exampleMeaning">تفاحة</span></p>
       </div>
       <div class="actions lesson-audio-actions">
         <button class="btn primary" id="hearLesson" type="button">🔊 اسمع اسم الحرف</button>
@@ -357,5 +357,6 @@ button:disabled{opacity:.38!important}
 }
 @media(prefers-reduced-motion:reduce){.lesson-progress-fill{transition:none!important}}
 </style>
+<style id="example-image-style">.example-image{display:block;width:112px;height:112px;object-fit:contain;margin:12px auto 4px;padding:8px;border-radius:20px;background:linear-gradient(145deg,#e3f8ef,#e3f1ff)}@media(prefers-color-scheme:dark){.example-image{background:linear-gradient(145deg,#173f3b,#173746)}}@media(max-width:600px){.example-image{width:92px;height:92px}}</style>
 </body>
 </html>
