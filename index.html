@@ -7,7 +7,6 @@
 <meta name="description" content="لُغتي: تعلّم الإنجليزية من الصفر خطوة بخطوة.">
 <title>لُغتي — رحلتك في تعلّم الإنجليزية</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
 :root{--ink:#262342;--muted:#77758f;--line:#eee9f6;--purple:#7157f5;--purple-dark:#5540d5;--pink:#ff7e9d;--yellow:#ffc857;--mint:#5ed6b0;--sky:#7bc9ff;--bg:#fffaf5;--white:#fff;--shadow:0 12px 35px #4b37790c}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Arial,sans-serif}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #aaa0ff;outline-offset:3px}button:disabled{opacity:.5;cursor:not-allowed}
 .top{position:sticky;top:0;z-index:5;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px max(calc((100% - 1100px)/2),20px);background:#fffdf9ed;backdrop-filter:blur(12px);border-bottom:1px solid #eee8f1}.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900}.logo{display:grid;place-items:center;width:40px;height:40px;background:linear-gradient(145deg,#8b76ff,#6348ee);color:white;border-radius:14px;box-shadow:0 6px 14px #7157f533;font-size:22px}.top-note{font-size:13px;color:var(--muted);font-weight:700}
@@ -307,12 +306,14 @@ nav.app-bottom-nav a:hover,nav.app-bottom-nav a:focus-visible{background:linear-
  nav.app-bottom-nav a{color:#c0d1d6}
  nav.app-bottom-nav a:hover,nav.app-bottom-nav a:focus-visible{background:#173f3b;color:#9af2d8}
 }
+</style>
+
 <style id="alive-scroll-motion">
 /* Fast, lightweight motion that makes the page feel responsive while scrolling. */
 html{scroll-behavior:smooth}
-body{--scroll-progress:0%;background-attachment:fixed}
+body{--scroll-progress:0%;background-attachment:scroll}
 body:before{content:"";position:fixed;z-index:100000;top:0;left:0;width:var(--scroll-progress);height:3px;pointer-events:none;background:linear-gradient(90deg,#59d9b7,#80cdf4,#ffcf70);box-shadow:0 0 10px #59d9b766;transition:width .08s linear}
-.hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel{transform:translateZ(0);will-change:transform,opacity}
+.hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel{backface-visibility:hidden}
 @media(prefers-reduced-motion:no-preference){
  .card,.stat,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action{transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease,border-color .2s ease,background-color .2s ease}
  .card:active,.stat:active,.skill:active,.path-item:active,.letter:active{transform:scale(.985)}
@@ -323,6 +324,12 @@ body:before{content:"";position:fixed;z-index:100000;top:0;left:0;width:var(--sc
 @keyframes float-gently{0%,100%{translate:0 0}50%{translate:0 -5px}}
 .app-bottom-nav{transition:background .25s ease,box-shadow .25s ease}
 .app-bottom-nav a{transition:background .18s ease,color .18s ease,transform .18s ease}
+@media(max-width:760px){
+ /* Keep scrolling responsive on phones: avoid repaint-heavy glass blur on every card. */
+ .top,.stat,.card,.skill,.path-item,.letter,.lesson-panel,.app-bottom-nav{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+ .stat,.card,.skill,.path-item,.letter,.lesson-panel{box-shadow:0 3px 12px rgba(23,48,60,.045)}
+ body{background-attachment:scroll!important}
+}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}body:before{transition:none}.hero .bubble{animation:none!important}}
 </style>
 <script id="alive-scroll-motion-script">
@@ -359,7 +366,6 @@ body:before{content:"";position:fixed;z-index:100000;top:0;left:0;width:var(--sc
  }
 })();
 </script>
-</style>
 
 </body>
 </html>
