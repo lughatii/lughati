@@ -333,37 +333,19 @@ body:before{content:"";position:fixed;z-index:100000;top:0;left:0;width:var(--sc
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}body:before{transition:none}.hero .bubble{animation:none!important}}
 </style>
 <script id="alive-scroll-motion-script">
-(()=>{
+/* Keep scrolling native: no reveal animations or per-frame visual work. */
+(()=> {
  const root=document.documentElement;
+ let queued=false;
  const update=()=>{
   const max=root.scrollHeight-root.clientHeight;
   const percent=max>0?Math.min(100,Math.max(0,root.scrollTop/max*100)):0;
   document.body.style.setProperty('--scroll-progress',percent+'%');
+  queued=false;
  };
- let queued=false;
- const onScroll=()=>{
-  if(queued)return;
-  queued=true;
-  requestAnimationFrame(()=>{update();queued=false});
- };
+ const onScroll=()=>{if(!queued){queued=true;requestAnimationFrame(update)}};
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
- function init(){
-  update();
-  window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',onScroll,{passive:true});
-  if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-   const items=document.querySelectorAll('main .hero,main .stat,main .card,main .skill,main .path-item,main .section-head,main .tip,main .lesson-panel');
-   const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-     if(entry.isIntersecting){
-      entry.target.animate([{opacity:.72,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:320,easing:'cubic-bezier(.2,.75,.25,1)'});
-      observer.unobserve(entry.target);
-     }
-    });
-   },{threshold:.06,rootMargin:'0px 0px -24px 0px'});
-   items.forEach(el=>observer.observe(el));
-  }
- }
+ function init(){update();window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll,{passive:true})}
 })();
 </script>
 
@@ -379,5 +361,15 @@ body:before{content:"";position:fixed;z-index:100000;top:0;left:0;width:var(--sc
 }
 </style>
 
+<style id="touch-scroll-priority">
+html{scroll-behavior:auto!important;overscroll-behavior-y:contain}
+body{touch-action:pan-y;overscroll-behavior-y:contain}
+@media(max-width:760px){
+ .hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel,.hero .bubble{animation:none!important}
+ .stat,.card,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action,.app-bottom-nav,.app-bottom-nav a{transition:none!important;will-change:auto!important}
+ body:before{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
 </body>
 </html>
