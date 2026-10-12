@@ -307,6 +307,58 @@ nav.app-bottom-nav a:hover,nav.app-bottom-nav a:focus-visible{background:linear-
  nav.app-bottom-nav a{color:#c0d1d6}
  nav.app-bottom-nav a:hover,nav.app-bottom-nav a:focus-visible{background:#173f3b;color:#9af2d8}
 }
+<style id="alive-scroll-motion">
+/* Fast, lightweight motion that makes the page feel responsive while scrolling. */
+html{scroll-behavior:smooth}
+body{--scroll-progress:0%;background-attachment:fixed}
+body:before{content:"";position:fixed;z-index:100000;top:0;left:0;width:var(--scroll-progress);height:3px;pointer-events:none;background:linear-gradient(90deg,#59d9b7,#80cdf4,#ffcf70);box-shadow:0 0 10px #59d9b766;transition:width .08s linear}
+.hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel{transform:translateZ(0);will-change:transform,opacity}
+@media(prefers-reduced-motion:no-preference){
+ .card,.stat,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action{transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease,border-color .2s ease,background-color .2s ease}
+ .card:active,.stat:active,.skill:active,.path-item:active,.letter:active{transform:scale(.985)}
+ .btn:active,.path-action:active,.app-bottom-nav a:active{transform:scale(.96)}
+ .hero .bubble{animation:float-gently 4.5s ease-in-out infinite}
+ .hero .bubble.b{animation-delay:-1.4s}.hero .bubble.c{animation-delay:-2.7s}
+}
+@keyframes float-gently{0%,100%{translate:0 0}50%{translate:0 -5px}}
+.app-bottom-nav{transition:background .25s ease,box-shadow .25s ease}
+.app-bottom-nav a{transition:background .18s ease,color .18s ease,transform .18s ease}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}body:before{transition:none}.hero .bubble{animation:none!important}}
+</style>
+<script id="alive-scroll-motion-script">
+(()=>{
+ const root=document.documentElement;
+ const update=()=>{
+  const max=root.scrollHeight-root.clientHeight;
+  const percent=max>0?Math.min(100,Math.max(0,root.scrollTop/max*100)):0;
+  document.body.style.setProperty('--scroll-progress',percent+'%');
+ };
+ let queued=false;
+ const onScroll=()=>{
+  if(queued)return;
+  queued=true;
+  requestAnimationFrame(()=>{update();queued=false});
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+ function init(){
+  update();
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll,{passive:true});
+  if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+   const items=document.querySelectorAll('main .hero,main .stat,main .card,main .skill,main .path-item,main .section-head,main .tip,main .letter,main .lesson-panel');
+   const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+     if(entry.isIntersecting){
+      entry.target.animate([{opacity:.72,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:320,easing:'cubic-bezier(.2,.75,.25,1)'});
+      observer.unobserve(entry.target);
+     }
+    });
+   },{threshold:.06,rootMargin:'0px 0px -24px 0px'});
+   items.forEach(el=>observer.observe(el));
+  }
+ }
+})();
+</script>
 </style>
 
 </body>
