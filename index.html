@@ -7,7 +7,6 @@
 <meta name="description" content="لُغتي: تعلّم الإنجليزية من الصفر خطوة بخطوة.">
 <title>لُغتي — رحلتك في تعلّم الإنجليزية</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
 :root{--ink:#262342;--muted:#77758f;--line:#eee9f6;--purple:#7157f5;--purple-dark:#5540d5;--pink:#ff7e9d;--yellow:#ffc857;--mint:#5ed6b0;--sky:#7bc9ff;--bg:#fffaf5;--white:#fff;--shadow:0 12px 35px #4b37790c}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Arial,sans-serif}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #aaa0ff;outline-offset:3px}button:disabled{opacity:.5;cursor:not-allowed}
 .top{position:sticky;top:0;z-index:5;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px max(calc((100% - 1100px)/2),20px);background:#fffdf9ed;backdrop-filter:blur(12px);border-bottom:1px solid #eee8f1}.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900}.logo{display:grid;place-items:center;width:40px;height:40px;background:linear-gradient(145deg,#8b76ff,#6348ee);color:white;border-radius:14px;box-shadow:0 6px 14px #7157f533;font-size:22px}.top-note{font-size:13px;color:var(--muted);font-weight:700}
@@ -367,6 +366,18 @@ body:before{content:"";position:fixed;z-index:100000;top:0;left:0;width:var(--sc
  }
 })();
 </script>
+
+
+<style id="mobile-speed-pass">
+/* Keep the glass aesthetic while avoiding expensive blur on dozens of tiles. */
+@media(max-width:760px){
+  .letter{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 2px 8px rgba(23,48,60,.045)!important}
+  .stat,.card,.skill,.path-item,.lesson-panel{backdrop-filter:blur(5px) saturate(125%)!important;-webkit-backdrop-filter:blur(5px) saturate(125%)!important}
+  .top,.app-bottom-nav{backdrop-filter:blur(8px) saturate(140%)!important;-webkit-backdrop-filter:blur(8px) saturate(140%)!important}
+  .card,.stat,.skill,.path-item,.lesson-panel,.letter{transition:transform .16s ease,border-color .16s ease!important}
+  .hero .bubble{animation-duration:6s!important}
+}
+</style>
 
 </body>
 </html>
