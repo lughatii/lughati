@@ -195,5 +195,73 @@ renderAlphabet();chooseLetter(0);
 <a href="#lessonArea"><span>✎</span><span>الدروس</span></a>
 <a href="#learningPath"><span>◉</span><span>المسار</span></a>
 </nav>
+
+<style id="ios-premium-refresh">
+:root{color-scheme:light;--ink:#172b35;--muted:#71818b;--line:#e1e9ec;--bg:#f2f6f7;--white:#fff;--shadow:0 10px 32px rgba(18,39,51,.08);--purple:#087f8c;--purple-dark:#075d68;--mint:#78e0c0;--sky:#83c9f4}
+*{-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:94px}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Cairo,Arial,sans-serif;background:radial-gradient(ellipse at 8% 4%,#d9f5eb 0,transparent 30%),radial-gradient(ellipse at 94% 23%,#dceeff 0,transparent 28%),#f4f7f8;color:var(--ink);padding-bottom:calc(94px + env(safe-area-inset-bottom))}
+button{font-family:inherit;touch-action:manipulation}
+button:focus-visible{outline:3px solid #1b9aaa;outline-offset:3px}
+.top{min-height:72px;padding:12px max(calc((100% - 1100px)/2),20px);background:rgba(248,251,252,.76);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.8)}
+.brand{letter-spacing:-.5px}.logo{background:linear-gradient(145deg,#087f8c,#13b8a6);border-radius:14px;box-shadow:0 7px 18px #087f8c38}
+.top-note{color:#637783}
+main{padding-top:25px}
+.hero{background:linear-gradient(128deg,#122d3a 0%,#174d59 53%,#087f8c 100%);color:#f6ffff;border:1px solid #ffffff24;border-radius:32px;box-shadow:0 18px 45px #173f4b26;padding:clamp(25px,4vw,44px)}
+.hero:after{background:radial-gradient(circle,#a2f5df55,transparent 70%);width:280px;height:280px;top:-130px;left:22%}
+.eyebrow{color:#9af2d8}.hero h1{letter-spacing:-1px;font-weight:850}.hero p{color:#d2e6e9}
+.btn{border-radius:999px;padding:12px 20px;font-weight:750;box-shadow:none;transition:transform .18s,filter .18s,background .18s}
+.btn:active,.path-action:active,.letter:active{transform:scale(.97)}
+.primary{background:linear-gradient(135deg,#a5f2d9,#63d9c1);color:#103a3d;box-shadow:0 6px 18px #001e252c}
+.primary:hover{background:linear-gradient(135deg,#baf8e4,#7ce6d0)}
+.secondary{background:#ffffff16;color:#fff;border:1px solid #ffffff56;backdrop-filter:blur(12px)}
+.bubble{border:1px solid #ffffffa8;box-shadow:0 16px 36px #061b2440;backdrop-filter:blur(12px)}
+.bubble.a{background:linear-gradient(145deg,#f9fffd,#d7f7ec);color:#087f8c;border-radius:32px;box-shadow:0 16px 38px #061b2440}
+.bubble.b{background:#ffcf70;color:#4b3513}.bubble.c{background:#83c9f4;color:#153e59}.spark{color:#ffcf70}.spark.two{color:#a5f2d9}
+.stats{gap:12px;margin-top:16px}
+.stat,.card,.skill,.path-item,.lesson-panel{background:rgba(255,255,255,.82);border:1px solid rgba(221,232,235,.92);box-shadow:0 8px 26px rgba(23,48,60,.055);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.stat{border-radius:23px;padding:17px}
+.stat:nth-child(1) .stat-icon{background:#d8f6eb;color:#087f68}.stat:nth-child(2) .stat-icon{background:#fff0c9;color:#895d08}.stat:nth-child(3) .stat-icon{background:#dceeff;color:#176b9c}
+.stat-icon,.unit-icon,.skill-icon,.path-number{border-radius:17px}
+.section-head h2{letter-spacing:-.45px;color:#183642}
+.section-head p{color:#72848d}
+.card{border-radius:27px;padding:22px}
+.continue-card{background:linear-gradient(140deg,rgba(255,255,255,.94),rgba(218,247,239,.9));border-color:#cdece3}
+.daily-card{background:linear-gradient(145deg,#fff0c9,#fffaf0);border-color:#f2dfae}
+.pill{background:#d8f6eb;color:#087568}
+.progress-track{background:#dce8e9;height:9px}.progress-fill{background:linear-gradient(90deg,#0b8790,#54d6b3)}
+.skills{gap:12px}.skill{border-radius:23px;padding:17px}.skill:nth-child(1) .skill-icon{background:#dceeff;color:#176b9c}.skill:nth-child(2) .skill-icon{background:#d8f6eb;color:#087f68}.skill:nth-child(3) .skill-icon{background:#ffe5d5;color:#9a4f25}.skill .skill-state{color:#087f68}
+.path-item{border-radius:21px}.path-number{background:#dceeff;color:#176b9c}.path-item:nth-child(2) .path-number{background:#ffe5d5;color:#9a4f25}.path-item:nth-child(3) .path-number{background:#d8f6eb;color:#087f68}.path-action{background:#d8f6eb;color:#086c68;border-radius:999px}
+.tip{background:#fff2ce;border-color:#f3df9d;color:#69501a;border-radius:18px}
+.alphabet{gap:10px}.letter{border:1px solid #e0e9ec;border-radius:21px;background:rgba(255,255,255,.88);box-shadow:0 5px 16px #1a39400a;min-height:108px}
+.letter:hover{border-color:#77cfc0}.letter[aria-pressed=true]{border:2px solid #0c9b98;background:linear-gradient(145deg,#e0fbf2,#e0f1ff);box-shadow:0 8px 22px #087f8c1c}
+.big-letter{color:#173f4a}.small-letter{color:#138d96}
+.lesson-panel{border-radius:27px;padding:23px}.focus-letter{background:linear-gradient(145deg,#d8f6eb,#dceeff);color:#087f8c;border-radius:24px}
+.done-button{background:#d8f6eb;color:#087f68}
+.foot{border-color:#dce6e8}
+.app-bottom-nav{position:fixed;z-index:20;left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom));margin:0 auto;max-width:520px;display:flex;justify-content:space-around;align-items:center;gap:7px;padding:9px 10px;background:rgba(249,252,253,.78);border:1px solid rgba(255,255,255,.92);border-radius:26px;box-shadow:0 12px 38px rgba(17,42,53,.16);backdrop-filter:blur(28px) saturate(190%);-webkit-backdrop-filter:blur(28px) saturate(190%)}
+.app-bottom-nav a{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;min-height:48px;padding:7px 10px;border-radius:18px;color:#607783;text-decoration:none;font-size:12px;font-weight:750;transition:background .18s,color .18s}
+.app-bottom-nav a span:first-child{font-size:20px;line-height:1}
+.app-bottom-nav a:hover,.app-bottom-nav a:focus-visible{background:#d8f6eb;color:#087f68}
+@media(max-width:760px){main{padding:17px 13px 35px}.hero{border-radius:29px;padding:24px 20px}.hero-art{min-height:142px}.stats{gap:8px}.stat{border-radius:20px;padding:12px}.dashboard-grid{gap:12px}.card{border-radius:24px}.skills{gap:8px}.skill{border-radius:20px;padding:13px}.alphabet{gap:8px}.letter{border-radius:18px;min-height:98px}.lesson-panel{border-radius:24px}.app-bottom-nav{left:12px;right:12px;bottom:calc(9px + env(safe-area-inset-bottom));padding:8px}.app-bottom-nav a{min-height:46px}}
+@media(max-width:390px){.hero{padding:19px 14px}.top{padding-inline:14px}.app-bottom-nav a{font-size:11px;gap:3px}.app-bottom-nav a span:first-child{font-size:19px}}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--ink:#e9f4f5;--muted:#a5b8bf;--line:#29434b;--bg:#0c1920;--white:#14262e;--shadow:0 12px 32px #0005}
+body{background:radial-gradient(ellipse at 5% 3%,#103c3a 0,transparent 34%),radial-gradient(ellipse at 95% 25%,#12344b 0,transparent 31%),#0c1920;color:#e9f4f5}
+.top{background:rgba(13,29,37,.78);border-bottom-color:#ffffff12}.top-note{color:#a5b8bf}
+.hero{background:linear-gradient(128deg,#091b25,#103b46 58%,#075b61);border-color:#ffffff16}
+.hero p{color:#c1d8dc}.secondary{background:#ffffff0d;border-color:#ffffff32}
+.stat,.card,.skill,.path-item,.lesson-panel,.letter{background:rgba(19,39,48,.88);border-color:#29434b;color:#e9f4f5}
+.continue-card{background:linear-gradient(140deg,#152b33,#163b3a);border-color:#28524e}
+.daily-card{background:linear-gradient(145deg,#382f1d,#24271f);border-color:#594a2a}
+.section-head h2,.big-letter,.lesson-copy .word{color:#e9f4f5}
+.section-head p,.card p,.skill p,.path-copy p,.lesson-copy p{color:#a5b8bf}
+.progress-track{background:#29434b}.letter[aria-pressed=true]{background:linear-gradient(145deg,#123d39,#153c4c);border-color:#51c9b1}
+.tip{background:#332c1b;border-color:#594a2a;color:#f4d99a}
+.app-bottom-nav{background:rgba(15,32,41,.82);border-color:#ffffff1b;box-shadow:0 12px 38px #0006}
+.app-bottom-nav a{color:#afc1c7}.app-bottom-nav a:hover,.app-bottom-nav a:focus-visible{background:#173f3b;color:#9af2d8}
+.foot{border-color:#29434b}
+}
+</style>
+
 </body>
 </html>
