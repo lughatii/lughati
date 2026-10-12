@@ -27,8 +27,19 @@ const db={en:[
 de:[['Hallo','مرحبًا','هالو','A1',"Hallo, wie geht's?",'مرحبًا، كيف الحال؟'],['Danke','شكرًا','دانكه','A1','Danke für deine Hilfe.','شكرًا على مساعدتك.'],['Guten Morgen','صباح الخير','جوتن مورجن','A1','Guten Morgen, Anna!','صباح الخير يا آنا!'],['Wasser','ماء','فاسر','A1','Ich trinke Wasser.','أنا أشرب الماء.'],['Freund','صديق','فروينت','A1','Er ist mein Freund.','هو صديقي.'],['Schön','جميل','شون','A2','Das ist sehr schön.','هذا جميل جدًا.'],['Lernen','يتعلّم','ليرنن','A1','Ich lerne Deutsch.','أنا أتعلم الألمانية.'],['Wichtig','مهم','فيشتش','A2','Das ist wichtig.','هذا مهم.'],['Möglichkeit','فرصة','مويشليشكايت','B1','Das ist eine gute Möglichkeit.','هذه فرصة جيدة.'],['Verstehen','يفهم','فيرشتين','A2','Ich verstehe die Frage.','أنا أفهم السؤال.'],['Reisen','يسافر','رايزن','A2','Ich möchte nach Berlin reisen.','أريد السفر إلى برلين.'],['Selbstvertrauen','الثقة بالنفس','زلبستفيرتراون','B1','Übung gibt Selbstvertrauen.','التدريب يمنح الثقة بالنفس.']]};
 let lang='en',flashI=0,revealed=false,qi=0,round=[],score=0,answered=false;
 
-/* Interface language is separate from the language being learned. */
-let siteLang=localStorage.getItem('lughatiSiteLanguage')==='en'?'en':'ar';
+/* Interface language is separate from the language being learned. Save it in localStorage and a cookie. */
+function readSavedSiteLanguage(){
+ try{const saved=localStorage.getItem('lughatiSiteLanguage');if(saved==='en'||saved==='ar')return saved}catch(e){}
+ const parts=document.cookie.split(';');for(const part of parts){const pair=part.trim().split('=');if(pair[0]==='lughatiSiteLanguage'&&(pair[1]==='en'||pair[1]==='ar'))return pair[1]}
+ return 'ar';
+}
+function persistSiteLanguage(value){
+ const normalized=value==='en'?'en':'ar';
+ try{localStorage.setItem('lughatiSiteLanguage',normalized)}catch(e){}
+ try{document.cookie='lughatiSiteLanguage='+normalized+'; Max-Age=31536000; Path=/; SameSite=Lax; Secure'}catch(e){}
+ return normalized;
+}
+let siteLang=readSavedSiteLanguage();
 const siteTranslations={
 'لُغتي':'Lughati','ل':'L','لُغتي — تعلّم على مهلك':'Lughati — Learn at Your Own Pace','مكتبة الكلمات':'Word Library','كروت الحفظ':'Flashcards','الاختبارات':'Quizzes','إعادة ضبط ↻':'Reset ↻',
 '✦ خطوة صغيرة كل يوم':'✦ A small step every day','اتعلّم لغة جديدة،':'Learn a new language,','بطريقتك وعلى مهلك.':'your way, at your own pace.','اختار الإنجليزي أو الألماني، واتدرّب على الكلمات والكتابة والجمل والمواقف الواقعية، وتابع تقدمك في لُغتي.':'Choose English or German, practice words, writing, sentences, and real-life situations, and track your progress with Lughati.',
@@ -158,7 +169,7 @@ function translateSite(root=document.body){
  if(langSelect)langSelect.setAttribute('aria-label',siteLang==='en'?'Website language':'لغة الموقع');
 }
 function setSiteLanguage(value){
- siteLang=value==='en'?'en':'ar';localStorage.setItem('lughatiSiteLanguage',siteLang);
+ siteLang=persistSiteLanguage(value);
  const selector=$('siteLanguage');selector.value=siteLang;
  const englishOnly=siteLang==='en';
  const englishButton=document.querySelector('[data-lang="en"]'),germanButton=document.querySelector('[data-lang="de"]');
