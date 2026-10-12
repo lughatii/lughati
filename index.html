@@ -142,7 +142,7 @@ nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
       <p>اسم الحرف بالعربي تقريبًا: <strong id="letterName">إيه</strong></p>
       <div class="example-card">
         <span class="example-label">مثال على الحرف</span>
-        <img class="example-image" id="exampleImage" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34e.png" alt="Apple — تفاحة" width="112" height="112" loading="eager" decoding="async"><p class="example-line"><span class="word" id="exampleWord">Apple</span><span class="example-separator">—</span><span id="exampleMeaning">تفاحة</span></p>
+        <img class="example-image" id="exampleImage" src="https://loremflickr.com/320/240/apple?lock=1" alt="Apple — تفاحة" width="112" height="112" loading="eager" decoding="async"><p class="example-line"><span class="word" id="exampleWord">Apple</span><span class="example-separator">—</span><span id="exampleMeaning">تفاحة</span></p>
       </div>
       <div class="actions lesson-audio-actions">
         <button class="btn primary audio-progress-button" id="hearLesson" type="button" aria-pressed="false">🔊 اسمع اسم الحرف</button>
@@ -165,11 +165,11 @@ nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
 </main>
 <script>
 const letters=[
-['A','a','إيه','Apple','تفاحة','1f34e'],['B','b','بي','Ball','كرة','26bd'],['C','c','سي','Cat','قطة','1f431'],['D','d','دي','Dog','كلب','1f436'],['E','e','إي','Egg','بيضة','1f95a'],['F','f','إف','Fish','سمكة','1f41f'],
-['G','g','جي','Goat','ماعز','1f410'],['H','h','إيتش','Hat','قبعة','1f3a9'],['I','i','آي','Ice','ثلج','1f9ca'],['J','j','جاي','Jam','مربّى','1f36f'],['K','k','كاي','Key','مفتاح','1f511'],['L','l','إل','Lion','أسد','1f981'],
-['M','m','إم','Moon','قمر','1f319'],['N','n','إن','Nose','أنف','1f443'],['O','o','أو','Orange','برتقالة','1f34a'],['P','p','پي','Pen','قلم','1f58a'],['Q','q','كيو','Queen','ملكة','1f478'],['R','r','آر','Rain','مطر','1f327'],
-['S','s','إس','Sun','شمس','2600'],['T','t','تي','Tree','شجرة','1f333'],['U','u','يو','Umbrella','مظلّة','2602'],['V','v','ڤي','Van','سيارة نقل','1f690'],['W','w','دَبليو','Water','ماء','1f4a7'],['X','x','إكس','Box','صندوق','1f4e6'],
-['Y','y','واي','Yellow','أصفر','1f7e1'],['Z','z','زي','Zoo','حديقة حيوان','1f992']];
+['A','a','إيه','Apple','تفاحة','apple'],['B','b','بي','Ball','كرة','soccer-ball'],['C','c','سي','Car','سيارة','car'],['D','d','دي','Dog','كلب','dog'],['E','e','إي','Egg','بيضة','egg'],['F','f','إف','Fish','سمكة','fish'],
+['G','g','جي','Goat','ماعز','goat'],['H','h','إيتش','Hat','قبعة','hat'],['I','i','آي','Ice','ثلج','ice-cubes'],['J','j','جاي','Jam','مربّى','jam-jar'],['K','k','كاي','Key','مفتاح','key'],['L','l','إل','Lion','أسد','lion'],
+['M','m','إم','Moon','قمر','moon'],['N','n','إن','Nose','أنف','nose'],['O','o','أو','Orange','برتقالة','orange-fruit'],['P','p','پي','Pen','قلم','pen'],['Q','q','كيو','Queen','ملكة','queen'],['R','r','آر','Rain','مطر','rain'], 
+['S','s','إس','Sun','شمس','sun'],['T','t','تي','Tree','شجرة','tree'],['U','u','يو','Umbrella','مظلّة','umbrella'],['V','v','ڤي','Van','سيارة نقل','van'],['W','w','دَبليو','Water','ماء','water'],['X','x','إكس','Box','صندوق','cardboard-box'],
+['Y','y','واي','Yellow','أصفر','yellow-flower'],['Z','z','زي','Zoo','حديقة حيوان','zebra']];
 const $=id=>document.getElementById(id);
 let selected=0, learned=new Set(), visited=new Set([0]);
 try{
@@ -200,8 +200,8 @@ function chooseLetter(i){
  $('letterName').textContent=l[2];
  $('exampleWord').textContent=l[3];
  $('exampleMeaning').textContent=l[4];
- $('exampleImage').src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/'+l[5]+'.png';
- $('exampleImage').alt=l[3]+' — '+l[4];
+ $('exampleImage').src='https://loremflickr.com/480/360/'+encodeURIComponent(l[5])+'?lock='+(selected+1);
+ $('exampleImage').alt='صورة فوتوغرافية: '+l[3]+' — '+l[4];
  updateAudioButtons();
  saveProgress();updateProgress();
 }
