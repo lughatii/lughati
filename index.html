@@ -265,19 +265,47 @@ body{background:radial-gradient(ellipse at 5% 3%,#103c3a 0,transparent 34%),radi
 
 
 <style id="bottom-nav-mobile-fix">
-.app-bottom-nav{box-sizing:border-box;width:auto;min-width:0;overflow:hidden;padding:6px 7px;gap:3px}
-.app-bottom-nav a{box-sizing:border-box;min-width:0;flex:1 1 0;padding:7px 3px;gap:4px;white-space:nowrap;overflow:hidden}
-.app-bottom-nav a span{min-width:0}
-.app-bottom-nav a span:last-child{overflow:hidden;text-overflow:ellipsis}
-@media(max-width:430px){
- .app-bottom-nav{left:8px;right:8px;width:auto;max-width:none;gap:2px;padding:6px}
- .app-bottom-nav a{font-size:11px;padding:7px 2px;gap:3px}
- .app-bottom-nav a span:first-child{font-size:18px;flex:0 0 auto}
+/* Stable mobile navigation: three equal columns, independent of older flex/grid rules. */
+html{scroll-padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+body{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
+nav.app-bottom-nav{
+ position:fixed!important;display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ align-items:stretch!important;justify-content:initial!important;
+ left:8px!important;right:8px!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;
+ width:auto!important;max-width:560px!important;margin:0 auto!important;
+ box-sizing:border-box!important;min-width:0!important;height:auto!important;
+ padding:6px!important;gap:4px!important;overflow:visible!important;
+ z-index:99999!important;transform:none!important;
+ visibility:visible!important;opacity:1!important;
+ border-radius:22px;background:rgba(249,252,253,.92);
+ border:1px solid rgba(255,255,255,.95);
+ box-shadow:0 10px 32px rgba(17,42,53,.2);
+ backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
 }
+nav.app-bottom-nav a{
+ display:flex!important;flex-direction:column!important;
+ align-items:center!important;justify-content:center!important;
+ box-sizing:border-box!important;min-width:0!important;width:100%!important;
+ min-height:52px!important;height:auto!important;margin:0!important;padding:6px 2px!important;
+ gap:3px!important;overflow:visible!important;white-space:normal!important;
+ text-align:center!important;text-decoration:none!important;
+ border-radius:16px;color:#607783;font-size:clamp(10px,2.8vw,12px)!important;
+ line-height:1.2!important;font-weight:750;
+}
+nav.app-bottom-nav a span{display:block!important;min-width:0!important;max-width:100%!important;overflow:visible!important;text-overflow:clip!important;white-space:normal!important}
+nav.app-bottom-nav a span:first-child{font-size:20px!important;line-height:1!important;flex:none!important}
+nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
+nav.app-bottom-nav a:hover,nav.app-bottom-nav a:focus-visible{background:linear-gradient(120deg,#e0f8ef,#e6f4ff);color:#177e68}
 @media(max-width:350px){
- .app-bottom-nav{left:5px;right:5px;padding:5px;gap:1px}
- .app-bottom-nav a{font-size:10px;padding:6px 1px;gap:2px}
- .app-bottom-nav a span:first-child{font-size:16px}
+ nav.app-bottom-nav{left:5px!important;right:5px!important;padding:4px!important;gap:2px!important}
+ nav.app-bottom-nav a{min-height:49px!important;padding:5px 1px!important;font-size:10px!important}
+ nav.app-bottom-nav a span:first-child{font-size:18px!important}
+}
+@media(prefers-color-scheme:dark){
+ nav.app-bottom-nav{background:rgba(15,32,41,.94);border-color:#ffffff25;box-shadow:0 10px 32px #0007}
+ nav.app-bottom-nav a{color:#c0d1d6}
+ nav.app-bottom-nav a:hover,nav.app-bottom-nav a:focus-visible{background:#173f3b;color:#9af2d8}
 }
 </style>
 
