@@ -69,21 +69,21 @@ main{width:100%}
 .vocab-wrap{margin-bottom:16px}.vocab-hero{background:linear-gradient(135deg,#e3f5f1,#fff);border:1px solid var(--line);border-radius:23px;padding:22px;margin-bottom:12px}
 .vocab-kicker{font-size:12px;letter-spacing:.08em;color:var(--teal);font-weight:900}.vocab-hero h1{margin:6px 0 8px}.vocab-hero p{margin:0;color:var(--muted);line-height:1.8}
 .vocab-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.vocab-tabs .btn.active{background:var(--teal);color:white;border-color:var(--teal)}
-.vocab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.vocab-card{background:white;border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:7px}
-.vocab-symbol{height:62px;display:grid;place-items:center;background:#f0f8f5;border-radius:12px;font-size:34px}
-.vocab-word{font-size:19px;font-weight:900;direction:ltr;text-align:center}.vocab-meaning{text-align:center;color:var(--muted);font-weight:750}
-.vocab-pron{text-align:center;font-size:12px;color:var(--muted)}.vocab-card .btn{width:100%;padding:9px 8px}
-.vocab-example{margin-top:14px;padding:14px;background:#f7fbf9;border-radius:14px;line-height:1.8}.vocab-example strong{direction:ltr;display:block;text-align:left}
+.vocab-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;max-width:440px;margin:0 auto}
+.vocab-card{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;min-width:0;display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.vocab-symbol{height:100px;display:grid;place-items:center;background:#f0f8f5;border-radius:14px;font-size:52px}
+.vocab-word{font-size:28px;font-weight:900;direction:ltr;text-align:center}.vocab-meaning{text-align:center;color:var(--muted);font-weight:750}
+.vocab-pron{text-align:center;font-size:12px;color:var(--muted)}.vocab-card .btn{width:100%;padding:11px 8px}
+.vocab-next{max-width:440px;margin:12px auto 0}.vocab-next .btn{width:100%}
 .vocab-quiz{margin-top:14px}.vocab-quiz h3{margin:0 0 8px}.vocab-quiz-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.vocab-quiz-options .btn{white-space:normal}
-@media(max-width:600px){.vocab-hero{padding:17px;border-radius:18px}.vocab-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.vocab-card{padding:10px}.vocab-word{font-size:17px}.vocab-symbol{height:54px}.vocab-quiz-options{grid-template-columns:1fr}}
+@media(max-width:600px){.vocab-hero{padding:17px;border-radius:18px}.vocab-grid{grid-template-columns:minmax(0,1fr);gap:8px}.vocab-card{padding:18px}.vocab-word{font-size:26px}.vocab-symbol{height:88px}.vocab-quiz-options{grid-template-columns:1fr}}
 </style></head><body><header class="top">لُغتي <span style="font-size:12px;color:#718780;font-weight:700">· حرف ورا حرف</span></header><main>
 
 <section class="vocab-wrap" id="bodyVocabulary">
   <div class="vocab-hero">
     <div class="vocab-kicker">DAILY VOCABULARY · 01</div>
     <h1>أجزاء الجسم <span style="color:var(--teal)">· Body Parts</span></h1>
-    <p>اتعلّم الكلمات اللي هتحتاجها في الحياة اليومية. اسمع النطق، شوف المعنى، واقرأ مثالًا بسيطًا — وبعدها اختبر نفسك.</p>
+    <p>اتعلّم كلمة واحدة في كل مرة. اسمع نطقها ومعناها، ولما تخلص اضغط على الكلمة التالية.</p>
     <div class="progress"><div class="fill" id="bodyProgress" style="width:0%"></div></div>
     <div class="caption"><span id="bodyLearnedLabel">0 من 20 كلمة اتعلّمتها</span><span>المستوى: مبتدئ</span></div>
   </div>
@@ -95,7 +95,7 @@ main{width:100%}
       <button class="btn" data-body-group="hands">اليد والقدم</button>
     </div>
     <div class="vocab-grid" id="bodyWordGrid"></div>
-    <div class="vocab-example" id="bodyExample"><span class="hint">مثال في جملة</span><strong>I wash my hands every day.</strong><span>أنا بغسل إيديا كل يوم.</span></div>
+    <div class="vocab-next actions"><button class="btn primary" id="bodyNextWord">الكلمة التالية ←</button></div>
     <div class="vocab-quiz">
       <h3>اختبر نفسك</h3>
       <p class="hint">اختار معنى الكلمة الإنجليزية الصحيح.</p>
@@ -164,10 +164,11 @@ const words=[
 let group='all',current=0,learned=new Set(),asked=null,answered=false;
 const $=id=>document.getElementById(id);
 function speakWord(w){if(!('speechSynthesis'in window))return; speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
-function renderWords(){const grid=$('bodyWordGrid');grid.textContent='';words.forEach((w,i)=>{if(group!=='all'&&w.group!==group)return;const card=document.createElement('article');card.className='vocab-card';card.innerHTML='<div class="vocab-symbol" aria-hidden="true">'+w.emoji+'</div><div class="vocab-word">'+w.en+'</div><div class="vocab-meaning">'+w.ar+'</div><div class="vocab-pron">النطق التقريبي: '+w.pron+'</div>';const listen=document.createElement('button');listen.className='btn';listen.textContent='🔊 اسمع النطق';listen.onclick=()=>{speakWord(w.en);learned.add(i);updateProgress()};card.appendChild(listen);const example=document.createElement('button');example.className='btn';example.textContent='شوف مثال';example.onclick=()=>{$('bodyExample').innerHTML='<span class="hint">مثال على '+w.en+'</span><strong>'+w.example+'</strong><span>'+w.translation+'</span>';current=i};card.appendChild(example);grid.appendChild(card)})}
+function visibleWords(){return words.map((w,i)=>({...w,index:i})).filter(w=>group==='all'||w.group===group)}
+function renderWords(){const grid=$('bodyWordGrid');grid.textContent='';const list=visibleWords();if(!list.length)return;if(current>=list.length)current=0;const item=list[current],w=words[item.index];const card=document.createElement('article');card.className='vocab-card';card.innerHTML='<div class="vocab-symbol" aria-hidden="true">'+w.emoji+'</div><div class="vocab-word">'+w.en+'</div><div class="vocab-meaning">'+w.ar+'</div><div class="vocab-pron">النطق التقريبي: '+w.pron+'</div><div class="hint" style="text-align:center">الكلمة '+(current+1)+' من '+list.length+'</div>';const listen=document.createElement('button');listen.className='btn';listen.textContent='🔊 اسمع النطق';listen.onclick=()=>{speakWord(w.en);learned.add(item.index);updateProgress()};card.appendChild(listen);grid.appendChild(card);$('bodyNextWord').textContent=current===list.length-1?'خلصت الكلمات ✓':'خلصت الكلمة — التالية ←';$('bodyNextWord').disabled=false}
 function updateProgress(){$('bodyProgress').style.width=(learned.size/words.length*100)+'%';$('bodyLearnedLabel').textContent=learned.size+' من '+words.length+' كلمة اتعلّمتها'}
 function newQuestion(){asked=Math.floor(Math.random()*words.length);answered=false;const options=new Set([asked]);while(options.size<4)options.add(Math.floor(Math.random()*words.length));const list=[...options].sort(()=>Math.random()-.5);$('bodyQuizFeedback').textContent='';$('bodyQuizOptions').textContent='';const w=words[asked];$('bodyQuizOptions').dataset.correct=String(asked);const q=document.createElement('div');q.style.gridColumn='1/-1';q.style.textAlign='center';q.style.fontSize='26px';q.style.fontWeight='900';q.style.direction='ltr';q.textContent=w.en;$('bodyQuizOptions').appendChild(q);list.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(answered)return;answered=true;if(i===asked){b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('bodyQuizFeedback').textContent='صح! '+w.en+' معناها '+w.ar+' 👏';$('bodyQuizFeedback').style.color='#087f70';learned.add(asked);updateProgress()}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('bodyQuizFeedback').textContent='مش بالظبط. '+w.en+' معناها '+w.ar+'. جرّب السؤال اللي بعده.';$('bodyQuizFeedback').style.color='#a85b20';[...$('bodyQuizOptions').children].forEach(x=>{if(x.textContent===w.ar){x.style.background='#d9f7e8';x.style.borderColor='#087f70'}})}};$('bodyQuizOptions').appendChild(b)})}
 $('bodyTabs').addEventListener('click',e=>{const b=e.target.closest('[data-body-group]');if(!b)return;group=b.dataset.bodyGroup;[...$('bodyTabs').querySelectorAll('button')].forEach(x=>x.classList.toggle('active',x===b));renderWords()});
-$('bodyNextQuestion').onclick=newQuestion;renderWords();updateProgress();newQuestion();
+$('bodyNextQuestion').onclick=newQuestion;$('bodyNextWord').onclick=()=>{const list=visibleWords();if(current<list.length-1){learned.add(list[current].index);updateProgress();current++;renderWords()}else{$('bodyNextWord').textContent='خلصت الكلمات كلها! 🎉';$('bodyNextWord').disabled=true;learned.add(list[current].index);updateProgress()}};$('bodyTabs').addEventListener('click',()=>{current=0;renderWords()});renderWords();updateProgress();newQuestion();
 })();
 </script></body></html>
