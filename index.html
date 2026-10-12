@@ -88,8 +88,19 @@ main{width:100%}
  const $=id=>document.getElementById(id);
  const endpoint="https://script.google.com/macros/s/AKfycbyN9Bc7-Mb5jlrPGXDlVtQ4SabmZero4GjkPMWfoE0V7kTagVGugni6lbtgdHQEWOy-GA/exec";
  async function request(data){
-  const res=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(data)});
-  return await res.json();
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(), 15000);
+  try {
+   const res=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(data),signal:controller.signal,credentials:"omit"});
+   const text=await res.text();
+   if(!res.ok) throw new Error("الخادم رجّع خطأ HTTP "+res.status);
+   try { return JSON.parse(text); }
+   catch { throw new Error("ردّ الخادم مش بصيغة JSON. راجع نشر Web App في Apps Script."); }
+  } catch(e) {
+   if(e.name==="AbortError") throw new Error("الاتصال أخد أكتر من 15 ثانية. غالبًا رابط Web App أو النشر محتاج مراجعة.");
+   if(e instanceof TypeError) throw new Error("المتصفح منع قراءة ردّ Apps Script (غالبًا CORS/إعادة توجيه). اختبار البريد وحده مش كفاية لإثبات اتصال الموقع.");
+   throw e;
+  } finally { clearTimeout(timer); }
  }
  const send=$("sendLoginCode"),verify=$("verifyLoginCode");
  if(!send||!verify)return;
