@@ -371,5 +371,33 @@ body{touch-action:pan-y;overscroll-behavior-y:contain}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
+
+<style id="mobile-scroll-smoothness-pass">
+/* Reduce repeated GPU compositing while preserving the main iOS glass navigation. */
+@media(max-width:760px){
+  html,body{-webkit-overflow-scrolling:touch;scroll-behavior:auto!important}
+  .top,.app-bottom-nav{
+    backdrop-filter:blur(6px) saturate(135%)!important;
+    -webkit-backdrop-filter:blur(6px) saturate(135%)!important;
+  }
+  .stat,.card,.skill,.path-item,.lesson-panel{
+    backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+    background:rgba(255,255,255,.88)!important;
+    box-shadow:0 3px 10px rgba(23,48,60,.045)!important;
+  }
+  .letter{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel,.hero .bubble{
+    animation:none!important;backface-visibility:visible!important
+  }
+  .stat,.card,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action,.app-bottom-nav,.app-bottom-nav a{
+    transition:none!important;will-change:auto!important
+  }
+  body:before{display:none!important}
+}
+@media(prefers-color-scheme:dark) and (max-width:760px){
+  .stat,.card,.skill,.path-item,.lesson-panel{background:rgba(18,34,43,.9)!important}
+}
+</style>
+
 </body>
 </html>
