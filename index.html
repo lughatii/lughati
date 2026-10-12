@@ -140,14 +140,8 @@ nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
       <div class="eyebrow" id="letterPosition">الدرس الأول</div>
       <h2 id="letterTitle">حرف A a</h2>
       <p>اسم الحرف بالعربي تقريبًا: <strong id="letterName">إيه</strong></p>
-      <div class="example-card">
-        <span class="example-label">كلمة على الحرف</span>
-        <p class="example-line"><span class="word" id="exampleWord">Apple</span><span class="example-separator">—</span><span id="exampleMeaning">تفاحة</span></p>
-      </div>
       <div class="actions lesson-audio-actions">
-        <button class="btn primary" id="hearLesson" type="button">🔊 اسمع الدرس كامل</button>
-        <button class="btn secondary" id="hearLetter" type="button">اسمع الحرف</button>
-        <button class="btn secondary" id="hearExample" type="button">اسمع الكلمة</button>
+        <button class="btn primary" id="hearLesson" type="button">🔊 اسمع اسم الحرف</button>
       </div>
       <div class="actions lesson-controls">
         <button class="btn done-button" id="markLearned" type="button">✓ اتعلّمت الحرف</button>
@@ -208,14 +202,8 @@ function speak(text){
  const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.78;window.speechSynthesis.speak(u);
 }
 function speakWholeLesson(){
- if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){alert('ميزة النطق مش متاحة في المتصفح ده.');return}
- window.speechSynthesis.cancel();
- const a=new SpeechSynthesisUtterance(letters[selected][0]);a.lang='en-US';a.rate=.78;
- const b=new SpeechSynthesisUtterance(letters[selected][3]);b.lang='en-US';b.rate=.78;
- window.speechSynthesis.speak(a);window.speechSynthesis.speak(b);
+ speak(letters[selected][0]);
 }
-$('hearLetter').addEventListener('click',()=>speak(letters[selected][0]));
-$('hearExample').addEventListener('click',()=>speak(letters[selected][3]));
 $('hearLesson').addEventListener('click',speakWholeLesson);
 $('nextLetter').addEventListener('click',()=>{if(selected<letters.length-1)chooseLetter(selected+1)});
 $('previousLetter').addEventListener('click',()=>{if(selected>0)chooseLetter(selected-1)});
