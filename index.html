@@ -30,7 +30,7 @@ let lang='en',flashI=0,revealed=false,qi=0,round=[],score=0,answered=false;
 /* Interface language is separate from the language being learned. */
 let siteLang=localStorage.getItem('lughatiSiteLanguage')==='en'?'en':'ar';
 const siteTranslations={
-'لُغتي':'Lughati','مكتبة الكلمات':'Word Library','كروت الحفظ':'Flashcards','الاختبارات':'Quizzes','إعادة ضبط ↻':'Reset ↻',
+'لُغتي':'Lughati','ل':'L','لُغتي — تعلّم على مهلك':'Lughati — Learn at Your Own Pace','مكتبة الكلمات':'Word Library','كروت الحفظ':'Flashcards','الاختبارات':'Quizzes','إعادة ضبط ↻':'Reset ↻',
 '✦ خطوة صغيرة كل يوم':'✦ A small step every day','اتعلّم لغة جديدة،':'Learn a new language,','بطريقتك وعلى مهلك.':'your way, at your own pace.','اختار الإنجليزي أو الألماني، واتدرّب على الكلمات والكتابة والجمل والمواقف الواقعية، وتابع تقدمك في لُغتي.':'Choose English or German, practice words, writing, sentences, and real-life situations, and track your progress with Lughati.',
 'ابدأ التدريب ←':'Start Practicing ←','تصفّح الكلمات':'Browse Words','نجوم لُغتي':'Lughati Stars','مستواك الحالي':'Current Level','كلمات مفضلة':'Favorite Words','سلسلة الأيام':'Daily Streak','نجمة':'stars','المستوى':'Level','كلمة':'words','يوم':'days',
 'مكتبتك الشخصية':'Your Personal Library','اختار لغتك وابدأ':'Choose a language to learn','كلمات وجمل مع الترجمة والأمثلة والنطق.':'Words and sentences with translations, examples, and pronunciation.','🇬🇧 الإنجليزية':'🇬🇧 English','🇩🇪 الألمانية':'🇩🇪 German','ابحث عن كلمة أو ترجمة...':'Search for a word or translation...','كل المستويات':'All Levels','المفضلة فقط':'Favorites only','مفيش كلمات مطابقة لبحثك.':'No matching words found.',
@@ -124,12 +124,37 @@ function translateText(value){
  for(const [re,repl] of patterns)if(re.test(original))return original.replace(re,repl);
  return original;
 }
+const originalTextNodes=new WeakMap();
+const originalAttributes=new WeakMap();
 function translateSite(root=document.body){
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
- let node;while((node=walker.nextNode())){if(!node.nodeValue.trim())continue;const trimmed=node.nodeValue.trim(),next=translateText(trimmed);if(next!==trimmed)node.nodeValue=node.nodeValue.replace(trimmed,next)}
- root.querySelectorAll('input[placeholder],input[aria-label],button[title],select[aria-label]').forEach(el=>['placeholder','aria-label','title'].forEach(a=>{if(el.hasAttribute(a))el.setAttribute(a,translateText(el.getAttribute(a)))}));
- document.documentElement.lang=siteLang;document.documentElement.dir=siteLang==='en'?'ltr':'rtl';
- document.title=siteLang==='en'?'Lughati — Learn a Language Every Day':'لُغتي — اتعلم لغة كل يوم';const langLabel=document.querySelector('label[for="siteLanguage"]');if(langLabel)langLabel.textContent=siteLang==='en'?'Website language':'لغة الموقع';const langSelect=document.getElementById('siteLanguage');if(langSelect)langSelect.setAttribute('aria-label',siteLang==='en'?'Website language':'لغة الموقع');
+ let node;
+ while((node=walker.nextNode())){
+  const raw=node.nodeValue;
+  if(!raw.trim())continue;
+  if(!originalTextNodes.has(node))originalTextNodes.set(node,raw);
+  const source=originalTextNodes.get(node),trimmed=source.trim();
+  const translated=siteLang==='en'?translateText(trimmed):trimmed;
+  const next=source.replace(trimmed,translated);
+  if(node.nodeValue!==next)node.nodeValue=next;
+ }
+ root.querySelectorAll('input[placeholder],input[aria-label],button[title],select[aria-label]').forEach(el=>{
+  ['placeholder','aria-label','title'].forEach(a=>{
+   if(!el.hasAttribute(a))return;
+   let originals=originalAttributes.get(el);
+   if(!originals){originals={};originalAttributes.set(el,originals)}
+   if(!(a in originals))originals[a]=el.getAttribute(a);
+   const source=originals[a];
+   el.setAttribute(a,siteLang==='en'?translateText(source):source);
+  });
+ });
+ document.documentElement.lang=siteLang;
+ document.documentElement.dir=siteLang==='en'?'ltr':'rtl';
+ document.title=siteLang==='en'?'Lughati — Learn a Language Every Day':'لُغتي — اتعلم لغة كل يوم';
+ const langLabel=document.querySelector('label[for="siteLanguage"]');
+ if(langLabel)langLabel.textContent=siteLang==='en'?'Website language':'لغة الموقع';
+ const langSelect=document.getElementById('siteLanguage');
+ if(langSelect)langSelect.setAttribute('aria-label',siteLang==='en'?'Website language':'لغة الموقع');
 }
 function setSiteLanguage(value){
  siteLang=value==='en'?'en':'ar';localStorage.setItem('lughatiSiteLanguage',siteLang);
@@ -144,7 +169,7 @@ function setSiteLanguage(value){
 $('siteLanguage').innerHTML='<option value="ar">العربية</option><option value="en">English</option>';
 $('siteLanguage').value=siteLang;
 $('siteLanguage').addEventListener('change',e=>setSiteLanguage(e.target.value));
-const siteObserver=new MutationObserver(records=>{if(siteLang==='en')records.forEach(record=>record.addedNodes&&record.addedNodes.forEach(n=>{if(n.nodeType===Node.TEXT_NODE){const trimmed=n.nodeValue.trim(),t=translateText(trimmed);if(t!==trimmed)n.nodeValue=n.nodeValue.replace(trimmed,t)}else if(n.nodeType===Node.ELEMENT_NODE)translateSite(n)}))});
+const siteObserver=new MutationObserver(records=>{if(siteLang==='en')records.forEach(record=>record.addedNodes&&record.addedNodes.forEach(n=>{if(n.nodeType===Node.TEXT_NODE){const holder=document.createElement('span');holder.appendChild(n.cloneNode(true));translateSite(holder);n.nodeValue=holder.textContent}else if(n.nodeType===Node.ELEMENT_NODE)translateSite(n)}))});
 siteObserver.observe(document.body,{subtree:true,childList:true});
 
 let state={xp:0,favs:[],known:[],streak:0,last:'',currentLevel:1,passedLevels:[],trainerSeen:[]};try{state=Object.assign(state,JSON.parse(localStorage.getItem('lughati')||'{}'))}catch(e){} state.currentLevel=Math.min(100,Math.max(1,Number(state.currentLevel)||1));state.passedLevels=Array.isArray(state.passedLevels)?state.passedLevels:[];state.trainerSeen=Array.isArray(state.trainerSeen)?state.trainerSeen:[];
