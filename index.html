@@ -145,9 +145,9 @@ nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
         <img class="example-image" id="exampleImage" src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f34e.png" alt="Apple — تفاحة" width="112" height="112" loading="eager" decoding="async"><p class="example-line"><span class="word" id="exampleWord">Apple</span><span class="example-separator">—</span><span id="exampleMeaning">تفاحة</span></p>
       </div>
       <div class="actions lesson-audio-actions">
-        <button class="btn primary" id="hearLesson" type="button">🔊 اسمع اسم الحرف</button>
-        <button class="btn secondary" id="hearLetter" type="button">اسمع الحرف</button>
-        <button class="btn secondary" id="hearExample" type="button">اسمع المثال</button>
+        <button class="btn primary" id="hearLesson" class="audio-progress-button" type="button" aria-pressed="false">🔊 اسمع اسم الحرف</button>
+        <button class="btn secondary" id="hearLetter" class="audio-progress-button" type="button" aria-pressed="false">اسمع الحرف</button>
+        <button class="btn secondary" id="hearExample" class="audio-progress-button" type="button" aria-pressed="false">اسمع المثال</button>
       </div>
       <div class="actions lesson-controls">
         <button class="btn done-button" id="markLearned" type="button">✓ اتعلّمت الحرف</button>
@@ -165,11 +165,11 @@ nav.app-bottom-nav a span:last-child{overflow-wrap:anywhere!important}
 </main>
 <script>
 const letters=[
-['A','a','إيه','Apple','تفاحة'],['B','b','بي','Ball','كرة'],['C','c','سي','Cat','قطة'],['D','d','دي','Dog','كلب'],['E','e','إي','Egg','بيضة'],['F','f','إف','Fish','سمكة'],
-['G','g','جي','Goat','ماعز'],['H','h','إيتش','Hat','قبعة'],['I','i','آي','Ice','ثلج'],['J','j','جاي','Jam','مربّى'],['K','k','كاي','Key','مفتاح'],['L','l','إل','Lion','أسد'],
-['M','m','إم','Moon','قمر'],['N','n','إن','Nose','أنف'],['O','o','أو','Orange','برتقالة'],['P','p','پي','Pen','قلم'],['Q','q','كيو','Queen','ملكة'],['R','r','آر','Rain','مطر'],
-['S','s','إس','Sun','شمس'],['T','t','تي','Tree','شجرة'],['U','u','يو','Umbrella','مظلّة'],['V','v','ڤي','Van','سيارة نقل'],['W','w','دَبليو','Water','ماء'],['X','x','إكس','Box','صندوق'],
-['Y','y','واي','Yellow','أصفر'],['Z','z','زي','Zoo','حديقة حيوان']];
+['A','a','إيه','Apple','تفاحة','1f34e'],['B','b','بي','Ball','كرة','26bd'],['C','c','سي','Cat','قطة','1f431'],['D','d','دي','Dog','كلب','1f436'],['E','e','إي','Egg','بيضة','1f95a'],['F','f','إف','Fish','سمكة','1f41f'],
+['G','g','جي','Goat','ماعز','1f410'],['H','h','إيتش','Hat','قبعة','1f3a9'],['I','i','آي','Ice','ثلج','1f9ca'],['J','j','جاي','Jam','مربّى','1f36f'],['K','k','كاي','Key','مفتاح','1f511'],['L','l','إل','Lion','أسد','1f981'],
+['M','m','إم','Moon','قمر','1f319'],['N','n','إن','Nose','أنف','1f443'],['O','o','أو','Orange','برتقالة','1f34a'],['P','p','پي','Pen','قلم','1f58a'],['Q','q','كيو','Queen','ملكة','1f478'],['R','r','آر','Rain','مطر','1f327'],
+['S','s','إس','Sun','شمس','2600'],['T','t','تي','Tree','شجرة','1f333'],['U','u','يو','Umbrella','مظلّة','2602'],['V','v','ڤي','Van','سيارة نقل','1f690'],['W','w','دَبليو','Water','ماء','1f4a7'],['X','x','إكس','Box','صندوق','1f4e6'],
+['Y','y','واي','Yellow','أصفر','1f7e1'],['Z','z','زي','Zoo','حديقة حيوان','1f992']];
 const $=id=>document.getElementById(id);
 let selected=0, learned=new Set(), visited=new Set([0]);
 try{
@@ -200,6 +200,9 @@ function chooseLetter(i){
  $('letterName').textContent=l[2];
  $('exampleWord').textContent=l[3];
  $('exampleMeaning').textContent=l[4];
+ $('exampleImage').src='https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/'+l[5]+'.png';
+ $('exampleImage').alt=l[3]+' — '+l[4];
+ updateAudioButtons();
  saveProgress();updateProgress();
 }
 function speak(text){
@@ -207,11 +210,27 @@ function speak(text){
  window.speechSynthesis.cancel();
  const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.78;window.speechSynthesis.speak(u);
 }
+let audioProgress={};
+try{audioProgress=JSON.parse(localStorage.getItem('lughati-audio-progress')||'{}')||{}}catch(e){audioProgress={}}
+function updateAudioButtons(){
+ ['hearLesson','hearLetter','hearExample'].forEach(id=>{
+  const button=$(id),lit=Boolean(audioProgress[selected]&&audioProgress[selected][id]);
+  button.classList.toggle('is-lit',lit);
+  button.setAttribute('aria-pressed',String(lit));
+ });
+}
+function rememberAudio(id){
+ if(!audioProgress[selected])audioProgress[selected]={};
+ audioProgress[selected][id]=true;
+ try{localStorage.setItem('lughati-audio-progress',JSON.stringify(audioProgress))}catch(e){}
+ updateAudioButtons();
+}
 function speakWholeLesson(){
+ rememberAudio('hearLesson');
  speak(letters[selected][0]);
 }
-$('hearLetter').addEventListener('click',()=>speak(letters[selected][0]));
-$('hearExample').addEventListener('click',()=>speak(letters[selected][3]));
+$('hearLetter').addEventListener('click',()=>{rememberAudio('hearLetter');speak(letters[selected][0])});
+$('hearExample').addEventListener('click',()=>{rememberAudio('hearExample');speak(letters[selected][3])});
 $('hearLesson').addEventListener('click',speakWholeLesson);
 $('nextLetter').addEventListener('click',()=>{if(selected<letters.length-1)chooseLetter(selected+1)});
 $('previousLetter').addEventListener('click',()=>{if(selected>0)chooseLetter(selected-1)});
@@ -358,5 +377,9 @@ button:disabled{opacity:.38!important}
 @media(prefers-reduced-motion:reduce){.lesson-progress-fill{transition:none!important}}
 </style>
 <style id="example-image-style">.example-image{display:block;width:112px;height:112px;object-fit:contain;margin:12px auto 4px;padding:8px;border-radius:20px;background:linear-gradient(145deg,#e3f8ef,#e3f1ff)}@media(prefers-color-scheme:dark){.example-image{background:linear-gradient(145deg,#173f3b,#173746)}}@media(max-width:600px){.example-image{width:92px;height:92px}}</style>
+<style id="persistent-audio-highlight">
+.audio-progress-button.is-lit{background:linear-gradient(135deg,#baf4df,#d7f0ff)!important;color:#075d68!important;border-color:#38b99c!important;box-shadow:inset 0 0 0 1px #ffffffaa,0 4px 12px #087f8c20!important}
+@media(prefers-color-scheme:dark){.audio-progress-button.is-lit{background:linear-gradient(135deg,#194b43,#1b4051)!important;color:#a5f2d9!important;border-color:#51c9b1!important}}
+</style>
 </body>
 </html>
