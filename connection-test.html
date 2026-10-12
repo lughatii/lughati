@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اختبار اتصال لُغتي</title>
+<style>
+body{font-family:system-ui,Arial,sans-serif;max-width:640px;margin:40px auto;padding:20px;line-height:1.8;color:#172033;background:#f6f8fc}
+main{background:white;border-radius:16px;padding:24px;box-shadow:0 4px 24px #18264a12}
+h1{font-size:1.5rem}button{border:0;border-radius:10px;background:#2457d6;color:white;padding:12px 18px;font-size:1rem}
+#result{margin-top:18px;padding:14px;border-radius:10px;background:#eef2f8;overflow-wrap:anywhere;white-space:pre-wrap}
+</style>
+</head>
+<body><main>
+<h1>اختبار اتصال لُغتي</h1>
+<p>الاختبار ده بيجرب قراءة ردّ خادم Google Apps Script فقط. مش هيبعت إيميل أو رمز تحقق، ومش هيغيّر أي بيانات.</p>
+<button id="run">ابدأ الاختبار</button>
+<div id="result" role="status">اضغط على «ابدأ الاختبار».</div>
+</main>
+<script>
+const endpoint="https://script.google.com/macros/s/AKfycbyN9Bc7-Mb5jlrPGXDlVtQ4SabmZero4GjkPMWfoE0V7kTagVGugni6lbtgdHQEWOy-GA/exec";
+const result=document.getElementById("result");
+document.getElementById("run").addEventListener("click",async()=>{
+ result.textContent="جاري الاختبار…";
+ try{
+  const response=await fetch(endpoint,{method:"GET",cache:"no-store"});
+  const body=await response.text();
+  result.textContent="نجح الاتصال وقراءة الرد.\nHTTP: "+response.status+"\nالرد: "+body;
+ }catch(error){
+  result.textContent="المتصفح منع قراءة الرد أو تعذّر الاتصال.\nالتفاصيل: "+String(error)+"\nده اختبار قراءة فقط، ومش معناه إن إعدادات الدخول شغالة.";
+ }
+});
+</script></body></html>
