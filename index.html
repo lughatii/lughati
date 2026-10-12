@@ -64,7 +64,47 @@ main{width:100%}
 .encouragement{margin-top:14px;padding:12px 14px;border-radius:15px;background:#fff7d6;border:1px solid #f3e5a4;color:#76551b;font-weight:800;text-align:center;line-height:1.7}
 .encouragement small{display:block;font-size:12px;font-weight:650;color:#8b7444}
 @media(max-width:600px){.encouragement{padding:10px 11px;font-size:14px}}
-\n</style></head><body><header class="top">لُغتي <span style="font-size:12px;color:#718780;font-weight:700">· حرف ورا حرف</span></header><main>
+\n
+/* Daily vocabulary: body parts */
+.vocab-wrap{margin-bottom:16px}.vocab-hero{background:linear-gradient(135deg,#e3f5f1,#fff);border:1px solid var(--line);border-radius:23px;padding:22px;margin-bottom:12px}
+.vocab-kicker{font-size:12px;letter-spacing:.08em;color:var(--teal);font-weight:900}.vocab-hero h1{margin:6px 0 8px}.vocab-hero p{margin:0;color:var(--muted);line-height:1.8}
+.vocab-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.vocab-tabs .btn.active{background:var(--teal);color:white;border-color:var(--teal)}
+.vocab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.vocab-card{background:white;border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:7px}
+.vocab-symbol{height:62px;display:grid;place-items:center;background:#f0f8f5;border-radius:12px;font-size:34px}
+.vocab-word{font-size:19px;font-weight:900;direction:ltr;text-align:center}.vocab-meaning{text-align:center;color:var(--muted);font-weight:750}
+.vocab-pron{text-align:center;font-size:12px;color:var(--muted)}.vocab-card .btn{width:100%;padding:9px 8px}
+.vocab-example{margin-top:14px;padding:14px;background:#f7fbf9;border-radius:14px;line-height:1.8}.vocab-example strong{direction:ltr;display:block;text-align:left}
+.vocab-quiz{margin-top:14px}.vocab-quiz h3{margin:0 0 8px}.vocab-quiz-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.vocab-quiz-options .btn{white-space:normal}
+@media(max-width:600px){.vocab-hero{padding:17px;border-radius:18px}.vocab-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.vocab-card{padding:10px}.vocab-word{font-size:17px}.vocab-symbol{height:54px}.vocab-quiz-options{grid-template-columns:1fr}}
+</style></head><body><header class="top">لُغتي <span style="font-size:12px;color:#718780;font-weight:700">· حرف ورا حرف</span></header><main>
+
+<section class="vocab-wrap" id="bodyVocabulary">
+  <div class="vocab-hero">
+    <div class="vocab-kicker">DAILY VOCABULARY · 01</div>
+    <h1>أجزاء الجسم <span style="color:var(--teal)">· Body Parts</span></h1>
+    <p>اتعلّم الكلمات اللي هتحتاجها في الحياة اليومية. اسمع النطق، شوف المعنى، واقرأ مثالًا بسيطًا — وبعدها اختبر نفسك.</p>
+    <div class="progress"><div class="fill" id="bodyProgress" style="width:0%"></div></div>
+    <div class="caption"><span id="bodyLearnedLabel">0 من 20 كلمة اتعلّمتها</span><span>المستوى: مبتدئ</span></div>
+  </div>
+  <div class="panel">
+    <div class="vocab-tabs" id="bodyTabs">
+      <button class="btn active" data-body-group="all">الكل</button>
+      <button class="btn" data-body-group="body">الجسم</button>
+      <button class="btn" data-body-group="face">الوجه</button>
+      <button class="btn" data-body-group="hands">اليد والقدم</button>
+    </div>
+    <div class="vocab-grid" id="bodyWordGrid"></div>
+    <div class="vocab-example" id="bodyExample"><span class="hint">مثال في جملة</span><strong>I wash my hands every day.</strong><span>أنا بغسل إيديا كل يوم.</span></div>
+    <div class="vocab-quiz">
+      <h3>اختبر نفسك</h3>
+      <p class="hint">اختار معنى الكلمة الإنجليزية الصحيح.</p>
+      <div class="vocab-quiz-options" id="bodyQuizOptions"></div>
+      <p id="bodyQuizFeedback" role="status" aria-live="polite" style="font-weight:800"></p>
+      <div class="actions"><button class="btn primary" id="bodyNextQuestion">سؤال جديد ←</button></div>
+    </div>
+  </div>
+</section>
 <section class="intro"><h1>يلا نتعلّم الإنجليزي 🌱</h1><p>شوف صورة الكلمة، اسمع اسم الحرف والكلمة، وكرّر بصوتك.</p><div class="progress"><div class="fill" id="fill"></div></div><div class="caption"><span id="pos">الحرف 1 من 26</span><span id="doneCount">0 حرف متعلّم</span></div><div class="encouragement" id="encouragement" aria-live="polite">يلا يا بطل، إنت قدّها! 💪<small>كل حرف بتتعلّمه بيقرّبك من هدفك.</small></div></section>
 <section class="lesson"><div class="panel example"><div class="letter" id="letter">A a</div><div class="letter-name" id="letterName">اسم الحرف: إيه</div><div class="picture" id="picture" role="img" aria-label="Apple — تفاحة"></div><div class="word" id="word">Apple</div><div class="meaning" id="meaning">تفاحة</div><div class="actions" style="margin-top:18px"><button class="btn primary" id="hearLetter">🔊 اسمع اسم الحرف</button><button class="btn" id="hearWord">🔊 اسمع الكلمة</button></div><div class="nav"><button class="btn" id="prev">السابق ←</button><button class="btn primary" id="next">التالي →</button></div></div></section><section class="panel" id="soundQuiz" style="display:none;min-height:70vh"><h2 style="font-size:21px;margin:0 0 6px">🎯 تحدّي الحرف والكلمة</h2><p class="hint" id="quizPrompt">اختار الكلمة اللي بتبدأ بالحرف المعروض.</p><div id="quizOptions" class="actions"></div><p id="quizFeedback" role="status" aria-live="polite" style="font-weight:800;margin-bottom:0"></p><div class="actions" id="quizContinueWrap" style="display:none;margin-top:14px"><button class="btn primary" id="quizContinue">تمام، نكمّل للحرف التالي →</button></div><p class="hint">بص على الحرف اللي بتتعلّمه، واختار الكلمة اللي بتبدأ بيه.</p></section><div class="footer">لُغتي — تعلّم بسيط، خطوة بخطوة.</div></main>
 <script>
@@ -96,4 +136,38 @@ function renderQuiz(){$('quizPrompt').textContent='حرف '+L[quizTarget][0]+': 
 function openQuiz(){quizOpen=true;document.body.classList.add('quiz-mode');$('soundQuiz').style.display='block';buildQuiz();renderQuiz();window.scrollTo({top:0,behavior:'instant'});}
 function closeQuiz(){quizOpen=false;document.body.classList.remove('quiz-mode');$('soundQuiz').style.display='none';}
 $('prev').onclick=()=>{if(n>0){n--;closeQuiz();render()}};$('next').onclick=()=>{openQuiz()};$('hearLetter').onclick=()=>speak(L[n][0]);$('hearWord').onclick=()=>speak(L[n][3]);$('quizContinue').onclick=()=>{done.add(n);try{localStorage.setItem('lughati-learned',JSON.stringify([...done]))}catch{}closeQuiz();if(n<25){n++;render()}else{document.body.classList.add('quiz-mode');$('soundQuiz').style.display='block';$('quizPrompt').textContent='عاش! خلّصت الحروف كلها والتحديات كمان يا جدع! 🎉';$('quizOptions').textContent='';$('quizFeedback').textContent='';$('quizContinueWrap').style.display='none'}};render();
+
+/* Body-parts daily vocabulary */
+(()=>{
+const words=[
+{en:'Head',ar:'رأس',pron:'هِد',emoji:'🧑',group:'body',example:'Touch your head.',translation:'المس رأسك.'},
+{en:'Neck',ar:'رقبة',pron:'نِك',emoji:'🧍',group:'body',example:'My neck hurts.',translation:'رقبتي تؤلمني.'},
+{en:'Shoulder',ar:'كتف',pron:'شولدر',emoji:'💪',group:'body',example:'Move your shoulders.',translation:'حرّك كتافك.'},
+{en:'Arm',ar:'ذراع',pron:'آرم',emoji:'💪',group:'body',example:'Raise your arm.',translation:'ارفع ذراعك.'},
+{en:'Elbow',ar:'كوع',pron:'إلبو',emoji:'🦾',group:'body',example:'Bend your elbow.',translation:'اثنِ كوعك.'},
+{en:'Chest',ar:'صدر',pron:'تشِست',emoji:'🫁',group:'body',example:'Take a deep breath into your chest.',translation:'خد نفس عميق.'},
+{en:'Back',ar:'ظهر',pron:'باك',emoji:'🧍',group:'body',example:'My back is tired.',translation:'ظهري تعبان.'},
+{en:'Stomach',ar:'بطن',pron:'ستَمَك',emoji:'🧍',group:'body',example:'My stomach hurts.',translation:'بطني بتوجعني.'},
+{en:'Leg',ar:'ساق',pron:'لِج',emoji:'🦵',group:'body',example:'Stretch your legs.',translation:'افرد رجليك.'},
+{en:'Knee',ar:'ركبة',pron:'ني',emoji:'🦵',group:'body',example:'Bend your knee.',translation:'اثنِ ركبتك.'},
+{en:'Foot',ar:'قدم',pron:'فوت',emoji:'🦶',group:'hands',example:'My foot is wet.',translation:'رجلي مبلولة.'},
+{en:'Face',ar:'وجه',pron:'فيس',emoji:'🙂',group:'face',example:'Wash your face.',translation:'اغسل وشك.'},
+{en:'Eye',ar:'عين',pron:'آي',emoji:'👁️',group:'face',example:'I have brown eyes.',translation:'عينيّ لونهم بني.'},
+{en:'Ear',ar:'أذن',pron:'إير',emoji:'👂',group:'face',example:'My left ear hurts.',translation:'ودني الشمال بتوجعني.'},
+{en:'Nose',ar:'أنف',pron:'نوز',emoji:'👃',group:'face',example:'My nose is cold.',translation:'مناخيري ساقعة.'},
+{en:'Mouth',ar:'فم',pron:'ماوث',emoji:'👄',group:'face',example:'Open your mouth.',translation:'افتح بقك.'},
+{en:'Tooth',ar:'سِنّ',pron:'توث',emoji:'🦷',group:'face',example:'I brush my teeth.',translation:'بغسل سناني.'},
+{en:'Hand',ar:'يد',pron:'هاند',emoji:'✋',group:'hands',example:'Raise your hand.',translation:'ارفع إيدك.'},
+{en:'Finger',ar:'إصبع',pron:'فينجر',emoji:'☝️',group:'hands',example:'Point with one finger.',translation:'شاور بإصبع واحد.'},
+{en:'Toe',ar:'إصبع القدم',pron:'تو',emoji:'🦶',group:'hands',example:'I hurt my toe.',translation:'إصبع رجلي اتخبط.'}
+];
+let group='all',current=0,learned=new Set(),asked=null,answered=false;
+const $=id=>document.getElementById(id);
+function speakWord(w){if(!('speechSynthesis'in window))return; speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
+function renderWords(){const grid=$('bodyWordGrid');grid.textContent='';words.forEach((w,i)=>{if(group!=='all'&&w.group!==group)return;const card=document.createElement('article');card.className='vocab-card';card.innerHTML='<div class="vocab-symbol" aria-hidden="true">'+w.emoji+'</div><div class="vocab-word">'+w.en+'</div><div class="vocab-meaning">'+w.ar+'</div><div class="vocab-pron">النطق التقريبي: '+w.pron+'</div>';const listen=document.createElement('button');listen.className='btn';listen.textContent='🔊 اسمع النطق';listen.onclick=()=>{speakWord(w.en);learned.add(i);updateProgress()};card.appendChild(listen);const example=document.createElement('button');example.className='btn';example.textContent='شوف مثال';example.onclick=()=>{$('bodyExample').innerHTML='<span class="hint">مثال على '+w.en+'</span><strong>'+w.example+'</strong><span>'+w.translation+'</span>';current=i};card.appendChild(example);grid.appendChild(card)})}
+function updateProgress(){$('bodyProgress').style.width=(learned.size/words.length*100)+'%';$('bodyLearnedLabel').textContent=learned.size+' من '+words.length+' كلمة اتعلّمتها'}
+function newQuestion(){asked=Math.floor(Math.random()*words.length);answered=false;const options=new Set([asked]);while(options.size<4)options.add(Math.floor(Math.random()*words.length));const list=[...options].sort(()=>Math.random()-.5);$('bodyQuizFeedback').textContent='';$('bodyQuizOptions').textContent='';const w=words[asked];$('bodyQuizOptions').dataset.correct=String(asked);const q=document.createElement('div');q.style.gridColumn='1/-1';q.style.textAlign='center';q.style.fontSize='26px';q.style.fontWeight='900';q.style.direction='ltr';q.textContent=w.en;$('bodyQuizOptions').appendChild(q);list.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(answered)return;answered=true;if(i===asked){b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('bodyQuizFeedback').textContent='صح! '+w.en+' معناها '+w.ar+' 👏';$('bodyQuizFeedback').style.color='#087f70';learned.add(asked);updateProgress()}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('bodyQuizFeedback').textContent='مش بالظبط. '+w.en+' معناها '+w.ar+'. جرّب السؤال اللي بعده.';$('bodyQuizFeedback').style.color='#a85b20';[...$('bodyQuizOptions').children].forEach(x=>{if(x.textContent===w.ar){x.style.background='#d9f7e8';x.style.borderColor='#087f70'}})}};$('bodyQuizOptions').appendChild(b)})}
+$('bodyTabs').addEventListener('click',e=>{const b=e.target.closest('[data-body-group]');if(!b)return;group=b.dataset.bodyGroup;[...$('bodyTabs').querySelectorAll('button')].forEach(x=>x.classList.toggle('active',x===b));renderWords()});
+$('bodyNextQuestion').onclick=newQuestion;renderWords();updateProgress();newQuestion();
+})();
 </script></body></html>
