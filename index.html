@@ -399,5 +399,20 @@ body{touch-action:pan-y;overscroll-behavior-y:contain}
 }
 </style>
 
+
+<style id="frame-pacing-pass">
+/* Prefer native high-refresh-rate scrolling and avoid extra paint work. */
+html{scroll-behavior:auto!important}
+body{background-attachment:scroll!important}
+@media(max-width:760px){
+  body{touch-action:pan-y!important;overscroll-behavior-y:auto!important}
+  .top,.app-bottom-nav{backdrop-filter:blur(5px) saturate(125%)!important;-webkit-backdrop-filter:blur(5px) saturate(125%)!important}
+  .hero,.stat,.card,.skill,.path-item,.section-head,.tip,.letter,.lesson-panel,.hero .bubble{animation:none!important;backface-visibility:visible!important}
+  .stat,.card,.skill,.path-item,.letter,.lesson-panel,.btn,.path-action,.app-bottom-nav,.app-bottom-nav a{transition:none!important;will-change:auto!important}
+  .stat,.card,.skill,.path-item,.lesson-panel{box-shadow:0 2px 7px rgba(23,48,60,.04)!important}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+
 </body>
 </html>
