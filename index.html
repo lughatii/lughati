@@ -84,6 +84,34 @@ main{width:100%}
 <section class="intro"><h1>يلا نتعلّم الإنجليزي 🌱</h1><p>شوف صورة الكلمة، اسمع اسم الحرف والكلمة، وكرّر بصوتك.</p><div class="progress"><div class="fill" id="fill"></div></div><div class="caption"><span id="pos">الحرف 1 من 26</span><span id="doneCount">0 حرف متعلّم</span></div><div class="encouragement" id="encouragement" aria-live="polite">يلا يا بطل، إنت قدّها! 💪<small>كل حرف بتتعلّمه بيقرّبك من هدفك.</small></div></section>
 <section class="lesson"><div class="panel example"><div class="letter" id="letter">A a</div><div class="letter-name" id="letterName">اسم الحرف: إيه</div><div class="picture" id="picture" role="img" aria-label="Apple — تفاحة"></div><div class="word" id="word">Apple</div><div class="meaning" id="meaning">تفاحة</div><div class="actions" style="margin-top:18px"><button class="btn primary" id="hearLetter">🔊 اسمع اسم الحرف</button><button class="btn" id="hearWord">🔊 اسمع الكلمة</button></div><div class="nav"><button class="btn" id="prev">السابق ←</button><button class="btn primary" id="next">التالي →</button></div></div></section><section class="panel" id="soundQuiz" style="display:none;min-height:70vh"><h2 style="font-size:21px;margin:0 0 6px">🎯 تحدّي الحرف والكلمة</h2><p class="hint" id="quizPrompt">اختار الكلمة اللي بتبدأ بالحرف المعروض.</p><div id="quizOptions" class="actions"></div><p id="quizFeedback" role="status" aria-live="polite" style="font-weight:800;margin-bottom:0"></p><div class="actions" id="quizContinueWrap" style="display:none;margin-top:14px"><button class="btn primary" id="quizContinue">تمام، نكمّل للحرف التالي →</button></div><p class="hint">بص على الحرف اللي بتتعلّمه، واختار الكلمة اللي بتبدأ بيه.</p></section><div class="footer">لُغتي — تعلّم بسيط، خطوة بخطوة.</div></main>
 <script>
+(function(){
+ const $=id=>document.getElementById(id);
+ const endpoint="https://script.google.com/macros/s/AKfycbyN9Bc7-Mb5jlrPGXDlVtQ4SabmZero4GjkPMWfoE0V7kTagVGugni6lbtgdHQEWOy-GA/exec";
+ async function request(data){
+  const res=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(data)});
+  return await res.json();
+ }
+ const send=$("sendLoginCode"),verify=$("verifyLoginCode");
+ if(!send||!verify)return;
+ send.addEventListener("click",async function(){
+  const email=$("loginEmail").value.trim().toLowerCase(),status=$("loginStatus");
+  if(email.indexOf("@")<1||email.indexOf(".",email.indexOf("@"))<0){status.textContent="اكتب بريد إلكتروني صحيح الأول.";return;}
+  send.disabled=true;status.textContent="جاري إرسال رمز التحقق…";
+  try{const data=await request({action:"sendCode",email});$("codeArea").style.display="block";status.textContent=data.message||"تم إرسال الطلب. راجع بريدك الإلكتروني.";}
+  catch(e){status.textContent="فشل الاتصال بالخادم من المتصفح. غالبًا إعدادات الاتصال بين GitHub Pages وApps Script هي السبب. التفاصيل: "+e.message;}
+  finally{send.disabled=false;}
+ });
+ verify.addEventListener("click",async function(){
+  const email=$("loginEmail").value.trim().toLowerCase(),code=$("loginCode").value.trim(),status=$("loginStatus");
+  if(!code){status.textContent="اكتب رمز التحقق اللي وصلك.";return;}
+  verify.disabled=true;status.textContent="جاري التأكد من الرمز…";
+  try{const data=await request({action:"verifyCode",email,code});const token=data.token||data.sessionToken||data.session_token;if(!token)throw new Error("الخادم لم يُرجع رمز جلسة.");localStorage.setItem("lughati-session",token);localStorage.setItem("lughati-email",email);status.textContent="تم تسجيل الدخول بنجاح ✅";}
+  catch(e){status.textContent="تعذر تأكيد الرمز: "+e.message;}
+  finally{verify.disabled=false;}
+ });
+})();
+</script>
+<script>
 const L=[['A','a','إيه','Apple','تفاحة'],['B','b','بي','Ball','كرة'],['C','c','سي','City','مدينة'],['D','d','دي','Dog','كلب'],['E','e','إي','Egg','بيضة'],['F','f','إف','Fish','سمكة'],['G','g','جي','Goat','ماعز'],['H','h','إيتش','Hat','قبعة'],['I','i','آي','Ice','ثلج'],['J','j','جاي','Jam','مربّى'],['K','k','كاي','Key','مفتاح'],['L','l','إل','Lion','أسد'],['M','m','إم','Moon','قمر'],['N','n','إن','Nose','أنف'],['O','o','أو','Orange','برتقالة'],['P','p','پي','Pen','قلم'],['Q','q','كيو','Queen','ملكة'],['R','r','آر','Rain','مطر'],['S','s','إس','Sun','شمس'],['T','t','تي','Tree','شجرة'],['U','u','يو','Umbrella','مظلّة'],['V','v','ڤي','Van','سيارة نقل'],['W','w','دَبليو','Water','ماء'],['X','x','إكس','X-ray','أشعة سينية'],['Y','y','واي','Yellow','أصفر'],['Z','z','زي','Zebra','حمار وحشي']];
 const pictures=["https://loremflickr.com/480/480/apple%2Cfruit?lock=45015","https://loremflickr.com/480/480/soccer%2Cball?lock=55379","https://loremflickr.com/480/480/city%2Cskyline?lock=87290","https://loremflickr.com/480/480/dog?lock=93880","https://loremflickr.com/480/480/egg?lock=21738","https://loremflickr.com/480/480/fish?lock=1017","https://loremflickr.com/480/480/goat?lock=51149","https://loremflickr.com/480/480/hat?lock=76388","https://loremflickr.com/480/480/ice%2Ccubes?lock=11390","https://loremflickr.com/480/480/jam%2Cjar?lock=86431","https://loremflickr.com/480/480/key?lock=2342","https://loremflickr.com/480/480/lion?lock=3101","https://loremflickr.com/480/480/moon?lock=74656","https://loremflickr.com/480/480/nose?lock=37765","https://loremflickr.com/480/480/orange%2Cfruit?lock=26255","https://loremflickr.com/480/480/pen?lock=85688","https://loremflickr.com/480/480/queen%2Ccrown?lock=92845","https://loremflickr.com/480/480/rain%2Cclouds?lock=3685","https://loremflickr.com/480/480/sun?lock=24140","https://loremflickr.com/480/480/tree?lock=90464","https://loremflickr.com/480/480/umbrella?lock=62109","https://loremflickr.com/480/480/van%2Cvehicle?lock=70742","https://loremflickr.com/480/480/water%2Cglass?lock=86802","https://loremflickr.com/480/480/xray%2Cmedical?lock=39131","https://loremflickr.com/480/480/yellow%2Ccolor%2Cobject?lock=85172","https://loremflickr.com/480/480/zebra%2Canimal?lock=78469"];
 const emojis=["🍎","⚽","🏙️","🐶","🥚","🐟","🐐","🎩","🧊","🍯","🔑","🦁","🌙","👃","🍊","🖊️","👑","🌧️","☀️","🌳","☂️","🚐","💧","🩻","🟡","🦓"];
@@ -111,34 +139,7 @@ function buildQuiz(){quizTarget=n;quizLocked=false;$('quizFeedback').textContent
 function renderQuiz(){$('quizPrompt').textContent='حرف '+L[quizTarget][0]+': اختار الكلمة اللي بتبدأ بالحرف ده.';}
 function openQuiz(){quizOpen=true;document.body.classList.add('quiz-mode');$('soundQuiz').style.display='block';buildQuiz();renderQuiz();window.scrollTo({top:0,behavior:'instant'});}
 function closeQuiz(){quizOpen=false;document.body.classList.remove('quiz-mode');$('soundQuiz').style.display='none';}
-$('prev').onclick=()=>{if(n>0){n--;closeQuiz();render()}};$('next').onclick=()=>{openQuiz()};$('hearLetter').onclick=()=>speak(L[n][0]);$('hearWord').onclick=()=>speak(L[n][3]);$('quizContinue').onclick=()=>{done.add(n);try{localStorage.setItem('lughati-learned',JSON.stringify([...done]))}catch{}closeQuiz();if(n<25){n++;render()}else{closeQuiz();$('stageComplete').style.display='block';$('stageComplete').scrollIntoView({behavior:'smooth',block:'center'});}};// Email OTP login via the Google Apps Script web app.
-const AUTH_ENDPOINT="https://script.google.com/macros/s/AKfycbyN9Bc7-Mb5jlrPGXDlVtQ4SabmZero4GjkPMWfoE0V7kTagVGugni6lbtgdHQEWOy-GA/exec";
-async function authRequest(payload){
- const response=await fetch(AUTH_ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(payload)});
- const data=await response.json();
- if(!response.ok||data.ok===false)throw new Error(data.message||data.error||"تعذر إكمال الطلب.");
- return data;
-}
-$('sendLoginCode').onclick=async()=>{
- const email=$('loginEmail').value.trim().toLowerCase();
- if(!/^[^\s@]+@[^\s@]+\\.[^\s@]+$/.test(email)){$('loginStatus').textContent='اكتب بريد إلكتروني صحيح الأول.';return}
- $('sendLoginCode').disabled=true;$('loginStatus').textContent='جاري إرسال رمز التحقق…';
- try{const d=await authRequest({action:'sendCode',email});$('codeArea').style.display='block';$('loginStatus').textContent=d.message||'لو البريد صحيح، راجع صندوق الوارد والرسائل غير المرغوب فيها.'}
- catch(e){$('loginStatus').textContent='ماقدرناش نقرأ ردّ الخادم من المتصفح. '+String(e)+' — لو ظهر الخطأ ده، هنحتاج نحل مشكلة الاتصال بين GitHub Pages وApps Script.'}
- finally{$('sendLoginCode').disabled=false}
-};
-$('verifyLoginCode').onclick=async()=>{
- const email=$('loginEmail').value.trim().toLowerCase(),code=$('loginCode').value.trim();
- if(!code){$('loginStatus').textContent='اكتب رمز التحقق اللي وصلك.';return}
- $('verifyLoginCode').disabled=true;$('loginStatus').textContent='جاري التأكد من الرمز…';
- try{const d=await authRequest({action:'verifyCode',email,code});const token=d.token||d.sessionToken||d.session_token;if(!token)throw new Error('الخادم لم يُرجع رمز جلسة؛ تسجيل الدخول لم يكتمل.');localStorage.setItem('lughati-session',token);localStorage.setItem('lughati-email',email);$('loginStatus').textContent='تم تسجيل الدخول بنجاح ✅';$('loginPanel').querySelector('h2').textContent='✅ تم تسجيل الدخول';$('loginPanel').querySelector('p').textContent='البريد المسجل: '+email}
- catch(e){$('loginStatus').textContent='تعذر تأكيد الرمز: '+String(e)}
- finally{$('verifyLoginCode').disabled=false}
-};
-(()=>{const email=localStorage.getItem('lughati-email');if(email){$('loginEmail').value=email;$('loginPanel').querySelector('h2').textContent='🔐 حسابك';$('loginStatus').textContent='البريد المحفوظ: '+email+' — الجلسة تحتاج اختبار تأكيدها مع الخادم.'}})();
-render();
-
- /* Body-parts daily vocabulary */
+$('prev').onclick=()=>{if(n>0){n--;closeQuiz();render()}};$('next').onclick=()=>{openQuiz()};$('hearLetter').onclick=()=>speak(L[n][0]);$('hearWord').onclick=()=>speak(L[n][3]);$('quizContinue').onclick=()=>{done.add(n);try{localStorage.setItem('lughati-learned',JSON.stringify([...done]))}catch{}closeQuiz();if(n<25){n++;render()}else{closeQuiz();$('stageComplete').style.display='block';$('stageComplete').scrollIntoView({behavior:'smooth',block:'center'});}}; /* Body-parts daily vocabulary */
 (()=>{
 const words=[
 {en:'Head',ar:'رأس',pron:'هِد',emoji:'🧑',group:'body',example:'Touch your head.',translation:'المس رأسك.'},
