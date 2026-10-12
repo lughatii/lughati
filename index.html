@@ -200,8 +200,9 @@ function chooseLetter(i){
  $('letterName').textContent=l[2];
  $('exampleWord').textContent=l[3];
  $('exampleMeaning').textContent=l[4];
- $('exampleImage').src='https://loremflickr.com/480/360/'+encodeURIComponent(l[5])+'?lock='+(selected+1);
- $('exampleImage').alt='صورة فوتوغرافية: '+l[3]+' — '+l[4];
+ $('exampleImage').onerror=function(){this.onerror=null;this.src='https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=480&q=80';};
+ $('exampleImage').src=l[0]==='C'?'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=480&q=80':'https://loremflickr.com/480/360/'+encodeURIComponent(l[5])+'?lock='+(selected+1);
+ $('exampleImage').alt=l[3]+' — '+l[4];
  updateAudioButtons();
  saveProgress();updateProgress();
 }
