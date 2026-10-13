@@ -37,6 +37,28 @@ body[data-lughati-mode="dark"] .btn:not(.primary),body[data-lughati-mode="dark"]
 body[data-lughati-mode="dark"] .picture{background:#17263a!important}
 @media(max-width:600px){#lughatiThemeButton{top:8px;left:8px;padding:8px 10px}.top{padding-left:100px!important}}
 
+
+/* Lughati glow polish v1 — decorative only */
+:root{--glow-color:var(--ui-accent,#1687ff)}
+body{isolation:isolate}
+body:before{content:"";position:fixed;inset:-18%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 12% 14%,color-mix(in srgb,var(--glow-color) 17%,transparent),transparent 32%),radial-gradient(ellipse at 88% 74%,color-mix(in srgb,var(--glow-color) 12%,transparent),transparent 35%);opacity:.9;animation:lughati-ambient 13s ease-in-out infinite alternate}
+.top{position:relative;isolation:isolate}
+.top:after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--glow-color),transparent);opacity:.65;box-shadow:0 0 12px var(--glow-color)}
+.hero,.intro,.panel,.card{position:relative;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.hero:before,.intro:before,.panel:before,.card:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 0%,color-mix(in srgb,var(--glow-color) 7%,transparent) 45%,transparent 70%);opacity:.7}
+.hero:hover,.intro:hover,.panel:hover,.card:hover{border-color:color-mix(in srgb,var(--glow-color) 48%,var(--ui-line,#dce4f0))!important;box-shadow:0 10px 32px color-mix(in srgb,var(--glow-color) 15%,transparent),0 0 0 1px color-mix(in srgb,var(--glow-color) 9%,transparent);transform:translateY(-2px)}
+.btn.primary,.btn:not(:disabled):hover,.refresh-btn:hover{box-shadow:0 5px 18px color-mix(in srgb,var(--glow-color) 34%,transparent),0 0 22px color-mix(in srgb,var(--glow-color) 16%,transparent)!important;transition:box-shadow .2s ease,transform .2s ease,filter .2s ease}
+.btn.primary:hover,.refresh-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.letter,.word{ text-shadow:0 0 22px color-mix(in srgb,var(--glow-color) 20%,transparent)}
+.progress,.fill{box-shadow:0 0 12px color-mix(in srgb,var(--glow-color) 20%,transparent)}
+#lughatiThemeButton{transition:box-shadow .2s ease,transform .2s ease}
+#lughatiThemeButton:hover{transform:translateY(-1px);box-shadow:0 5px 22px color-mix(in srgb,var(--glow-color) 24%,transparent)}
+.lughati-swatch{transition:transform .18s ease,box-shadow .18s ease}
+.lughati-swatch:hover{transform:scale(1.12);box-shadow:0 0 16px color-mix(in srgb,var(--glow-color) 45%,transparent)}
+@keyframes lughati-ambient{0%{transform:translate3d(-1%,0,0) scale(1)}100%{transform:translate3d(1%,1%,0) scale(1.04)}}
+@media(hover:none){.hero:hover,.intro:hover,.panel:hover,.card:hover{transform:none;box-shadow:none}}
+@media(prefers-reduced-motion:reduce){body:before{animation:none}.hero,.intro,.panel,.card,.btn,#lughatiThemeButton,.lughati-swatch{transition:none!important}}
+
 </style></head><body>
 <header class="top">لُغتي <span style="font-size:12px;color:#718780;font-weight:700">· اختار مرحلتك</span></header>
 <main>
