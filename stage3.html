@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eff9f5">
+<title>لُغتي — المرحلة الخاصة بي</title>
+<style>
+:root{--ink:#18332e;--muted:#718780;--line:#dcebe5;--teal:#087f70;--paper:#f1faf6}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation}.top{padding:14px max(calc((100% - 760px)/2),16px);background:#f7fffb;border-bottom:1px solid var(--line);font-size:21px;font-weight:900}main{max-width:760px;margin:auto;padding:18px 12px}.hero,.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:18px}.hero{background:linear-gradient(135deg,#ddf7ec,#f9fffc)}h1{font-size:clamp(24px,5vw,32px);margin:0 0 6px}.muted{color:var(--muted)}.progress{height:8px;background:#d5e9e0;border-radius:99px;margin-top:14px;overflow:hidden}.fill{height:100%;background:var(--teal);width:0;transition:width .2s}.caption{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:7px}.panel{margin-top:12px;text-align:center}.stage{font-size:13px;color:var(--teal);font-weight:900}.emoji{font-size:72px;margin:10px}.word{font-size:clamp(32px,8vw,46px);font-weight:900;direction:ltr}.meaning{font-size:21px;font-weight:800}.hint{font-size:13px;line-height:1.7;color:var(--muted)}.btn{border:1px solid var(--line);border-radius:13px;padding:11px 14px;background:#f6fcf9;color:var(--ink);font-weight:800;min-height:45px}.primary{background:var(--teal);color:white;border-color:var(--teal)}.row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}.write-area{width:min(100%,440px);margin:14px auto 0;position:relative}.write-input{width:100%;font-size:clamp(28px,7vw,40px);font-family:monospace;font-weight:850;text-align:center;direction:ltr;border:2px solid var(--line);border-radius:14px;padding:13px 8px;outline-color:var(--teal);background:transparent;position:relative;z-index:2;color:var(--ink);letter-spacing:2px}.write-input::placeholder{color:transparent}.ghost-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;direction:ltr;pointer-events:none;z-index:1;font-family:monospace;font-size:clamp(28px,7vw,40px);font-weight:850;letter-spacing:2px;white-space:pre;overflow:hidden;color:#cbd9d3}.feedback{min-height:28px;font-weight:850;margin-top:8px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:14px}.options button{white-space:normal}.hidden{display:none!important}.back{display:inline-block;text-decoration:none;color:var(--ink);margin-bottom:12px}.category{display:inline-block;background:#e4f6ef;color:var(--teal);border-radius:99px;padding:6px 12px;font-weight:850;font-size:13px}@media(max-width:480px){main{padding:12px 9px}.hero,.panel{padding:15px;border-radius:18px}.options{grid-template-columns:1fr}.emoji{font-size:60px}}
+</style></head>
+<body><header class="top">لُغتي <span class="muted" style="font-size:12px">· خاصة بي</span></header>
+<main><a class="back" href="index.html">← الرجوع للرئيسية</a>
+<section class="hero"><h1>مرحلتي الخاصة — مفردات متقدمة</h1><p class="muted" style="margin:0">اتدرّب على الكلمات اللي اخترتها، واكتب كل كلمة 3 مرات ثم اختار معناها الصحيح.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">الكلمة 1</span><span id="stageCount">الكتابة 1 من 3</span></div></section>
+<section class="panel" id="lesson"><div class="stage" id="category"></div><div class="emoji" id="emoji"></div><div class="word" id="word"></div><div class="meaning" id="meaning"></div><div class="row"><button class="btn" id="hear">🔊 اسمع الكلمة</button></div>
+<div id="writing"><p class="hint" id="instruction">اكتب الكلمة فوق الحروف الشفافة.</p><div class="write-area"><div class="ghost-overlay" id="ghostOverlay" aria-hidden="true"></div><input class="write-input" id="answer" placeholder=" " autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="اكتب الكلمة الإنجليزية"></div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><div class="row"><button class="btn primary" id="check">تحقّق</button><button class="btn hidden" id="nextWrite">المرة التالية ←</button></div></div>
+<div id="quiz" class="hidden"><p class="hint">اختار معنى الكلمة الإنجليزية الصحيح.</p><div class="options" id="options"></div><div class="feedback" id="quizFeedback" role="status" aria-live="polite"></div><div class="row"><button class="btn primary hidden" id="nextWord">الكلمة التالية ←</button></div></div>
+</section></main>
+<script>
+(()=> {
+const words=[
+{en:"accompany",ar:"يرافق",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"indicate",ar:"يشير إلى",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"migration",ar:"هجرة",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"amphibious",ar:"برمائي",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"intensify",ar:"يكثّف",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"mitigate",ar:"يخفّف",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"expansion",ar:"توسّع",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"large-scale",ar:"واسع النطاق",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"phenomenon",ar:"ظاهرة",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"expose",ar:"يكشف، يعرّض لـ",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"megacities",ar:"مدن عملاقة",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"potential",ar:"قدرة، إمكانية، محتمل",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"accelerated",ar:"معجَّل، مسرع",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"estimated",ar:"مقدَّر",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"poverty",ar:"فقر",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"activist",ar:"ناشط",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"ethical",ar:"أخلاقي",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"precaution",ar:"إجراء احترازي",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"adaptation",ar:"تأقلم، تكييف",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"factor",ar:"عامل",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"pressing",ar:"ملحّ",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"address",ar:"عنوان، يخاطب، يتعامل مع",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"flood-prone",ar:"عرضة للفيضانات",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"primarily",ar:"بشكل رئيسي",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"admit",ar:"يعترف",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"frequency",ar:"تكرار",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"process",ar:"عملية",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"advocate",ar:"يدافع",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"generation",ar:"جيل",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"projection",ar:"توقّع، تقدير، احتمال",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"agreement",ar:"موافقة، اتفاق",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"glaciers",ar:"أنهار جليدية",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"recognition",ar:"اعتراف",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"announcement",ar:"إعلان",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"growing",ar:"نامٍ، متزايد",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"renewable",ar:"متجدّد",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"approximately",ar:"تقريبًا",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"ice sheet",ar:"غطاء جليدي",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"require",ar:"يتطلّب",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"architecture",ar:"هندسة معمارية",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"identified",ar:"محدّد، تم تحديده",emoji:'📘',group:'مفردات خاصة بي'},
+{en:"reside",ar:"يقيم، يسكن",emoji:'📘',group:'مفردات خاصة بي'}
+];
+let index=0,attempt=1,phase='write',learned=new Set();
+try{const s=JSON.parse(localStorage.getItem('lughati-stage3-progress')||'{}');index=Number.isInteger(s.index)&&s.index>=0&&s.index<words.length?s.index:0;learned=new Set(Array.isArray(s.learned)?s.learned:[])}catch{}
+const $=id=>document.getElementById(id);
+function save(){try{localStorage.setItem('lughati-stage3-progress',JSON.stringify({index,learned:[...learned]}))}catch{}}
+function speak(){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(words[index].en);u.lang='en-US';u.rate=.8;speechSynthesis.speak(u)}
+function drawTrace(){const w=words[index].en;let hint='';const visible=new Set();if(attempt===2){if(w.length<=2){for(let i=0;i<w.length;i++)visible.add(i)}else{visible.add(1);visible.add(Math.min(3,w.length-1));}}[...w].forEach((ch,i)=>{if(attempt===1)hint+=ch;else if(attempt===2)hint+=visible.has(i)?ch:' ';});$('ghostOverlay').textContent=hint;$('stageCount').textContent='الكتابة '+attempt+' من 3';$('instruction').textContent=attempt===1?'المرة الأولى: الكلمة كاملة شفافة داخل الخانة، واكتب فوقها.':attempt===2?'المرة الثانية: يظهر حرفان فقط، واكتب باقي الحروف بنفسك.':'';$('category').classList.toggle('hidden',attempt===3);$('emoji').classList.toggle('hidden',attempt===3);$('word').classList.toggle('hidden',attempt===3);$('meaning').classList.toggle('hidden',attempt===3);$('hear').classList.toggle('hidden',attempt===3);$('ghostOverlay').classList.toggle('hidden',attempt===3);}
+function render(){const w=words[index];phase='write';attempt=1;$('category').textContent='قسم '+w.group;$('emoji').textContent=w.emoji;$('word').textContent=w.en;$('meaning').textContent=w.ar;$('category').classList.remove('hidden');$('emoji').classList.remove('hidden');$('word').classList.remove('hidden');$('meaning').classList.remove('hidden');$('hear').classList.remove('hidden');$('ghostOverlay').classList.remove('hidden');$('count').textContent='الكلمة '+(index+1)+' من '+words.length;$('progress').style.width=(learned.size/words.length*100)+'%';$('writing').classList.remove('hidden');$('quiz').classList.add('hidden');$('feedback').textContent='';$('answer').value='';$('check').classList.remove('hidden');$('nextWrite').classList.add('hidden');drawTrace();save()}
+function checkWriting(){if(phase!=='write')return;const entered=$('answer').value.trim().replace(/\s+/g,'').toLowerCase();if(entered!==words[index].en.toLowerCase()){$('feedback').textContent='لسه مش مظبوطة، جرّب تاني.';$('feedback').style.color='#a85b20';return} $('feedback').textContent='صح!';$('check').classList.add('hidden');if(attempt<3){attempt++;$('answer').value='';$('feedback').textContent='';$('check').classList.remove('hidden');drawTrace();$('answer').focus()}else{phase='quiz';$('answer').value='';$('writing').classList.add('hidden');$('quiz').classList.remove('hidden');makeOptions()}}
+function makeOptions(){const correct=words[index];const ids=new Set([index]);while(ids.size<4)ids.add(Math.floor(Math.random()*words.length));const choices=[...ids].sort(()=>Math.random()-.5);$('options').textContent='';$('quizFeedback').textContent='';$('nextWord').classList.add('hidden');choices.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(phase!=='quiz')return;if(i===index){phase='advance';b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('quizFeedback').textContent='إجابة صحيحة!';$('quizFeedback').style.color='#087f70';learned.add(index);save();$('progress').style.width=(learned.size/words.length*100)+'%';$('answer').value='';index=(index+1)%words.length;setTimeout(render,350)}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('quizFeedback').textContent='جرّب تاني، ركّز في معنى الاختيار.';$('quizFeedback').style.color='#a85b20'}};$('options').appendChild(b)})}
+$('hear').onclick=speak;$('check').onclick=checkWriting;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWriting()});$('nextWrite').onclick=()=>{};$('nextWord').onclick=()=>{};render();
+})();
+</script></body></html>
