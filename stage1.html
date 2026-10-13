@@ -1,0 +1,136 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eff9f5"><title>لُغتي — المرحلة الأولى: الحروف</title>
+<style>
+:root{--ink:#18332e;--muted:#718780;--line:#dcebe5;--teal:#087f70;--paper:#f1faf6}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}button{font:inherit;cursor:pointer}.top{padding:14px max(calc((100% - 900px)/2),16px);background:#f7fffb;border-bottom:1px solid var(--line);font-size:21px;font-weight:900}main{max-width:900px;margin:auto;padding:20px 14px}.intro,.panel{background:white;border:1px solid var(--line);border-radius:23px;padding:20px}.intro{background:linear-gradient(135deg,#ddf7ec,#f9fffc)}h1{font-size:clamp(24px,5vw,34px);margin:0 0 6px}.intro p{color:var(--muted);margin:0}.progress{height:7px;background:#d5e9e0;border-radius:99px;margin-top:16px;overflow:hidden}.fill{height:100%;background:var(--teal);width:4%}.caption{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:7px}.lesson{display:flex;flex-direction:column;gap:14px;margin-top:14px;max-width:620px;margin-left:auto;margin-right:auto}.letter{font-size:clamp(68px,13vw,100px);font-weight:900;line-height:1;text-align:center;color:var(--teal);direction:ltr}.letter-name{text-align:center;color:var(--muted);margin:8px 0 20px}.actions,.nav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.btn{border:1px solid var(--line);border-radius:13px;padding:11px 14px;background:#f6fcf9;color:var(--ink);font-weight:800}.primary{background:var(--teal);color:white;border-color:var(--teal)}.nav{justify-content:space-between;margin-top:15px}.nav .btn{flex:1}.btn:disabled{opacity:.4}.example{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:0}.picture{width:min(100%,190px);aspect-ratio:1;border-radius:20px;background:linear-gradient(145deg,#e0f7ed,#f3fbf7);display:grid;place-items:center;overflow:hidden}.picture img{display:block;width:100%;height:100%;object-fit:contain}.word{font-size:26px;font-weight:850;direction:ltr;margin-top:12px}.meaning{color:var(--muted);font-weight:750}.letters{display:none!important}body.quiz-mode .intro,body.quiz-mode .lesson,body.quiz-mode .footer{display:none!important}body.quiz-mode main{max-width:720px;min-height:calc(100vh - 55px);display:flex;align-items:center;justify-content:center}body.quiz-mode #soundQuiz{width:100%;margin:0!important}.letters button{min-height:40px;border:1px solid var(--line);border-radius:10px;background:#fff;font-weight:850}.letters button[aria-current=true]{background:var(--teal);color:white}.letters button.done{box-shadow:inset 0 -3px #77d5ad}.hint{font-size:12px;color:var(--muted);line-height:1.7}.footer{text-align:center;color:var(--muted);font-size:12px;margin:24px 0}@media(max-width:600px){.lesson{grid-template-columns:1fr}.example{min-height:0;order:-1;display:flex;flex-direction:column;align-items:center;text-align:center}.picture{width:min(100%,170px);aspect-ratio:1;display:grid;place-items:center;overflow:hidden}.picture img{display:block;width:100%;height:100%;object-fit:contain}.example .word{font-size:30px;font-weight:900;margin-top:8px}.example .meaning{font-size:20px}.letters{grid-template-columns:repeat(7,1fr)}}
+
+/* Responsive layout: phones, tablets, and desktop */
+html{min-width:0;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{min-width:0;overflow-x:hidden}
+button{touch-action:manipulation; -webkit-tap-highlight-color:transparent}
+main{width:100%}
+.lesson{width:100%}
+#soundQuiz{min-width:0}
+#quizOptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#quizOptions .btn{min-width:0;overflow-wrap:anywhere;white-space:normal;min-height:54px}
+#quizContinueWrap .btn{max-width:100%;white-space:normal}
+@media(min-width:1000px){
+  main{max-width:1080px;padding:28px 24px}
+  .top{font-size:23px}
+  .intro,.panel{padding:28px}
+  .lesson{max-width:760px}
+  .picture{width:min(100%,240px)}
+  .word{font-size:30px}
+  #soundQuiz{max-width:820px;margin-inline:auto!important}
+  #quizOptions{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+}
+@media(min-width:601px) and (max-width:999px){
+  main{max-width:850px;padding:22px 20px}
+  .lesson{max-width:680px}
+  .intro,.panel{padding:22px}
+  .picture{width:min(100%,210px)}
+  body.quiz-mode main{padding:20px}
+  body.quiz-mode #soundQuiz{min-height:calc(100dvh - 40px)!important}
+}
+@media(max-width:600px){
+  .top{padding:13px 16px;font-size:20px}
+  main{padding:14px 10px}
+  .intro,.panel{padding:16px;border-radius:18px}
+  .lesson{display:flex;gap:12px;margin-top:12px}
+  .letter{font-size:clamp(64px,19vw,88px)}
+  .picture{width:min(55vw,180px);max-width:100%}
+  .actions{gap:8px}
+  .btn{padding:11px 10px;min-height:44px}
+  .nav{gap:8px}
+  .nav .btn{min-width:0}
+  #quizOptions{grid-template-columns:1fr;gap:9px}
+  #quizOptions .btn{width:100%;text-align:center}
+  body.quiz-mode main{width:100%;min-height:100dvh;min-height:100vh;padding:10px;align-items:stretch}
+  body.quiz-mode #soundQuiz{min-height:calc(100dvh - 20px)!important;min-height:calc(100vh - 20px)!important;padding:16px;border-radius:18px}
+  body.quiz-mode #quizOptions{grid-template-columns:1fr}
+}
+@media(max-width:360px){
+  main{padding-inline:8px}
+  .intro,.panel{padding:13px}
+  .actions .btn{font-size:14px}
+  .letter-name{margin-bottom:14px}
+  .picture{width:min(52vw,155px)}
+  body.quiz-mode main{padding:7px}
+  body.quiz-mode #soundQuiz{padding:12px}
+}
+@media(hover:none){
+  .btn{min-height:46px}
+}
+
+
+.encouragement{margin-top:14px;padding:12px 14px;border-radius:15px;background:#fff7d6;border:1px solid #f3e5a4;color:#76551b;font-weight:800;text-align:center;line-height:1.7}
+.encouragement small{display:block;font-size:12px;font-weight:650;color:#8b7444}
+@media(max-width:600px){.encouragement{padding:10px 11px;font-size:14px}}
+\n
+</style></head><body><header class="top">لُغتي <span style="font-size:12px;color:#718780;font-weight:700">· حرف ورا حرف</span></header><main>
+
+<section class="panel" id="stageComplete" style="display:none;margin-bottom:16px;background:linear-gradient(135deg,#ddf7ec,#f9fffc)"><h2>عاش! خلّصت المرحلة الأولى 🎉</h2><p>أتقنت الحروف الإنجليزية من A إلى Z. جاهز تبدأ المرحلة الثانية وتتعلم كلمات الحياة اليومية؟</p><a class="btn primary" href="stage2.html" style="display:inline-block;text-decoration:none;margin-top:10px">ابدأ المرحلة الثانية ←</a></section>
+<section class="intro"><h1>يلا نتعلّم الإنجليزي 🌱</h1><p>شوف صورة الكلمة، اسمع اسم الحرف والكلمة، وكرّر بصوتك.</p><div class="progress"><div class="fill" id="fill"></div></div><div class="caption"><span id="pos">الحرف 1 من 26</span><span id="doneCount">0 حرف متعلّم</span></div><div class="encouragement" id="encouragement" aria-live="polite">يلا يا بطل، إنت قدّها! 💪<small>كل حرف بتتعلّمه بيقرّبك من هدفك.</small></div></section>
+<section class="lesson"><div class="panel example"><div class="letter" id="letter">A a</div><div class="letter-name" id="letterName">اسم الحرف: إيه</div><div class="picture" id="picture" role="img" aria-label="Apple — تفاحة"></div><div class="word" id="word">Apple</div><div class="meaning" id="meaning">تفاحة</div><div class="actions" style="margin-top:18px"><button class="btn primary" id="hearLetter">🔊 اسمع اسم الحرف</button><button class="btn" id="hearWord">🔊 اسمع الكلمة</button></div><div class="nav"><button class="btn" id="prev">السابق ←</button><button class="btn primary" id="next">التالي →</button></div></div></section><section class="panel" id="soundQuiz" style="display:none;min-height:70vh"><h2 style="font-size:21px;margin:0 0 6px">🎯 تحدّي الحرف والكلمة</h2><p class="hint" id="quizPrompt">اختار الكلمة اللي بتبدأ بالحرف المعروض.</p><div id="quizOptions" class="actions"></div><p id="quizFeedback" role="status" aria-live="polite" style="font-weight:800;margin-bottom:0"></p><div class="actions" id="quizContinueWrap" style="display:none;margin-top:14px"><button class="btn primary" id="quizContinue">تمام، نكمّل للحرف التالي →</button></div><p class="hint">بص على الحرف اللي بتتعلّمه، واختار الكلمة اللي بتبدأ بيه.</p></section><div class="footer">لُغتي — تعلّم بسيط، خطوة بخطوة.</div></main>
+
+<script>
+const L=[['A','a','إيه','Apple','تفاحة'],['B','b','بي','Ball','كرة'],['C','c','سي','City','مدينة'],['D','d','دي','Dog','كلب'],['E','e','إي','Egg','بيضة'],['F','f','إف','Fish','سمكة'],['G','g','جي','Goat','ماعز'],['H','h','إيتش','Hat','قبعة'],['I','i','آي','Ice','ثلج'],['J','j','جاي','Jam','مربّى'],['K','k','كاي','Key','مفتاح'],['L','l','إل','Lion','أسد'],['M','m','إم','Moon','قمر'],['N','n','إن','Nose','أنف'],['O','o','أو','Orange','برتقالة'],['P','p','پي','Pen','قلم'],['Q','q','كيو','Queen','ملكة'],['R','r','آر','Rain','مطر'],['S','s','إس','Sun','شمس'],['T','t','تي','Tree','شجرة'],['U','u','يو','Umbrella','مظلّة'],['V','v','ڤي','Van','سيارة نقل'],['W','w','دَبليو','Water','ماء'],['X','x','إكس','X-ray','أشعة سينية'],['Y','y','واي','Yellow','أصفر'],['Z','z','زي','Zebra','حمار وحشي']];
+const pictures=["https://loremflickr.com/480/480/apple%2Cfruit?lock=45015","https://loremflickr.com/480/480/soccer%2Cball?lock=55379","https://loremflickr.com/480/480/city%2Cskyline?lock=87290","https://loremflickr.com/480/480/dog?lock=93880","https://loremflickr.com/480/480/egg?lock=21738","https://loremflickr.com/480/480/fish?lock=1017","https://loremflickr.com/480/480/goat?lock=51149","https://loremflickr.com/480/480/hat?lock=76388","https://loremflickr.com/480/480/ice%2Ccubes?lock=11390","https://loremflickr.com/480/480/jam%2Cjar?lock=86431","https://loremflickr.com/480/480/key?lock=2342","https://loremflickr.com/480/480/lion?lock=3101","https://loremflickr.com/480/480/moon?lock=74656","https://loremflickr.com/480/480/nose?lock=37765","https://loremflickr.com/480/480/orange%2Cfruit?lock=26255","https://loremflickr.com/480/480/pen?lock=85688","https://loremflickr.com/480/480/queen%2Ccrown?lock=92845","https://loremflickr.com/480/480/rain%2Cclouds?lock=3685","https://loremflickr.com/480/480/sun?lock=24140","https://loremflickr.com/480/480/tree?lock=90464","https://loremflickr.com/480/480/umbrella?lock=62109","https://loremflickr.com/480/480/van%2Cvehicle?lock=70742","https://loremflickr.com/480/480/water%2Cglass?lock=86802","https://loremflickr.com/480/480/xray%2Cmedical?lock=39131","https://loremflickr.com/480/480/yellow%2Ccolor%2Cobject?lock=85172","https://loremflickr.com/480/480/zebra%2Canimal?lock=78469"];
+const emojis=["🍎","⚽","🏙️","🐶","🥚","🐟","🐐","🎩","🧊","🍯","🔑","🦁","🌙","👃","🍊","🖊️","👑","🌧️","☀️","🌳","☂️","🚐","💧","🩻","🟡","🦓"];
+// كلمات مساعدة لنطق صوت البداية بشكل منفصل عن اسم الحرف والكلمة الكاملة.
+const soundHints=["أَ","بْ","كْ","دْ","إِ","فْ","جْ","هْ","إِ","جْ","كْ","لْ","مْ","نْ","أَ","پْ","كْ","رْ","سْ","تْ","أَ","ڤْ","وْ","إِكس","يْ","زْ"];
+let quizTarget=0,quizLocked=false,quizOpen=false;
+const $=id=>document.getElementById(id);
+const cheerLines=[
+["يلا يا معلم، ورّينا الهمّة! 💪","واحدة واحدة وهتلاقي الإنجليزي بقى سهل."],
+["عاش يا وحش، كده الكلام! 🔥","كمّل يا نجم، إنت ماشي زي الفل."],
+["إيه الحلاوة دي يا جدع! 😎","كل حرف جديد بتعرفه دي نقطة في صالحك."],
+["يا سلام يا جامد! ⭐","خليك مكمل، إحنا لسه في أول السكة."],
+["بص يا سيدي، إنت قدّها وقدود! 💚","جرّب براحتك، مفيش سباق ولا حاجة."],
+["الله ينور يا نجم! 👏","شوية شوية وهتلاقي نفسك بتتكلم إنجليزي."],
+["يلا بينا يا بطل، شد حيلك! 🚀","إنت بتتقدم حتى لو مش واخد بالك."],
+["يا مزاجك يا شيخ! 🎉","كمّل كده، إنت عامل شغل عالي."]
+];
+let n=0,done=new Set();try{done=new Set(JSON.parse(localStorage.getItem('lughati-learned')||'[]'))}catch{}
+function showCheer(index=n){const line=cheerLines[index%cheerLines.length];$('encouragement').innerHTML=line[0]+'<small>'+line[1]+'</small>'}
+function render(){const l=L[n];$('letter').textContent=l[0]+' '+l[1];$('letterName').textContent='اسم الحرف: '+l[2];$('word').textContent=l[3];$('meaning').textContent=l[4];const img=document.createElement('img');img.loading='lazy';img.alt=l[3];img.src=pictures[n];img.onerror=()=>{$('picture').textContent=emojis[n];$('picture').style.fontSize='100px';};$('picture').style.fontSize='';$('picture').textContent='';$('picture').appendChild(img);$('picture').setAttribute('aria-label',l[3]+' — '+l[4]);$('prev').disabled=n===0;$('next').disabled=false;$('next').textContent='ابدأ الاختبار →';$('fill').style.width=((n+1)/26*100)+'%';$('pos').textContent='الحرف '+(n+1)+' من 26';$('doneCount').textContent=done.size+' حرف متعلّم';showCheer(n);}
+function speak(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
+function speakSound(i){const hints=["aah","buh","kuh","duh","eh","fff","guh","huh","ih","juh","kuh","lll","mmm","nnn","ah","puh","kwuh","rrr","sss","tuh","uh","vuh","wuh","ex","yuh","zzz"];speak(hints[i]);}
+let feedbackAudioCtx=null;async function playFeedbackTone(correct){try{const C=window.AudioContext||window.webkitAudioContext;if(!C){speak(correct?"Great job!":"Try again!");return}if(!feedbackAudioCtx)feedbackAudioCtx=new C();const ctx=feedbackAudioCtx;if(ctx.state==="suspended")await ctx.resume();const now=ctx.currentTime;const master=ctx.createGain();master.gain.setValueAtTime(0.75,now);master.connect(ctx.destination);const tone=(freq,start,duration,shape="sine",volume=0.18)=>{const osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=shape;osc.frequency.setValueAtTime(freq,start);gain.gain.setValueAtTime(0.0001,start);gain.gain.exponentialRampToValueAtTime(volume,start+0.018);gain.gain.exponentialRampToValueAtTime(0.0001,start+duration);osc.connect(gain);gain.connect(master);osc.start(start);osc.stop(start+duration+0.02)};if(correct){tone(523.25,now,0.13,"sine",0.14);tone(659.25,now+0.11,0.13,"sine",0.15);tone(783.99,now+0.22,0.18,"sine",0.17);tone(1046.5,now+0.37,0.3,"triangle",0.19);tone(1568,now+0.4,0.22,"sine",0.055);}else{tone(392,now,0.17,"triangle",0.14);tone(311.13,now+0.15,0.2,"triangle",0.15);tone(233.08,now+0.33,0.28,"sawtooth",0.075);}}catch{try{speak(correct?"Great job!":"Try again!")}catch{}}}
+function buildQuiz(){quizTarget=n;quizLocked=false;$('quizFeedback').textContent='';$('quizFeedback').style.color='';$('quizContinueWrap').style.display='none';$('quizOptions').textContent='';const ids=new Set([quizTarget]);while(ids.size<4)ids.add(Math.floor(Math.random()*26));const opts=[...ids].sort(()=>Math.random()-.5);opts.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=L[i][3]+' — '+L[i][4];b.onclick=()=>{if(quizLocked)return;quizLocked=true;if(i===quizTarget){playFeedbackTone(true);b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('quizFeedback').textContent=['أيوه كده يا معلم، إجابة مظبوطة! 🎉','عاش يا وحش! جبتها من أولها 👏','الله ينور يا نجم، دماغك شغّالة! 🔥','يا سلام يا جدع، إجابة زي الفل! 🏆','إيه الجمال ده! كده إحنا بنتكلم صح 😎'][Math.floor(Math.random()*4)];$('quizFeedback').style.color='#087f70';$('quizContinueWrap').style.display='flex';}else{playFeedbackTone(false);$('quizFeedback').textContent='ولا يهمك يا معلم، بتحصل لأحسن ناس 😄 الإجابة الصح هي '+L[quizTarget][3]+'. اسمعها تاني وتعالى نجرب كمان مرة، هتيجي معاك!';$('quizFeedback').style.color='#a85b20';[...$('quizOptions').children].forEach(x=>{if(x.textContent.startsWith(L[quizTarget][3]+' — ')){x.style.background='#d9f7e8';x.style.borderColor='#087f70'}});const retry=document.createElement('button');retry.className='btn';retry.textContent='🔁 جرّب مرة أخرى';retry.onclick=buildQuiz;$('quizOptions').appendChild(retry);}};$('quizOptions').appendChild(b)});}
+function renderQuiz(){$('quizPrompt').textContent='حرف '+L[quizTarget][0]+': اختار الكلمة اللي بتبدأ بالحرف ده.';}
+function openQuiz(){quizOpen=true;document.body.classList.add('quiz-mode');$('soundQuiz').style.display='block';buildQuiz();renderQuiz();window.scrollTo({top:0,behavior:'instant'});}
+function closeQuiz(){quizOpen=false;document.body.classList.remove('quiz-mode');$('soundQuiz').style.display='none';}
+$('prev').onclick=()=>{if(n>0){n--;closeQuiz();render()}};$('next').onclick=()=>{openQuiz()};$('hearLetter').onclick=()=>speak(L[n][0]);$('hearWord').onclick=()=>speak(L[n][3]);$('quizContinue').onclick=()=>{done.add(n);try{localStorage.setItem('lughati-learned',JSON.stringify([...done]))}catch{}closeQuiz();if(n<25){n++;render()}else{closeQuiz();$('stageComplete').style.display='block';$('stageComplete').scrollIntoView({behavior:'smooth',block:'center'});}}; /* Body-parts daily vocabulary */
+(()=>{
+const words=[
+{en:'Head',ar:'رأس',pron:'هِد',emoji:'🧑',group:'body',example:'Touch your head.',translation:'المس رأسك.'},
+{en:'Neck',ar:'رقبة',pron:'نِك',emoji:'🧍',group:'body',example:'My neck hurts.',translation:'رقبتي تؤلمني.'},
+{en:'Shoulder',ar:'كتف',pron:'شولدر',emoji:'💪',group:'body',example:'Move your shoulders.',translation:'حرّك كتافك.'},
+{en:'Arm',ar:'ذراع',pron:'آرم',emoji:'💪',group:'body',example:'Raise your arm.',translation:'ارفع ذراعك.'},
+{en:'Elbow',ar:'كوع',pron:'إلبو',emoji:'🦾',group:'body',example:'Bend your elbow.',translation:'اثنِ كوعك.'},
+{en:'Chest',ar:'صدر',pron:'تشِست',emoji:'🫁',group:'body',example:'Take a deep breath into your chest.',translation:'خد نفس عميق.'},
+{en:'Back',ar:'ظهر',pron:'باك',emoji:'🧍',group:'body',example:'My back is tired.',translation:'ظهري تعبان.'},
+{en:'Stomach',ar:'بطن',pron:'ستَمَك',emoji:'🧍',group:'body',example:'My stomach hurts.',translation:'بطني بتوجعني.'},
+{en:'Leg',ar:'ساق',pron:'لِج',emoji:'🦵',group:'body',example:'Stretch your legs.',translation:'افرد رجليك.'},
+{en:'Knee',ar:'ركبة',pron:'ني',emoji:'🦵',group:'body',example:'Bend your knee.',translation:'اثنِ ركبتك.'},
+{en:'Foot',ar:'قدم',pron:'فوت',emoji:'🦶',group:'hands',example:'My foot is wet.',translation:'رجلي مبلولة.'},
+{en:'Face',ar:'وجه',pron:'فيس',emoji:'🙂',group:'face',example:'Wash your face.',translation:'اغسل وشك.'},
+{en:'Eye',ar:'عين',pron:'آي',emoji:'👁️',group:'face',example:'I have brown eyes.',translation:'عينيّ لونهم بني.'},
+{en:'Ear',ar:'أذن',pron:'إير',emoji:'👂',group:'face',example:'My left ear hurts.',translation:'ودني الشمال بتوجعني.'},
+{en:'Nose',ar:'أنف',pron:'نوز',emoji:'👃',group:'face',example:'My nose is cold.',translation:'مناخيري ساقعة.'},
+{en:'Mouth',ar:'فم',pron:'ماوث',emoji:'👄',group:'face',example:'Open your mouth.',translation:'افتح بقك.'},
+{en:'Tooth',ar:'سِنّ',pron:'توث',emoji:'🦷',group:'face',example:'I brush my teeth.',translation:'بغسل سناني.'},
+{en:'Hand',ar:'يد',pron:'هاند',emoji:'✋',group:'hands',example:'Raise your hand.',translation:'ارفع إيدك.'},
+{en:'Finger',ar:'إصبع',pron:'فينجر',emoji:'☝️',group:'hands',example:'Point with one finger.',translation:'شاور بإصبع واحد.'},
+{en:'Toe',ar:'إصبع القدم',pron:'تو',emoji:'🦶',group:'hands',example:'I hurt my toe.',translation:'إصبع رجلي اتخبط.'}
+];
+let group='all',current=0,learned=new Set(),asked=null,answered=false;
+const $=id=>document.getElementById(id);
+function speakWord(w){if(!('speechSynthesis'in window))return; speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
+function visibleWords(){return words.map((w,i)=>({...w,index:i})).filter(w=>group==='all'||w.group===group)}
+function renderWords(){const grid=$('bodyWordGrid');grid.textContent='';const list=visibleWords();if(!list.length)return;if(current>=list.length)current=0;const item=list[current],w=words[item.index];const card=document.createElement('article');card.className='vocab-card';card.innerHTML='<div class="vocab-symbol" aria-hidden="true">'+w.emoji+'</div><div class="vocab-word">'+w.en+'</div><div class="vocab-meaning">'+w.ar+'</div><div class="vocab-pron">النطق التقريبي: '+w.pron+'</div><div class="hint" style="text-align:center">الكلمة '+(current+1)+' من '+list.length+'</div>';const listen=document.createElement('button');listen.className='btn';listen.textContent='🔊 اسمع النطق';listen.onclick=()=>{speakWord(w.en);learned.add(item.index);updateProgress()};card.appendChild(listen);grid.appendChild(card);$('bodyNextWord').textContent=current===list.length-1?'خلصت الكلمات ✓':'خلصت الكلمة — التالية ←';$('bodyNextWord').disabled=false}
+function updateProgress(){$('bodyProgress').style.width=(learned.size/words.length*100)+'%';$('bodyLearnedLabel').textContent=learned.size+' من '+words.length+' كلمة اتعلّمتها'}
+function newQuestion(){asked=Math.floor(Math.random()*words.length);answered=false;const options=new Set([asked]);while(options.size<4)options.add(Math.floor(Math.random()*words.length));const list=[...options].sort(()=>Math.random()-.5);$('bodyQuizFeedback').textContent='';$('bodyQuizOptions').textContent='';const w=words[asked];$('bodyQuizOptions').dataset.correct=String(asked);const q=document.createElement('div');q.style.gridColumn='1/-1';q.style.textAlign='center';q.style.fontSize='26px';q.style.fontWeight='900';q.style.direction='ltr';q.textContent=w.en;$('bodyQuizOptions').appendChild(q);list.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(answered)return;answered=true;if(i===asked){b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('bodyQuizFeedback').textContent='صح! '+w.en+' معناها '+w.ar+' 👏';$('bodyQuizFeedback').style.color='#087f70';learned.add(asked);updateProgress()}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('bodyQuizFeedback').textContent='مش بالظبط. '+w.en+' معناها '+w.ar+'. جرّب السؤال اللي بعده.';$('bodyQuizFeedback').style.color='#a85b20';[...$('bodyQuizOptions').children].forEach(x=>{if(x.textContent===w.ar){x.style.background='#d9f7e8';x.style.borderColor='#087f70'}})}};$('bodyQuizOptions').appendChild(b)})}
+$('bodyTabs').addEventListener('click',e=>{const b=e.target.closest('[data-body-group]');if(!b)return;group=b.dataset.bodyGroup;[...$('bodyTabs').querySelectorAll('button')].forEach(x=>x.classList.toggle('active',x===b));renderWords()});
+$('bodyNextQuestion').onclick=newQuestion;$('bodyNextWord').onclick=()=>{const list=visibleWords();if(current<list.length-1){learned.add(list[current].index);updateProgress();current++;renderWords()}else{$('bodyNextWord').textContent='خلصت الكلمات كلها! 🎉';$('bodyNextWord').disabled=true;learned.add(list[current].index);updateProgress()}};$('bodyTabs').addEventListener('click',()=>{current=0;renderWords()});renderWords();updateProgress();newQuestion();
+})();
+</script></body></html>
