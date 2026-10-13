@@ -69,58 +69,75 @@ main{width:100%}
 
 <section class="panel" id="loginPanel" style="margin-bottom:16px">
 <h2 style="margin-top:0">🔐 تسجيل الدخول بالإيميل</h2>
-<p class="hint">سجّل دخولك برمز تحقق هيوصلك على بريدك الإلكتروني، علشان نقدر نحفظ تقدمك.</p>
+<p class="hint">هنبعتلك رابط آمن على بريدك الإلكتروني. افتحه عشان تسجّل الدخول.</p>
 <label for="loginEmail" style="display:block;font-weight:800;margin:10px 0 5px">البريد الإلكتروني</label>
 <input id="loginEmail" type="email" autocomplete="email" placeholder="name@example.com" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;direction:ltr;text-align:left">
-<button class="btn primary" id="sendLoginCode" style="margin-top:10px;width:100%">ابعتلي رمز التحقق</button>
-<div id="codeArea" style="display:none;margin-top:14px">
-<label for="loginCode" style="display:block;font-weight:800;margin-bottom:5px">رمز التحقق اللي وصلك</label>
-<input id="loginCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="اكتب الرمز هنا" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;letter-spacing:5px;text-align:center">
-<button class="btn primary" id="verifyLoginCode" style="margin-top:10px;width:100%">تأكيد الرمز وتسجيل الدخول</button>
-</div>
+<button class="btn primary" id="sendLoginCode" style="margin-top:10px;width:100%">ابعتلي رابط تسجيل الدخول</button>
 <p id="loginStatus" role="status" aria-live="polite" class="hint" style="margin-bottom:0"></p>
+<button class="btn" id="logoutButton" style="display:none;margin-top:10px;width:100%">تسجيل الخروج</button>
 </section>
 <section class="panel" id="stageComplete" style="display:none;margin-bottom:16px;background:linear-gradient(135deg,#ddf7ec,#f9fffc)"><h2>عاش! خلّصت المرحلة الأولى 🎉</h2><p>أتقنت الحروف الإنجليزية من A إلى Z. جاهز تبدأ المرحلة الثانية وتتعلم كلمات الحياة اليومية؟</p><a class="btn primary" href="stage2.html" style="display:inline-block;text-decoration:none;margin-top:10px">ابدأ المرحلة الثانية ←</a></section>
 <section class="intro"><h1>يلا نتعلّم الإنجليزي 🌱</h1><p>شوف صورة الكلمة، اسمع اسم الحرف والكلمة، وكرّر بصوتك.</p><div class="progress"><div class="fill" id="fill"></div></div><div class="caption"><span id="pos">الحرف 1 من 26</span><span id="doneCount">0 حرف متعلّم</span></div><div class="encouragement" id="encouragement" aria-live="polite">يلا يا بطل، إنت قدّها! 💪<small>كل حرف بتتعلّمه بيقرّبك من هدفك.</small></div></section>
 <section class="lesson"><div class="panel example"><div class="letter" id="letter">A a</div><div class="letter-name" id="letterName">اسم الحرف: إيه</div><div class="picture" id="picture" role="img" aria-label="Apple — تفاحة"></div><div class="word" id="word">Apple</div><div class="meaning" id="meaning">تفاحة</div><div class="actions" style="margin-top:18px"><button class="btn primary" id="hearLetter">🔊 اسمع اسم الحرف</button><button class="btn" id="hearWord">🔊 اسمع الكلمة</button></div><div class="nav"><button class="btn" id="prev">السابق ←</button><button class="btn primary" id="next">التالي →</button></div></div></section><section class="panel" id="soundQuiz" style="display:none;min-height:70vh"><h2 style="font-size:21px;margin:0 0 6px">🎯 تحدّي الحرف والكلمة</h2><p class="hint" id="quizPrompt">اختار الكلمة اللي بتبدأ بالحرف المعروض.</p><div id="quizOptions" class="actions"></div><p id="quizFeedback" role="status" aria-live="polite" style="font-weight:800;margin-bottom:0"></p><div class="actions" id="quizContinueWrap" style="display:none;margin-top:14px"><button class="btn primary" id="quizContinue">تمام، نكمّل للحرف التالي →</button></div><p class="hint">بص على الحرف اللي بتتعلّمه، واختار الكلمة اللي بتبدأ بيه.</p></section><div class="footer">لُغتي — تعلّم بسيط، خطوة بخطوة.</div></main>
-<script>
-(function(){
- const $=id=>document.getElementById(id);
- const endpoint="https://script.google.com/macros/s/AKfycbzhOaMYdQSdJOsGuUXWHU0pPB2o5rdsynEwmL1U72Vc71kH_zfG-vVPoyFp9DUPf2tPAw/exec";
- async function request(data){
-  const controller = new AbortController();
-  const timer = setTimeout(()=>controller.abort(), 15000);
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyDamIN3P6kH1bsCLiFNo3cIlQAT367ZCBM",
+  authDomain: "lughati-28f13.firebaseapp.com",
+  projectId: "lughati-28f13",
+  storageBucket: "lughati-28f13.firebasestorage.app",
+  messagingSenderId: "411319277307",
+  appId: "1:411319277307:web:bc10a1b10b70f91ae5825e",
+  measurementId: "G-LWJ5SHKNSM"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const $ = id => document.getElementById(id);
+const status = $("loginStatus");
+const sendButton = $("sendLoginCode");
+const logoutButton = $("logoutButton");
+const actionCodeSettings = { url: "https://lughatii.github.io/lughati/", handleCodeInApp: true };
+if (isSignInWithEmailLink(auth, window.location.href)) {
+  let email = window.localStorage.getItem("lughati-email-for-signin");
+  if (!email) email = window.prompt("اكتب نفس البريد الإلكتروني اللي استقبل رابط الدخول");
+  if (email) {
+    status.textContent = "جاري تأكيد رابط تسجيل الدخول…";
+    signInWithEmailLink(auth, email.trim(), window.location.href)
+      .then(() => { window.localStorage.removeItem("lughati-email-for-signin"); history.replaceState({}, document.title, window.location.pathname); })
+      .catch(error => { status.textContent = "الرابط لم يعمل: " + error.message; });
+  }
+}
+sendButton.addEventListener("click", async () => {
+  const email = $("loginEmail").value.trim().toLowerCase();
+  if (!email || !email.includes("@")) { status.textContent = "اكتب بريد إلكتروني صحيح الأول."; return; }
+  sendButton.disabled = true;
+  status.textContent = "جاري إرسال رابط الدخول…";
   try {
-   const res=await fetch(endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(data),signal:controller.signal,credentials:"omit"});
-   const text=await res.text();
-   if(!res.ok) throw new Error("الخادم رجّع خطأ HTTP "+res.status);
-   try { return JSON.parse(text); }
-   catch { throw new Error("ردّ الخادم مش بصيغة JSON. راجع نشر Web App في Apps Script."); }
-  } catch(e) {
-   if(e.name==="AbortError") throw new Error("الاتصال أخد أكتر من 15 ثانية. غالبًا رابط Web App أو النشر محتاج مراجعة.");
-   if(e instanceof TypeError) throw new Error("المتصفح منع قراءة ردّ Apps Script (غالبًا CORS/إعادة توجيه). اختبار البريد وحده مش كفاية لإثبات اتصال الموقع.");
-   throw e;
-  } finally { clearTimeout(timer); }
- }
- const send=$("sendLoginCode"),verify=$("verifyLoginCode");
- if(!send||!verify)return;
- send.addEventListener("click",async function(){
-  const email=$("loginEmail").value.trim().toLowerCase(),status=$("loginStatus");
-  if(email.indexOf("@")<1||email.indexOf(".",email.indexOf("@"))<0){status.textContent="اكتب بريد إلكتروني صحيح الأول.";return;}
-  send.disabled=true;status.textContent="جاري إرسال رمز التحقق…";
-  try{const data=await request({action:"sendCode",email});$("codeArea").style.display="block";status.textContent=data.message||"تم إرسال الطلب. راجع بريدك الإلكتروني.";}
-  catch(e){status.textContent="فشل الاتصال بالخادم من المتصفح. غالبًا إعدادات الاتصال بين GitHub Pages وApps Script هي السبب. التفاصيل: "+e.message;}
-  finally{send.disabled=false;}
- });
- verify.addEventListener("click",async function(){
-  const email=$("loginEmail").value.trim().toLowerCase(),code=$("loginCode").value.trim(),status=$("loginStatus");
-  if(!code){status.textContent="اكتب رمز التحقق اللي وصلك.";return;}
-  verify.disabled=true;status.textContent="جاري التأكد من الرمز…";
-  try{const data=await request({action:"verifyCode",email,code});const token=data.token||data.sessionToken||data.session_token;if(!token)throw new Error("الخادم لم يُرجع رمز جلسة.");localStorage.setItem("lughati-session",token);localStorage.setItem("lughati-email",email);status.textContent="تم تسجيل الدخول بنجاح ✅";}
-  catch(e){status.textContent="تعذر تأكيد الرمز: "+e.message;}
-  finally{verify.disabled=false;}
- });
-})();
+    await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+    window.localStorage.setItem("lughati-email-for-signin", email);
+    status.textContent = "بعتنالك رابط تسجيل الدخول. افتح بريدك واضغط على الرابط، ولو مش ظاهر شوف الرسائل غير المرغوب فيها.";
+  } catch (error) {
+    status.textContent = "تعذّر إرسال الرابط: " + error.message;
+  } finally { sendButton.disabled = false; }
+});
+logoutButton.addEventListener("click", async () => {
+  try { await signOut(auth); status.textContent = "تم تسجيل الخروج."; }
+  catch (error) { status.textContent = "تعذّر تسجيل الخروج: " + error.message; }
+});
+onAuthStateChanged(auth, user => {
+  if (user) {
+    $("loginEmail").value = user.email || "";
+    $("loginEmail").disabled = true;
+    sendButton.style.display = "none";
+    logoutButton.style.display = "block";
+    status.textContent = "أنت مسجّل الدخول بالبريد: " + user.email + " ✅";
+  } else {
+    $("loginEmail").disabled = false;
+    sendButton.style.display = "block";
+    logoutButton.style.display = "none";
+  }
+});
 </script>
 <script>
 const L=[['A','a','إيه','Apple','تفاحة'],['B','b','بي','Ball','كرة'],['C','c','سي','City','مدينة'],['D','d','دي','Dog','كلب'],['E','e','إي','Egg','بيضة'],['F','f','إف','Fish','سمكة'],['G','g','جي','Goat','ماعز'],['H','h','إيتش','Hat','قبعة'],['I','i','آي','Ice','ثلج'],['J','j','جاي','Jam','مربّى'],['K','k','كاي','Key','مفتاح'],['L','l','إل','Lion','أسد'],['M','m','إم','Moon','قمر'],['N','n','إن','Nose','أنف'],['O','o','أو','Orange','برتقالة'],['P','p','پي','Pen','قلم'],['Q','q','كيو','Queen','ملكة'],['R','r','آر','Rain','مطر'],['S','s','إس','Sun','شمس'],['T','t','تي','Tree','شجرة'],['U','u','يو','Umbrella','مظلّة'],['V','v','ڤي','Van','سيارة نقل'],['W','w','دَبليو','Water','ماء'],['X','x','إكس','X-ray','أشعة سينية'],['Y','y','واي','Yellow','أصفر'],['Z','z','زي','Zebra','حمار وحشي']];
