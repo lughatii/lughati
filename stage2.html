@@ -44,6 +44,27 @@ button,input{max-width:100%;-webkit-tap-highlight-color:transparent}
  .write-input,.ghost-overlay{font-size:22px}
 }
 
+
+/* iPhone-inspired appearance controls; presentation only */
+:root{--ui-accent:#1687ff;--ui-bg:#f2f5fa;--ui-card:#ffffff;--ui-ink:#172033;--ui-muted:#718096;--ui-line:#dce4f0}
+body{background:var(--ui-bg)!important;color:var(--ui-ink)!important;font-family:-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Tahoma,Arial,sans-serif!important}
+.top{background:var(--ui-card)!important;color:var(--ui-ink)!important;border-bottom:1px solid var(--ui-line)!important}
+.hero,.intro,.panel,.card{background:var(--ui-card)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important;border-radius:24px!important;box-shadow:0 8px 24px rgba(15,35,65,.06)}
+.hero,.intro{background:linear-gradient(145deg,color-mix(in srgb,var(--ui-accent) 12%,var(--ui-card)),var(--ui-card))!important}
+.btn,.refresh-btn,.write-input{border-color:var(--ui-line)!important;border-radius:15px!important}
+.btn.primary,.btn:not(:disabled):hover,.btn[aria-current=true],.btn.primary:hover,.btn.primary:focus,.btn.primary:active,.btn.primary{background:var(--ui-accent)!important;border-color:var(--ui-accent)!important;color:white!important}
+.progress{background:color-mix(in srgb,var(--ui-accent) 15%,var(--ui-card))!important}.fill{background:var(--ui-accent)!important}
+#lughatiThemeButton{position:fixed;z-index:9998;left:12px;top:10px;border:1px solid var(--ui-line);border-radius:999px;background:var(--ui-card);color:var(--ui-ink);padding:9px 12px;font:700 13px system-ui;box-shadow:0 4px 16px #0001;cursor:pointer}
+#lughatiThemePanel{position:fixed;z-index:9999;left:12px;top:55px;width:min(300px,calc(100vw - 24px));padding:16px;border:1px solid var(--ui-line);border-radius:22px;background:var(--ui-card);color:var(--ui-ink);box-shadow:0 16px 50px #0003;display:none}
+#lughatiThemePanel.open{display:block}#lughatiThemePanel h3{font-size:16px;margin:0 0 10px}#lughatiThemePanel p{font-size:12px;margin:12px 0 8px;color:var(--ui-muted)}
+.lughati-swatches{display:flex;gap:9px;flex-wrap:wrap}.lughati-swatch{width:31px;height:31px;border-radius:50%;border:2px solid #ffffff;outline:1px solid #cbd5e1;cursor:pointer}.lughati-swatch[aria-pressed=true]{outline:3px solid var(--ui-accent)}
+.lughati-mode{display:flex;gap:8px}.lughati-mode button{flex:1;padding:9px 7px;border:1px solid var(--ui-line);border-radius:12px;background:var(--ui-bg);color:var(--ui-ink);font:inherit;cursor:pointer}
+body[data-lughati-mode="dark"]{--ui-bg:#080f1c;--ui-card:#101c2d;--ui-ink:#f1f5fb;--ui-muted:#a9bad0;--ui-line:#263852}
+body[data-lughati-mode="dark"] .hero,body[data-lughati-mode="dark"] .intro{background:linear-gradient(145deg,color-mix(in srgb,var(--ui-accent) 18%,var(--ui-card)),var(--ui-card))!important}
+body[data-lughati-mode="dark"] .btn:not(.primary),body[data-lughati-mode="dark"] .refresh-btn{background:#17263a!important;color:var(--ui-ink)!important}
+body[data-lughati-mode="dark"] .picture{background:#17263a!important}
+@media(max-width:600px){#lughatiThemeButton{top:8px;left:8px;padding:8px 10px}.top{padding-left:100px!important}}
+
 </style></head>
 <body><header class="top">لُغتي <span class="muted" style="font-size:12px">· المرحلة الثانية</span></header>
 <main><a class="back" href="index.html">← الرجوع للرئيسية</a>
@@ -87,4 +108,19 @@ function checkWriting(){if(phase!=='write')return;const entered=$('answer').valu
 function makeOptions(){const correct=words[index];const ids=new Set([index]);while(ids.size<4)ids.add(Math.floor(Math.random()*words.length));const choices=[...ids].sort(()=>Math.random()-.5);$('options').textContent='';$('quizFeedback').textContent='';$('nextWord').classList.add('hidden');choices.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(phase!=='quiz')return;if(i===index){phase='advance';b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('quizFeedback').textContent='إجابة صحيحة!';$('quizFeedback').style.color='#087f70';learned.add(index);save();$('progress').style.width=(learned.size/words.length*100)+'%';$('answer').value='';index=(index+1)%words.length;setTimeout(render,350)}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('quizFeedback').textContent='جرّب تاني، ركّز في معنى الاختيار.';$('quizFeedback').style.color='#a85b20'}};$('options').appendChild(b)})}
 $('hear').onclick=speak;$('check').onclick=checkWriting;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWriting()});$('nextWrite').onclick=()=>{};$('nextWord').onclick=()=>{};render();
 })();
-</script></body></html>
+</script>
+<script>
+(()=>{const key='lughati-appearance-v1';const colors=[['أزرق','#1687ff'],['أخضر','#13b981'],['بنفسجي','#8b5cf6'],['وردي','#ec4899'],['برتقالي','#f97316'],['أحمر','#ef4444'],['تركواز','#06b6d4'],['أسود فضي','#64748b'],['ذهبي','#d4a017'],['بنفسجي داكن','#6d28d9']];
+let prefs={color:'#1687ff',mode:'auto'};try{prefs={...prefs,...JSON.parse(localStorage.getItem(key)||'{}')}}catch{}
+const apply=()=>{document.documentElement.style.setProperty('--ui-accent',prefs.color);const dark=prefs.mode==='dark'||(prefs.mode==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.body.dataset.lughatiMode=dark?'dark':'light';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#080f1c':prefs.color)};
+const save=()=>{try{localStorage.setItem(key,JSON.stringify(prefs))}catch{}apply()};
+const b=document.createElement('button');b.id='lughatiThemeButton';b.type='button';b.textContent='🎨 المظهر';b.setAttribute('aria-expanded','false');
+const p=document.createElement('section');p.id='lughatiThemePanel';p.setAttribute('aria-label','إعدادات المظهر');p.innerHTML='<h3>تخصيص المظهر</h3><p>اختار اللون</p><div class="lughati-swatches"></div><p>الخلفية والوضع الليلي</p><div class="lughati-mode"><button type="button" data-mode="auto">حسب الجهاز</button><button type="button" data-mode="dark">دارك مود</button><button type="button" data-mode="light">فاتح</button></div>';
+colors.forEach(([name,color])=>{const s=document.createElement('button');s.type='button';s.className='lughati-swatch';s.title=name;s.setAttribute('aria-label',name);s.style.background=color;s.setAttribute('aria-pressed',String(prefs.color===color));s.onclick=()=>{prefs.color=color;p.querySelectorAll('.lughati-swatch').forEach(x=>x.setAttribute('aria-pressed',String(x===s)));save()};p.querySelector('.lughati-swatches').appendChild(s)});
+p.querySelectorAll('[data-mode]').forEach(x=>{x.onclick=()=>{prefs.mode=x.dataset.mode;save()}});
+b.onclick=()=>{p.classList.toggle('open');b.setAttribute('aria-expanded',String(p.classList.contains('open')))};
+document.addEventListener('click',e=>{if(!p.contains(e.target)&&e.target!==b){p.classList.remove('open');b.setAttribute('aria-expanded','false')}});
+document.body.append(b,p);apply();window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if(prefs.mode==='auto')apply()});
+})();
+</script>
+</body></html>
