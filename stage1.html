@@ -114,9 +114,122 @@ input,select,textarea{border-radius:13px;max-width:100%}
 </style>
 </head><body><header class="top">لُغتي <span style="font-size:12px;color:#718780;font-weight:700">· حرف ورا حرف</span></header><main>
 
-<section class="panel" id="stageComplete" style="display:none;margin-bottom:16px;background:linear-gradient(135deg,#ddf7ec,#f9fffc)"><h2>عاش! خلّصت المرحلة الأولى 🎉</h2><p>عاش! خلّصت الحروف 🎉 دلوقتي هننقلك للكلمات تلقائيًا…</p><a class="btn primary" href="stage2.html" style="display:inline-block;text-decoration:none;margin-top:10px">ابدأ المرحلة الثانية ←</a></section>
+<section class="panel" id="stageComplete" style="display:none;margin-bottom:16px;background:linear-gradient(135deg,#ddf7ec,#f9fffc)"><h2>عاش! خلّصت المرحلة الأولى 🎉</h2><p>عاش! خلّصت الحروف 🎉 دلوقتي هننقلك للكلمات تلقائيًا…</p><p>هنبدأ الكلمات دلوقتي في نفس الصفحة.</p></section>
 <section class="intro"><h1>يلا نتعلّم الإنجليزي 🌱</h1><p>شوف صورة الكلمة، اسمع اسم الحرف والكلمة، وكرّر بصوتك.</p><div class="progress"><div class="fill" id="fill"></div></div><div class="caption"><span id="pos">الحرف 1 من 26</span><span id="doneCount">0 حرف متعلّم</span></div><div class="encouragement" id="encouragement" aria-live="polite">يلا يا بطل، إنت قدّها! 💪<small>كل حرف بتتعلّمه بيقرّبك من هدفك.</small></div></section>
-<section class="lesson"><div class="panel example"><div class="letter" id="letter">A a</div><div class="letter-name" id="letterName">اسم الحرف: إيه</div><div class="picture" id="picture" role="img" aria-label="Apple — تفاحة"></div><div class="word" id="word">Apple</div><div class="meaning" id="meaning">تفاحة</div><div class="actions" style="margin-top:18px"><button class="btn primary" id="hearLetter">🔊 اسمع اسم الحرف</button><button class="btn" id="hearWord">🔊 اسمع الكلمة</button></div><div class="nav"><button class="btn" id="prev">السابق ←</button><button class="btn primary" id="next">التالي →</button></div></div></section><section class="panel" id="soundQuiz" style="display:none;min-height:70vh"><h2 style="font-size:21px;margin:0 0 6px">🎯 اختبار الحروف</h2><p class="hint" id="quizPrompt">اختار الكلمة الصحيحة من غير تلميحات.</p><div id="quizOptions" class="actions"></div><p id="quizFeedback" role="status" aria-live="polite" style="font-weight:800;margin-bottom:0"></p><div class="actions" id="quizContinueWrap" style="display:none;margin-top:14px"><button class="btn primary" id="quizContinue">تمام، نكمّل للحرف التالي →</button></div></section><div class="footer">لُغتي — تعلّم بسيط، خطوة بخطوة.</div></main>
+<section class="lesson"><div class="panel example"><div class="letter" id="letter">A a</div><div class="letter-name" id="letterName">اسم الحرف: إيه</div><div class="picture" id="picture" role="img" aria-label="Apple — تفاحة"></div><div class="word" id="word">Apple</div><div class="meaning" id="meaning">تفاحة</div><div class="actions" style="margin-top:18px"><button class="btn primary" id="hearLetter">🔊 اسمع اسم الحرف</button><button class="btn" id="hearWord">🔊 اسمع الكلمة</button></div><div class="nav"><button class="btn" id="prev">السابق ←</button><button class="btn primary" id="next">التالي →</button></div></div></section><section class="panel" id="soundQuiz" style="display:none;min-height:70vh"><h2 style="font-size:21px;margin:0 0 6px">🎯 اختبار الحروف</h2><p class="hint" id="quizPrompt">اختار الكلمة الصحيحة من غير تلميحات.</p><div id="quizOptions" class="actions"></div><p id="quizFeedback" role="status" aria-live="polite" style="font-weight:800;margin-bottom:0"></p><div class="actions" id="quizContinueWrap" style="display:none;margin-top:14px"><button class="btn primary" id="quizContinue">تمام، نكمّل للحرف التالي →</button></div></section><div class="footer">لُغتي — تعلّم بسيط، خطوة بخطوة.</div><style id="word-stage-styles">
+:root{--ink:#18332e;--muted:#718780;--line:#dcebe5;--teal:#087f70;--paper:#f1faf6}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation}.top{padding:14px max(calc((100% - 760px)/2),16px);background:#f7fffb;border-bottom:1px solid var(--line);font-size:21px;font-weight:900}main{max-width:760px;margin:auto;padding:18px 12px}.hero,.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:18px}.hero{background:linear-gradient(135deg,#ddf7ec,#f9fffc)}h1{font-size:clamp(24px,5vw,32px);margin:0 0 6px}.muted{color:var(--muted)}.progress{height:8px;background:#d5e9e0;border-radius:99px;margin-top:14px;overflow:hidden}.fill{height:100%;background:var(--teal);width:0;transition:width .2s}.caption{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:7px}.panel{margin-top:12px;text-align:center}.stage{font-size:13px;color:var(--teal);font-weight:900}.emoji{font-size:72px;margin:10px}.word{font-size:clamp(32px,8vw,46px);font-weight:900;direction:ltr}.meaning{font-size:21px;font-weight:800}.hint{font-size:13px;line-height:1.7;color:var(--muted)}.btn{border:1px solid var(--line);border-radius:13px;padding:11px 14px;background:#f6fcf9;color:var(--ink);font-weight:800;min-height:45px}.primary{background:var(--teal);color:white;border-color:var(--teal)}.row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}.write-area{width:min(100%,440px);margin:14px auto 0;position:relative}.write-input{width:100%;font-size:clamp(28px,7vw,40px);font-family:monospace;font-weight:850;text-align:center;direction:ltr;border:2px solid var(--line);border-radius:14px;padding:13px 8px;outline-color:var(--teal);background:transparent;position:relative;z-index:2;color:var(--ink);letter-spacing:2px}.write-input::placeholder{color:transparent}.ghost-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;direction:ltr;pointer-events:none;z-index:1;font-family:monospace;font-size:clamp(28px,7vw,40px);font-weight:850;letter-spacing:2px;white-space:pre;overflow:hidden;color:#cbd9d3}.feedback{min-height:28px;font-weight:850;margin-top:8px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:14px}.options button{white-space:normal}.hidden{display:none!important}.back{display:inline-block;text-decoration:none;color:var(--ink);margin-bottom:12px}.category{display:inline-block;background:#e4f6ef;color:var(--teal);border-radius:99px;padding:6px 12px;font-weight:850;font-size:13px}@media(max-width:480px){main{padding:12px 9px}.hero,.panel{padding:15px;border-radius:18px}.options{grid-template-columns:1fr}.emoji{font-size:60px}}
+
+/* تحسين تجربة الهاتف دون تغيير منطق التمرين */
+html{min-width:0;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{min-width:0;overflow-x:hidden}
+main{width:100%;padding-left:12px;padding-right:12px}
+button,input{max-width:100%;-webkit-tap-highlight-color:transparent}
+.hero,.panel{min-width:0}
+.word{overflow-wrap:anywhere}
+.row{align-items:stretch}
+.row .btn{flex:0 1 auto;max-width:100%;white-space:normal}
+.write-area{width:100%;max-width:440px}
+.write-input{min-width:0;letter-spacing:clamp(0px,0.5vw,2px);padding-left:4px;padding-right:4px}
+.ghost-overlay{max-width:100%;letter-spacing:clamp(0px,0.5vw,2px)}
+.options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.options button{min-width:0;overflow-wrap:anywhere;min-height:48px;line-height:1.5}
+@media(max-width:600px){
+ .top{padding:13px 14px;font-size:19px}
+ main{padding:12px 9px}
+ .hero,.panel{padding:15px 13px;border-radius:18px}
+ h1{font-size:clamp(22px,6vw,29px);line-height:1.35}
+ .caption{font-size:11px}
+ .emoji{font-size:56px;margin:7px}
+ .word{font-size:clamp(27px,8vw,38px);line-height:1.3;overflow-wrap:anywhere}
+ .meaning{font-size:19px;line-height:1.6}
+ .hint{font-size:13px;line-height:1.8}
+ .row{gap:8px}
+ .row .btn{flex:1 1 135px;padding:11px 9px}
+ .write-input,.ghost-overlay{font-size:clamp(22px,7vw,34px)}
+ .options{grid-template-columns:1fr;gap:8px}
+ .options button{width:100%;text-align:center;padding:12px 10px}
+}
+@media(max-width:360px){
+ main{padding-left:7px;padding-right:7px}
+ .hero,.panel{padding:12px 10px}
+ .row .btn{flex-basis:100%}
+ .write-input,.ghost-overlay{font-size:22px}
+}
+
+
+/* Appearance is managed from the home page settings. */
+
+
+/* Lughati glow polish v1 — decorative only */
+:root{--glow-color:var(--ui-accent,#1687ff)}
+body{isolation:isolate}
+body:before{content:"";position:fixed;inset:-18%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 12% 14%,color-mix(in srgb,var(--glow-color) 17%,transparent),transparent 32%),radial-gradient(ellipse at 88% 74%,color-mix(in srgb,var(--glow-color) 12%,transparent),transparent 35%);opacity:.9;animation:lughati-ambient 13s ease-in-out infinite alternate}
+.top{position:relative;isolation:isolate}
+.top:after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--glow-color),transparent);opacity:.65;box-shadow:0 0 12px var(--glow-color)}
+.hero,.intro,.panel,.card{position:relative;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.hero:before,.intro:before,.panel:before,.card:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 0%,color-mix(in srgb,var(--glow-color) 7%,transparent) 45%,transparent 70%);opacity:.7}
+.hero:hover,.intro:hover,.panel:hover,.card:hover{border-color:color-mix(in srgb,var(--glow-color) 48%,var(--ui-line,#dce4f0))!important;box-shadow:0 10px 32px color-mix(in srgb,var(--glow-color) 15%,transparent),0 0 0 1px color-mix(in srgb,var(--glow-color) 9%,transparent);transform:translateY(-2px)}
+.btn.primary,.btn:not(:disabled):hover,.refresh-btn:hover{box-shadow:0 5px 18px color-mix(in srgb,var(--glow-color) 34%,transparent),0 0 22px color-mix(in srgb,var(--glow-color) 16%,transparent)!important;transition:box-shadow .2s ease,transform .2s ease,filter .2s ease}
+.btn.primary:hover,.refresh-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.letter,.word{ text-shadow:0 0 22px color-mix(in srgb,var(--glow-color) 20%,transparent)}
+.progress,.fill{box-shadow:0 0 12px color-mix(in srgb,var(--glow-color) 20%,transparent)}
+
+
+.lughati-swatch{transition:transform .18s ease,box-shadow .18s ease}
+.lughati-swatch:hover{transform:scale(1.12);box-shadow:0 0 16px color-mix(in srgb,var(--glow-color) 45%,transparent)}
+@keyframes lughati-ambient{0%{transform:translate3d(-1%,0,0) scale(1)}100%{transform:translate3d(1%,1%,0) scale(1.04)}}
+@media(hover:none){.hero:hover,.intro:hover,.panel:hover,.card:hover{transform:none;box-shadow:none}}
+@media(prefers-reduced-motion:reduce){body:before{animation:none}.hero,.intro,.panel,.card,.btn,#lughatiThemeButton,.lughati-swatch{transition:none!important}}
+
+</style>
+<section id="wordStage" style="display:none">
+<div class="panel" style="text-align:center;margin-bottom:12px"><h2 style="margin:0 0 8px">🎉 خلصت الحروف! نبدأ الكلمات</h2><p class="hint">دلوقتي هنتعلم الكلمات، وفي أي وقت تقدر تعيد من الأول.</p><button class="btn" id="restartCourse">↻ ابدأ من الأول (الحروف)</button></div>
+<section class="hero"><h1>اتعلّم الكلمة واكتبها</h1><p class="muted" style="margin:0">اسمع الكلمة، اكتبها 3 مرات، وبعدها اختار معناها الصحيح.</p><div class="progress"><div class="fill" id="word-progress"></div></div><div class="caption"><span id="word-count">الكلمة 1</span><span id="word-stageCount">الكتابة 1 من 3</span></div></section>
+<section class="panel" id="word-lesson"><div class="stage" id="word-category"></div><div class="emoji" id="word-emoji"></div><div class="word" id="word-word"></div><div class="meaning" id="word-meaning"></div><div class="row"><button class="btn" id="word-hear">🔊 اسمع الكلمة</button></div>
+<div id="word-writing"><p class="hint" id="word-instruction">اكتب الكلمة فوق الحروف الشفافة.</p><div class="write-area"><div class="ghost-overlay" id="word-ghostOverlay" aria-hidden="true"></div><input class="write-input" id="word-answer" placeholder=" " autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="اكتب الكلمة الإنجليزية"></div><div class="feedback" id="word-feedback" role="status" aria-live="polite"></div><div class="row"><button class="btn primary" id="word-check">تحقّق</button><button class="btn hidden" id="word-nextWrite">المرة التالية ←</button></div></div>
+<div id="word-quiz" class="hidden"><p class="hint">اختار معنى الكلمة الإنجليزية الصحيح.</p><div class="options" id="word-options"></div><div class="feedback" id="word-quizFeedback" role="status" aria-live="polite"></div><div class="row"><button class="btn primary hidden" id="word-nextWord">الكلمة التالية ←</button></div></div>
+</section>
+</section>
+<script id="word-stage-script">
+(()=> {
+const words=[
+{en:'Face',ar:'وجه',emoji:'🙂',group:'الوجه'},
+{en:'Eye',ar:'عين',emoji:'👁️',group:'الوجه'},
+{en:'Ear',ar:'أذن',emoji:'👂',group:'الوجه'},
+{en:'Nose',ar:'أنف',emoji:'👃',group:'الوجه'},
+{en:'Mouth',ar:'فم',emoji:'👄',group:'الوجه'},
+{en:'Tooth',ar:'سِنّ',emoji:'🦷',group:'الوجه'},
+{en:'Hand',ar:'يد',emoji:'✋',group:'اليد'},
+{en:'Finger',ar:'إصبع',emoji:'☝️',group:'اليد'},
+{en:'Foot',ar:'قدم',emoji:'🦶',group:'القدم'},
+{en:'Toe',ar:'إصبع القدم',emoji:'🦶',group:'القدم'},
+{en:'Head',ar:'رأس',emoji:'🧑',group:'الجسم'},
+{en:'Neck',ar:'رقبة',emoji:'🧍',group:'الجسم'},
+{en:'Shoulder',ar:'كتف',emoji:'💪',group:'الجسم'},
+{en:'Arm',ar:'ذراع',emoji:'💪',group:'الجسم'},
+{en:'Elbow',ar:'كوع',emoji:'🦾',group:'الجسم'},
+{en:'Chest',ar:'صدر',emoji:'🫁',group:'الجسم'},
+{en:'Back',ar:'ظهر',emoji:'🧍',group:'الجسم'},
+{en:'Stomach',ar:'بطن',emoji:'🧍',group:'الجسم'},
+{en:'Leg',ar:'ساق',emoji:'🦵',group:'الجسم'},
+{en:'Knee',ar:'ركبة',emoji:'🦵',group:'الجسم'}
+];
+let index=0,attempt=1,phase='write',learned=new Set();
+try{const s=JSON.parse(localStorage.getItem('lughati-stage2-progress')||'{}');index=Number.isInteger(s.index)&&s.index>=0&&s.index<words.length?s.index:0;learned=new Set(Array.isArray(s.learned)?s.learned:[])}catch{}
+const $=id=>document.getElementById('word-'+id);
+function save(){try{localStorage.setItem('lughati-stage2-progress',JSON.stringify({index,learned:[...learned]}))}catch{}}
+function speak(){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(words[index].en);u.lang='en-US';u.rate=.8;speechSynthesis.speak(u)}
+function drawTrace(){const w=words[index].en;let hint='';const visible=new Set();if(attempt===2){if(w.length<=2){for(let i=0;i<w.length;i++)visible.add(i)}else{visible.add(1);visible.add(Math.min(3,w.length-1));}}[...w].forEach((ch,i)=>{if(attempt===1)hint+=ch;else if(attempt===2)hint+=visible.has(i)?ch:' ';});$('ghostOverlay').textContent=hint;$('stageCount').textContent='الكتابة '+attempt+' من 3';$('instruction').textContent=attempt===1?'المرة الأولى: الكلمة كاملة شفافة داخل الخانة، واكتب فوقها.':attempt===2?'المرة الثانية: يظهر حرفان فقط، واكتب باقي الحروف بنفسك.':'';$('category').classList.toggle('hidden',attempt===3);$('emoji').classList.toggle('hidden',attempt===3);$('word').classList.toggle('hidden',attempt===3);$('meaning').classList.toggle('hidden',attempt===3);$('hear').classList.toggle('hidden',attempt===3);$('ghostOverlay').classList.toggle('hidden',attempt===3);}
+function render(){const w=words[index];phase='write';attempt=1;$('category').textContent='قسم '+w.group;$('emoji').textContent=w.emoji;$('word').textContent=w.en;$('meaning').textContent=w.ar;$('category').classList.remove('hidden');$('emoji').classList.remove('hidden');$('word').classList.remove('hidden');$('meaning').classList.remove('hidden');$('hear').classList.remove('hidden');$('ghostOverlay').classList.remove('hidden');$('count').textContent='الكلمة '+(index+1)+' من '+words.length;$('progress').style.width=(learned.size/words.length*100)+'%';$('writing').classList.remove('hidden');$('quiz').classList.add('hidden');$('feedback').textContent='';$('answer').value='';$('check').classList.remove('hidden');$('nextWrite').classList.add('hidden');drawTrace();save()}
+function checkWriting(){if(phase!=='write')return;const entered=$('answer').value.trim().replace(/\s+/g,'').toLowerCase();if(entered!==words[index].en.toLowerCase()){$('feedback').textContent='لسه مش مظبوطة، جرّب تاني.';$('feedback').style.color='#a85b20';return} $('feedback').textContent='صح!';$('check').classList.add('hidden');if(attempt<3){attempt++;$('answer').value='';$('feedback').textContent='';$('check').classList.remove('hidden');drawTrace();$('answer').focus()}else{phase='quiz';$('answer').value='';$('writing').classList.add('hidden');$('quiz').classList.remove('hidden');makeOptions()}}
+function makeOptions(){const correct=words[index];const ids=new Set([index]);while(ids.size<4)ids.add(Math.floor(Math.random()*words.length));const choices=[...ids].sort(()=>Math.random()-.5);$('options').textContent='';$('quizFeedback').textContent='';$('nextWord').classList.add('hidden');choices.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(phase!=='quiz')return;if(i===index){phase='advance';b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('quizFeedback').textContent='إجابة صحيحة!';$('quizFeedback').style.color='#087f70';learned.add(index);save();$('progress').style.width=(learned.size/words.length*100)+'%';$('answer').value='';if(index===words.length-1){$('progress').style.width='100%';$('lesson').innerHTML='<h2>عاش يا بطل! 🎉</h2><p>خلصت كل الكلمات.</p><button class="btn primary" id="word-restart">ابدأ الكلمات من الأول</button>';document.getElementById('word-restart').onclick=()=>{index=0;learned.clear();save();location.reload()};return}index++;setTimeout(render,350)}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('quizFeedback').textContent='جرّب تاني، ركّز في معنى الاختيار.';$('quizFeedback').style.color='#a85b20'}};$('options').appendChild(b)})}
+$('hear').onclick=speak;$('check').onclick=checkWriting;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWriting()});$('nextWrite').onclick=()=>{};$('nextWord').onclick=()=>{};render();
+})();
+
+window.startWordsStage=function(){document.body.classList.remove('quiz-mode');document.querySelector('.intro').style.display='none';document.querySelector('.lesson').style.display='none';document.getElementById('soundQuiz').style.display='none';document.getElementById('stageComplete').style.display='none';document.getElementById('wordStage').style.display='block';window.scrollTo({top:0,behavior:'smooth'});};
+document.getElementById('restartCourse').onclick=function(){try{localStorage.removeItem('lughati-learned');localStorage.removeItem('lughati-current-letter');localStorage.removeItem('lughati-stage2-progress')}catch{}location.reload()};
+</script></main>
 
 <script>
 const L=[['A','a','إيه','Apple','تفاحة'],['B','b','بي','Ball','كرة'],['C','c','سي','City','مدينة'],['D','d','دي','Dog','كلب'],['E','e','إي','Egg','بيضة'],['F','f','إف','Fish','سمكة'],['G','g','جي','Goat','ماعز'],['H','h','إيتش','Hat','قبعة'],['I','i','آي','Ice','ثلج'],['J','j','جاي','Jam','مربّى'],['K','k','كاي','Key','مفتاح'],['L','l','إل','Lion','أسد'],['M','m','إم','Moon','قمر'],['N','n','إن','Nose','أنف'],['O','o','أو','Orange','برتقالة'],['P','p','پي','Pen','قلم'],['Q','q','كيو','Queen','ملكة'],['R','r','آر','Rain','مطر'],['S','s','إس','Sun','شمس'],['T','t','تي','Tree','شجرة'],['U','u','يو','Umbrella','مظلّة'],['V','v','ڤي','Van','سيارة نقل'],['W','w','دَبليو','Water','ماء'],['X','x','إكس','X-ray','أشعة سينية'],['Y','y','واي','Yellow','أصفر'],['Z','z','زي','Zebra','حمار وحشي']];
@@ -146,7 +259,7 @@ function buildQuiz(){quizTarget=n;quizLocked=false;$('quizFeedback').textContent
 function renderQuiz(){$('quizPrompt').textContent='اختار الكلمة الصحيحة من غير تلميحات.';}
 function openQuiz(){quizOpen=true;try{localStorage.setItem('lughati-quiz-open','1')}catch{}document.body.classList.add('quiz-mode');$('soundQuiz').style.display='block';buildQuiz();renderQuiz();window.scrollTo({top:0,behavior:'instant'});}
 function closeQuiz(){quizOpen=false;try{localStorage.removeItem('lughati-quiz-open')}catch{}document.body.classList.remove('quiz-mode');$('soundQuiz').style.display='none';}
-$('prev').onclick=()=>{if(n>0){n--;closeQuiz();render()}};$('next').onclick=()=>{openQuiz()};$('hearLetter').onclick=()=>speak(L[n][0]);$('hearWord').onclick=()=>speak(L[n][3]);$('quizContinue').onclick=()=>{done.add(n);try{localStorage.setItem('lughati-learned',JSON.stringify([...done]))}catch{}closeQuiz();if(n<25){n++;render()}else{closeQuiz();$('stageComplete').style.display='block';$('stageComplete').scrollIntoView({behavior:'smooth',block:'center'});if(!window.lughatiStageAdvanceTimer){window.lughatiStageAdvanceTimer=setTimeout(()=>{window.location.href='stage2.html'},2200)}}};
+$('prev').onclick=()=>{if(n>0){n--;closeQuiz();render()}};$('next').onclick=()=>{openQuiz()};$('hearLetter').onclick=()=>speak(L[n][0]);$('hearWord').onclick=()=>speak(L[n][3]);$('quizContinue').onclick=()=>{done.add(n);try{localStorage.setItem('lughati-learned',JSON.stringify([...done]))}catch{}closeQuiz();if(n<25){n++;render()}else{closeQuiz();$('stageComplete').style.display='block';$('stageComplete').scrollIntoView({behavior:'smooth',block:'center'});if(!window.lughatiStageAdvanceTimer){window.lughatiStageAdvanceTimer=setTimeout(()=>{window.startWordsStage()},2200)}}};
 render();
 </script>
 
