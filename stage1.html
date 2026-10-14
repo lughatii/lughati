@@ -150,4 +150,17 @@ $('prev').onclick=()=>{if(n>0){n--;closeQuiz();render()}};$('next').onclick=()=>
 render();
 </script>
 
-<script id="lughati-shared-accent">(()=>{let color='#ff2449';try{color=localStorage.getItem('lughati-accent')||color}catch{}const root=document.documentElement;root.style.setProperty('--brand',color);root.style.setProperty('--teal',color);root.style.setProperty('--glow-color',color);root.style.setProperty('--ui-accent',color);document.querySelectorAll('.primary,.fill,.letter').forEach(el=>{if(el.classList.contains('primary')){el.style.backgroundColor=color;el.style.borderColor=color}else if(el.classList.contains('fill'))el.style.backgroundColor=color;else el.style.color=color});})();</script></body></html>
+<script id="lughati-shared-accent">(()=>{let color='#ff2449';try{color=localStorage.getItem('lughati-accent')||color}catch{}const root=document.documentElement;root.style.setProperty('--brand',color);root.style.setProperty('--teal',color);root.style.setProperty('--glow-color',color);root.style.setProperty('--ui-accent',color);document.querySelectorAll('.primary,.fill,.letter').forEach(el=>{if(el.classList.contains('primary')){el.style.backgroundColor=color;el.style.borderColor=color}else if(el.classList.contains('fill'))el.style.backgroundColor=color;else el.style.color=color});})();</script><script id="lughati-shared-theme">(()=>{let mode='dark';try{mode=localStorage.getItem('lughati-home-theme')||'dark'}catch{}const dark=mode!=='light';document.body.classList.toggle('lughati-dark',dark);if(!dark)return;const style=document.createElement('style');style.textContent=`
+body.lughati-dark{--ink:#f2f6ff;--muted:#a8bad4;--line:#263752;--teal:var(--ui-accent,#ff2449);--paper:#050914;background:#050914!important;color:var(--ink)!important}
+body.lughati-dark:before{background:radial-gradient(ellipse at 12% 14%,color-mix(in srgb,var(--glow-color) 16%,transparent),transparent 32%),radial-gradient(ellipse at 88% 74%,#09204455,transparent 35%)!important}
+body.lughati-dark .top{background:#091323!important;color:#f2f6ff!important;border-color:#263752!important}
+body.lughati-dark .hero,body.lughati-dark .intro,body.lughati-dark .panel,body.lughati-dark .card{background:#0b1526!important;color:#f2f6ff!important;border-color:#263752!important}
+body.lughati-dark .hero{background:linear-gradient(135deg,#101d31,#091323)!important}
+body.lughati-dark .btn{background:#101c30;color:#eaf1ff;border-color:#30435f}
+body.lughati-dark .btn.primary{background:var(--ui-accent,#ff2449)!important;color:white!important;border-color:var(--ui-accent,#ff2449)!important}
+body.lughati-dark .write-input{background:#07101e!important;color:#f2f6ff!important;border-color:#30435f!important}
+body.lughati-dark .progress{background:#1a2940!important}
+body.lughati-dark .category{background:#17283b!important;color:var(--ui-accent,#ff2449)!important}
+body.lughati-dark .picture{background:linear-gradient(145deg,#14253a,#0a1423)!important}
+body.lughati-dark .letters button{background:#101c30!important;color:#f2f6ff!important;border-color:#30435f!important}
+`;document.head.appendChild(style)})();</script></body></html>
