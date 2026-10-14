@@ -163,6 +163,30 @@ button:focus-visible,.btn:focus-visible,.letters button:focus-visible,.options b
  button:hover,.btn:hover,.primary:hover,.top-cta:hover,.icon-btn:hover,.close-btn:hover,.tag:hover,.category:hover,.eyebrow:hover,.letters button:hover,.options button:hover,.path-card:hover,.panel:hover,.card:hover,.trust-item:hover,.stat:hover{transform:none!important}
 }
 </style>
+
+<style id="lughati-low-end-device-optimization">
+/* Keep the site responsive on phones and tablets without changing learning logic. */
+@media (max-width: 850px) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .lughati-orb { display: none !important; }
+  .lughati-orb, .glass, .glass-card, .nav, .top, .hero, .intro,
+  .panel, .card, .settings-panel, .settings-card, .progress-card,
+  .stats-card, .trustbar, .path-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  body::before { filter: none !important; }
+}
+@media (max-width: 620px) {
+  .book-stack, .cap, .headphones, .path-art { filter: none !important; }
+  .halo, .ring, .book, .floating-word, .spark { box-shadow: none !important; }
+}
+</style>
+
 </head>
 <body>
 <header class="shell"><div class="nav">
