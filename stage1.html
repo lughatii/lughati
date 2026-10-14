@@ -150,4 +150,4 @@ $('prev').onclick=()=>{if(n>0){n--;closeQuiz();render()}};$('next').onclick=()=>
 render();
 </script>
 
-</body></html>
+<script id="lughati-shared-accent">(()=>{let color='#ff2449';try{color=localStorage.getItem('lughati-accent')||color}catch{}const root=document.documentElement;root.style.setProperty('--brand',color);root.style.setProperty('--teal',color);root.style.setProperty('--glow-color',color);root.style.setProperty('--ui-accent',color);document.querySelectorAll('.primary,.fill,.letter').forEach(el=>{if(el.classList.contains('primary')){el.style.backgroundColor=color;el.style.borderColor=color}else if(el.classList.contains('fill'))el.style.backgroundColor=color;else el.style.color=color});})();</script></body></html>
