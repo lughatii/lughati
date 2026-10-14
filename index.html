@@ -429,6 +429,43 @@ button:active, .btn:active, .primary:active, .top-cta:active,
 }
 </style>
 
+
+<style id="lughati-slower-abc-glowing-headphones">
+/* Slow down the floating letters while keeping their gentle collisions. */
+.path-art.abc-art span{
+ animation-duration:5.2s,6s!important;
+}
+.path-art.abc-art span:nth-child(2){animation-delay:-1.2s,-2s!important}
+.path-art.abc-art span:nth-child(3){animation-delay:-2.4s,-4s!important}
+/* Replace the headphone emoji with a clean vector icon and animate its neon glow. */
+.headphones.headphones-svg{
+ width:clamp(62px,8vw,92px)!important;
+ height:clamp(62px,8vw,92px)!important;
+ display:grid!important;place-items:center!important;
+ color:#53f7ff!important;
+ filter:drop-shadow(0 0 7px currentColor) drop-shadow(0 0 17px #8b5cf6)!important;
+ transform-origin:50% 60%;
+ animation:lughati-headphone-dance 4.2s ease-in-out infinite,lughati-headphone-colors 5.5s linear infinite!important;
+}
+.headphones.headphones-svg svg{
+ display:block!important;width:100%!important;height:100%!important;
+ overflow:visible;filter:drop-shadow(0 0 6px currentColor)!important;
+}
+@keyframes lughati-headphone-dance{
+ 0%,100%{transform:translate3d(0,0,0) rotate(10deg) scale(1)}
+ 25%{transform:translate3d(0,-9px,0) rotate(-5deg) scale(1.06)}
+ 50%{transform:translate3d(2px,-3px,0) rotate(16deg) scale(1.02)}
+ 75%{transform:translate3d(-2px,-11px,0) rotate(3deg) scale(1.07)}
+}
+@keyframes lughati-headphone-colors{
+ 0%{color:#53f7ff;filter:drop-shadow(0 0 7px #53f7ff) drop-shadow(0 0 17px #8b5cf6)}
+ 33%{color:#ff67d8;filter:drop-shadow(0 0 9px #ff67d8) drop-shadow(0 0 22px #ff67d8)}
+ 66%{color:#a8ff60;filter:drop-shadow(0 0 9px #a8ff60) drop-shadow(0 0 22px #28d9ff)}
+ 100%{color:#53f7ff;filter:drop-shadow(0 0 7px #53f7ff) drop-shadow(0 0 17px #8b5cf6)}
+}
+@media(max-width:850px){.headphones.headphones-svg{width:58px!important;height:58px!important}}
+@media(prefers-reduced-motion:reduce){.headphones.headphones-svg{animation:none!important}}
+</style>
 </head>
 <body>
 <header class="shell"><div class="nav">
@@ -442,7 +479,7 @@ button:active, .btn:active, .primary:active, .top-cta:active,
 <h1>رحلتك نحو إتقان <span class="gradient-text">اللغة الإنجليزية</span></h1>
 <p class="intro">من أول حرف لحد ما تثق في لغتك. اتعلّم بطريقة ممتعة، وتقدّم خطوة بخطوة في مسار يناسب هدفك.</p>
 <div class="hero-actions"><button class="primary" id="startMain" type="button">ابدأ رحلتك <span>←</span></button><a class="secondary" href="#features"><span>⌄</span> اكتشف المميزات</a></div></div>
-<div class="art" aria-label="تصميم تعليمي ثلاثي الأبعاد"><div class="halo"></div><div class="ring"></div><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span><span class="floating-word word-a">LEARN ✦</span><span class="floating-word word-b">GROW · GLOW</span><div class="book-stack"><div class="book">ENGLISH</div><div class="book">LEARN</div><div class="book">ACHIEVE</div></div><div class="cap cap-svg" aria-hidden="true"><svg viewBox="0 0 120 90" role="img" focusable="false"><path d="M5 29 60 6l55 23-55 24L5 29Z" fill="currentColor"/><path d="M27 40v20c17 14 49 14 66 0V40L60 54 27 40Z" fill="currentColor" opacity=".82"/><path d="M110 31v29" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="110" cy="65" r="5" fill="currentColor"/></svg></div><div class="headphones">🎧</div></div>
+<div class="art" aria-label="تصميم تعليمي ثلاثي الأبعاد"><div class="halo"></div><div class="ring"></div><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span><span class="floating-word word-a">LEARN ✦</span><span class="floating-word word-b">GROW · GLOW</span><div class="book-stack"><div class="book">ENGLISH</div><div class="book">LEARN</div><div class="book">ACHIEVE</div></div><div class="cap cap-svg" aria-hidden="true"><svg viewBox="0 0 120 90" role="img" focusable="false"><path d="M5 29 60 6l55 23-55 24L5 29Z" fill="currentColor"/><path d="M27 40v20c17 14 49 14 66 0V40L60 54 27 40Z" fill="currentColor" opacity=".82"/><path d="M110 31v29" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="110" cy="65" r="5" fill="currentColor"/></svg></div><div class="headphones headphones-svg" aria-label="سماعة للاستماع" role="img"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M18 53V45a32 32 0 0 1 64 0v8" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/><rect x="10" y="48" width="21" height="34" rx="9" fill="currentColor"/><rect x="69" y="48" width="21" height="34" rx="9" fill="currentColor"/><path d="M79 82c-3 8-12 11-23 11h-7" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><circle cx="43" cy="93" r="3.5" fill="currentColor"/></svg></div></div>
 </section>
 <section class="trustbar" id="features" aria-label="مميزات المنصة"><div class="trust-item"><span class="trust-icon">✦</span><div><strong>تعلّم بخطوات بسيطة</strong><small>من الأساسيات للاحتراف</small></div></div><div class="trust-item"><span class="trust-icon">◉</span><div><strong>محتوى تفاعلي</strong><small>تعلّم وجرّب بنفسك</small></div></div><div class="trust-item"><span class="trust-icon">▥</span><div><strong>تقدّم واضح</strong><small>اعرف وصلت لفين</small></div></div><div class="trust-item"><span class="trust-icon">✧</span><div><strong>مسار يناسب هدفك</strong><small>اختار المرحلة المناسبة</small></div></div></section>
 <section id="paths"><div class="section-head"><span class="section-kicker">YOUR NEXT STEP</span><h2>اختار مسارك الآن</h2><p>ابدأ من المكان المناسب ليك، وخلي كل خطوة تقرّبك من هدفك.</p></div>
