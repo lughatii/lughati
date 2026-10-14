@@ -127,7 +127,28 @@ input::placeholder,textarea::placeholder{color:#64748b!important}
 footer{border-color:rgba(148,163,184,.15)!important;color:#94a3b8!important}
 @media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
 </style>
-</head>
+<style id="lughati-motion-enhancement">
+/* Lughati motion + glow enhancement */
+:root{--lughati-glow:var(--cyan,var(--ui-accent,#28d9ff))}
+@keyframes lughatiGlow{0%,100%{text-shadow:0 0 5px color-mix(in srgb,var(--lughati-glow) 20%,transparent),0 0 16px color-mix(in srgb,var(--lughati-glow) 18%,transparent)}50%{text-shadow:0 0 10px color-mix(in srgb,var(--lughati-glow) 75%,transparent),0 0 28px color-mix(in srgb,var(--lughati-glow) 45%,transparent),0 0 42px color-mix(in srgb,var(--purple,#9d4dff) 25%,transparent)}}
+@keyframes lughatiFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(3deg)}}
+@keyframes lughatiOrbit{0%{transform:rotate(0deg) translateX(7px) rotate(0deg)}100%{transform:rotate(360deg) translateX(7px) rotate(-360deg)}}
+@keyframes lughatiWave{0%{transform:scale(.7);opacity:.75}100%{transform:scale(1.8);opacity:0}}
+@keyframes lughatiShine{0%,100%{box-shadow:0 0 8px color-mix(in srgb,var(--lughati-glow) 20%,transparent)}50%{box-shadow:0 0 20px color-mix(in srgb,var(--lughati-glow) 50%,transparent),0 0 34px color-mix(in srgb,var(--purple,#9d4dff) 25%,transparent)}}
+h1,.brand,.word,.letter,.stage{animation:lughatiGlow 3s ease-in-out infinite}
+.hero,.intro,.brand-icon,.emoji,.letter{position:relative}
+.hero,.intro,.panel,.card,.btn,.primary{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.hero:hover,.intro:hover,.panel:hover,.card:hover{box-shadow:0 0 24px color-mix(in srgb,var(--lughati-glow) 22%,transparent)}
+.btn:hover,.primary:hover{transform:translateY(-2px);box-shadow:0 0 18px color-mix(in srgb,var(--lughati-glow) 42%,transparent)}
+.brand-icon,.emoji{animation:lughatiFloat 3.2s ease-in-out infinite}
+body:after{content:"";position:fixed;z-index:-1;pointer-events:none;width:14px;height:14px;left:8%;top:28%;border:2px solid color-mix(in srgb,var(--lughati-glow) 75%,transparent);border-radius:50%;box-shadow:0 0 18px var(--lughati-glow);animation:lughatiOrbit 12s linear infinite}
+.lughati-theme-toggle{position:fixed;z-index:9999;bottom:18px;left:16px;border:1px solid #4c83b9;border-radius:999px;padding:10px 15px;background:rgba(7,18,37,.9);color:#fff;font-weight:800;box-shadow:0 0 18px #11c9ff55;backdrop-filter:blur(12px);cursor:pointer;animation:lughatiShine 2.8s ease-in-out infinite}
+.lughati-theme-toggle:focus-visible{outline:3px solid #ffc86b;outline-offset:3px}
+.lughati-speaker{display:inline-flex;position:relative;align-items:center;justify-content:center}
+.lughati-speaker:before,.lughati-speaker:after{content:"";position:absolute;inset:-5px;border:2px solid currentColor;border-radius:50%;animation:lughatiWave 1.7s ease-out infinite}
+.lughati-speaker:after{animation-delay:.85s}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style></head>
 <body><header class="top">لُغتي <span class="muted" style="font-size:12px">· المرحلة الثانية</span></header>
 <main><a class="back" href="index.html">← الرجوع للرئيسية</a>
 <section class="hero"><h1>اتعلّم الكلمة واكتبها</h1><p class="muted" style="margin:0">اسمع الكلمة، اكتبها 3 مرات، وبعدها اختار معناها الصحيح.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">الكلمة 1</span><span id="stageCount">الكتابة 1 من 3</span></div></section>
@@ -192,4 +213,4 @@ body.lughati-dark input,body.lughati-dark select,body.lughati-dark textarea{back
 body.lughati-dark input::placeholder,body.lughati-dark textarea::placeholder{color:#8fa4c1!important}
 body.lughati-dark .btn:disabled{opacity:.55;color:#a8bad4!important}
 
-`;document.head.appendChild(style)})();</script></body></html>
+`;document.head.appendChild(style)})();</script><script id="lughati-motion-theme">(()=>{if(document.getElementById('lughati-theme-toggle'))return;const b=document.createElement('button');b.id='lughati-theme-toggle';b.className='lughati-theme-toggle';b.type='button';const read=()=>{try{return localStorage.getItem('lughati-home-theme')||'dark'}catch{return'dark'}};const paint=()=>{const light=read()==='light';b.textContent=light?'🌙 الوضع الداكن':'☀️ الوضع الفاتح';b.setAttribute('aria-label',light?'تفعيل الوضع الداكن':'تفعيل الوضع الفاتح')};b.addEventListener('click',()=>{const next=read()==='light'?'dark':'light';try{localStorage.setItem('lughati-home-theme',next)}catch{};location.reload()});document.body.appendChild(b);paint();document.querySelectorAll('button,a').forEach(el=>{if(/سماعة|استمع|نطق|🔊|🎧/.test(el.textContent||'')){el.classList.add('lughati-speaker')}})})();</script></body></html>
