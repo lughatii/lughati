@@ -368,6 +368,67 @@ button:active, .btn:active, .primary:active, .top-cta:active,
   .path-art.abc-art span,.cap.cap-svg,.path-art.cap-card-art { animation:none!important; transform:none!important; opacity:1!important; }
 }
 </style>
+
+<style id="lughati-free-floating-neon-abc">
+/* Free-floating letters: no card, box, border, or glass panel. */
+.path-art.abc-art{
+  width:clamp(180px,25vw,290px)!important;
+  height:clamp(110px,16vw,175px)!important;
+  padding:0!important; gap:clamp(2px,1.2vw,14px)!important;
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  direction:ltr!important; background:transparent!important; border:0!important;
+  border-radius:0!important; box-shadow:none!important; backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important; overflow:visible!important;
+  transform:none!important;
+}
+.path-art.abc-art span{
+  display:inline-block!important; position:relative; flex:0 0 auto;
+  font-family:system-ui,sans-serif!important;
+  font-size:clamp(66px,9vw,108px)!important; font-weight:1000!important;
+  line-height:1!important; background:none!important; border:0!important;
+  -webkit-text-fill-color:currentColor!important;
+  color:#53f7ff!important;
+  text-shadow:0 0 7px currentColor,0 0 18px currentColor,0 0 36px currentColor,0 0 54px #8b5cf6!important;
+  animation:lughati-free-bump 2.8s ease-in-out infinite, lughati-neon-cycle 5.5s linear infinite!important;
+  will-change:transform,filter;
+}
+.path-art.abc-art span:nth-child(1){animation-delay:0s,0s!important}
+.path-art.abc-art span:nth-child(2){animation-delay:-.65s,-1.8s!important}
+.path-art.abc-art span:nth-child(3){animation-delay:-1.3s,-3.6s!important}
+@keyframes lughati-free-bump{
+  0%,100%{transform:translate3d(0,0,0) rotate(-9deg) scale(1)}
+  18%{transform:translate3d(12px,-13px,0) rotate(7deg) scale(1.08)}
+  35%{transform:translate3d(-5px,3px,0) rotate(-4deg) scale(.96)}
+  52%{transform:translate3d(8px,10px,0) rotate(10deg) scale(1.04)}
+  72%{transform:translate3d(-10px,-4px,0) rotate(-7deg) scale(.98)}
+}
+@keyframes lughati-neon-cycle{
+  0%{color:#55f6ff;filter:hue-rotate(0deg)}
+  25%{color:#b477ff;filter:hue-rotate(90deg)}
+  50%{color:#ff67d8;filter:hue-rotate(180deg)}
+  75%{color:#a8ff60;filter:hue-rotate(270deg)}
+  100%{color:#55f6ff;filter:hue-rotate(360deg)}
+}
+/* Rotating, color-shifting neon light around the graduation cap. */
+.cap.cap-svg,.path-art.cap-card-art{
+  filter:drop-shadow(0 0 7px #49efff) drop-shadow(0 0 17px #9d4dff)!important;
+  animation:lughati-cap-float 5s ease-in-out infinite,lughati-cap-neon 6s linear infinite!important;
+}
+@keyframes lughati-cap-neon{
+  0%{filter:drop-shadow(0 0 7px #49efff) drop-shadow(0 0 17px #9d4dff)}
+  33%{filter:drop-shadow(0 0 10px #ff54cf) drop-shadow(0 0 24px #ff54cf)}
+  66%{filter:drop-shadow(0 0 10px #8bff69) drop-shadow(0 0 24px #28d9ff)}
+  100%{filter:drop-shadow(0 0 7px #49efff) drop-shadow(0 0 17px #9d4dff)}
+}
+@media(max-width:850px){
+ .path-art.abc-art{width:160px!important;height:100px!important;gap:2px!important}
+ .path-art.abc-art span{font-size:clamp(49px,12vw,67px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .path-art.abc-art span,.cap.cap-svg,.path-art.cap-card-art{animation:none!important}
+}
+</style>
+
 </head>
 <body>
 <header class="shell"><div class="nav">
