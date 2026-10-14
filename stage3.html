@@ -90,6 +90,43 @@ input,select,textarea{border-radius:13px;max-width:100%}
 @media(max-width:600px){.top{padding:13px 15px;font-size:19px}main{padding:12px 11px 24px}.hero,.intro{padding:20px 16px;border-radius:22px}.panel{padding:15px;border-radius:19px}h1{line-height:1.3;font-size:clamp(23px,6vw,30px)}.cards{grid-template-columns:1fr!important;gap:11px}button{min-height:46px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Cairo','Inter','sans-serif']},colors:{navy:{800:'#0f172a',900:'#020617'},primary:'#06b6d4',secondary:'#8b5cf6',accent:'#3b82f6'}}}};</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style id="lughati-premium-dark-identity">
+:root{color-scheme:dark;--lughati-bg:#020617;--lughati-panel:rgba(15,23,42,.72);--lughati-cyan:#06b6d4;--lughati-purple:#8b5cf6;--lughati-blue:#3b82f6;--lughati-text:#f8fafc;--lughati-muted:#a8b4c7;--lughati-border:rgba(255,255,255,.08)}
+html{background:#020617;color-scheme:dark}
+body{background:#020617!important;color:#f8fafc!important;font-family:'Cairo','Inter',sans-serif!important;isolation:isolate;min-height:100vh}
+body:before{content:"";position:fixed;inset:-12%;z-index:-2;pointer-events:none;filter:blur(100px);opacity:.8;background:radial-gradient(ellipse at 14% 20%,rgba(6,182,212,.2),transparent 35%),radial-gradient(ellipse at 84% 24%,rgba(139,92,246,.22),transparent 34%),radial-gradient(ellipse at 55% 90%,rgba(59,130,246,.13),transparent 38%)}
+body:after{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:linear-gradient(145deg,#020617,#071126 58%,#08051b)}
+.glass{background:rgba(15,23,42,.4)!important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08)!important}
+.glass-card{background:linear-gradient(145deg,rgba(30,41,59,.6) 0%,rgba(15,23,42,.8) 100%)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.05)!important;border-radius:1.25rem;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.gradient-text{background:linear-gradient(100deg,#67e8f9 0%,#06b6d4 35%,#8b5cf6 78%,#c4b5fd 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important}
+header,.top,.nav,.navlinks,.settings-card,.settings-panel,.intro,.hero,.panel,.card,.path-card,.progress-card,.stats-card,.trustbar,.trust-item,.stat,.picture,.category,.tag,.letters button,.options button,.settings-card,.setting-label select{border-color:rgba(148,163,184,.17)!important}
+.top,.nav,.settings-card,.settings-panel,.intro,.panel,.card,.progress-card,.stats-card,.trustbar,.stat,.picture,.setting-label select{background:linear-gradient(145deg,rgba(30,41,59,.62),rgba(15,23,42,.82))!important;color:#f8fafc!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.hero{background:linear-gradient(135deg,rgba(8,145,178,.2),rgba(30,41,59,.72) 52%,rgba(91,33,182,.2))!important;color:#f8fafc!important;border:1px solid rgba(103,232,249,.15)!important}
+.hero p,.hero .sub,.hero .muted{color:#cbd5e1!important}
+.path-card{background:linear-gradient(145deg,rgba(8,145,178,.18),rgba(15,23,42,.88))!important;border:1px solid rgba(6,182,212,.24)!important}
+.path-card.purple{background:linear-gradient(145deg,rgba(139,92,246,.2),rgba(15,23,42,.88))!important;border-color:rgba(139,92,246,.3)!important}
+.btn,.close-btn,.icon-btn{background:rgba(15,23,42,.78)!important;color:#e2e8f0!important;border-color:rgba(148,163,184,.25)!important}
+.primary,.btn.primary,.top-cta,button.primary{background:linear-gradient(110deg,#06b6d4,#3b82f6 55%,#8b5cf6)!important;color:#fff!important;border:1px solid rgba(103,232,249,.25)!important;box-shadow:0 8px 26px rgba(6,182,212,.18)!important}
+a{color:inherit}
+a:hover,.navlinks a:hover{color:#67e8f9}
+h1,h2,h3,strong,.brand,.foot-brand{color:#f8fafc}
+p,.muted,.hint,.caption,.intro,.meaning,.letter-name,.setting-label{color:#a8b4c7}
+input,select,textarea,.write-input{background:rgba(2,6,23,.58)!important;color:#f8fafc!important;border:1px solid rgba(148,163,184,.24)!important;border-radius:13px}
+input:focus,select:focus,textarea:focus,.write-input:focus{outline:none!important;border-color:#06b6d4!important;box-shadow:0 0 0 3px rgba(6,182,212,.15),0 0 22px rgba(6,182,212,.12)!important}
+input::placeholder,textarea::placeholder{color:#64748b!important}
+.progress{background:rgba(51,65,85,.8)!important}.fill{background:linear-gradient(90deg,#06b6d4,#3b82f6,#8b5cf6)!important}
+.letter,.word,.emoji,.trust-icon{color:#67e8f9}
+.ghost-overlay{color:rgba(148,163,184,.36)!important}
+.category,.tag,.eyebrow{background:rgba(6,182,212,.1)!important;color:#67e8f9!important;border-color:rgba(6,182,212,.28)!important}
+footer{border-color:rgba(148,163,184,.15)!important;color:#94a3b8!important}
+@media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
+</style>
 </head>
 <body><header class="top">لُغتي <span class="muted" style="font-size:12px">· خاصة بي</span></header>
 <main><a class="back" href="index.html">← الرجوع للرئيسية</a>
