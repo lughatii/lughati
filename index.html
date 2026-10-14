@@ -2,105 +2,65 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#eff9f5"><title>لُغتي — اختار المرحلة</title>
+<meta name="theme-color" content="#050914"><meta name="description" content="لغتي، رحلتك لتعلم اللغة الإنجليزية من الحروف إلى الكلمات والاختبارات التفاعلية.">
+<title>لُغتي — رحلتك نحو إتقان الإنجليزية</title>
 <style>
-:root{--ink:#18332e;--muted:#718780;--line:#dcebe5;--teal:#087f70;--paper:#f1faf6}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
-.top{padding:16px max(calc((100% - 900px)/2),16px);background:#f7fffb;border-bottom:1px solid var(--line);font-size:22px;font-weight:900}
-main{max-width:760px;margin:0 auto;padding:28px 16px}
-.hero{padding:26px 20px;border-radius:24px;background:linear-gradient(135deg,#ddf7ec,#f9fffc);border:1px solid var(--line);text-align:center}
-h1{font-size:clamp(26px,5vw,36px);margin:0 0 10px}.sub{color:var(--muted);margin:0;line-height:1.8}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
-.card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:24px 18px;background:white;border:1px solid var(--line);border-radius:22px}
-.emoji{font-size:46px}.card h2{margin:0;font-size:23px}.card p{margin:0;color:var(--muted);line-height:1.8}
-.btn{display:inline-block;width:100%;margin-top:auto;padding:13px 16px;border-radius:13px;background:var(--teal);color:white;text-decoration:none;font-weight:850}.refresh-btn{display:block;width:min(100%,260px);margin:16px auto 0;padding:12px 16px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--teal);font-weight:850;cursor:pointer;font:inherit;font-weight:850}
-footer{text-align:center;color:var(--muted);font-size:12px;margin:24px 0}
-@media(max-width:560px){main{padding:18px 12px}.cards{grid-template-columns:1fr}.card{padding:20px 16px}.hero{padding:22px 16px}}
-
-/* iPhone-inspired appearance controls; presentation only */
-:root{--ui-accent:#1687ff;--ui-bg:#f2f5fa;--ui-card:#ffffff;--ui-ink:#172033;--ui-muted:#718096;--ui-line:#dce4f0}
-body{background:var(--ui-bg)!important;color:var(--ui-ink)!important;font-family:-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Tahoma,Arial,sans-serif!important}
-.top{background:var(--ui-card)!important;color:var(--ui-ink)!important;border-bottom:1px solid var(--ui-line)!important}
-.hero,.intro,.panel,.card{background:var(--ui-card)!important;color:var(--ui-ink)!important;border-color:var(--ui-line)!important;border-radius:24px!important;box-shadow:0 8px 24px rgba(15,35,65,.06)}
-.hero,.intro{background:linear-gradient(145deg,color-mix(in srgb,var(--ui-accent) 12%,var(--ui-card)),var(--ui-card))!important}
-.btn,.refresh-btn,.write-input{border-color:var(--ui-line)!important;border-radius:15px!important}
-.btn.primary,.btn:not(:disabled):hover,.btn[aria-current=true],.btn.primary:hover,.btn.primary:focus,.btn.primary:active,.btn.primary{background:var(--ui-accent)!important;border-color:var(--ui-accent)!important;color:white!important}
-.progress{background:color-mix(in srgb,var(--ui-accent) 15%,var(--ui-card))!important}.fill{background:var(--ui-accent)!important}
-#lughatiThemeButton{position:fixed;z-index:9998;left:12px;top:10px;border:1px solid var(--ui-line);border-radius:999px;background:var(--ui-card);color:var(--ui-ink);padding:9px 12px;font:700 13px system-ui;box-shadow:0 4px 16px #0001;cursor:pointer}
-#lughatiThemePanel{position:fixed;z-index:9999;left:12px;top:55px;width:min(300px,calc(100vw - 24px));padding:16px;border:1px solid var(--ui-line);border-radius:22px;background:var(--ui-card);color:var(--ui-ink);box-shadow:0 16px 50px #0003;display:none}
-#lughatiThemePanel.open{display:block}#lughatiThemePanel h3{font-size:16px;margin:0 0 10px}#lughatiThemePanel p{font-size:12px;margin:12px 0 8px;color:var(--ui-muted)}
-.lughati-swatches{display:flex;gap:9px;flex-wrap:wrap}.lughati-swatch{width:31px;height:31px;border-radius:50%;border:2px solid #ffffff;outline:1px solid #cbd5e1;cursor:pointer}.lughati-swatch[aria-pressed=true]{outline:3px solid var(--ui-accent)}
-.lughati-mode{display:flex;gap:8px}.lughati-mode button{flex:1;padding:9px 7px;border:1px solid var(--ui-line);border-radius:12px;background:var(--ui-bg);color:var(--ui-ink);font:inherit;cursor:pointer}
-body[data-lughati-mode="dark"]{--ui-bg:#080f1c;--ui-card:#101c2d;--ui-ink:#f1f5fb;--ui-muted:#a9bad0;--ui-line:#263852}
-body[data-lughati-mode="dark"] .hero,body[data-lughati-mode="dark"] .intro{background:linear-gradient(145deg,color-mix(in srgb,var(--ui-accent) 18%,var(--ui-card)),var(--ui-card))!important}
-body[data-lughati-mode="dark"] .btn:not(.primary),body[data-lughati-mode="dark"] .refresh-btn{background:#17263a!important;color:var(--ui-ink)!important}
-body[data-lughati-mode="dark"] .picture{background:#17263a!important}
-@media(max-width:600px){#lughatiThemeButton{top:8px;left:8px;padding:8px 10px}.top{padding-left:100px!important}}
-
-
-/* Lughati glow polish v1 — decorative only */
-:root{--glow-color:var(--ui-accent,#1687ff)}
-body{isolation:isolate}
-body:before{content:"";position:fixed;inset:-18%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 12% 14%,color-mix(in srgb,var(--glow-color) 17%,transparent),transparent 32%),radial-gradient(ellipse at 88% 74%,color-mix(in srgb,var(--glow-color) 12%,transparent),transparent 35%);opacity:.9;animation:lughati-ambient 13s ease-in-out infinite alternate}
-.top{position:relative;isolation:isolate}
-.top:after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--glow-color),transparent);opacity:.65;box-shadow:0 0 12px var(--glow-color)}
-.hero,.intro,.panel,.card{position:relative;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
-.hero:before,.intro:before,.panel:before,.card:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 0%,color-mix(in srgb,var(--glow-color) 7%,transparent) 45%,transparent 70%);opacity:.7}
-.hero:hover,.intro:hover,.panel:hover,.card:hover{border-color:color-mix(in srgb,var(--glow-color) 48%,var(--ui-line,#dce4f0))!important;box-shadow:0 10px 32px color-mix(in srgb,var(--glow-color) 15%,transparent),0 0 0 1px color-mix(in srgb,var(--glow-color) 9%,transparent);transform:translateY(-2px)}
-.btn.primary,.btn:not(:disabled):hover,.refresh-btn:hover{box-shadow:0 5px 18px color-mix(in srgb,var(--glow-color) 34%,transparent),0 0 22px color-mix(in srgb,var(--glow-color) 16%,transparent)!important;transition:box-shadow .2s ease,transform .2s ease,filter .2s ease}
-.btn.primary:hover,.refresh-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
-.letter,.word{ text-shadow:0 0 22px color-mix(in srgb,var(--glow-color) 20%,transparent)}
-.progress,.fill{box-shadow:0 0 12px color-mix(in srgb,var(--glow-color) 20%,transparent)}
-#lughatiThemeButton{transition:box-shadow .2s ease,transform .2s ease}
-#lughatiThemeButton:hover{transform:translateY(-1px);box-shadow:0 5px 22px color-mix(in srgb,var(--glow-color) 24%,transparent)}
-.lughati-swatch{transition:transform .18s ease,box-shadow .18s ease}
-.lughati-swatch:hover{transform:scale(1.12);box-shadow:0 0 16px color-mix(in srgb,var(--glow-color) 45%,transparent)}
-@keyframes lughati-ambient{0%{transform:translate3d(-1%,0,0) scale(1)}100%{transform:translate3d(1%,1%,0) scale(1.04)}}
-@media(hover:none){.hero:hover,.intro:hover,.panel:hover,.card:hover{transform:none;box-shadow:none}}
-@media(prefers-reduced-motion:reduce){body:before{animation:none}.hero,.intro,.panel,.card,.btn,#lughatiThemeButton,.lughati-swatch{transition:none!important}}
-
-</style><style id="lughati-mobile-app-redesign">
-:root{--ink:#17202c;--muted:#707987;--line:#e7e9ee;--teal:#e51d35;--paper:#f5f6f9;--brand:#e51d35;--brand-soft:#fff0f2}
-html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
-body{background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.55}
-.top{position:sticky;top:0;z-index:20;padding:14px 16px;background:rgba(255,255,255,.94);color:var(--ink);border-bottom:1px solid var(--line);box-shadow:0 4px 18px rgba(22,30,45,.045);backdrop-filter:blur(16px);font-size:20px}
-main{width:min(100%,900px);padding:16px 13px 30px}
-.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#e51d35 0%,#b70e27 100%);color:#fff;border:0;border-radius:25px;padding:24px 19px;box-shadow:0 12px 28px rgba(229,29,53,.17)}
-.hero p,.hero .sub,.hero .muted{color:rgba(255,255,255,.82)}
-.panel,.intro,.card,.cards>*{border-radius:20px}
-.panel{border:1px solid var(--line);box-shadow:0 5px 18px rgba(23,32,44,.045)}
-button,.btn,a.button{transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
-button{min-height:44px;border-radius:14px}
-button:active,.btn:active{transform:scale(.98)}
-button:not([class*="secondary"]):not([class*="ghost"]){accent-color:#e51d35}
-a{color:var(--brand)}
-.progress{overflow:hidden;border-radius:99px}
-.cards{gap:12px}
-input,select,textarea{border-radius:13px;max-width:100%}
-@media(max-width:600px){.top{padding:13px 15px;font-size:19px}main{padding:12px 11px 24px}.hero,.intro{padding:20px 16px;border-radius:22px}.panel{padding:15px;border-radius:19px}h1{line-height:1.3;font-size:clamp(23px,6vw,30px)}.cards{grid-template-columns:1fr!important;gap:11px}button{min-height:46px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+:root{color-scheme:dark;--bg:#030713;--panel:#091323;--line:#1b2b46;--text:#f6f8ff;--muted:#a8bfdc;--red:#ff2449;--blue:#00b8ff;--purple:#d42cff;--green:#18e69a;--orange:#ff9c24}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;overflow-x:hidden;line-height:1.65}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(ellipse at 9% 9%,#9d123b55,transparent 29%),radial-gradient(ellipse at 83% 32%,#052e7650,transparent 34%),radial-gradient(ellipse at 48% 88%,#0a245244,transparent 38%),linear-gradient(135deg,#040611,#020814 65%,#08051b)}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}
+.shell{width:min(1320px,calc(100% - 48px));margin-inline:auto}
+.nav{height:70px;margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 24px;border:1px solid #263652;border-radius:26px;background:#080e1bdc;backdrop-filter:blur(18px);box-shadow:0 12px 35px #0004;position:relative;z-index:10}
+.brand{display:flex;align-items:center;gap:12px;font-size:29px;font-weight:950;white-space:nowrap}.brand-icon{font-size:34px;color:#ff385a;filter:drop-shadow(0 0 12px #ff244988)}
+.navlinks{display:flex;align-items:center;gap:clamp(16px,3vw,42px);color:#bfd1ea;font-weight:750}.navlinks a{padding:22px 0;position:relative}.navlinks a:hover,.navlinks a.active{color:white}.navlinks a.active:after{content:"";height:4px;border-radius:9px;position:absolute;bottom:0;right:0;left:0;background:var(--red);box-shadow:0 0 14px #ff2449}
+.nav-actions{display:flex;gap:10px;align-items:center}.theme-toggle,.lang{border:1px solid #344866;background:#0c1729;color:#dce8ff;border-radius:999px;padding:9px 13px}.lang{font-weight:800}
+.hero{min-height:500px;display:grid;grid-template-columns:.9fr 1.1fr;align-items:center;gap:18px;padding:40px 30px 22px}.hero-copy{position:relative;z-index:2}.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border:1px solid #64728d;border-radius:999px;background:#0a1120c9;color:#f3f6ff;font-weight:750}.spark{color:#ff695e;text-shadow:0 0 12px #ff554f}
+h1{font-size:clamp(34px,4.2vw,62px);line-height:1.35;margin:17px 0 14px;font-weight:950;letter-spacing:-1px}.h1-red{display:block;color:#ff2347;text-shadow:0 0 24px #ff123c45}.intro{font-size:clamp(15px,1.3vw,19px);line-height:1.95;color:#a9c7e8;max-width:530px;margin:0 0 26px}.cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(120deg,#ff2d4d,#d9002b);color:white;padding:14px 30px;border-radius:999px;min-width:190px;font-weight:900;box-shadow:0 10px 28px #f20b3b3d;transition:transform .2s,box-shadow .2s}.cta:hover{transform:translateY(-3px);box-shadow:0 14px 35px #ff234966}
+.abc-stage{height:385px;position:relative;display:grid;place-items:center;perspective:1000px;isolation:isolate}.orbit{position:absolute;width:92%;height:62%;border:2px solid transparent;border-top-color:#ff2449;border-right-color:#b02cff;border-bottom-color:#00baff;border-radius:50%;transform:rotate(-5deg);filter:drop-shadow(0 0 8px #ff244988);animation:orbitPulse 4s ease-in-out infinite alternate}.orbit:after{content:"";position:absolute;inset:13px -10px;border:1px solid #286dff88;border-radius:50%;transform:rotate(9deg)}.letters{width:100%;display:flex;justify-content:center;align-items:center;gap:clamp(3px,2vw,28px);position:relative;z-index:2;direction:ltr}.letter{font-family:system-ui,sans-serif;font-weight:1000;font-size:clamp(100px,15vw,205px);line-height:1;display:inline-block;position:relative;will-change:transform;transform-style:preserve-3d;animation:floatLetter 3.5s ease-in-out infinite;text-shadow:0 0 7px currentColor,0 0 22px currentColor,0 0 50px color-mix(in srgb,currentColor 75%,transparent),0 12px 0 #0008;transition:filter .4s}.letter-a{color:#ff5a14;filter:drop-shadow(0 0 17px #ff3c0b);animation-delay:-.7s}.letter-b{color:#00b8ff;filter:drop-shadow(0 0 19px #007dff);animation-delay:-1.8s}.letter-c{color:#e04aff;filter:drop-shadow(0 0 20px #a000ff);animation-delay:-2.5s}.letter:after{content:attr(data-letter);position:absolute;inset:0;color:transparent;-webkit-text-stroke:1px #ffffff70;opacity:.6;pointer-events:none}
+.orb{position:absolute;border-radius:50%;background:currentColor;box-shadow:0 0 17px currentColor;animation:particle 5s ease-in-out infinite}.orb.one{width:17px;height:17px;color:#00c8ff;top:14%;right:17%}.orb.two{width:12px;height:12px;color:#ff305b;bottom:17%;left:18%;animation-delay:-2s}.orb.three{width:9px;height:9px;color:#b82cff;top:34%;left:12%;animation-delay:-3s}.orb.four{width:13px;height:13px;color:#126bff;bottom:25%;right:11%;animation-delay:-1s}.floor-glow{position:absolute;bottom:9%;left:10%;right:10%;height:24px;background:linear-gradient(90deg,transparent,#ff1c4b,#00b8ff,#c522ff,transparent);filter:blur(19px);opacity:.7}
+.features{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;padding:12px 30px 24px}.feature{min-height:205px;padding:20px 20px 16px;border:1px solid #1e304e;border-radius:25px;background:linear-gradient(145deg,#0b1526eF,#060d19f5);box-shadow:inset 0 1px #ffffff06;transition:transform .22s,border-color .22s,box-shadow .22s}.feature:hover{transform:translateY(-5px);border-color:var(--feature);box-shadow:0 12px 32px color-mix(in srgb,var(--feature) 13%,transparent)}.feature:nth-child(1){--feature:#d82dff}.feature:nth-child(2){--feature:#078dff}.feature:nth-child(3){--feature:#14e89a}.feature:nth-child(4){--feature:#ff2351}.feature:nth-child(5){--feature:#ff9b24}.feature-icon{width:56px;height:56px;display:grid;place-items:center;border-radius:18px;background:color-mix(in srgb,var(--feature) 23%,#101b2b);border:1px solid color-mix(in srgb,var(--feature) 55%,transparent);color:white;font-size:27px;box-shadow:0 0 24px color-mix(in srgb,var(--feature) 28%,transparent)}.feature h2{font-size:19px;margin:12px 0 7px}.feature p{font-size:14px;line-height:1.9;color:#a9bfdc;margin:0}.feature-arrow{display:block;color:var(--feature);font-size:26px;line-height:1;margin-top:12px}
+.discover{text-align:center;padding:10px 0 28px;color:#b9cce7;font-size:13px}.mouse{width:25px;height:39px;border:2px solid #8db6ff;border-radius:20px;margin:0 auto 7px;position:relative}.mouse:before{content:"";position:absolute;width:3px;height:8px;background:#8db6ff;top:7px;left:9px;border-radius:5px;animation:scrollDot 1.4s infinite}.chevron{font-size:22px;color:#6e8cbd;line-height:1}
+.footer{border-top:1px solid #192943;padding:22px 0 28px;text-align:center;color:#7f96b6;font-size:12px}
+body.light{color-scheme:light;--bg:#f4f7fc;--text:#111b2e;--muted:#526782;background:#f4f7fc;color:#111b2e}body.light:before{background:radial-gradient(ellipse at 9% 9%,#ffb8c955,transparent 30%),radial-gradient(ellipse at 83% 32%,#a9d7ff77,transparent 34%),linear-gradient(135deg,#f8faff,#edf3ff)}body.light .nav{background:#ffffffdf;border-color:#d5deeb}body.light .navlinks{color:#526782}body.light .navlinks a:hover,body.light .navlinks a.active{color:#111b2e}body.light .eyebrow{background:#ffffffd9;color:#172033;border-color:#c6d2e4}body.light .intro{color:#506b8c}body.light .feature{background:linear-gradient(145deg,#fff,#f5f8ff);border-color:#d6dfec}body.light .feature p{color:#506782}body.light .footer{border-color:#dce3ee}body.light .theme-toggle,body.light .lang{background:#fff;color:#25344b;border-color:#d2dcec}
+@keyframes floatLetter{0%,100%{transform:translateY(0) rotateY(-7deg) rotateZ(-2deg) scale(1)}50%{transform:translateY(-17px) rotateY(8deg) rotateZ(2deg) scale(1.045)}}@keyframes orbitPulse{0%{transform:rotate(-8deg) scale(.96);opacity:.72}100%{transform:rotate(4deg) scale(1.04);opacity:1}}@keyframes particle{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-17px)}}@keyframes scrollDot{0%{transform:translateY(0);opacity:1}100%{transform:translateY(11px);opacity:0}}
+@media(max-width:1050px){.hero{grid-template-columns:1fr 1fr;padding-inline:10px}.features{grid-template-columns:repeat(3,minmax(0,1fr));padding-inline:10px}.feature:nth-child(4),.feature:nth-child(5){min-height:185px}.abc-stage{height:330px}.letter{font-size:clamp(90px,15vw,160px)}}
+@media(max-width:700px){.shell{width:calc(100% - 24px)}.nav{margin-top:10px;height:auto;min-height:62px;padding:10px 13px;border-radius:20px;flex-wrap:wrap;gap:8px}.brand{font-size:23px}.brand-icon{font-size:28px}.navlinks{order:3;width:100%;justify-content:space-around;gap:8px;border-top:1px solid #ffffff12}.navlinks a{padding:9px 2px 7px;font-size:12px}.navlinks a.active:after{height:2px}.nav-actions{margin-right:auto}.theme-toggle,.lang{font-size:12px;padding:7px 10px}.hero{grid-template-columns:1fr;gap:0;padding:26px 8px 10px;min-height:auto}.hero-copy{text-align:center}.eyebrow{font-size:13px}h1{font-size:clamp(32px,8vw,45px);margin:14px 0 10px}.intro{margin:0 auto 20px;font-size:15px}.cta{min-width:175px;padding:12px 25px}.abc-stage{height:260px;margin-top:8px}.letters{gap:clamp(0px,1vw,9px)}.letter{font-size:clamp(88px,23vw,145px)}.orbit{width:95%;height:58%}.features{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:8px 0 18px}.feature{padding:15px 13px;border-radius:20px;min-height:190px}.feature-icon{width:47px;height:47px;font-size:23px;border-radius:15px}.feature h2{font-size:16px}.feature p{font-size:12px}.feature-arrow{font-size:22px}.discover{padding-top:8px}}
+@media(max-width:390px){.nav{padding:9px}.brand{font-size:20px}.nav-actions{gap:5px}.theme-toggle,.lang{padding:6px 8px}.navlinks a{font-size:11px}.abc-stage{height:220px}.letter{font-size:clamp(76px,22vw,100px)}.features{grid-template-columns:1fr}.feature{min-height:0}.feature p{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
-</head><body>
-<header class="top">لُغتي <span style="font-size:12px;color:#718780;font-weight:700">· اختار مرحلتك</span></header>
-<main>
-<section class="hero"><h1>تحب تبدأ منين؟ 🌱</h1><p class="sub">اختار المرحلة المناسبة ليك، وتقدر تبدأ بالحروف أو تدخل على الكلمات والتحديات مباشرة.</p></section>
-<section class="cards">
-<article class="card"><div class="emoji">🔤</div><h2>المرحلة الأولى: الحروف</h2><p>اتعلّم الحروف الإنجليزية من A إلى Z، واسمع نطق الحرف والكلمة مع الصور.</p><a class="btn" href="stage1.html">ابدأ المرحلة الأولى</a></article>
-<article class="card"><div class="emoji">🎯</div><h2>المرحلة الثانية: الكلمات</h2><p>ادخل مباشرة على كلمات الحياة اليومية، واتعلّمها من خلال الصور والتحديات.</p><a class="btn" href="stage2.html">ابدأ المرحلة الثانية</a></article>
-<article class="card"><div class="emoji">📚</div><h2>المرحلة الثالثة: خاصة بي</h2><p>قائمة الكلمات الخاصة بي: مفردات متقدمة ومعانيها بالعربية، مع تدريب كتابة واختبار معنى.</p><a class="btn" href="stage3.html">ابدأ مرحلتي الخاصة</a></article></section><section class="cards" style="margin-top:14px"><button class="refresh-btn" id="refreshSite" type="button">↻ تحديث الموقع</button><footer>لُغتي — تعلّم بسيط، خطوة بخطوة.</footer>
-</main><script>document.getElementById("refreshSite").addEventListener("click",()=>{window.location.reload()});</script>
+</head>
+<body>
+<header class="nav shell">
+<a class="brand" href="#home" aria-label="لغتي - الرئيسية"><span class="brand-icon">📖</span><span>لُغتي</span></a>
+<nav class="navlinks" aria-label="التنقل الرئيسي"><a class="active" href="#home">الرئيسية</a><a href="#features">المميزات</a><a href="#stages">المراحل</a><a href="#about">عن الموقع</a></nav>
+<div class="nav-actions"><button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع" title="تبديل الوضع">☾ / ☼</button><button class="lang" id="langToggle" aria-label="تغيير اللغة">ع / EN</button></div>
+</header>
+<main id="home" class="shell">
+<section class="hero">
+<div class="hero-copy"><div class="eyebrow"><span class="spark">✦</span><span data-ar="مرحباً بك في لغتي" data-en="Welcome to Lughati">مرحباً بك في لغتي</span></div>
+<h1><span data-ar="رحلتك نحو إتقان" data-en="Your journey to mastering">رحلتك نحو إتقان</span><span class="h1-red" data-ar="اللغة الإنجليزية" data-en="English">اللغة الإنجليزية</span></h1>
+<p class="intro" data-ar="موقع تعليمي متكامل يساعدك على تعلم اللغة الإنجليزية بأسلوب سهل وممتع، من خلال مراحل منظمة واختبارات تفاعلية، مع متابعة تقدمك وحفظ إنجازاتك." data-en="A complete learning experience that helps you learn English in a simple, enjoyable way through structured stages, interactive quizzes, and progress tracking.">موقع تعليمي متكامل يساعدك على تعلم اللغة الإنجليزية بأسلوب سهل وممتع، من خلال مراحل منظمة واختبارات تفاعلية، مع متابعة تقدمك وحفظ إنجازاتك.</p>
+<a class="cta" href="stage1.html"><span data-ar="ابدأ الآن" data-en="Start learning">ابدأ الآن</span><span aria-hidden="true">←</span></a></div>
+<div class="abc-stage" aria-label="حروف إنجليزية مضيئة ومتحركة">
+<div class="orbit" aria-hidden="true"></div><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div><div class="orb four"></div>
+<div class="letters"><span class="letter letter-a" data-letter="A">A</span><span class="letter letter-b" data-letter="B">B</span><span class="letter letter-c" data-letter="C">C</span></div><div class="floor-glow"></div>
+</div>
+</section>
+<section class="features" id="features" aria-label="مميزات لغتي">
+<article class="feature"><div class="feature-icon">★</div><h2 data-ar="مستويات متعددة" data-en="Multiple levels">مستويات متعددة</h2><p data-ar="ابدأ من مستواك المناسب وتدرج في التعلم خطوة بخطوة." data-en="Start at your level and progress one step at a time.">ابدأ من مستواك المناسب وتدرج في التعلم خطوة بخطوة.</p><a class="feature-arrow" href="stage1.html" aria-label="ابدأ المستويات">⟵</a></article>
+<article class="feature"><div class="feature-icon">▣</div><h2 data-ar="دروس منظمة" data-en="Structured lessons">دروس منظمة</h2><p data-ar="محتوى تعليمي مبسط ومقسم إلى مراحل سهلة الفهم." data-en="Clear, bite-sized learning content organised into easy stages.">محتوى تعليمي مبسط ومقسم إلى مراحل سهلة الفهم.</p><a class="feature-arrow" href="stage1.html" aria-label="الدروس">⟵</a></article>
+<article class="feature"><div class="feature-icon">☑</div><h2 data-ar="اختبارات تفاعلية" data-en="Interactive quizzes">اختبارات تفاعلية</h2><p data-ar="اختبر نفسك وتأكد من فهمك لكل كلمة ومهارة." data-en="Test yourself and check your understanding of every word and skill.">اختبر نفسك وتأكد من فهمك لكل كلمة ومهارة.</p><a class="feature-arrow" href="stage2.html" aria-label="الاختبارات">⟵</a></article>
+<article class="feature"><div class="feature-icon">♜</div><h2 data-ar="نظام نقاط وتحفيز" data-en="Points and rewards">نظام نقاط وتحفيز</h2><p data-ar="اجمع النقاط وحقق الإنجازات مع كل تقدم في رحلتك." data-en="Earn points and celebrate achievements as you move forward.">اجمع النقاط وحقق الإنجازات مع كل تقدم في رحلتك.</p><a class="feature-arrow" href="stage3.html" aria-label="الإنجازات">⟵</a></article>
+<article class="feature"><div class="feature-icon">⚙</div><h2 data-ar="إعدادات مخصصة" data-en="Personal settings">إعدادات مخصصة</h2><p data-ar="اختار الثيم واللون المناسب لك واستمتع بتجربة مريحة." data-en="Choose a theme and colour that make learning comfortable.">اختار الثيم واللون المناسب لك واستمتع بتجربة مريحة.</p><button class="feature-arrow" id="openTheme" aria-label="تغيير المظهر" style="background:none;border:0;padding:0">⟵</button></article>
+</section>
+<section class="discover" id="stages"><div class="mouse" aria-hidden="true"></div><div data-ar="اكتشف المزيد" data-en="Discover more">اكتشف المزيد</div><div class="chevron">⌄</div></section>
+<footer class="footer" id="about"><span data-ar="لُغتي — تعلّم، احفظ، تطوّر." data-en="Lughati — Learn, remember, grow.">لُغتي — تعلّم، احفظ، تطوّر.</span></footer>
+</main>
 <script>
-(()=>{const key='lughati-appearance-v1';const colors=[['أزرق','#1687ff'],['أخضر','#13b981'],['بنفسجي','#8b5cf6'],['وردي','#ec4899'],['برتقالي','#f97316'],['أحمر','#ef4444'],['تركواز','#06b6d4'],['أسود فضي','#64748b'],['ذهبي','#d4a017'],['بنفسجي داكن','#6d28d9']];
-let prefs={color:'#1687ff',mode:'auto'};try{prefs={...prefs,...JSON.parse(localStorage.getItem(key)||'{}')}}catch{}
-const apply=()=>{document.documentElement.style.setProperty('--ui-accent',prefs.color);const dark=prefs.mode==='dark'||(prefs.mode==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.body.dataset.lughatiMode=dark?'dark':'light';document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#080f1c':prefs.color)};
-const save=()=>{try{localStorage.setItem(key,JSON.stringify(prefs))}catch{}apply()};
-const b=document.createElement('button');b.id='lughatiThemeButton';b.type='button';b.textContent='🎨 المظهر';b.setAttribute('aria-expanded','false');
-const p=document.createElement('section');p.id='lughatiThemePanel';p.setAttribute('aria-label','إعدادات المظهر');p.innerHTML='<h3>تخصيص المظهر</h3><p>اختار اللون</p><div class="lughati-swatches"></div><p>الخلفية والوضع الليلي</p><div class="lughati-mode"><button type="button" data-mode="auto">حسب الجهاز</button><button type="button" data-mode="dark">دارك مود</button><button type="button" data-mode="light">فاتح</button></div>';
-colors.forEach(([name,color])=>{const s=document.createElement('button');s.type='button';s.className='lughati-swatch';s.title=name;s.setAttribute('aria-label',name);s.style.background=color;s.setAttribute('aria-pressed',String(prefs.color===color));s.onclick=()=>{prefs.color=color;p.querySelectorAll('.lughati-swatch').forEach(x=>x.setAttribute('aria-pressed',String(x===s)));save()};p.querySelector('.lughati-swatches').appendChild(s)});
-p.querySelectorAll('[data-mode]').forEach(x=>{x.onclick=()=>{prefs.mode=x.dataset.mode;save()}});
-b.onclick=()=>{p.classList.toggle('open');b.setAttribute('aria-expanded',String(p.classList.contains('open')))};
-document.addEventListener('click',e=>{if(!p.contains(e.target)&&e.target!==b){p.classList.remove('open');b.setAttribute('aria-expanded','false')}});
-document.body.append(b,p);apply();window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if(prefs.mode==='auto')apply()});
+(()=>{const body=document.body,theme=document.getElementById('themeToggle');let saved='dark';try{saved=localStorage.getItem('lughati-home-theme')||'dark'}catch{}if(saved==='light')body.classList.add('light');theme.addEventListener('click',()=>{body.classList.toggle('light');try{localStorage.setItem('lughati-home-theme',body.classList.contains('light')?'light':'dark')}catch{}});document.getElementById('openTheme').addEventListener('click',()=>theme.click());
+let lang='ar';document.getElementById('langToggle').addEventListener('click',()=>{lang=lang==='ar'?'en':'ar';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';document.querySelectorAll('[data-ar][data-en]').forEach(el=>el.textContent=el.dataset[lang]);document.getElementById('langToggle').textContent=lang==='ar'?'ع / EN':'EN / ع';});
+const letters=[...document.querySelectorAll('.letter')];const phase=Math.random()*Math.PI*2;letters.forEach((el,i)=>{el.style.animationDelay=(-(i*.8+phase%3))+'s'});if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){let angle=phase;function orbitLetters(){angle+=.006;letters.forEach((el,i)=>{const a=angle+i*Math.PI*2/3;const spread=12+Math.abs(Math.sin(angle*.7))*14;el.style.translate=(Math.sin(a)*spread)+'px '+(Math.cos(a)*7)+'px';});requestAnimationFrame(orbitLetters)}requestAnimationFrame(orbitLetters)}
+document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.navlinks a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}));
 })();
 </script>
 </body></html>
