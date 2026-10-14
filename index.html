@@ -24,11 +24,34 @@ footer{border-top:1px solid #142c48;padding:22px 0 30px;color:#8299b7;font-size:
 @media(max-width:850px){.navlinks{gap:15px}.hero{min-height:420px;gap:8px;padding-inline:5px}.art{height:310px}.book{height:52px}.trust-item{gap:8px}.trust-icon{font-size:23px}.trust-item strong{font-size:12px}.trust-item small{font-size:10px}.path-card{padding:20px}.path-copy{max-width:76%}.path-card h3{font-size:21px}.progress-row{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.shell{width:calc(100% - 22px)}header{top:6px}.nav{padding:9px 11px;border-radius:17px;gap:8px;flex-wrap:wrap}.brand{font-size:22px;gap:7px}.brand-icon{width:37px;height:37px;font-size:22px;border-radius:12px}.navlinks{order:3;width:100%;justify-content:space-around;border-top:1px solid #ffffff12;padding-top:4px;font-size:12px}.nav-actions{margin-right:auto}.top-cta{padding:9px 13px;font-size:12px}.icon-btn{width:36px;height:36px}.hero{grid-template-columns:1fr;padding:28px 5px 12px;gap:0}.hero-copy{text-align:center}.eyebrow{font-size:12px}.hero h1{font-size:clamp(35px,9vw,49px);margin:14px 0 10px}.intro{font-size:15px;margin-inline:auto;margin-bottom:18px}.hero-actions{justify-content:center}.art{height:260px;margin-top:4px}.book-stack{width:66%}.book{height:47px;font-size:16px}.cap{top:11%;left:15%}.headphones{right:8%;bottom:9%}.trustbar{grid-template-columns:1fr 1fr;margin:0 0 34px}.trust-item{justify-content:flex-start;padding:14px 12px;border-bottom:1px solid #193452}.trust-item:nth-child(2){border-left:0}.trust-item:nth-child(3),.trust-item:nth-child(4){border-bottom:0}.trust-item strong{font-size:12px}.trust-item small{font-size:10px}.paths{grid-template-columns:1fr;margin:0 0 18px;gap:12px}.path-card{min-height:215px}.path-copy{max-width:75%}.path-art{font-size:94px;left:8px}.progress-row{grid-template-columns:1fr;margin:0 0 30px;gap:12px}.progress-card,.stats-card{padding:16px}.foot-inner{flex-direction:column;text-align:center}.foot-links{gap:16px}.section-head p{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Mobile performance and stability safeguards */
+@media (max-width: 620px) {
+  html { scroll-behavior: auto; }
+  header { top: 0; margin-top: 0 !important; }
+  .nav { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .hero { min-height: auto; padding-top: 22px; gap: 10px; }
+  .art { height: 230px; }
+  .book-stack { filter: none; }
+  .halo { box-shadow: none; }
+  .ring, .spark, .floating-word, .cap, .headphones,
+  .lughati-orb, .pulse { animation: none !important; }
+  .lughati-orb { display: none !important; }
+  .top-cta, .primary { box-shadow: none; }
+  .top-cta:hover, .primary:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Cairo','Inter','sans-serif']},colors:{navy:{800:'#0f172a',900:'#020617'},primary:'#06b6d4',secondary:'#8b5cf6',accent:'#3b82f6'}}}};</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <style id="lughati-premium-dark-identity">
