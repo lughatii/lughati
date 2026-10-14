@@ -290,6 +290,84 @@ button:active, .btn:active, .primary:active, .top-cta:active,
   .cap-svg, .abc-art, .cap-card-art { animation:none!important; transform:none; opacity:1; }
 }
 </style>
+<style id="lughati-programmatic-neon-icons-fix">
+/* Large, readable programmatic ABC badge and refined graduation-cap motion. */
+.path-art.abc-art {
+  width: clamp(190px, 25vw, 285px);
+  height: clamp(120px, 16vw, 175px);
+  left: 12px;
+  bottom: 12px;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(3px, .8vw, 12px);
+  direction: ltr;
+  font-family: Inter, Arial, sans-serif;
+  font-size: clamp(64px, 8vw, 100px);
+  font-weight: 1000;
+  line-height: 1;
+  letter-spacing: -.075em;
+  border: 1px solid rgba(103,232,249,.48);
+  border-radius: 26px;
+  background: linear-gradient(135deg,rgba(8,24,48,.82),rgba(34,18,70,.72));
+  box-shadow: inset 0 1px rgba(255,255,255,.12), 0 0 28px rgba(34,211,238,.16);
+  text-shadow: 0 0 8px rgba(34,211,238,.95),0 0 22px rgba(59,130,246,.75);
+  filter: none;
+  transform: none;
+  overflow: visible;
+}
+.path-art.abc-art span {
+  display: inline-block;
+  position: relative;
+  color: #8be9ff;
+  animation: lughati-abc-bump 2.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.path-art.abc-art span:nth-child(2) { color: #c4a4ff; animation-delay: .12s; }
+.path-art.abc-art span:nth-child(3) { color: #ff91e8; animation-delay: .24s; }
+.cap.cap-svg {
+  width: clamp(88px, 11vw, 132px);
+  height: clamp(78px, 10vw, 115px);
+  font-size: initial;
+  display: grid;
+  place-items: center;
+  transform-origin: 50% 50%;
+  animation: lughati-cap-float 5.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.cap.cap-svg svg { width: 100%; height: 100%; overflow: visible; }
+.path-art.cap-card-art {
+  width: clamp(112px, 13vw, 155px);
+  height: clamp(100px, 12vw, 140px);
+  font-size: initial;
+  display: grid;
+  place-items: center;
+  transform-origin: 50% 50%;
+  animation: lughati-cap-float 5.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.path-art.cap-card-art svg { width: 100%; height: 100%; overflow: visible; }
+@keyframes lughati-abc-bump {
+  0%,100% { transform: translate3d(0,0,0) scale(1); opacity: .88; }
+  28% { transform: translate3d(5px,-3px,0) scale(1.06); opacity: 1; }
+  50% { transform: translate3d(0,1px,0) scale(1.02); opacity: 1; }
+  72% { transform: translate3d(-4px,-2px,0) scale(1.05); opacity: .98; }
+}
+@keyframes lughati-cap-float {
+  0%,100% { transform: perspective(500px) rotateZ(-8deg) rotateY(-5deg) translate3d(0,0,0); opacity: .9; }
+  50% { transform: perspective(500px) rotateZ(8deg) rotateY(5deg) translate3d(0,-7px,0); opacity: 1; }
+}
+@media (max-width:850px) {
+  .path-art.abc-art { width: 145px; height: 105px; left: 8px; bottom: 10px; padding: 8px 10px; gap: 2px; font-size: clamp(49px, 12vw, 67px); border-radius: 20px; }
+  .path-art.abc-art span { animation-duration: 2.6s; }
+  .cap.cap-svg { width: 86px; height: 78px; }
+  .path-art.cap-card-art { width: 105px; height: 96px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .path-art.abc-art span,.cap.cap-svg,.path-art.cap-card-art { animation:none!important; transform:none!important; opacity:1!important; }
+}
+</style>
 </head>
 <body>
 <header class="shell"><div class="nav">
@@ -307,7 +385,7 @@ button:active, .btn:active, .primary:active, .top-cta:active,
 </section>
 <section class="trustbar" id="features" aria-label="مميزات المنصة"><div class="trust-item"><span class="trust-icon">✦</span><div><strong>تعلّم بخطوات بسيطة</strong><small>من الأساسيات للاحتراف</small></div></div><div class="trust-item"><span class="trust-icon">◉</span><div><strong>محتوى تفاعلي</strong><small>تعلّم وجرّب بنفسك</small></div></div><div class="trust-item"><span class="trust-icon">▥</span><div><strong>تقدّم واضح</strong><small>اعرف وصلت لفين</small></div></div><div class="trust-item"><span class="trust-icon">✧</span><div><strong>مسار يناسب هدفك</strong><small>اختار المرحلة المناسبة</small></div></div></section>
 <section id="paths"><div class="section-head"><span class="section-kicker">YOUR NEXT STEP</span><h2>اختار مسارك الآن</h2><p>ابدأ من المكان المناسب ليك، وخلي كل خطوة تقرّبك من هدفك.</p></div>
-<div class="paths"><article class="path-card"><div class="path-copy"><span class="path-label">المسار الأول · للمبتدئين</span><h3>الحروف والكلمات</h3><p>ابدأ من الحروف الإنجليزية، واتدرّج للكلمات الأساسية خطوة بخطوة.</p><button class="primary choose-stage" type="button" data-href="stage1.html">ابدأ التعلّم <span>←</span></button><div class="tag">المرحلة الأولى</div></div><div class="path-art abc-art" aria-label="ABC"><span>a</span><span>b</span><span>c</span></div></article>
+<div class="paths"><article class="path-card"><div class="path-copy"><span class="path-label">المسار الأول · للمبتدئين</span><h3>الحروف والكلمات</h3><p>ابدأ من الحروف الإنجليزية، واتدرّج للكلمات الأساسية خطوة بخطوة.</p><button class="primary choose-stage" type="button" data-href="stage1.html">ابدأ التعلّم <span>←</span></button><div class="tag">المرحلة الأولى</div></div><div class="path-art abc-art" aria-label="ABC"><span>A</span><span>B</span><span>C</span></div></article>
 <article class="path-card purple"><div class="path-copy"><span class="path-label">المسار الثاني · للثانوية العامة</span><h3>الصف الثالث الثانوي</h3><p>ادخل على المحتوى المخصص لطلاب الصف الثالث الثانوي وابدأ المراجعة.</p><button class="primary choose-stage" type="button" data-href="stage3.html">افتح المسار <span>←</span></button><div class="tag">منهج الثانوية العامة</div></div><div class="path-art cap-card-art" aria-hidden="true"><svg viewBox="0 0 120 90" focusable="false"><path d="M5 29 60 6l55 23-55 24L5 29Z" fill="currentColor"/><path d="M27 40v20c17 14 49 14 66 0V40L60 54 27 40Z" fill="currentColor" opacity=".82"/><path d="M110 31v29" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="110" cy="65" r="5" fill="currentColor"/></svg></div></article></div></section>
 <section class="progress-row"><div class="progress-card"><div class="progress-ring"><span>ابدأ</span></div><div><h3>كل خطوة بتفرق</h3><p>ابدأ النهارده، وخلّي تعلّمك عادة يومية صغيرة.</p></div></div><div class="stats-card"><div class="stat"><strong>ABC</strong><span>ابدأ بالحروف</span></div><div class="stat"><strong>∞</strong><span>اتعلّم على مهلك</span></div><div class="stat"><strong>✓</strong><span>تقدّم خطوة خطوة</span></div></div></section>
 </main>
