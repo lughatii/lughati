@@ -187,6 +187,82 @@ button:focus-visible,.btn:focus-visible,.letters button:focus-visible,.options b
 }
 </style>
 
+
+<style id="lughati-game-performance">
+/* Lightweight game-like motion: animate only transform and opacity. */
+html { scroll-behavior: smooth; }
+@keyframes lughati-gpu-pulse {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: .88; }
+  50% { transform: translate3d(0,-2px,0) scale(1.025); opacity: 1; }
+}
+@keyframes lughati-gpu-float {
+  0%, 100% { transform: translate3d(0,0,0); opacity: .86; }
+  50% { transform: translate3d(0,-5px,0); opacity: 1; }
+}
+/* Stop older, expensive decorative animations and keep their appearance static. */
+*, *::before, *::after { scroll-behavior: inherit; }
+.lughati-orb, .spark, .ring, .halo, .book, .floating-word,
+.intro p, .hint-card p, .explanation p, .description-card p,
+.instruction-card p, .helper-card p, .note-card p,
+button, .btn, .primary, .top-cta, .icon-btn, .close-btn,
+.tag, .category, .eyebrow, .letters button, .options button,
+.path-card, .panel, .card, .trust-item, .stat, .gradient-text {
+  animation: none !important;
+}
+.primary, .top-cta, button.primary, .btn.primary {
+  box-shadow: 0 0 0 1px rgba(103,232,249,.14), 0 0 18px rgba(6,182,212,.12) !important;
+  transition: transform .14s ease-out, opacity .14s ease-out !important;
+}
+.letter, .letters button, .abc, .category, .tag, .eyebrow,
+.path-label, .primary, .top-cta, button.primary, .btn.primary {
+  will-change: transform, opacity;
+}
+.letter, .letters button, .abc {
+  text-shadow: 0 0 10px rgba(6,182,212,.28);
+}
+.category, .tag, .eyebrow, .path-label {
+  text-shadow: 0 0 10px rgba(139,92,246,.18);
+}
+button, .btn, .primary, .top-cta, .icon-btn, .close-btn,
+.letters button, .options button, .path-card {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .14s ease-out, opacity .14s ease-out, border-color .14s ease-out !important;
+}
+@media (hover: hover) and (pointer: fine) {
+  button:hover, .btn:hover, .primary:hover, .top-cta:hover,
+  .icon-btn:hover, .close-btn:hover, .letters button:hover,
+  .options button:hover, .path-card:hover {
+    transform: translate3d(0,-2px,0) scale(1.01);
+    opacity: 1;
+  }
+}
+button:active, .btn:active, .primary:active, .top-cta:active,
+.icon-btn:active, .close-btn:active, .letters button:active,
+.options button:active {
+  transform: translate3d(0,1px,0) scale(.985);
+  opacity: .9;
+}
+@media (max-width: 850px) {
+  html { scroll-behavior: auto; }
+  .lughati-orb { display: none !important; }
+  .letter, .letters button, .abc, .category, .tag, .eyebrow,
+  .path-label, .primary, .top-cta, button.primary, .btn.primary {
+    animation: lughati-gpu-pulse 3.8s ease-in-out infinite !important;
+  }
+  .primary, .top-cta, button.primary, .btn.primary {
+    box-shadow: 0 0 14px rgba(6,182,212,.14) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <header class="shell"><div class="nav">
