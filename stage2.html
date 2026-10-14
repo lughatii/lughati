@@ -87,7 +87,28 @@ body:before{content:"";position:fixed;inset:-18%;z-index:-1;pointer-events:none;
 @media(hover:none){.hero:hover,.intro:hover,.panel:hover,.card:hover{transform:none;box-shadow:none}}
 @media(prefers-reduced-motion:reduce){body:before{animation:none}.hero,.intro,.panel,.card,.btn,#lughatiThemeButton,.lughati-swatch{transition:none!important}}
 
-</style></head>
+</style><style id="lughati-mobile-app-redesign">
+:root{--ink:#17202c;--muted:#707987;--line:#e7e9ee;--teal:#e51d35;--paper:#f5f6f9;--brand:#e51d35;--brand-soft:#fff0f2}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.55}
+.top{position:sticky;top:0;z-index:20;padding:14px 16px;background:rgba(255,255,255,.94);color:var(--ink);border-bottom:1px solid var(--line);box-shadow:0 4px 18px rgba(22,30,45,.045);backdrop-filter:blur(16px);font-size:20px}
+main{width:min(100%,900px);padding:16px 13px 30px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#e51d35 0%,#b70e27 100%);color:#fff;border:0;border-radius:25px;padding:24px 19px;box-shadow:0 12px 28px rgba(229,29,53,.17)}
+.hero p,.hero .sub,.hero .muted{color:rgba(255,255,255,.82)}
+.panel,.intro,.card,.cards>*{border-radius:20px}
+.panel{border:1px solid var(--line);box-shadow:0 5px 18px rgba(23,32,44,.045)}
+button,.btn,a.button{transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+button{min-height:44px;border-radius:14px}
+button:active,.btn:active{transform:scale(.98)}
+button:not([class*="secondary"]):not([class*="ghost"]){accent-color:#e51d35}
+a{color:var(--brand)}
+.progress{overflow:hidden;border-radius:99px}
+.cards{gap:12px}
+input,select,textarea{border-radius:13px;max-width:100%}
+@media(max-width:600px){.top{padding:13px 15px;font-size:19px}main{padding:12px 11px 24px}.hero,.intro{padding:20px 16px;border-radius:22px}.panel{padding:15px;border-radius:19px}h1{line-height:1.3;font-size:clamp(23px,6vw,30px)}.cards{grid-template-columns:1fr!important;gap:11px}button{min-height:46px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
 <body><header class="top">لُغتي <span class="muted" style="font-size:12px">· المرحلة الثانية</span></header>
 <main><a class="back" href="index.html">← الرجوع للرئيسية</a>
 <section class="hero"><h1>اتعلّم الكلمة واكتبها</h1><p class="muted" style="margin:0">اسمع الكلمة، اكتبها 3 مرات، وبعدها اختار معناها الصحيح.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">الكلمة 1</span><span id="stageCount">الكتابة 1 من 3</span></div></section>
