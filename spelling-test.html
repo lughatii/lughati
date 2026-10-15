@@ -182,12 +182,15 @@
       function readProgress() {
         try {
           const saved = JSON.parse(localStorage.getItem(PROGRESS_KEY));
+          if (saved && saved.completed === true) {
+            return { index: 0, stage: 1, started: false, completed: true };
+          }
           if (saved && Number.isInteger(saved.index) && saved.index >= 0 &&
               saved.index < words.length && [1, 2, 3].includes(saved.stage)) {
-            return { index: saved.index, stage: saved.stage, started: saved.started === true };
+            return { index: saved.index, stage: saved.stage, started: saved.started === true, completed: false };
           }
         } catch (error) { console.warn('تعذرت قراءة التقدم المحفوظ.', error); }
-        return { index: 0, stage: 1, started: false };
+        return { index: 0, stage: 1, started: false, completed: false };
       }
 
       let state = readProgress();
@@ -231,39 +234,54 @@
       }
 
       function updateProgress() {
-        const percent = Math.round((state.index / words.length) * 100);
+        const percent = state.completed ? 100 : Math.round((state.index / words.length) * 100);
         ui.progressFill.style.width = percent + '%';
         ui.progressCount.textContent = percent + '%';
         ui.progressBar.setAttribute('aria-valuenow', String(percent));
-        ui.progressText.textContent = 'أنجزت ' + state.index + ' من ' + words.length + ' كلمات';
+        ui.progressText.textContent = state.completed
+          ? 'اكتملت مجموعة الكلمات (' + words.length + ' كلمات)'
+          : 'أنجزت ' + state.index + ' من ' + words.length + ' كلمات';
       }
 
       function updateDots() {
-        ui.dots.forEach((dot, i) => dot.classList.toggle('active', i === state.stage - 1));
+        ui.dots.forEach((dot, i) => dot.classList.toggle('active', state.completed || i === state.stage - 1));
       }
 
       function render() {
         const current = words[state.index];
         const isStarted = state.started;
-        ui.wordDisplay.textContent = current.word;
-        ui.wordCounter.textContent = 'الكلمة ' + (state.index + 1) + ' من ' + words.length;
+        ui.wordDisplay.textContent = state.completed ? words[0].word : current.word;
+        ui.wordCounter.textContent = state.completed
+          ? 'اكتملت المجموعة'
+          : 'الكلمة ' + (state.index + 1) + ' من ' + words.length;
         ui.readyStage.style.display = isStarted ? 'none' : 'block';
         ui.inputStage.classList.toggle('visible', isStarted);
-        ui.panelTitle.textContent = isStarted ? 'اكتب الكلمة من ذاكرتك' : 'خلّينا نحفظ كلمة جديدة';
-        ui.instruction.textContent = isStarted
-          ? 'ركّز في أماكن الحروف، ثم اكتب الكلمة واضغط «تحقّق».'
-          : 'استمع إلى الكلمة، ثم اكتبها بنفسك. كل مرحلة تساعدك تعتمد على ذاكرتك أكثر.';
-        ui.eyebrowText.textContent = isStarted ? 'اختبار الإملاء' : 'تدريب المفردات';
+        ui.panelTitle.textContent = state.completed
+          ? 'أحسنت! أنهيت الكلمات كلها 🎉'
+          : (isStarted ? 'اكتب الكلمة من ذاكرتك' : 'خلّينا نحفظ كلمة جديدة');
+        ui.instruction.textContent = state.completed
+          ? 'أنهيت مجموعة الكلمات بنجاح. اضغط «ابدأ الاختبار» لمراجعتها مرة أخرى.'
+          : (isStarted
+            ? 'ركّز في أماكن الحروف، ثم اكتب الكلمة واضغط «تحقّق».'
+            : 'استمع إلى الكلمة، ثم اكتبها بنفسك. كل مرحلة تساعدك تعتمد على ذاكرتك أكثر.');
+        ui.eyebrowText.textContent = state.completed ? 'اكتمل الاختبار' : (isStarted ? 'اختبار الإملاء' : 'تدريب المفردات');
         ui.stageLabel.textContent = ['المرحلة الأولى · تلميح كامل', 'المرحلة الثانية · نصف الحروف', 'المرحلة الثالثة · بدون تلميح'][state.stage - 1];
         ui.hintLayer.textContent = isStarted ? makeHint(current.word, state.stage) : '';
         ui.answerInput.classList.toggle('has-hint', isStarted && state.stage < 3);
         ui.answerInput.value = '';
-        showFeedback(isStarted ? 'اكتب الكلمة ثم اضغط «تحقّق».' : '');
+        showFeedback(state.completed
+          ? 'تم إكمال جميع الكلمات بنجاح.'
+          : (isStarted ? 'اكتب الكلمة ثم اضغط «تحقّق».' : ''));
         updateDots();
         updateProgress();
       }
 
       function startTest() {
+        if (state.completed) {
+          state.index = 0;
+          state.stage = 1;
+          state.completed = false;
+        }
         state.started = true;
         saveProgress();
         render();
@@ -358,7 +376,7 @@
         const confirmed = window.confirm('هل تريد مسح تقدم الكلمات والبدء من جديد؟ سيظل المظهر المختار كما هو.');
         if (!confirmed) return;
         try { localStorage.removeItem(PROGRESS_KEY); } catch (error) { console.warn(error); }
-        state = { index: 0, stage: 1, started: false };
+        state = { index: 0, stage: 1, started: false, completed: false };
         ui.settingsMenu.classList.remove('open');
         ui.settingsToggle.setAttribute('aria-expanded', 'false');
         render();
