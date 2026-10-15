@@ -328,7 +328,7 @@ button:active, .btn:active, .primary:active, .top-cta:active,
 <body><header class="top">لُغتي <span class="muted" style="font-size:12px">· المرحلة الثانية</span></header>
 <main><a class="back" href="index.html">← الرجوع للرئيسية</a>
 <section class="hero"><h1>اتعلّم الكلمة واكتبها</h1><p class="muted" style="margin:0">اسمع الكلمة، اكتبها 3 مرات، وبعدها اختار معناها الصحيح.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">الكلمة 1</span><span id="stageCount">الكتابة 1 من 3</span></div></section>
-<section class="panel" id="lesson"><div class="stage" id="category"></div><div class="emoji" id="emoji"></div><div class="word" id="word"></div><div class="meaning" id="meaning"></div><div class="row" id="preTestControls"><button class="btn" id="hear">🔊 استمع للكلمة</button><button class="btn primary" id="startTest">ابدأ الاختبار</button></div>
+<section class="panel" id="lesson"><div class="stage" id="category"></div><div class="emoji" id="emoji"></div><div class="word" id="word"></div><div class="meaning" id="meaning"></div><div class="row" id="preTestControls"><button class="btn" id="hear">🔊 استمع للكلمة</button><button class="btn primary" id="startTest">ابدأ الاختبار</button><button class="btn" id="clearProgress" style="font-size:12px;padding:7px 10px;min-height:34px">مسح التقدم والبدء من جديد</button></div>
 <div id="writing" class="hidden"><p class="hint" id="instruction">اكتب الكلمة فوق الحروف الشفافة.</p><div class="write-area"><div class="ghost-overlay" id="ghostOverlay" aria-hidden="true"></div><input class="write-input" id="answer" placeholder=" " autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="اكتب الكلمة الإنجليزية"></div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><div class="row"><button class="btn primary" id="check">تحقّق</button><button class="btn hidden" id="nextWrite">المرة التالية ←</button></div></div>
 <div id="quiz" class="hidden"><p class="hint">اختار معنى الكلمة الإنجليزية الصحيح.</p><div class="options" id="options"></div><div class="feedback" id="quizFeedback" role="status" aria-live="polite"></div><div class="row"><button class="btn primary hidden" id="nextWord">الكلمة التالية ←</button></div></div>
 </section></main>
@@ -356,16 +356,60 @@ const words=[
 {en:'Leg',ar:'ساق',emoji:'🦵',group:'الجسم'},
 {en:'Knee',ar:'ركبة',emoji:'🦵',group:'الجسم'}
 ];
-let index=0,attempt=1,phase='write',learned=new Set();
-try{const s=JSON.parse(localStorage.getItem('lughati-stage2-progress')||'{}');index=Number.isInteger(s.index)&&s.index>=0&&s.index<words.length?s.index:0;learned=new Set(Array.isArray(s.learned)?s.learned:[])}catch{}
+let index=0,attempt=1,phase='ready',learned=new Set();
+try {
+  const saved=JSON.parse(localStorage.getItem('lughati-stage2-progress')||'null');
+  if(saved && typeof saved==='object'){
+    if(Number.isInteger(saved.index)&&saved.index>=0&&saved.index<words.length) index=saved.index;
+    if(Number.isInteger(saved.attempt)&&saved.attempt>=1&&saved.attempt<=3) attempt=saved.attempt;
+    if(['ready','write','quiz'].includes(saved.phase)) phase=saved.phase;
+    if(Array.isArray(saved.learned)) learned=new Set(saved.learned.filter(n=>Number.isInteger(n)&&n>=0&&n<words.length));
+  }
+}catch{}
 const $=id=>document.getElementById(id);
-function save(){try{localStorage.setItem('lughati-stage2-progress',JSON.stringify({index,learned:[...learned]}))}catch{}}
+function save(){
+  try{localStorage.setItem('lughati-stage2-progress',JSON.stringify({index,attempt,phase,learned:[...learned]}))}
+  catch(error){console.warn('تعذر حفظ تقدم الطالب:',error)}
+}
 function speak(){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(words[index].en);u.lang='en-US';u.rate=.8;speechSynthesis.speak(u)}
-function drawTrace(){const w=words[index].en;let hint='';if(attempt===1){hint=w;}else if(attempt===2){const chars=[...w];const positions=chars.map((ch,i)=>/[a-z]/i.test(ch)?i:-1).filter(i=>i>=0);for(let i=positions.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[positions[i],positions[j]]=[positions[j],positions[i]];}const reveal=new Set(positions.slice(0,Math.ceil(positions.length/2)));hint=chars.map((ch,i)=>/[a-z]/i.test(ch)?(reveal.has(i)?ch:' '):ch).join('');}else{hint='';}$('ghostOverlay').textContent=hint;$('stageCount').textContent='الكتابة '+attempt+' من 3';$('instruction').textContent=attempt===1?'المرة الأولى: الحروف الشفافة تساعدك على كتابة الكلمة.':attempt===2?'المرة الثانية: يظهر نصف الحروف عشوائيًا.':'المرة الثالثة: اكتب الكلمة من الذاكرة دون تلميح.';$('category').classList.toggle('hidden',attempt===3);$('emoji').classList.toggle('hidden',attempt===3);$('word').classList.toggle('hidden',phase==='write');$('meaning').classList.toggle('hidden',attempt===3);$('ghostOverlay').classList.toggle('hidden',attempt===3);}
-function render(){const w=words[index];phase='ready';attempt=1;$('category').textContent='قسم '+w.group;$('emoji').textContent=w.emoji;$('word').textContent=w.en;$('meaning').textContent=w.ar;$('category').classList.remove('hidden');$('emoji').classList.remove('hidden');$('word').classList.remove('hidden');$('meaning').classList.remove('hidden');$('hear').classList.remove('hidden');$('startTest').classList.remove('hidden');$('writing').classList.add('hidden');$('ghostOverlay').classList.remove('hidden');$('count').textContent='الكلمة '+(index+1)+' من '+words.length;$('progress').style.width=(learned.size/words.length*100)+'%';$('quiz').classList.add('hidden');$('feedback').textContent='';$('answer').value='';$('answer').disabled=false;$('check').disabled=false;$('check').classList.remove('hidden');$('nextWrite').classList.add('hidden');drawTrace();save()}
-function checkWriting(){if(phase!=='write')return;const entered=$('answer').value.trim().replace(/\s+/g,'').toLowerCase();if(entered!==words[index].en.toLowerCase()){$('feedback').textContent='لسه مش مظبوطة، جرّب تاني.';$('feedback').style.color='#a85b20';return} $('feedback').textContent='صح!';$('check').classList.add('hidden');if(attempt<3){attempt++;$('answer').value='';$('feedback').textContent='';$('check').classList.remove('hidden');drawTrace();$('answer').focus()}else{phase='quiz';$('answer').value='';$('writing').classList.add('hidden');$('quiz').classList.remove('hidden');makeOptions();$('quizFeedback').textContent='أحسنت! تم حفظ الكلمة. اختر معناها الصحيح.';$('quizFeedback').style.color='#087f70'}}
-function makeOptions(){const correct=words[index];const ids=new Set([index]);while(ids.size<4)ids.add(Math.floor(Math.random()*words.length));const choices=[...ids].sort(()=>Math.random()-.5);$('options').textContent='';$('quizFeedback').textContent='';$('nextWord').classList.add('hidden');choices.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(phase!=='quiz')return;if(i===index){phase='advance';$('word').classList.remove('hidden');b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('quizFeedback').textContent='إجابة صحيحة!';$('quizFeedback').style.color='#087f70';learned.add(index);save();$('progress').style.width=(learned.size/words.length*100)+'%';$('answer').value='';index=(index+1)%words.length;setTimeout(render,350)}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('quizFeedback').textContent='جرّب تاني، ركّز في معنى الاختيار.';$('quizFeedback').style.color='#a85b20'}};$('options').appendChild(b)})}
-$('hear').onclick=speak;$('startTest').onclick=()=>{phase='write';attempt=1;$('word').classList.add('hidden');$('hear').classList.add('hidden');$('startTest').classList.add('hidden');$('writing').classList.remove('hidden');$('answer').value='';$('feedback').textContent='';drawTrace();$('answer').focus()};$('check').onclick=checkWriting;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWriting()});$('nextWrite').onclick=()=>{};$('nextWord').onclick=()=>{};render();
+function drawTrace(){const w=words[index].en;let hint='';if(attempt===1){hint=w;}else if(attempt===2){const chars=[...w];const positions=chars.map((ch,i)=>/[a-z]/i.test(ch)?i:-1).filter(i=>i>=0);for(let i=positions.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[positions[i],positions[j]]=[positions[j],positions[i]];}const reveal=new Set(positions.slice(0,Math.ceil(positions.length/2)));hint=chars.map((ch,i)=>/[a-z]/i.test(ch)?(reveal.has(i)?ch:' '):ch).join('');}else{hint='';}$('ghostOverlay').textContent=hint;$('stageCount').textContent='الكتابة '+attempt+' من 3';$('instruction').textContent=attempt===1?'المرة الأولى: الحروف الشفافة تساعدك على كتابة الكلمة.':attempt===2?'المرة الثانية: يظهر نصف الحروف عشوائيًا.':'المرة الثالثة: اكتب الكلمة من الذاكرة دون تلميح.';$('category').classList.toggle('hidden',attempt===3);$('emoji').classList.toggle('hidden',attempt===3);$('word').classList.toggle('hidden',phase!=='ready');$('meaning').classList.toggle('hidden',attempt===3);$('ghostOverlay').classList.toggle('hidden',attempt===3);}
+function render(reset=false){
+  if(reset){phase='ready';attempt=1;}
+  const w=words[index];
+  $('category').textContent='قسم '+w.group;
+  $('emoji').textContent=w.emoji;
+  $('word').textContent=w.en;
+  $('meaning').textContent=w.ar;
+  $('category').classList.remove('hidden');
+  $('emoji').classList.remove('hidden');
+  $('meaning').classList.remove('hidden');
+  $('count').textContent='الكلمة '+(index+1)+' من '+words.length;
+  $('progress').style.width=(learned.size/words.length*100)+'%';
+  $('answer').disabled=false;
+  $('check').disabled=false;
+  $('check').classList.remove('hidden');
+  $('nextWrite').classList.add('hidden');
+  $('feedback').textContent='';
+  $('answer').value='';
+  $('writing').classList.toggle('hidden',phase!=='write');
+  $('quiz').classList.toggle('hidden',phase!=='quiz');
+  $('word').classList.toggle('hidden',phase!=='ready');
+  $('hear').classList.toggle('hidden',phase!=='ready');
+  $('startTest').classList.toggle('hidden',phase!=='ready');
+  $('clearProgress').classList.toggle('hidden',phase!=='ready');
+  $('ghostOverlay').classList.remove('hidden');
+  drawTrace();
+  if(phase==='quiz'){
+    $('word').classList.add('hidden');
+    makeOptions();
+    $('quizFeedback').textContent='أحسنت! تم حفظ الكلمة. اختر معناها الصحيح.';
+    $('quizFeedback').style.color='#087f70';
+  }
+  save();
+}
+function checkWriting(){if(phase!=='write')return;const entered=$('answer').value.trim().replace(/\s+/g,'').toLowerCase();if(entered!==words[index].en.toLowerCase()){$('feedback').textContent='لسه مش مظبوطة، جرّب تاني.';$('feedback').style.color='#a85b20';return} $('feedback').textContent='صح!';$('check').classList.add('hidden');if(attempt<3){attempt++;$('answer').value='';$('feedback').textContent='';$('check').classList.remove('hidden');drawTrace();save();$('answer').focus()}else{phase='quiz';$('answer').value='';$('writing').classList.add('hidden');$('quiz').classList.remove('hidden');save();makeOptions();$('quizFeedback').textContent='أحسنت! تم حفظ الكلمة. اختر معناها الصحيح.';$('quizFeedback').style.color='#087f70'}}
+function makeOptions(){const correct=words[index];const ids=new Set([index]);while(ids.size<4)ids.add(Math.floor(Math.random()*words.length));const choices=[...ids].sort(()=>Math.random()-.5);$('options').textContent='';$('quizFeedback').textContent='';$('nextWord').classList.add('hidden');choices.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(phase!=='quiz')return;if(i===index){phase='advance';$('word').classList.remove('hidden');b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('quizFeedback').textContent='إجابة صحيحة!';$('quizFeedback').style.color='#087f70';learned.add(index);$('progress').style.width=(learned.size/words.length*100)+'%';$('answer').value='';index=(index+1)%words.length;attempt=1;phase='ready';save();setTimeout(()=>render(),350)}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('quizFeedback').textContent='جرّب تاني، ركّز في معنى الاختيار.';$('quizFeedback').style.color='#a85b20'}};$('options').appendChild(b)})}
+$('hear').onclick=speak;$('startTest').onclick=()=>{phase='write';attempt=1;$('word').classList.add('hidden');$('hear').classList.add('hidden');$('startTest').classList.add('hidden');$('writing').classList.remove('hidden');$('answer').value='';$('feedback').textContent='';drawTrace();$('clearProgress').classList.add('hidden');save();$('answer').focus()};$('clearProgress').onclick=()=>{if(confirm('هل تريد مسح التقدم والبدء من جديد؟')){localStorage.clear();location.reload()}};$('check').onclick=checkWriting;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWriting()});$('nextWrite').onclick=()=>{};$('nextWord').onclick=()=>{};render();
 })();
 </script>
 
