@@ -458,7 +458,18 @@ body.lughati-dark .muted,body.lughati-dark .hint,body.lughati-dark .caption,body
 body.lughati-dark .feedback,body.lughati-dark [role="status"]{color:#eaf1ff}
 body.lughati-dark .options button{background:#101c30;color:#f2f6ff;border-color:#30435f}
 body.lughati-dark input,body.lughati-dark select,body.lughati-dark textarea{background:#07101e!important;color:#f2f6ff!important;border-color:#30435f!important}
-body.lughati-dark input::placeholder,body.lughati-dark textarea::placeholder{color:rgba(255,255,255,.3)!important}body.lughati-dark .ghost-overlay{color:rgba(255,255,255,.3)!important}
+body.lughati-dark input::placeholder,body.lughati-dark textarea::placeholder{color:rgba(255,255,255,.3)!important}
+body.lughati-dark .ghost-overlay{
+  color:rgba(255,255,255,.38)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.38)!important;
+  text-shadow:0 0 5px rgba(103,232,249,.42),0 0 12px rgba(56,189,248,.22)!important;
+  opacity:1!important;
+}
+html.lughati-light body .ghost-overlay{
+  color:rgba(15,23,42,.32)!important;
+  -webkit-text-fill-color:rgba(15,23,42,.32)!important;
+  text-shadow:none!important;
+}
 body.lughati-dark .btn:disabled{opacity:.55;color:#a8bad4!important}
 
 `;document.head.appendChild(style)})();</script><script id="lughati-motion-theme">(()=>{const root=document.documentElement;let mode='dark';try{mode=localStorage.getItem('lughati-home-theme')||'dark'}catch{}const apply=()=>{const light=mode==='light';root.classList.toggle('lughati-light',light);document.body.classList.add('lughati-neon');let b=document.getElementById('lughati-theme-toggle');if(!b){b=document.createElement('button');b.id='lughati-theme-toggle';b.className='lughati-theme-toggle';b.type='button';b.addEventListener('click',()=>{mode=mode==='light'?'dark':'light';try{localStorage.setItem('lughati-home-theme',mode)}catch{}apply()})}b.textContent=light?'☾ الوضع الداكن':'☼ الوضع الفاتح';b.setAttribute('aria-label',light?'تفعيل الوضع الداكن':'تفعيل الوضع الفاتح');const slot=document.querySelector('.nav-actions,.navlinks,.nav,.top');if(slot){if(slot.classList.contains('nav-actions'))slot.prepend(b);else slot.appendChild(b)}else document.body.appendChild(b)};apply();if(!document.querySelector('.lughati-orb')){for(const color of ['cyan','violet']){const orb=document.createElement('span');orb.className='lughati-orb '+color;orb.setAttribute('aria-hidden','true');document.body.appendChild(orb)}}document.querySelectorAll('button,a').forEach(el=>{if(/سماعة|استمع|نطق|🔊|🎧/.test(el.textContent||''))el.classList.add('lughati-speaker')})})();</script>
