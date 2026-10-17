@@ -545,7 +545,7 @@ function speak(){
    u.onerror=()=>{
      $('feedback').textContent='تعذّر تشغيل الصوت. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';
    };
-   u.onend=()=>{const t=String(w.ar||'').trim();if(!t)return;const av=synth.getVoices().filter(v=>/^ar([_-]|$)/i.test(v.lang||''));const v=av.find(x=>/^ar[-_]EG$/i.test(x.lang||''))||av[0];const ar=new SpeechSynthesisUtterance(t);ar.lang=v?v.lang:'ar-EG';ar.rate=0.9;if(v)ar.voice=v;synth.speak(ar);};
+   u.onend=()=>{const t=String(w.ar||'').trim();if(!t)return;const av=synth.getVoices().filter(v=>/^ar([_-]|$)/i.test(v.lang||''));const v=av.find(x=>/^ar[-_]EG$/i.test(x.lang||''))||av[0];const ar=new SpeechSynthesisUtterance(t);ar.lang=v?v.lang:'ar-EG';ar.rate=0.9;if(v)ar.voice=v;ar.onend=()=>{const arAgain=new SpeechSynthesisUtterance(t);arAgain.lang=v?v.lang:'ar-EG';arAgain.rate=0.9;if(v)arAgain.voice=v;synth.speak(arAgain);};synth.speak(ar);};
    synth.speak(u);
  };
  const voices=synth.getVoices();
