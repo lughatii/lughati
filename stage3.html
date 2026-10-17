@@ -451,39 +451,51 @@ function load(){try{const s=JSON.parse(localStorage.getItem(STORE)||'null');if(!
 function showOnly(id){['preTestControls','writing','sentenceStage','scenarioStage','quiz','completeStage'].forEach(k=>$(k).classList.toggle('hidden',k!==id));}
 function speak(){
  if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
-   $('feedback').textContent='المتصفح لا يدعم النطق الصوتي. جرّب متصفح Chrome محدّثًا.';
+   $('feedback').textContent='المتصفح لا يدعم النطق الصوتي. جرّب تحديث Chrome.';
    return;
  }
  const synth=window.speechSynthesis;
  synth.cancel();
  const w=words[index];
- // زر الاستماع ينطق الكلمة الإنجليزية فقط، ولا يخلط معها الترجمة العربية.
- const text=String(w.spoken || w.en || '').replace(/\s*\/\s*/g, ', ').trim();
+ // جرّب صوتًا إنجليزيًا مصريًا إن كان مثبتًا، وإلا استخدم أفضل صوت إنجليزي متاح.
+ const text=String(w.spoken || w.en || '').replace(/\\s*\\/\\s*/g, ', ').trim();
  if(!text) return;
+ let started=false;
  const speakNow=()=>{
-   synth.cancel();
-   const u=new SpeechSynthesisUtterance(text);
-   u.lang='en-US';
-   u.rate=0.9;
-   u.pitch=1;
+   if(started) return;
+   started=true;
    const voices=synth.getVoices();
-   const englishVoices=voices.filter(v=>/^en(-|_)/i.test(v.lang || ''));
-   const preferred=englishVoices.find(v=>/^en-US$/i.test(v.lang)) ||
-                   englishVoices.find(v=>/^en-GB$/i.test(v.lang)) ||
-                   englishVoices[0];
+   const englishVoices=voices.filter(v=>/^en([_-]|$)/i.test(v.lang || ''));
+   const preferred=
+     englishVoices.find(v=>/^en[-_]EG$/i.test(v.lang || '')) ||
+     englishVoices.find(v=>/egypt|egyptian|masri/i.test((v.name || '')+' '+(v.lang || ''))) ||
+     englishVoices.find(v=>/^en[-_]US$/i.test(v.lang || '')) ||
+     englishVoices.find(v=>/^en[-_]GB$/i.test(v.lang || '')) ||
+     englishVoices[0];
+   const u=new SpeechSynthesisUtterance(text);
+   u.lang=preferred ? preferred.lang : 'en-US';
+   u.rate=0.86;
+   u.pitch=1;
    if(preferred) u.voice=preferred;
-   u.onerror=()=>{ $('feedback').textContent='تعذّر تشغيل النطق. تأكد من تفعيل صوت إنجليزي على جهازك.'; };
+   u.onerror=()=>{
+     $('feedback').textContent='تعذّر تشغيل الصوت. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';
+   };
    synth.speak(u);
  };
- if(synth.getVoices().length){
+ const voices=synth.getVoices();
+ if(voices.length){
    speakNow();
  }else{
-   synth.addEventListener('voiceschanged',function onVoicesChanged(){
+   const onVoicesChanged=()=>{
      synth.removeEventListener('voiceschanged',onVoicesChanged);
      speakNow();
-   },{once:true});
-   // بعض متصفحات الهاتف لا تطلق voiceschanged إلا بعد طلب النطق.
-   setTimeout(()=>{if(!synth.speaking && !synth.pending) speakNow();},250);
+   };
+   synth.addEventListener('voiceschanged',onVoicesChanged);
+   // بعض أجهزة الهاتف لا تُحمّل قائمة الأصوات إلا بعد مهلة قصيرة.
+   setTimeout(()=>{
+     synth.removeEventListener('voiceschanged',onVoicesChanged);
+     speakNow();
+   },700);
  }
 }
 function drawTrace(){const w=words[index].en;let hint='';if(attempt===1)hint=w;else if(attempt===2){const chars=[...w],pos=chars.map((c,i)=>/[a-z]/i.test(c)?i:-1).filter(i=>i>=0);for(let i=pos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pos[i],pos[j]]=[pos[j],pos[i]];}const reveal=new Set(pos.slice(0,Math.ceil(pos.length*.58)));hint=chars.map((c,i)=>/[a-z]/i.test(c)?(reveal.has(i)?c:' '):c).join('');} $('ghostOverlay').textContent=hint;$('stageCount').textContent='الكتابة '+attempt+' من 3';$('instruction').textContent=attempt===1?'المرحلة 1: اكتب الكلمة فوق الحروف الشفافة.':attempt===2?'المرحلة 2: اكتب الكلمة بمساعدة بعض الحروف.':'المرحلة 3: اكتب الكلمة من الذاكرة دون تلميح.';$('ghostOverlay').classList.toggle('hidden',attempt===3);}
