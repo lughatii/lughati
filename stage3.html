@@ -336,6 +336,15 @@ body.lughati-dark .ghost-overlay{color:rgba(226,232,240,.52)!important;-webkit-t
 #wordNavigation .btn:disabled{opacity:.42;cursor:not-allowed;transform:none;box-shadow:none!important}
 @media(max-width:420px){#wordNavigation .btn{flex:1 1 135px;min-width:0}}
 </style>
+<style id="sentence-choice-quiz-style">
+.quiz-sentence-card{margin:18px 0;padding:clamp(16px,4vw,24px);border:1px solid rgba(6,182,212,.28);border-radius:18px;background:linear-gradient(145deg,rgba(6,182,212,.09),rgba(15,23,42,.55));text-align:center}
+.quiz-sentence{margin:0;color:#f8fafc;font-size:clamp(20px,4.5vw,28px);font-weight:800;line-height:1.8;overflow-wrap:anywhere}
+.quiz-arabic{margin:12px 0;color:#a8e8f3;font-size:clamp(16px,3.8vw,20px);line-height:1.9}
+.quiz-audio{margin-top:4px}
+#options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#options .btn{min-width:0;overflow-wrap:anywhere;white-space:normal}
+@media(max-width:480px){#options{grid-template-columns:1fr}.quiz-sentence-card{padding:15px 12px}}
+</style>
 </head>
 <body><header class="top">لُغتي</header>
 <main><a class="back" href="index.html">← الرجوع للرئيسية</a>
@@ -377,7 +386,11 @@ body.lughati-dark .ghost-overlay{color:rgba(226,232,240,.52)!important;-webkit-t
     <div class="stage" id="quizHeading">اختبار المستوى</div>
     <p class="hint" id="quizInstructions">جاوب عن 5 أسئلة. لازم تجيب 4 صح على الأقل للانتقال للمستوى التالي.</p>
     <div class="caption"><span id="quizCounter">السؤال 1 من 5</span><span id="timer">الوقت: 02:00</span></div>
-    <div class="word" id="quizWord" style="font-size:clamp(26px,7vw,38px)"></div>
+    <div class="quiz-sentence-card">
+      <p class="quiz-sentence" id="quizSentence" dir="ltr">The writer uses ______ in the article.</p>
+      <p class="quiz-arabic" id="quizArabic" dir="rtl"></p>
+      <button class="btn quiz-audio" id="speakQuizSentence" type="button" aria-label="استمع إلى الجملة">🔊 استمع للجملة</button>
+    </div>
     <div class="options" id="options"></div>
     <div class="feedback" id="quizFeedback" role="status" aria-live="polite"></div>
     <div class="row"><button class="btn primary hidden" id="nextQuestion" type="button">السؤال التالي ←</button></div>
@@ -573,7 +586,51 @@ function checkWriting(){if(phase!=='write')return;const got=$('answer').value.tr
 function checkSentence(){if(phase!=='sentence')return;const text=$('sentenceAnswer').value.trim(),tokens=text.split(/\s+/).filter(Boolean),hasWord=new RegExp('(^|[^a-z])'+words[index].en.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^a-z]|$)','i').test(text);if(tokens.length<3||!hasWord){$('sentenceFeedback').textContent='اكتب جملة من 3 كلمات على الأقل، وتأكد إنها تحتوي على "'+words[index].en+'".';$('sentenceFeedback').style.color='#a85b20';return;}phase='scenario';render();save();}
 function renderScenario(){const w=words[index],choices=[{text:w.en,ok:true},...Array.from(new Set(words.filter((x,i)=>i!==index).sort(()=>Math.random()-.5).slice(0,3).map(x=>({text:x.en,ok:false}))))];choices.sort(()=>Math.random()-.5);$('scenarioPrompt').textContent='موقف عملي: أنت بتكتب فقرة عن «'+w.ar+'». اختار الكلمة الإنجليزية اللي هتستخدمها في السياق ده.';$('scenarioFeedback').textContent='';$('scenarioOptions').textContent='';choices.forEach(c=>{const b=document.createElement('button');b.className='btn';b.textContent=c.text;b.onclick=()=>{if(c.ok){$('scenarioFeedback').textContent='إجابة صحيحة! كده استخدمت الكلمة في سياق عملي.';$('scenarioFeedback').style.color='#087f70';[...$('scenarioOptions').children].forEach(x=>x.disabled=true);learned=[...new Set([...learned,index])];setTimeout(()=>startLevelTest(),450);}else{$('scenarioFeedback').textContent='مش دي الأنسب للسياق. جرّب اختيار تاني.';$('scenarioFeedback').style.color='#a85b20';b.disabled=true;}save();};$('scenarioOptions').appendChild(b);});}
 function startLevelTest(){clearInterval(timerId);phase='quiz';testQuestions=[];const pool=words.map((w,i)=>i);for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}testQuestions=pool.slice(0,5);if(testQuestions.length<5)while(testQuestions.length<5)testQuestions.push(Math.floor(Math.random()*words.length));questionIndex=0;correctAnswers=0;timeLeft=secondsForLevel(level);render();timerId=setInterval(()=>{timeLeft--; $('timer').textContent='الوقت: '+formatTime(timeLeft);save();if(timeLeft<=0){clearInterval(timerId);finishLevel(true);}},1000);}
-function renderQuiz(){if(!testQuestions.length)testQuestions=[index,...Array.from({length:4},()=>Math.floor(Math.random()*words.length))];$('quizHeading').textContent='اختبار المستوى '+level+' · تحدي الوقت';$('quizInstructions').textContent='5 أسئلة · لازم 4 إجابات صحيحة على الأقل للنجاح.';$('quizCounter').textContent='السؤال '+(questionIndex+1)+' من 5';$('timer').textContent='الوقت: '+formatTime(timeLeft);const target=words[testQuestions[questionIndex]];$('quizWord').textContent=target.en;$('quizFeedback').textContent='';$('nextQuestion').classList.add('hidden');$('retryLevel').classList.add('hidden');answered=false;const ids=new Set([testQuestions[questionIndex]]);while(ids.size<4)ids.add(Math.floor(Math.random()*words.length));const opts=[...ids].sort(()=>Math.random()-.5);$('options').textContent='';opts.forEach(i=>{const b=document.createElement('button');b.className='btn';b.textContent=words[i].ar;b.onclick=()=>{if(answered)return;answered=true;[...$('options').children].forEach(x=>x.disabled=true);if(i===testQuestions[questionIndex]){correctAnswers++;b.style.background='#d9f7e8';b.style.borderColor='#087f70';$('quizFeedback').textContent='صح!';$('quizFeedback').style.color='#087f70';}else{b.style.background='#fde8e5';b.style.borderColor='#b85a4a';$('quizFeedback').textContent='الإجابة الصحيحة: '+target.ar;$('quizFeedback').style.color='#a85b20';}if(questionIndex<4){$('nextQuestion').classList.remove('hidden');}else{ $('nextQuestion').textContent='عرض النتيجة';$('nextQuestion').classList.remove('hidden');}save();};$('options').appendChild(b);});}
+function quizSentenceFor(target){
+ return {english:'The writer uses ______ in the article.',arabic:'يستخدم الكاتب التعبير «'+String(target.ar||'')+'» في المقال.'};
+}
+function speakQuizSentence(){
+ if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){
+   $('quizFeedback').textContent='المتصفح لا يدعم النطق الصوتي.'; return;
+ }
+ const target=words[testQuestions[questionIndex]], word=String(target.en||'').replace(/\s*\/\s*/g,' / ');
+ const sentence=quizSentenceFor(target).english;
+ const text=answered?sentence.replace('______',word):sentence.replace('______','blank');
+ const synth=window.speechSynthesis; synth.cancel();
+ const utterance=new SpeechSynthesisUtterance(text), voices=synth.getVoices();
+ const english=voices.filter(v=>/^en([_-]|$)/i.test(v.lang||''));
+ const voice=english.find(v=>/^en[-_]EG$/i.test(v.lang||''))||english.find(v=>/egypt|egyptian|masri/i.test((v.name||'')+' '+(v.lang||'')))||english.find(v=>/^en[-_]US$/i.test(v.lang||''))||english.find(v=>/^en[-_]GB$/i.test(v.lang||''))||english[0];
+ utterance.lang=voice?voice.lang:'en-US'; utterance.rate=.86; if(voice)utterance.voice=voice; synth.speak(utterance);
+}
+function renderQuiz(){
+ if(!testQuestions.length)testQuestions=[index,...Array.from({length:4},()=>Math.floor(Math.random()*words.length))];
+ $('quizHeading').textContent='اختبار المستوى '+level+' · أكمل الجملة';
+ $('quizInstructions').textContent='اقرأ الجملة ومعناها بالعربي، واختار الكلمة المناسبة من 4 اختيارات. لازم 4 إجابات صحيحة على الأقل للنجاح.';
+ $('quizCounter').textContent='السؤال '+(questionIndex+1)+' من 5'; $('timer').textContent='الوقت: '+formatTime(timeLeft);
+ const target=words[testQuestions[questionIndex]], sentence=quizSentenceFor(target);
+ $('quizSentence').textContent=sentence.english; $('quizArabic').textContent=sentence.arabic;
+ $('quizFeedback').textContent=''; $('nextQuestion').classList.add('hidden'); $('retryLevel').classList.add('hidden');
+ $('nextQuestion').textContent=questionIndex<4?'السؤال التالي ←':'عرض النتيجة';
+ $('speakQuizSentence').disabled=false; $('speakQuizSentence').onclick=speakQuizSentence; answered=false;
+ const ids=new Set([testQuestions[questionIndex]]);
+ while(ids.size<Math.min(4,words.length)){const randomIndex=Math.floor(Math.random()*words.length);if(randomIndex!==testQuestions[questionIndex])ids.add(randomIndex);}
+ const opts=[...ids].sort(()=>Math.random()-.5); $('options').textContent='';
+ opts.forEach(i=>{
+  const b=document.createElement('button');b.className='btn';b.type='button';b.textContent=words[i].en;
+  b.onclick=()=>{
+   if(answered)return; answered=true; [...$('options').children].forEach(x=>x.disabled=true);
+   if(i===testQuestions[questionIndex]){
+    correctAnswers++;b.style.background='#0b6657';b.style.borderColor='#34d399';
+    $('quizFeedback').textContent='إجابة صحيحة! '+target.en+' = '+target.ar;$('quizFeedback').style.color='#6ee7b7';
+   }else{
+    b.style.background='#7f1d1d';b.style.borderColor='#f87171';
+    $('quizFeedback').textContent='الإجابة الصحيحة: '+target.en+' — '+target.ar;$('quizFeedback').style.color='#fca5a5';
+   }
+   $('nextQuestion').classList.remove('hidden');save();
+  };
+  $('options').appendChild(b);
+ });
+}
 function finishLevel(timeout=false){clearInterval(timerId);const passed=!timeout&&correctAnswers>=4;levelPassed=passed;phase='complete';$('quiz').classList.add('hidden');$('completeStage').classList.remove('hidden');$('preTestControls').classList.add('hidden');$('writing').classList.add('hidden');$('sentenceStage').classList.add('hidden');$('scenarioStage').classList.add('hidden');$('completeTitle').textContent=passed?(level>=100?'أتممت المستويات الـ100!':'نجحت في المستوى '+level+'!'):'لم تجتز الاختبار هذه المرة';$('completeMessage').textContent=(timeout?'انتهى الوقت. ':'')+'نتيجتك '+correctAnswers+'/5. '+(passed?'كسبت 10 نقاط لُغتي.':'تحتاج إلى 4 إجابات صحيحة على الأقل. أعد الاختبار وراجع الكلمات.');$('continueBtn').classList.toggle('hidden',!passed);$('retryLevel').classList.toggle('hidden',passed);$('nextQuestion').classList.add('hidden');$('continueBtn').textContent=level>=100?'إعادة الرحلة من البداية':'ابدأ المستوى التالي ←';save();}
 function nextLevel(){if(!levelPassed)return;if(level>=100){level=1;index=0;learned=[];}else{level++;index=(index+1)%words.length;}levelPassed=false;attempt=1;phase='ready';render();}
 $('hear').onclick=speak;$('startTest').onclick=startTraining;$('backToWord').onclick=()=>{clearInterval(timerId);phase='ready';attempt=1;render();window.scrollTo({top:0,behavior:'smooth'});};$('previousWord').onclick=()=>{if(index<=0)return;clearInterval(timerId);index--;attempt=1;phase='ready';levelPassed=false;render();window.scrollTo({top:0,behavior:'smooth'});};$('skipWord').onclick=()=>{clearInterval(timerId);index=(index+1)%words.length;attempt=1;phase='ready';levelPassed=false;render();window.scrollTo({top:0,behavior:'smooth'});};$('check').onclick=checkWriting;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWriting();});$('checkSentence').onclick=checkSentence;$('sentenceAnswer').addEventListener('keydown',e=>{if(e.key==='Enter')checkSentence();});$('nextQuestion').onclick=()=>{if(!answered)return;if(questionIndex<4){questionIndex++;renderQuiz();save();}else finishLevel(false,false);};$('retryLevel').onclick=()=>startLevelTest();$('continueBtn').onclick=nextLevel;load();if(phase==='write'){phase='ready';}if(phase==='quiz'){if(!testQuestions.length)testQuestions=[index,index,index,index,index];render();timerId=setInterval(()=>{timeLeft--; $('timer').textContent='الوقت: '+formatTime(timeLeft);save();if(timeLeft<=0){clearInterval(timerId);finishLevel(true,true);}},1000);}else render();
