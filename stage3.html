@@ -458,7 +458,7 @@ function speak(){
  synth.cancel();
  const w=words[index];
  // جرّب صوتًا إنجليزيًا مصريًا إن كان مثبتًا، وإلا استخدم أفضل صوت إنجليزي متاح.
- const text=String(w.spoken || w.en || '').replace(/\\s*\\/\\s*/g, ', ').trim();
+ const text=String(w.spoken || w.en || '').replace(/\s*\/\s*/g, ', ').trim();
  if(!text) return;
  let started=false;
  const speakNow=()=>{
