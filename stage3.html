@@ -522,7 +522,7 @@ function speak(){
  const synth=window.speechSynthesis;
  synth.cancel();
  const w=words[index];
- const text=String(w.spoken || w.en || '').replace(/\\s*\\/\\s*/g, ', ').trim();
+ const text=String(w.spoken || w.en || '').replace(/\s*\/\s*/g, ', ').trim();
  if(!text) return;
  let started=false;
  const speakNow=()=>{
