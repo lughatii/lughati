@@ -374,52 +374,59 @@ button:active, .btn:active, .primary:active, .top-cta:active,
 (()=> {
 'use strict';
 const words=[
-
-{en:"accompany",ar:"يرافق",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"indicate",ar:"يشير إلى",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"migration",ar:"هجرة",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"amphibious",ar:"برمائي",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"intensify",ar:"يكثّف",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"mitigate",ar:"يخفّف",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"expansion",ar:"توسّع",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"large-scale",ar:"واسع النطاق",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"phenomenon",ar:"ظاهرة",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"expose",ar:"يكشف، يعرّض لـ",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"megacities",ar:"مدن عملاقة",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"potential",ar:"قدرة، إمكانية، محتمل",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"accelerated",ar:"معجَّل، مسرع",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"estimated",ar:"مقدَّر",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"poverty",ar:"فقر",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"activist",ar:"ناشط",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"ethical",ar:"أخلاقي",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"precaution",ar:"إجراء احترازي",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"adaptation",ar:"تأقلم، تكييف",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"factor",ar:"عامل",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"pressing",ar:"ملحّ",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"address",ar:"عنوان، يخاطب، يتعامل مع",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"flood-prone",ar:"عرضة للفيضانات",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"primarily",ar:"بشكل رئيسي",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"admit",ar:"يعترف",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"frequency",ar:"تكرار",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"process",ar:"عملية",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"advocate",ar:"يدافع",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"generation",ar:"جيل",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"projection",ar:"توقّع، تقدير، احتمال",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"agreement",ar:"موافقة، اتفاق",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"glaciers",ar:"أنهار جليدية",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"recognition",ar:"اعتراف",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"announcement",ar:"إعلان",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"growing",ar:"نامٍ، متزايد",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"renewable",ar:"متجدّد",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"approximately",ar:"تقريبًا",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"ice sheet",ar:"غطاء جليدي",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"require",ar:"يتطلّب",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"architecture",ar:"هندسة معمارية",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"identified",ar:"محدّد، تم تحديده",emoji:'📘',group:'مفردات خاصة بي'},
-{en:"reside",ar:"يقيم، يسكن",emoji:'📘',group:'مفردات خاصة بي'}
+{en:"consult / consulted",ar:"يستشير",spoken:"consult, consulted",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"distinguish / distinguished",ar:"يميز",spoken:"distinguish, distinguished",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"contributions",ar:"إسهامات",spoken:"contributions",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"intellectual",ar:"الفكرية",spoken:"intellectual",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"lunar calendar",ar:"التقويم القمري",spoken:"lunar calendar",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"facilities",ar:"تسهيلات",spoken:"facilities",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"judicial system",ar:"النظام القضائي",spoken:"judicial system",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"establish / established",ar:"يؤسس",spoken:"establish, established",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"taxation",ar:"الضرائب",spoken:"taxation",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"regional rulers",ar:"حكام الإقليم",spoken:"regional rulers",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"citizens",ar:"المواطنين",spoken:"citizens",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"justice",ar:"العدل",spoken:"justice",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"convert into",ar:"يتحول إلى / يدخل",spoken:"convert into",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"Christians",ar:"المسيحيين",spoken:"Christians",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"suppressive",ar:"قمعي",spoken:"suppressive",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"expansion",ar:"توسعة",spoken:"expansion",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"subjugated",ar:"خضع لـ",spoken:"subjugated",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"knowledge",ar:"معرفة",spoken:"knowledge",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"conquer / conquered",ar:"يغزو",spoken:"conquer, conquered",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"institutions of",ar:"المؤسسات",spoken:"institutions of",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"effect on",ar:"تأثير على",spoken:"effect on",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"Muslim",ar:"المسلم",spoken:"Muslim",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"revolutionized",ar:"ثار",spoken:"revolutionized",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"smoothly",ar:"بنعومة",spoken:"smoothly",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"assassinate / assassinated",ar:"اغتال",spoken:"assassinate, assassinated",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"confer / conferred",ar:"يمنح",spoken:"confer, conferred",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"fair",ar:"عادل",spoken:"fair",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"establishment",ar:"تأسيس",spoken:"establishment",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"freedom",ar:"الحرية",spoken:"freedom",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"census",ar:"إحصاء",spoken:"census",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"improve / improved",ar:"يحسن",spoken:"improve, improved",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"economic system",ar:"النظام الاقتصادي",spoken:"economic system",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"military police",ar:"الشرطة العسكرية",spoken:"military police",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"public treasury",ar:"المال العام",spoken:"public treasury",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"interact with",ar:"يتفاعل مع",spoken:"interact with",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"administration",ar:"إدارة",spoken:"administration",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"tolerant",ar:"موهوب / متسامح",spoken:"tolerant",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"appeal to",ar:"يروق لـ",spoken:"appeal to",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"Jews",ar:"اليهود",spoken:"Jews",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"recruited in",ar:"يتطوع في",spoken:"recruited in",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"Empire",ar:"إمبراطورية",spoken:"Empire",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"victories",ar:"انتصارات",spoken:"victories",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"The Islamic State",ar:"الدولة الإسلامية",spoken:"The Islamic State",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"territories",ar:"المناطق",spoken:"territories",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"law",ar:"القانونية",spoken:"law",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"the stability",ar:"استقرار",spoken:"the stability",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"non-Muslim",ar:"الغير مسلم",spoken:"non-Muslim",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"conquered lands",ar:"الأراضي المحتلة",spoken:"conquered lands",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"effectively",ar:"بفاعلية",spoken:"effectively",emoji:'📘',group:'كلمات ثالثة ثانوي'},
+{en:"significant",ar:"بارز",spoken:"significant",emoji:'📘',group:'كلمات ثالثة ثانوي'}
 ];
 const $=id=>document.getElementById(id);
-const STORE='lughati-stage3-learning-v2';
+const STORE='lughati-stage3-learning-v3';
 let level=1,index=0,attempt=1,phase='ready',learned=[],testQuestions=[],questionIndex=0,correctAnswers=0,timeLeft=120,timerId=null,answered=false,levelPassed=false;
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 function secondsForLevel(l){return Math.round(120-(l-1)*100/99);}
@@ -427,7 +434,7 @@ function formatTime(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+Strin
 function save(){try{localStorage.setItem(STORE,JSON.stringify({level,index,attempt,phase,learned,testQuestions,questionIndex,correctAnswers,timeLeft,levelPassed}));}catch(e){console.warn('تعذر حفظ التقدم',e);}}
 function load(){try{const s=JSON.parse(localStorage.getItem(STORE)||'null');if(!s||typeof s!=='object')return;level=clamp(Number(s.level)||1,1,100);index=clamp(Number(s.index)||0,0,words.length-1);attempt=clamp(Number(s.attempt)||1,1,3);if(['ready','write','sentence','scenario','quiz','complete'].includes(s.phase))phase=s.phase;learned=Array.isArray(s.learned)?s.learned.filter(Number.isInteger):[];testQuestions=Array.isArray(s.testQuestions)?s.testQuestions:[];questionIndex=clamp(Number(s.questionIndex)||0,0,4);correctAnswers=clamp(Number(s.correctAnswers)||0,0,5);timeLeft=clamp(Number(s.timeLeft)||secondsForLevel(level),1,120);levelPassed=Boolean(s.levelPassed);}catch(e){console.warn('تعذر استرجاع التقدم',e);}}
 function showOnly(id){['preTestControls','writing','sentenceStage','scenarioStage','quiz','completeStage'].forEach(k=>$(k).classList.toggle('hidden',k!==id));}
-function speak(){if(!('speechSynthesis'in window)){ $('feedback').textContent='المتصفح لا يدعم النطق الصوتي.';return;}speechSynthesis.cancel();const a=new SpeechSynthesisUtterance(words[index].en);a.lang='en-US';a.rate=.82;speechSynthesis.speak(a);}
+function speak(){if(!('speechSynthesis'in window)){ $('feedback').textContent='المتصفح لا يدعم النطق الصوتي.';return;}speechSynthesis.cancel();const w=words[index];const speakOne=(text,lang,rate)=>new Promise(resolve=>{const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=rate;u.onend=resolve;u.onerror=resolve;speechSynthesis.speak(u);});(async()=>{for(let i=0;i<3;i++){await speakOne(w.spoken||w.en,'en-US',.82);await speakOne(w.ar,'ar-EG',.88);}})();}
 function drawTrace(){const w=words[index].en;let hint='';if(attempt===1)hint=w;else if(attempt===2){const chars=[...w],pos=chars.map((c,i)=>/[a-z]/i.test(c)?i:-1).filter(i=>i>=0);for(let i=pos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pos[i],pos[j]]=[pos[j],pos[i]];}const reveal=new Set(pos.slice(0,Math.ceil(pos.length*.58)));hint=chars.map((c,i)=>/[a-z]/i.test(c)?(reveal.has(i)?c:' '):c).join('');} $('ghostOverlay').textContent=hint;$('stageCount').textContent='الكتابة '+attempt+' من 3';$('instruction').textContent=attempt===1?'المرحلة 1: اكتب الكلمة فوق الحروف الشفافة.':attempt===2?'المرحلة 2: اكتب الكلمة بمساعدة بعض الحروف.':'المرحلة 3: اكتب الكلمة من الذاكرة دون تلميح.';$('ghostOverlay').classList.toggle('hidden',attempt===3);}
 function render(){const w=words[index];$('category').textContent='المستوى '+level+' من 100 · الكلمة '+(index+1)+' من '+words.length;$('word').textContent=w.en;$('meaning').textContent=w.ar;$('emoji').textContent=w.emoji||'📘';$('progress').style.width=((level-1)/100*100)+'%';$('count').textContent='المستوى '+level+' / 100';$('stageCount').textContent='الكتابة '+attempt+' من 3';$('word').classList.toggle('hidden',phase!=='ready');$('meaning').classList.toggle('hidden',phase!=='ready');$('emoji').classList.toggle('hidden',phase!=='ready');$('hear').classList.toggle('hidden',phase!=='ready');$('startTest').classList.toggle('hidden',phase!=='ready');$('clearProgress').classList.toggle('hidden',phase!=='ready');$('lessonHint').classList.toggle('hidden',phase!=='ready');$('writing').classList.toggle('hidden',phase!=='write');$('sentenceStage').classList.toggle('hidden',phase!=='sentence');$('scenarioStage').classList.toggle('hidden',phase!=='scenario');$('quiz').classList.toggle('hidden',phase!=='quiz');$('completeStage').classList.toggle('hidden',phase!=='complete');if(phase==='write'){drawTrace();$('answer').value='';$('feedback').textContent='';}if(phase==='sentence'){$('sentenceTarget').textContent=w.en;$('sentenceAnswer').value='';$('sentenceFeedback').textContent='';}if(phase==='scenario')renderScenario();if(phase==='quiz')renderQuiz();if(phase==='complete'){$('completeTitle').textContent=levelPassed?(level>=100?'أتممت المستويات الـ100!':'نجحت في المستوى '+level+'!'):'لم تجتز الاختبار هذه المرة';$('completeMessage').textContent='نتيجتك '+correctAnswers+'/5. '+(levelPassed?'كسبت 10 نقاط لُغتي. المستوى التالي جاهز.':'تحتاج إلى 4 إجابات صحيحة على الأقل. أعد الاختبار وراجع الكلمات.');$('continueBtn').classList.toggle('hidden',!levelPassed);$('retryLevel').classList.toggle('hidden',levelPassed);$('continueBtn').textContent=level>=100?'إعادة الرحلة من البداية':'ابدأ المستوى التالي ←';}save();}
 function startTraining(){phase='write';attempt=1;render();$('answer').focus();}
