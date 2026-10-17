@@ -522,8 +522,7 @@ function speak(){
  const synth=window.speechSynthesis;
  synth.cancel();
  const w=words[index];
- // جرّب صوتًا إنجليزيًا مصريًا إن كان مثبتًا، وإلا استخدم أفضل صوت إنجليزي متاح.
- const text=String(w.spoken || w.en || '').replace(/\s*\/\s*/g, ', ').trim();
+ const text=String(w.spoken || w.en || '').replace(/\\s*\\/\\s*/g, ', ').trim();
  if(!text) return;
  let started=false;
  const speakNow=()=>{
@@ -537,16 +536,30 @@ function speak(){
      englishVoices.find(v=>/^en[-_]US$/i.test(v.lang || '')) ||
      englishVoices.find(v=>/^en[-_]GB$/i.test(v.lang || '')) ||
      englishVoices[0];
-   const u=new SpeechSynthesisUtterance(text);
-   u.lang=preferred ? preferred.lang : 'en-US';
-   u.rate=0.86;
-   u.pitch=1;
-   if(preferred) u.voice=preferred;
-   u.onerror=()=>{
-     $('feedback').textContent='تعذّر تشغيل الصوت. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';
+   const arabicVoices=voices.filter(v=>/^ar([_-]|$)/i.test(v.lang || ''));
+   const arabicVoice=arabicVoices.find(v=>/^ar[-_]EG$/i.test(v.lang || ''))||arabicVoices[0];
+   const arabicText=String(w.ar||'').trim();
+   const speakArabic=(count=0)=>{
+     if(!arabicText || count>=2) return;
+     const ar=new SpeechSynthesisUtterance(arabicText);
+     ar.lang=arabicVoice?arabicVoice.lang:'ar-EG';
+     ar.rate=0.9;
+     if(arabicVoice) ar.voice=arabicVoice;
+     ar.onend=()=>speakArabic(count+1);
+     synth.speak(ar);
    };
-   u.onend=()=>{const t=String(w.ar||'').trim();if(!t)return;const av=synth.getVoices().filter(v=>/^ar([_-]|$)/i.test(v.lang||''));const v=av.find(x=>/^ar[-_]EG$/i.test(x.lang||''))||av[0];const ar=new SpeechSynthesisUtterance(t);ar.lang=v?v.lang:'ar-EG';ar.rate=0.9;if(v)ar.voice=v;ar.onend=()=>{const arAgain=new SpeechSynthesisUtterance(t);arAgain.lang=v?v.lang:'ar-EG';arAgain.rate=0.9;if(v)arAgain.voice=v;synth.speak(arAgain);};synth.speak(ar);};
-   synth.speak(u);
+   const speakEnglish=(count=0)=>{
+     if(count>=2){speakArabic();return;}
+     const u=new SpeechSynthesisUtterance(text);
+     u.lang=preferred?preferred.lang:'en-US';
+     u.rate=0.86;
+     u.pitch=1;
+     if(preferred) u.voice=preferred;
+     u.onerror=()=>{$('feedback').textContent='تعذّر تشغيل الصوت. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';};
+     u.onend=()=>speakEnglish(count+1);
+     synth.speak(u);
+   };
+   speakEnglish();
  };
  const voices=synth.getVoices();
  if(voices.length){
@@ -557,7 +570,6 @@ function speak(){
      speakNow();
    };
    synth.addEventListener('voiceschanged',onVoicesChanged);
-   // بعض أجهزة الهاتف لا تُحمّل قائمة الأصوات إلا بعد مهلة قصيرة.
    setTimeout(()=>{
      synth.removeEventListener('voiceschanged',onVoicesChanged);
      speakNow();
