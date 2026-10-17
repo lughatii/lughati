@@ -707,12 +707,27 @@ footer{border-color:#203246!important}.foot-inner{padding-top:18px}.foot-links{g
 @media(prefers-reduced-motion:reduce){.avatar-ring:before{animation:none!important}}
 </style>
 
+
+<style id="lughati-simple-settings-nav">
+.navlinks{display:flex!important;align-items:center;gap:clamp(14px,2.5vw,28px)}
+.nav-settings-link{border:0;background:transparent!important;color:#d1dce7!important;padding:7px 10px;border-radius:9px;font:inherit;font-weight:750;cursor:pointer}
+.nav-settings-link:hover,.nav-settings-link:focus-visible{color:var(--cyan)!important;background:#142638!important;outline:none}
+.settings-open-btn{display:none!important}
+.settings-section{margin-top:20px;padding-top:17px;border-top:1px solid rgba(148,163,184,.17)}
+.settings-section h3{margin:0 0 7px;font-size:16px;color:#f8fafc}
+.settings-section p{margin:0 0 14px;font-size:13px;line-height:1.8;color:#a8b4c7}
+.settings-section .setting-label{margin-top:10px}
+.contact-settings .wa-link{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:45px;padding:11px 15px;border-radius:12px;background:#25d366;color:#052e16!important;font-weight:850;text-decoration:none}
+.contact-settings .wa-link:hover{filter:brightness(1.05)}
+@media(max-width:620px){.nav{flex-wrap:nowrap}.navlinks{display:flex!important;order:0;width:auto;justify-content:flex-start;border-top:0;padding-top:0;gap:4px;font-size:12px}.navlinks a,.nav-settings-link{padding:7px 6px;white-space:nowrap}.nav-actions{margin-right:auto}.top-cta{white-space:nowrap;padding:8px 10px;font-size:11px}.settings-card{max-height:calc(100dvh - 30px);overflow-y:auto}}
+</style>
+
 </head>
 <body>
 <header class="shell"><div class="nav">
 <a class="brand" href="#home" aria-label="لُغتي الرئيسية"><span class="avatar-ring" aria-label="صورة صاحب موقع لُغتي"><span class="avatar-core"><img src="assets/profile-full.jpg" alt="صورة صاحب موقع لُغتي" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;border-radius:50%;display:block"></span></span><span>لُغتي</span></a>
-<nav class="navlinks" aria-label="القائمة"><a href="#home">الصفحة الرئيسية</a></nav>
-<div class="nav-actions"><button class="icon-btn settings-open-btn" id="settingsOpen" type="button" aria-label="الإعدادات"><span aria-hidden="true">⚙</span><span class="settings-button-label">الإعدادات</span></button><button class="top-cta" id="startTop" type="button">ابدأ الآن <span>←</span></button></div>
+<nav class="navlinks" aria-label="القائمة"><a href="#home">الرئيسية</a><button class="nav-settings-link" id="settingsOpen" type="button">الإعدادات</button></nav>
+<div class="nav-actions"><button class="top-cta" id="startTop" type="button">ابدأ الآن <span>←</span></button></div>
 </div></header>
 <main id="home" class="shell">
 <section class="hero">
@@ -730,7 +745,7 @@ footer{border-color:#203246!important}.foot-inner{padding-top:18px}.foot-links{g
 <section class="progress-row"><div class="progress-card"><div class="progress-ring"><span>ابدأ</span></div><div><h3>كل خطوة بتفرق</h3><p>ابدأ النهارده، وخلّي تعلّمك عادة يومية صغيرة.</p></div></div><div class="stats-card"><div class="stat"><strong>123</strong><span>اتعلّم كلمات جديدة</span></div><div class="stat"><strong>∞</strong><span>اتعلّم على مهلك</span></div><div class="stat"><strong>✓</strong><span>تقدّم خطوة خطوة</span></div></div></section>
 </main>
 <footer><div class="shell foot-inner"><a class="brand foot-brand" href="#home"><span class="avatar-ring" aria-label="صورة صاحب موقع لُغتي"><span class="avatar-core"><img src="assets/profile-full.jpg" alt="صورة صاحب موقع لُغتي" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;border-radius:50%;display:block"></span></span><span>لُغتي</span></a><div class="foot-links"><a href="#home">الرئيسية</a><a href="#features">مميزاتنا</a><a href="#paths">مسارات التعلّم</a></div><span>تعلّم · تقدّم · حقّق هدفك ✦</span></div></footer>
-<div class="settings-panel" id="settingsPanel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="settings-card"><div class="settings-head"><h2 id="settingsTitle">الإعدادات</h2><button class="close-btn" id="settingsClose" type="button">إغلاق ✕</button></div><label class="setting-label" for="accentSelect">لون الموقع<select id="accentSelect"><option value="blue">أزرق سماوي</option><option value="purple">بنفسجي</option><option value="pink">وردي</option><option value="green">أخضر</option></select></label></div></div>
+<div class="settings-panel" id="settingsPanel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="settings-card"><div class="settings-head"><h2 id="settingsTitle">الإعدادات</h2><button class="close-btn" id="settingsClose" type="button">إغلاق ✕</button></div><section class="settings-section" aria-labelledby="colorsTitle"><h3 id="colorsTitle">ألوان الموقع</h3><label class="setting-label" for="accentSelect">اختار اللون الأساسي<select id="accentSelect"><option value="blue">أزرق سماوي</option><option value="purple">بنفسجي</option><option value="pink">وردي</option><option value="green">أخضر</option></select></label></section><section class="settings-section contact-settings" aria-labelledby="contactTitle"><h3 id="contactTitle">التواصل مع المنشئ / المطوّر</h3><p>لو عندك اقتراح أو واجهتك مشكلة في الموقع، تقدر تتواصل معايا مباشرة.</p><a class="wa-link" href="https://wa.me/201125260487?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9%20%D9%81%D9%8A%20%D9%85%D9%88%D9%82%D8%B9%20%D9%84%D8%BA%D8%AA%D9%8A" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">✆</span> تواصل عبر واتساب</a></section></div></div>
 <div class="settings-panel" id="stagePanel" role="dialog" aria-modal="true" aria-labelledby="stageTitle"><div class="settings-card"><div class="settings-head"><h2 id="stageTitle">اختار المرحلة اللي تناسبك</h2><button class="close-btn" id="stageClose" type="button">إغلاق ✕</button></div><p style="color:#a7bfdc">ابدأ مباشرة في مسار الصف الثالث الثانوي.</p><div style="display:grid;gap:12px;margin-top:18px"><a class="primary" href="stage3.html">للصف الثالث الثانوي فقط ←</a></div></div></div>
 <script>
 (()=>{const $=id=>document.getElementById(id),stage=$('stagePanel'),settings=$('settingsPanel');function open(p){p.classList.add('open')}function close(p){p.classList.remove('open')}$('startTop').addEventListener('click',()=>open(stage));$('startMain').addEventListener('click',()=>open(stage));document.querySelectorAll('.choose-stage').forEach(b=>b.addEventListener('click',()=>location.href=b.dataset.href));$('settingsOpen').addEventListener('click',()=>open(settings));$('settingsClose').addEventListener('click',()=>close(settings));$('stageClose').addEventListener('click',()=>close(stage));[stage,settings].forEach(p=>p.addEventListener('click',e=>{if(e.target===p)close(p)}));document.addEventListener('keydown',e=>{if(e.key==='Escape'){close(stage);close(settings)}});const root=document.documentElement;const palettes={blue:['#11c9ff','#287bff','#9d4dff'],purple:['#b56aff','#6d5bff','#ed69ff'],pink:['#ff6bb8','#ff4bce','#8c6bff'],green:['#3ce8c1','#19a8ff','#76f5a6']};function accent(k){const c=palettes[k]||palettes.blue;root.style.setProperty('--cyan',c[0]);root.style.setProperty('--blue',c[1]);root.style.setProperty('--purple',c[2]);try{localStorage.setItem('lughati-accent',k)}catch{}}let color='blue';try{color=localStorage.getItem('lughati-accent')||'blue'}catch{}$('accentSelect').value=color;accent(color);$('accentSelect').addEventListener('change',e=>accent(e.target.value));})();
@@ -746,8 +761,7 @@ footer{border-color:#203246!important}.foot-inner{padding-top:18px}.foot-links{g
 @media(max-width:850px){.lughati-wa-float{left:12px;bottom:max(12px,env(safe-area-inset-bottom));padding:12px}.lughati-wa-float span{display:none}.lughati-wa-float svg{width:27px;height:27px}.lughati-contact{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
 @media(prefers-reduced-motion:reduce){.lughati-wa-float{transition:none!important}}
 </style>
-<a class="lughati-wa-float" href="https://wa.me/201125260487?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9%20%D9%81%D9%8A%20%D9%85%D9%88%D9%82%D8%B9%20%D9%84%D8%BA%D8%AA%D9%8A" target="_blank" rel="noopener noreferrer" aria-label="تواصل مع دعم لُغتي عبر واتساب">
-<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .8A15 15 0 0 0 3.1 23.5L1 31l7.7-2A15.1 15.1 0 1 0 16 .8zm0 27.3a12.2 12.2 0 0 1-6.2-1.7l-.5-.3-4.6 1.2 1.2-4.5-.3-.5A12.3 12.3 0 1 1 16 28.1zm6.7-9.2c-.4-.2-2.2-1.1-2.6-1.2s-.6-.2-.9.2-1 1.2-1.2 1.5-.5.3-.9.1a10.1 10.1 0 0 1-3-1.9 11.4 11.4 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.6-.7.4-.6c.1-.2 0-.5 0-.7s-.9-2.1-1.3-2.9c-.3-.7-.7-.6-.9-.6h-.8c-.3 0-.7.1-1.1.5s-1.4 1.4-1.4 3.3 1.4 3.8 1.6 4.1 2.8 4.3 6.8 6c.9.4 1.6.6 2.1.7.9.3 1.7.2 2.3.1.7-.1 2.2-.9 2.5-1.8s.3-1.7.2-1.8-.3-.3-.7-.5z"/></svg><span>تواصل واتساب</span></a>
+
 <script id="lughati-tablet-safety">
 (()=>{try{document.documentElement.style.webkitTextSizeAdjust='100%';document.documentElement.style.textSizeAdjust='100%';}catch{} })();
 </script>
