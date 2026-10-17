@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#eff9f5">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050914">
 <title>لُغتي — للصف الثالث الثانوي</title>
 <style>
 :root{--ink:#18332e;--muted:#718780;--line:#dcebe5;--teal:#087f70;--paper:#f1faf6}
@@ -70,7 +70,7 @@ body:before{content:"";position:fixed;inset:-18%;z-index:-1;pointer-events:none;
 @media(prefers-reduced-motion:reduce){body:before{animation:none}.hero,.intro,.panel,.card,.btn,#lughatiThemeButton,.lughati-swatch{transition:none!important}}
 
 .pronunciation{margin:5px auto 10px;color:#0f9f91;font-size:18px;font-weight:800;line-height:1.7;direction:rtl}
-html:not(.lughati-light) .pronunciation{color:#67e8f9}
+.pronunciation{color:#67e8f9}
 </style><style id="lughati-mobile-app-redesign">
 :root{--ink:#17202c;--muted:#707987;--line:#e7e9ee;--teal:#e51d35;--paper:#f5f6f9;--brand:#e51d35;--brand-soft:#fff0f2}
 html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
@@ -132,7 +132,6 @@ footer{border-color:rgba(148,163,184,.15)!important;color:#94a3b8!important}
 <style id="lughati-motion-enhancement">
 /* Lughati neon ambience + accessible theme palettes */
 :root{color-scheme:dark;--glow-cyan:#06b6d4;--glow-violet:#8b5cf6;--theme-bg:#020617;--theme-text:#f8fafc;--theme-panel:rgba(8,18,38,.78);--theme-line:rgba(103,190,255,.24)}
-html.lughati-light{color-scheme:light;--theme-bg:#f8fafc;--theme-text:#0f172a;--theme-panel:rgba(255,255,255,.76);--theme-line:rgba(14,116,144,.2)}
 body{transition:background-color .35s ease,color .35s ease}
 body.lughati-neon{background-color:var(--theme-bg)!important;color:var(--theme-text)!important}
 body.lughati-neon:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(circle at 14% 18%,rgba(6,182,212,.16),transparent 28%),radial-gradient(circle at 86% 28%,rgba(139,92,246,.17),transparent 30%),radial-gradient(circle at 52% 100%,rgba(6,182,212,.1),transparent 35%),var(--theme-bg)!important}
@@ -146,13 +145,6 @@ body.lughati-neon:before{content:"";position:fixed;inset:0;z-index:-2;pointer-ev
 .lughati-neon .card:before,.lughati-neon .panel:before,.lughati-neon .unit:before,.lughati-neon .level:before,.lughati-neon .question:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;background:linear-gradient(120deg,transparent,rgba(6,182,212,.5),transparent,rgba(139,92,246,.48),transparent);background-size:240% 240%;animation:lughatiShimmer 7s linear infinite;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
 .lughati-neon .card,.lughati-neon .panel,.lughati-neon .unit,.lughati-neon .level,.lughati-neon .question{position:relative;overflow:hidden}
 @keyframes lughatiShimmer{0%{background-position:0% 50%;opacity:.3}50%{background-position:100% 50%;opacity:.85}100%{background-position:0% 50%;opacity:.3}}
-.lughati-theme-toggle{position:static!important;z-index:30;display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(6,182,212,.55);border-radius:999px;padding:9px 13px;background:linear-gradient(120deg,rgba(6,182,212,.15),rgba(139,92,246,.18));color:inherit;font:inherit;font-size:13px;font-weight:850;white-space:nowrap;box-shadow:0 0 16px rgba(6,182,212,.16);cursor:pointer}
-.lughati-theme-toggle:hover{box-shadow:0 0 20px rgba(6,182,212,.34),0 0 30px rgba(139,92,246,.2)}
-html.lughati-light body.lughati-neon{background-color:#f8fafc!important;color:#0f172a!important}
-html.lughati-light body.lughati-neon:before{background:radial-gradient(circle at 14% 18%,rgba(6,182,212,.10),transparent 28%),radial-gradient(circle at 86% 28%,rgba(139,92,246,.10),transparent 30%),#f8fafc!important}
-html.lughati-light .nav,html.lughati-light .top{background:rgba(255,255,255,.78)!important;color:#0f172a!important;border-color:rgba(14,116,144,.18)!important}
-html.lughati-light .hero,html.lughati-light .intro,html.lughati-light .panel,html.lughati-light .card,html.lughati-light .unit,html.lughati-light .level,html.lughati-light .question{background:rgba(255,255,255,.72)!important;color:#0f172a!important;border-color:rgba(14,116,144,.18)!important}
-html.lughati-light .muted,html.lughati-light .hint,html.lughati-light .caption,html.lughati-light .sub{color:#526477!important}
 @media(prefers-reduced-motion:reduce){.lughati-orb,.lughati-neon .card:before,.lughati-neon .panel:before,.lughati-neon .unit:before,.lughati-neon .level:before,.lughati-neon .question:before{animation:none!important}*{scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style><style id="lughati-neon-motion-fix">
 /* Neon motion polish: visual-only overrides; existing HTML, IDs and JavaScript stay intact. */
@@ -211,7 +203,7 @@ button:focus-visible,.btn:focus-visible,.letters button:focus-visible,.options b
 @media (max-width: 620px) {
   html { scroll-behavior: auto; }
   .lughati-orb { display: none !important; }
-  .lughati-orb, .lughati-speaker, .lughati-theme-toggle {
+  .lughati-orb, .lughati-speaker {
     animation: none !important;
     transition: none !important;
   }
@@ -328,14 +320,12 @@ button:active, .btn:active, .primary:active, .top-cta:active,
 
 
 <style id="lughati-ghost-visibility-fix">
-/* Keep the hint layer visible through the typing field in both themes. */
+/* Keep the hint layer visible through the typing field in dark mode. */
 .write-area{isolation:isolate}
 .write-input{background:transparent!important;position:relative;z-index:2;-webkit-text-fill-color:var(--ink,#f2f6ff)!important}
 .ghost-overlay{z-index:1!important;opacity:1!important;visibility:visible!important;color:rgba(226,232,240,.48)!important;-webkit-text-fill-color:rgba(226,232,240,.48)!important;text-shadow:0 0 3px rgba(103,232,249,.28)!important}
 body.lughati-dark .write-input{background:transparent!important}
 body.lughati-dark .ghost-overlay{color:rgba(226,232,240,.52)!important;-webkit-text-fill-color:rgba(226,232,240,.52)!important;text-shadow:0 0 4px rgba(103,232,249,.32)!important}
-html.lughati-light .write-input{background:transparent!important}
-html.lughati-light .ghost-overlay{color:rgba(51,65,85,.42)!important;-webkit-text-fill-color:rgba(51,65,85,.42)!important;text-shadow:none!important}
 #backToWordRow{margin-top:12px}
 #backToWord{border-color:rgba(6,182,212,.45)!important}
 </style>
@@ -589,7 +579,7 @@ function nextLevel(){if(!levelPassed)return;if(level>=100){level=1;index=0;learn
 $('hear').onclick=speak;$('startTest').onclick=startTraining;$('backToWord').onclick=()=>{clearInterval(timerId);phase='ready';attempt=1;render();window.scrollTo({top:0,behavior:'smooth'});};$('previousWord').onclick=()=>{if(index<=0)return;clearInterval(timerId);index--;attempt=1;phase='ready';levelPassed=false;render();window.scrollTo({top:0,behavior:'smooth'});};$('skipWord').onclick=()=>{clearInterval(timerId);index=(index+1)%words.length;attempt=1;phase='ready';levelPassed=false;render();window.scrollTo({top:0,behavior:'smooth'});};$('check').onclick=checkWriting;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWriting();});$('checkSentence').onclick=checkSentence;$('sentenceAnswer').addEventListener('keydown',e=>{if(e.key==='Enter')checkSentence();});$('nextQuestion').onclick=()=>{if(!answered)return;if(questionIndex<4){questionIndex++;renderQuiz();save();}else finishLevel(false,false);};$('retryLevel').onclick=()=>startLevelTest();$('continueBtn').onclick=nextLevel;load();if(phase==='write'){phase='ready';}if(phase==='quiz'){if(!testQuestions.length)testQuestions=[index,index,index,index,index];render();timerId=setInterval(()=>{timeLeft--; $('timer').textContent='الوقت: '+formatTime(timeLeft);save();if(timeLeft<=0){clearInterval(timerId);finishLevel(true,true);}},1000);}else render();
 })();
 </script>
-<script id="lughati-shared-accent">(()=>{let color='#ff2449';try{color=localStorage.getItem('lughati-accent')||color}catch{}const root=document.documentElement;['--brand','--teal','--glow-color','--ui-accent','--accent','--user-accent'].forEach(name=>root.style.setProperty(name,color));const style=document.createElement('style');style.id='lughati-accent-overrides';style.textContent='.btn.primary,.primary,.fill{background-color:'+color+'!important;border-color:'+color+'!important}.category{color:'+color+'!important}.progress .fill{background:'+color+'!important}.top a,.back,a.button{color:'+color+'}button:focus-visible,input:focus-visible{outline:2px solid '+color+';outline-offset:3px}';document.head.appendChild(style);document.querySelectorAll('.primary,.fill,.letter').forEach(el=>{if(el.classList.contains('primary')){el.style.backgroundColor=color;el.style.borderColor=color}else if(el.classList.contains('fill'))el.style.backgroundColor=color;else el.style.color=color});})();</script><script id="lughati-shared-theme">(()=>{let mode='dark';try{mode=localStorage.getItem('lughati-home-theme')||'dark'}catch{}const dark=mode!=='light';document.body.classList.toggle('lughati-dark',dark);if(!dark)return;const style=document.createElement('style');style.textContent=`
+<script id="lughati-shared-accent">(()=>{let color='#ff2449';try{color=localStorage.getItem('lughati-accent')||color}catch{}const root=document.documentElement;['--brand','--teal','--glow-color','--ui-accent','--accent','--user-accent'].forEach(name=>root.style.setProperty(name,color));const style=document.createElement('style');style.id='lughati-accent-overrides';style.textContent='.btn.primary,.primary,.fill{background-color:'+color+'!important;border-color:'+color+'!important}.category{color:'+color+'!important}.progress .fill{background:'+color+'!important}.top a,.back,a.button{color:'+color+'}button:focus-visible,input:focus-visible{outline:2px solid '+color+';outline-offset:3px}';document.head.appendChild(style);document.querySelectorAll('.primary,.fill,.letter').forEach(el=>{if(el.classList.contains('primary')){el.style.backgroundColor=color;el.style.borderColor=color}else if(el.classList.contains('fill'))el.style.backgroundColor=color;else el.style.color=color});})();</script><script id="lughati-shared-theme">(()=>{try{localStorage.setItem('lughati-home-theme','dark')}catch{}document.documentElement.classList.remove('lughati-light');document.body.classList.add('lughati-dark');const style=document.createElement('style');style.textContent=`
 body.lughati-dark{--ink:#f2f6ff;--muted:#a8bad4;--line:#263752;--teal:var(--ui-accent,#ff2449);--paper:#050914;background:#050914!important;color:var(--ink)!important}
 body.lughati-dark:before{background:radial-gradient(ellipse at 12% 14%,color-mix(in srgb,var(--glow-color) 16%,transparent),transparent 32%),radial-gradient(ellipse at 88% 74%,#09204455,transparent 35%)!important}
 body.lughati-dark .top{background:#091323!important;color:#f2f6ff!important;border-color:#263752!important}
@@ -613,14 +603,13 @@ body.lughati-dark .ghost-overlay{
   text-shadow:0 0 5px rgba(103,232,249,.42),0 0 12px rgba(56,189,248,.22)!important;
   opacity:1!important;
 }
-html.lughati-light body .ghost-overlay{
   color:rgba(15,23,42,.32)!important;
   -webkit-text-fill-color:rgba(15,23,42,.32)!important;
   text-shadow:none!important;
 }
 body.lughati-dark .btn:disabled{opacity:.55;color:#a8bad4!important}
 
-`;document.head.appendChild(style)})();</script><script id="lughati-motion-theme">(()=>{const root=document.documentElement;let mode='dark';try{mode=localStorage.getItem('lughati-home-theme')||'dark'}catch{}const apply=()=>{const light=mode==='light';root.classList.toggle('lughati-light',light);document.body.classList.toggle('lughati-dark',!light);document.body.classList.add('lughati-neon');let b=document.getElementById('lughati-theme-toggle');if(!b){b=document.createElement('button');b.id='lughati-theme-toggle';b.className='lughati-theme-toggle';b.type='button';b.addEventListener('click',()=>{mode=mode==='light'?'dark':'light';try{localStorage.setItem('lughati-home-theme',mode)}catch{}apply()})}b.textContent=light?'☾ الوضع الداكن':'☼ الوضع الفاتح';b.setAttribute('aria-label',light?'تفعيل الوضع الداكن':'تفعيل الوضع الفاتح');const slot=document.querySelector('.nav-actions,.navlinks,.nav,.top');if(slot){if(slot.classList.contains('nav-actions'))slot.prepend(b);else slot.appendChild(b)}else document.body.appendChild(b)};apply();if(!document.querySelector('.lughati-orb')){for(const color of ['cyan','violet']){const orb=document.createElement('span');orb.className='lughati-orb '+color;orb.setAttribute('aria-hidden','true');document.body.appendChild(orb)}}document.querySelectorAll('button,a').forEach(el=>{if(/سماعة|استمع|نطق|🔊|🎧/.test(el.textContent||''))el.classList.add('lughati-speaker')})})();</script>
+`;document.head.appendChild(style)})();</script><script id="lughati-motion-theme">(()=>{const root=document.documentElement;root.classList.remove("lughati-light");document.body.classList.add("lughati-dark","lughati-neon");try{localStorage.setItem("lughati-home-theme","dark")}catch{}if(!document.querySelector(".lughati-orb")){for(const color of ["cyan","violet"]){const orb=document.createElement("span");orb.className="lughati-orb "+color;orb.setAttribute("aria-hidden","true");document.body.appendChild(orb)}}document.querySelectorAll("button,a").forEach(el=>{if(/سماعة|استمع|نطق|🔊|🎧/.test(el.textContent||""))el.classList.add("lughati-speaker")})})();</script>
 <style id="lughati-contact-whatsapp">
 /* Lightweight contact controls; responsive on phones and tablets. */
 .lughati-wa-float{position:fixed;z-index:9999;left:18px;bottom:18px;display:flex;align-items:center;gap:9px;padding:12px 17px;border-radius:999px;background:#25d366;color:#052e16!important;font:800 15px/1.2 system-ui,sans-serif;text-decoration:none!important;box-shadow:0 6px 22px #0003;border:2px solid #ffffff80;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
