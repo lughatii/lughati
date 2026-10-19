@@ -335,18 +335,19 @@ body.lughati-dark .ghost-overlay{color:rgba(226,232,240,.52)!important;-webkit-t
 #wordNavigation .btn{min-width:145px}
 #wordNavigation .btn:disabled{opacity:.42;cursor:not-allowed;transform:none;box-shadow:none!important}
 @media(max-width:420px){#wordNavigation .btn{flex:1 1 135px;min-width:0}}
+.sentence{margin:18px auto 12px;padding:18px 14px;max-width:600px;border:1px solid rgba(148,163,184,.2);border-radius:16px;background:rgba(255,255,255,.025);font-size:clamp(20px,4.8vw,27px);font-weight:800;line-height:1.7;color:var(--ink,#f8fafc)}.options button{background:rgba(255,255,255,.035)!important;color:inherit!important;border:1px solid rgba(148,163,184,.25)!important;border-radius:14px;padding:13px 12px;min-height:52px}.options button:hover{border-color:var(--glow-color,#06b6d4)!important;background:rgba(255,255,255,.08)!important}.options button.selected{border-color:var(--glow-color,#06b6d4)!important;background:rgba(6,182,212,.12)!important}.options button.correct{border-color:#34d399!important;background:rgba(52,211,153,.12)!important}.options button.wrong{border-color:#fb7185!important;background:rgba(251,113,133,.12)!important}.btn:disabled{opacity:.45;cursor:not-allowed}@media(max-width:520px){.sentence{padding:14px 11px}.options{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body><header class="top">لُغتي</header>
 <main><a class="back" href="index.html">← الرجوع للرئيسية</a>
-<section class="hero"><h1>مرحلتي الخاصة — للصف الثالث الثانوي</h1><p class="muted" style="margin:0">اكتب كل كلمة بالتدريج: تلميح كامل، ثم بعض الحروف، ثم من الذاكرة. بعد الإجابة الصحيحة تنتقل للمرحلة التالية.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">الكلمة 1</span><span id="stageCount">الكتابة 1 من 3</span></div></section>
+<section class="hero"><h1>مرحلتي الخاصة — للصف الثالث الثانوي</h1><p class="muted" style="margin:0">أكمل الجملة باختيار الكلمة الإنجليزية الصحيحة من الاختيارات. كل إجابة صحيحة تنقلك للسؤال التالي.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">الكلمة 1</span><span id="stageCount">الكتابة 1 من 3</span></div></section>
 <section class="panel" id="lesson">
   <div class="stage" id="category">المستوى 1 من 100</div>
   <div class="emoji" id="emoji">📘</div>
   <div class="word" id="word"></div>
   <div class="pronunciation" id="pronunciation" dir="rtl" aria-label="النطق التقريبي بالعربي"></div>
   <div class="meaning" id="meaning"></div>
-  <div class="hint" id="lessonHint">اسمع الكلمة لو محتاج، وبعدها ابدأ الكتابة. التلميح هيقل مع كل إجابة صحيحة.</div>
+  <div class="hint" id="lessonHint">راجع معنى الكلمة، ثم اختَر الإجابة التي تكمل الجملة بشكل صحيح.</div>
   <div class="row" id="preTestControls">
     <button class="btn" id="hear" type="button">🔊 استمع للكلمة</button>
     <button class="btn primary" id="startTest" type="button">ابدأ التدريب</button>
@@ -357,10 +358,11 @@ body.lughati-dark .ghost-overlay{color:rgba(226,232,240,.52)!important;-webkit-t
   </div>
   <div class="row hidden" id="backToWordRow"><button class="btn" id="backToWord" type="button">← الرجوع للكلمة</button></div>
   <div id="writing" class="hidden">
-    <p class="hint" id="instruction">اكتب الكلمة فوق الحروف الشفافة.</p>
-    <div class="write-area"><div class="ghost-overlay" id="ghostOverlay" aria-hidden="true"></div><input class="write-input" id="answer" placeholder=" " autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="اكتب الكلمة الإنجليزية"></div>
+    <p class="hint" id="instruction">اختر الكلمة التي تكمل الجملة.</p>
+    <div class="sentence" id="sentence" dir="ltr">The teacher explained the meaning of ____.</div>
+    <div class="options" id="options" role="group" aria-label="اختيارات إكمال الجملة"></div>
     <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
-    <div class="row"><button class="btn primary" id="check" type="button">تحقّق</button></div>
+    <div class="row"><button class="btn primary" id="nextQuestion" type="button" disabled>السؤال التالي ←</button></div>
   </div>
 
 </section></main>
@@ -548,59 +550,90 @@ function speak(){
    },700);
  }
 }
-function drawTrace(){
- const w=String(words[index].en||'');let hint='';
- if(attempt===1)hint=w;
- else if(attempt===2){
-  const chars=[...w],positions=chars.map((c,i)=>/[a-z]/i.test(c)?i:-1).filter(i=>i>=0);
-  for(let i=positions.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[positions[i],positions[j]]=[positions[j],positions[i]];}
-  const reveal=new Set(positions.slice(0,Math.ceil(positions.length*.58)));
-  hint=chars.map((c,i)=>/[a-z]/i.test(c)?(reveal.has(i)?c:' '):c).join('');
- }
- $('ghostOverlay').textContent=hint;
- $('stageCount').textContent='المرحلة '+attempt+' من 3';
- $('instruction').textContent=attempt===1?'المرحلة 1: اكتب الكلمة فوق الحروف الشفافة.':attempt===2?'المرحلة 2: اكتب الكلمة بمساعدة بعض الحروف.':'المرحلة 3: اكتب الكلمة من الذاكرة دون تلميح.';
- $('ghostOverlay').classList.toggle('hidden',attempt===3);
+const sentenceTemplates={
+ "consult / consulted":"The student ____ the teacher before the exam.",
+ "distinguish / distinguished":"It is important to ____ facts from opinions.",
+ "contributions":"Her ____ helped the whole team succeed.",
+ "intellectual":"Reading can support ____ development.",
+ "lunar calendar":"Some holidays are set using the ____.",
+ "facilities":"The school has modern sports ____.",
+ "judicial system":"The ____ helps interpret and apply the law.",
+ "establish / established":"They plan to ____ a new library.",
+ "taxation":"The government uses ____ to collect public money.",
+ "regional rulers":"The ____ met to discuss the area's needs.",
+ "citizens":"The new law protects all ____.",
+ "justice":"Everyone deserves ____ and equal treatment.",
+ "convert into":"Heat can ____ electrical energy.",
+ "Christians":"Many ____ celebrate Christmas.",
+ "suppressive":"The report described the policy as ____.",
+ "expansion":"The city's ____ created new jobs.",
+ "subjugated":"The people were ____ by the invading force.",
+ "knowledge":"Practice helps build your ____.",
+ "conquer / conquered":"The army tried to ____ the territory.",
+ "institutions of":"Universities are important ____ learning.",
+ "effect on":"Lack of sleep can have an ____ memory."
+};
+let selectedAnswer='';
+function makeSentence(w){
+ const template=sentenceTemplates[w.en];
+ if(template)return template;
+ return 'The teacher explained the meaning of ____.';
+}
+function makeOptions(){
+ const correct=String(words[index].en||'');
+ const pool=words.map(w=>String(w.en||'')).filter(v=>v&&v!==correct);
+ const unique=[...new Set(pool)];
+ for(let i=unique.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[unique[i],unique[j]]=[unique[j],unique[i]];}
+ const choices=[correct,...unique.slice(0,3)];
+ for(let i=choices.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]];}
+ return choices;
 }
 function render(){
  const w=words[index];
- $('word').style.cssText=phase==='ready'?'display:block!important;visibility:visible!important;opacity:1!important;position:relative;z-index:2;color:#67e8f9!important;-webkit-text-fill-color:#67e8f9!important':'';
- $('meaning').style.cssText=phase==='ready'?'display:block!important;visibility:visible!important;opacity:1!important;position:relative;z-index:2;color:var(--ink,#f8fafc)!important;-webkit-text-fill-color:var(--ink,#f8fafc)!important':'';
- $('pronunciation').style.cssText=phase==='ready'?'display:block!important;visibility:visible!important;opacity:1!important;position:relative;z-index:2;color:#67e8f9!important;-webkit-text-fill-color:#67e8f9!important':'';
+ $('category').textContent=w.group||'مفردات إنجليزية';
+ $('word').textContent=w.en;$('meaning').textContent=w.ar;$('emoji').textContent=w.emoji||'📘';
  $('pronunciation').textContent=arabicPronunciations[w.en]||'';
- $('pronunciation').classList.toggle('hidden',phase!=='ready');
- $('category').textContent=w.group||'مفردات إنجليزية';$('word').textContent=w.en;$('meaning').textContent=w.ar;$('emoji').textContent=w.emoji||'📘';
- $('progress').style.width=(index/words.length*100)+'%';$('count').textContent='الكلمة '+(index+1)+' من '+words.length;
- $('stageCount').textContent=phase==='write'?'المرحلة '+attempt+' من 3':'جاهز للتدريب';
+ $('progress').style.width=((index+1)/words.length*100)+'%';
+ $('count').textContent='السؤال '+(index+1)+' من '+words.length;
+ $('stageCount').textContent=phase==='write'?'اختيار من متعدد':'جاهز للتدريب';
  $('word').classList.toggle('hidden',phase!=='ready');$('meaning').classList.toggle('hidden',phase!=='ready');$('emoji').classList.toggle('hidden',phase!=='ready');
+ $('pronunciation').classList.toggle('hidden',phase!=='ready');
  $('hear').classList.toggle('hidden',phase!=='ready');$('startTest').classList.toggle('hidden',phase!=='ready');$('lessonHint').classList.toggle('hidden',phase!=='ready');
- $('backToWordRow').classList.toggle('hidden',phase!=='write');$('previousWord').disabled=index===0;
- $('writing').classList.toggle('hidden',phase!=='write');$('feedback').textContent='';
- if(phase==='write'){$('answer').value='';drawTrace();}
- else{$('ghostOverlay').textContent='';$('ghostOverlay').classList.add('hidden');}
+ $('backToWordRow').classList.add('hidden');$('writing').classList.toggle('hidden',phase!=='write');$('feedback').textContent='';
+ $('nextQuestion').disabled=true;selectedAnswer='';
+ if(phase==='write'){
+   $('sentence').textContent=makeSentence(w);
+   $('options').replaceChildren();
+   makeOptions().forEach(option=>{
+     const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent=option;btn.dir='ltr';
+     btn.addEventListener('click',()=>chooseAnswer(option,btn));$('options').appendChild(btn);
+   });
+ }
+ $('previousWord').disabled=index===0;
  save();
 }
-function startTraining(){phase='write';attempt=1;render();$('answer').focus();}
-function checkWriting(){
- if(phase!=='write')return;
- const got=$('answer').value.trim().replace(/\s+/g,'').toLowerCase(),expected=String(words[index].en||'').replace(/\s+/g,'').toLowerCase();
- if(got!==expected){
-  $('feedback').textContent='لسه مش مظبوطة، جرّب تاني وراجع ترتيب الحروف.';$('feedback').style.color='#f87171';
-  const area=$('writing').querySelector('.write-area');
-  if(area){area.classList.remove('shake');void area.offsetWidth;area.classList.add('shake');setTimeout(()=>area.classList.remove('shake'),420);}
-  return;
+function startTraining(){phase='write';attempt=1;render();}
+function chooseAnswer(option,button){
+ if(selectedAnswer||phase!=='write')return;
+ selectedAnswer=option;
+ const correct=String(words[index].en||'');
+ document.querySelectorAll('#options button').forEach(b=>{b.disabled=true;if(b.textContent===correct)b.classList.add('correct');});
+ if(option===correct){
+   $('feedback').textContent='برافو! إجابة صحيحة 👏';$('feedback').style.color='#34d399';
+ }else{
+   button.classList.add('wrong');$('feedback').textContent='مش دي الإجابة الصحيحة. جرّب في السؤال الجاي.';$('feedback').style.color='#fb7185';
  }
- if(attempt<3){
-  attempt++;render();$('feedback').textContent=attempt===2?'صح! هنعرضلك بعض الحروف بس.':'ممتاز! المرة دي من غير تلميح.';$('feedback').style.color='#34d399';$('answer').focus();save();return;
- }
- index=(index+1)%words.length;attempt=1;phase='write';render();
- $('feedback').textContent='برافو! نبدأ الكلمة اللي بعدها.';$('feedback').style.color='#34d399';$('answer').focus();save();
+ $('nextQuestion').disabled=false;
+}
+function nextQuestion(){
+ if(!selectedAnswer)return;
+ index=(index+1)%words.length;attempt=1;phase='write';render();window.scrollTo({top:0,behavior:'smooth'});
 }
 $('hear').onclick=speak;$('startTest').onclick=startTraining;
 $('backToWord').onclick=()=>{phase='ready';attempt=1;render();};
 $('previousWord').onclick=()=>{if(index<=0)return;index--;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
 $('skipWord').onclick=()=>{index=(index+1)%words.length;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
-$('check').onclick=checkWriting;$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')checkWriting();});
+$('nextQuestion').onclick=nextQuestion;
 load();render();
 
 })();
