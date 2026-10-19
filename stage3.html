@@ -387,9 +387,50 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
 @media(max-width:600px){.top{padding:12px 16px!important;font-size:19px!important}.top:after{font-size:8px;letter-spacing:1px;padding:6px 8px}main{width:calc(100% - 24px)!important;padding:16px 0 32px!important}.hero,.panel{border-radius:20px!important}.hero{padding:21px 19px!important}.panel{padding:20px 15px!important}.hero h1{font-size:23px!important}.hero .muted{font-size:12px}.emoji{width:70px;height:70px;border-radius:21px;font-size:39px!important;margin-top:18px!important}.word{font-size:clamp(31px,9vw,44px)!important}.meaning{font-size:20px!important}.row{gap:8px!important}.row .btn{flex:1 1 auto;min-width:0;padding:10px 12px!important}.options{grid-template-columns:1fr!important;gap:9px!important}.options button{min-height:52px}.sentence{font-size:18px;border-radius:15px;padding:17px 12px}.back{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.emoji{animation:none!important}.btn,.back,.options button{transition:none!important}.fill{transition:none!important}}
 </style>
+
+<style id="lughati-header-polish">
+/* Clean, aligned responsive header — visual-only navigation treatment */
+.top{
+  position:sticky!important;top:0;z-index:100;isolation:isolate;
+  display:flex!important;align-items:center;justify-content:space-between;
+  gap:clamp(12px,3vw,28px);width:100%;min-height:76px;
+  padding:12px max(calc((100% - 1000px)/2),clamp(16px,4vw,28px))!important;
+  background:rgba(5,12,25,.92)!important;color:#f5faff!important;
+  border-bottom:1px solid rgba(110,222,232,.18)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.18)!important;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  font-size:initial!important;line-height:1.2;letter-spacing:normal!important;
+}
+.top:after{content:none!important;display:none!important}
+.top-brand{display:inline-flex;align-items:center;gap:12px;min-width:0;color:#f5faff!important;text-decoration:none!important}
+.top-mark{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;border-radius:14px;
+  background:linear-gradient(145deg,rgba(34,211,238,.18),rgba(59,130,246,.12));
+  border:1px solid rgba(103,232,249,.42);color:#8beaf0;font-size:25px;font-weight:950;
+  box-shadow:inset 0 0 18px rgba(34,211,238,.08),0 0 18px rgba(34,211,238,.08)}
+.top-brand-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.top-brand-name{font-size:clamp(20px,2.5vw,24px);font-weight:950;line-height:1.15;white-space:nowrap}
+.top-brand-subtitle{font:750 9px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:1.8px;color:#7ddde8;white-space:nowrap}
+.top-nav{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0}
+.top-home{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:10px 16px;
+  border:1px solid rgba(125,211,252,.24);border-radius:13px;background:rgba(15,35,57,.72);
+  color:#dff5ff!important;text-decoration:none!important;font-size:14px;font-weight:850;white-space:nowrap;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease}
+.top-home span:first-child{font-size:20px;line-height:1;color:#7ddde8}
+.top-home:hover{background:rgba(19,55,79,.9);border-color:rgba(103,232,249,.48);transform:translateY(-1px)}
+.top-home:focus-visible,.top-brand:focus-visible{outline:2px solid #67e8f9;outline-offset:4px;border-radius:12px}
+@media(max-width:600px){
+ .top{min-height:66px;gap:10px;padding:10px 13px!important}
+ .top-brand{gap:9px}.top-mark{width:39px;height:39px;flex-basis:39px;border-radius:12px;font-size:22px}
+ .top-brand-name{font-size:20px}.top-brand-subtitle{font-size:8px;letter-spacing:1.2px}
+ .top-home{min-height:42px;padding:9px 11px;gap:6px;font-size:12px;border-radius:12px}
+ .top-home span:first-child{font-size:18px}
+}
+@media(max-width:350px){.top{padding-inline:9px!important;gap:6px}.top-brand{gap:7px}.top-mark{width:35px;height:35px;flex-basis:35px}.top-brand-subtitle{letter-spacing:.7px;font-size:7px}.top-home{padding-inline:8px}}
+@media(prefers-reduced-motion:reduce){.top-home{transition:none!important}.top-home:hover{transform:none}}
+</style>
 </head>
-<body><header class="top">لُغتي</header>
-<main><a class="back" href="index.html">← الرجوع للرئيسية</a>
+<body><header class="top"><a class="top-brand" href="index.html" aria-label="لُغتي — الصفحة الرئيسية"><span class="top-mark" aria-hidden="true">ل</span><span class="top-brand-copy"><span class="top-brand-name">لُغتي</span><span class="top-brand-subtitle">ENGLISH LEARNING</span></span></a><nav class="top-nav" aria-label="التنقل الرئيسي"><a class="top-home" href="index.html"><span aria-hidden="true">⌂</span><span>الرئيسية</span></a></nav></header>
+<main>
 <section class="hero"><h1>مرحلتي الخاصة — للصف الثالث الثانوي</h1><p class="muted" style="margin:0">أكمل الجملة باختيار الكلمة الإنجليزية الصحيحة من الاختيارات. كل إجابة صحيحة تنقلك للسؤال التالي.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">الكلمة 1</span><span id="stageCount">الكتابة 1 من 3</span></div></section>
 <section class="panel" id="lesson">
   <div class="stage" id="category">المستوى 1 من 100</div>
