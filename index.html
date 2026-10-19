@@ -746,23 +746,26 @@ footer{border-color:#203246!important}.foot-inner{padding-top:18px}.foot-links{g
 </style>
 
 <style id="lughati-cinematic-intro">
-/* Cinematic intro: graceful static fallback plus a lightweight animated sequence. */
-#lughati-intro{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#10253b 0%,#050b16 43%,#010309 100%);opacity:1;visibility:visible;pointer-events:none;isolation:isolate;will-change:opacity;transition:opacity .8s ease,visibility .8s ease}
+/* Premium midnight-space intro with restrained gold and electric-blue light. */
+#lughati-intro{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#10233b 0%,#07111f 36%,#020711 69%,#010309 100%);opacity:1;visibility:visible;pointer-events:none;isolation:isolate;will-change:opacity;transition:opacity .85s ease,visibility .85s ease}
+#lughati-intro:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 15%,rgba(49,143,255,.045) 48%,transparent 70%),radial-gradient(ellipse at 50% 52%,transparent 0%,rgba(0,0,0,.25) 72%,rgba(0,0,0,.68) 100%)}
 #lughati-intro.is-hiding{opacity:0;visibility:hidden}
-#lughati-intro .intro-stars{position:absolute;inset:0;overflow:hidden;opacity:.8;pointer-events:none}
-#lughati-intro .intro-particle{position:absolute;left:var(--px);top:var(--py);width:var(--size);height:var(--size);border-radius:50%;background:var(--particle-color);box-shadow:0 0 10px var(--particle-color),0 0 22px color-mix(in srgb,var(--particle-color),transparent 35%);opacity:0;animation:intro-particle-drift var(--duration) ease-in-out var(--delay) infinite alternate;will-change:transform,opacity}
-@keyframes intro-particle-drift{0%{opacity:.12;transform:translate3d(0,0,0) scale(.7)}50%{opacity:var(--particle-opacity);transform:translate3d(var(--dx),var(--dy),0) scale(1.15)}100%{opacity:.22;transform:translate3d(calc(var(--dx)*-.55),calc(var(--dy)*-.55),0) scale(.85)}}
+#lughati-intro .intro-stars{position:absolute;inset:0;overflow:hidden;opacity:.9;pointer-events:none}
+#lughati-intro .intro-particle{position:absolute;left:var(--px);top:var(--py);width:var(--size);height:var(--size);border-radius:50%;background:var(--particle-color);box-shadow:0 0 7px var(--particle-color),0 0 17px color-mix(in srgb,var(--particle-color),transparent 28%);opacity:0;animation:intro-particle-drift var(--duration) ease-in-out var(--delay) infinite alternate;will-change:transform,opacity}
+@keyframes intro-particle-drift{0%{opacity:.12;transform:translate3d(0,0,0) scale(.72)}50%{opacity:var(--particle-opacity);transform:translate3d(var(--dx),var(--dy),0) scale(1.22)}100%{opacity:.2;transform:translate3d(calc(var(--dx)*-.62),calc(var(--dy)*-.62),0) scale(.84)}}
 #lughati-intro .intro-symbol{display:none}
-#lughati-intro .intro-brand{position:relative;z-index:2;text-align:center;opacity:1;transform:translateY(0) scale(1)}
-#lughati-intro .intro-logo{font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(64px,13vw,112px);font-weight:1000;line-height:1.25;letter-spacing:-3px;color:#f7fdff;text-shadow:0 0 10px #56eaff,0 0 30px #13c8ffb8,0 0 65px #437bff8c;opacity:0;transform:translateY(12px) scale(.94);filter:blur(8px);transition:opacity .95s cubic-bezier(.2,.75,.25,1),transform .95s cubic-bezier(.2,.75,.25,1),filter .95s ease}
+#lughati-intro .intro-brand{position:relative;z-index:2;text-align:center;opacity:1;transform:translateY(0) scale(1);padding:20px 16px}
+#lughati-intro .intro-logo{position:relative;font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(64px,13vw,112px);font-weight:1000;line-height:1.25;letter-spacing:-3px;color:#f7fbff;text-shadow:0 1px 0 rgba(255,255,255,.3),0 0 14px rgba(60,151,255,.42),0 0 38px rgba(20,102,222,.28);opacity:0;transform:translateY(9px) scale(.975);filter:blur(2px);transition:opacity .8s cubic-bezier(.2,.75,.25,1),transform .8s cubic-bezier(.2,.75,.25,1),filter .8s ease}
+#lughati-intro .intro-logo:after{content:"";display:block;width:clamp(72px,14vw,116px);height:2px;margin:8px auto 0;border-radius:99px;background:linear-gradient(90deg,transparent,#f5c76a 22%,#fff0bd 50%,#e9a83c 78%,transparent);box-shadow:0 0 12px rgba(245,190,82,.48);transform:scaleX(.55);opacity:0;transition:transform .8s ease .2s,opacity .8s ease .2s}
 #lughati-intro.logo-visible .intro-logo{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
-#lughati-intro .intro-tagline{margin:12px auto 0;min-height:1.8em;max-width:90vw;font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(15px,3.4vw,25px);font-weight:800;line-height:1.8;color:#dffaff;text-shadow:0 0 8px #57eaff,0 0 22px #168dff,0 0 42px #8b5cf6;opacity:0;transform:translateY(8px);transition:opacity .55s ease,transform .55s ease;direction:rtl}
+#lughati-intro.logo-visible .intro-logo:after{opacity:1;transform:scaleX(1)}
+#lughati-intro .intro-tagline{margin:16px auto 0;min-height:1.8em;max-width:90vw;font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(15px,3.4vw,25px);font-weight:800;line-height:1.8;color:#eaf4ff;text-shadow:0 0 10px rgba(50,143,255,.48),0 0 24px rgba(35,108,219,.25);opacity:0;transform:translateY(8px);transition:opacity .55s ease,transform .55s ease;direction:rtl}
 #lughati-intro.tagline-visible .intro-tagline{opacity:1;transform:translateY(0)}
 #lughati-intro .intro-tagline-text{display:inline}
-#lughati-intro .intro-cursor{display:inline-block;width:2px;height:1.05em;margin-inline-start:4px;vertical-align:-.16em;background:#80f1ff;box-shadow:0 0 9px #46dfff;animation:intro-cursor-blink .75s steps(1,end) infinite}
+#lughati-intro .intro-cursor{display:inline-block;width:2px;height:1.05em;margin-inline-start:4px;vertical-align:-.16em;background:#f2c568;box-shadow:0 0 9px rgba(246,195,91,.8);animation:intro-cursor-blink .75s steps(1,end) infinite}
 @keyframes intro-cursor-blink{0%,48%{opacity:1}49%,100%{opacity:0}}
 @media(max-width:600px){#lughati-intro .intro-tagline{max-width:88vw;line-height:1.9}#lughati-intro .intro-logo{font-size:clamp(58px,15vw,88px)}}
-@media(prefers-reduced-motion:reduce){#lughati-intro{transition:none!important}#lughati-intro .intro-particle,#lughati-intro .intro-cursor{animation:none!important}#lughati-intro .intro-particle{opacity:.35!important}#lughati-intro .intro-logo{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}#lughati-intro .intro-tagline{opacity:1!important;transform:none!important;transition:none!important}#lughati-intro .intro-cursor{display:none!important}}
+@media(prefers-reduced-motion:reduce){#lughati-intro{transition:none!important}#lughati-intro .intro-particle,#lughati-intro .intro-cursor{animation:none!important}#lughati-intro .intro-particle{opacity:.35!important}#lughati-intro .intro-logo{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}#lughati-intro .intro-logo:after{opacity:1!important;transform:none!important;transition:none!important}#lughati-intro .intro-tagline{opacity:1!important;transform:none!important;transition:none!important}#lughati-intro .intro-cursor{display:none!important}}
 </style>
 </head>
 <body>
@@ -798,7 +801,7 @@ footer{border-color:#203246!important}.foot-inner{padding-top:18px}.foot-links{g
   let typingAudio=null,typingGain=null,audioReady=false,typingTimer=null,removeTimer=null;
   function makeParticles(){
     if(!stars||stars.childElementCount)return;
-    const colors=['#55e9ff','#a99aff','#67f4d2','#ff85d2','#ffd27a'];
+    const colors=['#398cff','#63b5ff','#f1bd59','#ffd98a','#1768d8'];
     const count=window.matchMedia&&window.matchMedia('(max-width: 600px)').matches?24:38;
     for(let i=0;i<count;i++){
       const p=document.createElement('span');p.className='intro-particle';
@@ -824,8 +827,8 @@ footer{border-color:#203246!important}.foot-inner{padding-top:18px}.foot-links{g
     if(!audioReady||!typingAudio||typingAudio.state!=='running')return;
     try{
       const osc=typingAudio.createOscillator(),gain=typingAudio.createGain(),now=typingAudio.currentTime;
-      osc.type='square';osc.frequency.setValueAtTime(680+Math.random()*520,now);
-      gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.12,now+.004);gain.gain.exponentialRampToValueAtTime(.0001,now+.028);
+      osc.type='triangle';osc.frequency.setValueAtTime(720+Math.random()*360,now);
+      gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.075,now+.003);gain.gain.exponentialRampToValueAtTime(.0001,now+.024);
       osc.connect(gain);gain.connect(typingGain);osc.start(now);osc.stop(now+.032);
     }catch{}
   }
