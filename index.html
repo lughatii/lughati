@@ -736,6 +736,13 @@ footer{border-color:#203246!important}.foot-inner{padding-top:18px}.foot-links{g
 @media (prefers-reduced-motion: reduce) {
   .path-art.earth-spin { animation: none !important; }
 }
+/* Transparent controls and a roomier navigation bar */
+.nav{min-height:76px;padding:16px 24px!important}
+.primary,.top-cta,.secondary,.btn,.nav-settings-link{box-shadow:none!important}
+.primary,.top-cta{background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.25)!important;color:inherit!important;backdrop-filter:blur(8px)}
+.primary:hover,.top-cta:hover{background:rgba(255,255,255,.1)!important;border-color:rgba(103,232,249,.6)!important}
+.secondary{background:transparent!important;border:1px solid rgba(255,255,255,.18);border-radius:999px}
+@media(max-width:600px){.nav{gap:10px;padding:12px 13px!important;min-height:66px}.brand{font-size:23px}.nav-settings-link{width:42px;height:42px}}
 </style>
 </head>
 <body>
