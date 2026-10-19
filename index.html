@@ -744,8 +744,45 @@ footer{border-color:#203246!important}.foot-inner{padding-top:18px}.foot-links{g
 .secondary{background:transparent!important;border:1px solid rgba(255,255,255,.18);border-radius:999px}
 @media(max-width:600px){.nav{gap:10px;padding:12px 13px!important;min-height:66px}.brand{font-size:23px}.nav-settings-link{width:42px;height:42px}}
 </style>
+
+<style id="lughati-cinematic-intro">
+#lughati-intro{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 48%,#10253b 0%,#050b16 43%,#010309 100%);animation:intro-dismiss .9s ease 5.9s forwards;pointer-events:none;isolation:isolate}
+#lughati-intro .intro-stars{position:absolute;inset:0;background:radial-gradient(circle at 20% 25%,#39d9ff55 0 1px,transparent 2px),radial-gradient(circle at 75% 22%,#b4a0ff66 0 1px,transparent 2px),radial-gradient(circle at 65% 76%,#56f5d055 0 1px,transparent 2px),radial-gradient(circle at 30% 80%,#ff7ac855 0 1px,transparent 2px);background-size:180px 170px,220px 190px,240px 210px,200px 180px;opacity:0;animation:intro-stars-in 1.2s ease .2s forwards}
+#lughati-intro .intro-symbol{position:absolute;left:50%;top:50%;font-family:Arial,sans-serif;font-weight:800;font-size:clamp(24px,5vw,48px);color:var(--tone);text-shadow:0 0 18px var(--tone);opacity:0;transform:translate(var(--sx),var(--sy)) scale(1.5) rotate(var(--rot));animation:intro-gather 1.65s cubic-bezier(.16,1,.3,1) var(--delay) forwards}
+#lughati-intro .intro-symbol:nth-of-type(2){--sx:-42vw;--sy:-24vh;--rot:-35deg;--delay:.15s;--tone:#55e9ff}
+#lughati-intro .intro-symbol:nth-of-type(3){--sx:35vw;--sy:-30vh;--rot:22deg;--delay:.28s;--tone:#a99aff}
+#lughati-intro .intro-symbol:nth-of-type(4){--sx:-33vw;--sy:22vh;--rot:48deg;--delay:.35s;--tone:#67f4d2}
+#lughati-intro .intro-symbol:nth-of-type(5){--sx:42vw;--sy:18vh;--rot:-20deg;--delay:.22s;--tone:#ff85d2}
+#lughati-intro .intro-symbol:nth-of-type(6){--sx:-12vw;--sy:-40vh;--rot:15deg;--delay:.42s;--tone:#ffd27a}
+#lughati-intro .intro-symbol:nth-of-type(7){--sx:13vw;--sy:38vh;--rot:-42deg;--delay:.32s;--tone:#62c8ff}
+#lughati-intro .intro-symbol:nth-of-type(8){--sx:5vw;--sy:-32vh;--rot:30deg;--delay:.5s;--tone:#b8ffea}
+#lughati-intro .intro-symbol:nth-of-type(9){--sx:-40vw;--sy:-4vh;--rot:-15deg;--delay:.38s;--tone:#d3a2ff}
+#lughati-intro .intro-symbol:nth-of-type(10){--sx:39vw;--sy:-5vh;--rot:38deg;--delay:.48s;--tone:#73f4ff}
+#lughati-intro .intro-symbol:nth-of-type(11){--sx:-24vw;--sy:34vh;--rot:20deg;--delay:.55s;--tone:#ff9bd9}
+#lughati-intro .intro-symbol:nth-of-type(12){--sx:26vw;--sy:-35vh;--rot:-28deg;--delay:.3s;--tone:#8ef5d8}
+#lughati-intro .intro-symbol:nth-of-type(13){--sx:27vw;--sy:30vh;--rot:45deg;--delay:.44s;--tone:#b7a2ff}
+#lughati-intro .intro-symbol:nth-of-type(14){--sx:-6vw;--sy:42vh;--rot:-12deg;--delay:.6s;--tone:#7de6ff}
+#lughati-intro .intro-symbol:nth-of-type(15){--sx:0;--sy:-45vh;--rot:28deg;--delay:.52s;--tone:#ffd27a}
+#lughati-intro .intro-symbol:nth-of-type(16){--sx:-45vw;--sy:30vh;--rot:-30deg;--delay:.26s;--tone:#6bf3d6}
+#lughati-intro .intro-symbol:nth-of-type(17){--sx:45vw;--sy:34vh;--rot:18deg;--delay:.4s;--tone:#ff8bd7}
+#lughati-intro .intro-symbol:nth-of-type(18){--sx:-28vw;--sy:-36vh;--rot:40deg;--delay:.58s;--tone:#8beaff}
+#lughati-intro .intro-symbol:nth-of-type(19){--sx:31vw;--sy:5vh;--rot:-32deg;--delay:.36s;--tone:#b8a5ff}
+#lughati-intro .intro-symbol:nth-of-type(20){--sx:-16vw;--sy:10vh;--rot:22deg;--delay:.45s;--tone:#73f4d6}
+#lughati-intro .intro-symbol:nth-of-type(21){--sx:16vw;--sy:-12vh;--rot:-25deg;--delay:.5s;--tone:#ffb4e7}
+@keyframes intro-gather{0%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(1.45) rotate(var(--rot));filter:blur(5px)}18%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translate(0,0) scale(.12) rotate(0);filter:blur(1px)}}
+#lughati-intro .intro-brand{position:relative;z-index:2;text-align:center;opacity:0;transform:scale(.72);animation:intro-logo-in 1.1s cubic-bezier(.16,1,.3,1) 1.75s forwards}
+#lughati-intro .intro-logo{font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(64px,13vw,112px);font-weight:1000;line-height:1.25;letter-spacing:-3px;color:#f7fdff;text-shadow:0 0 10px #56eaff,0 0 30px #13c8ffb8,0 0 65px #437bff8c}
+#lughati-intro .intro-tagline{margin-top:12px;font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(15px,3.4vw,25px);font-weight:800;color:#dffaff;opacity:0;animation:intro-tag-in 1s ease 2.55s forwards;text-shadow:0 0 8px #57eaff,0 0 22px #168dff,0 0 42px #8b5cf6}
+@keyframes intro-logo-in{0%{opacity:0;transform:scale(.72);filter:blur(12px)}70%{opacity:1;transform:scale(1.06);filter:blur(0)}100%{opacity:1;transform:scale(1)}}
+@keyframes intro-tag-in{from{opacity:0;transform:translateY(12px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes intro-stars-in{to{opacity:.55}}
+@keyframes intro-dismiss{to{opacity:0;visibility:hidden}}
+@media(max-width:600px){#lughati-intro .intro-tagline{max-width:88vw;margin-inline:auto;line-height:1.8}#lughati-intro .intro-symbol{font-size:28px}}
+@media(prefers-reduced-motion:reduce){#lughati-intro{animation:intro-dismiss .2s ease 1.5s forwards}#lughati-intro .intro-symbol,#lughati-intro .intro-brand,#lughati-intro .intro-tagline{animation-duration:.01ms!important;animation-delay:0s!important}}
+</style>
 </head>
 <body>
+<div id="lughati-intro" aria-label="مقدمة لُغتي" aria-hidden="true"><div class="intro-stars"></div><span class="intro-symbol">A</span><span class="intro-symbol">あ</span><span class="intro-symbol">中</span><span class="intro-symbol">ع</span><span class="intro-symbol">Ω</span><span class="intro-symbol">Ж</span><span class="intro-symbol">文</span><span class="intro-symbol">ñ</span><span class="intro-symbol">語</span><span class="intro-symbol">Б</span><span class="intro-symbol">ก</span><span class="intro-symbol">한</span><span class="intro-symbol">字</span><span class="intro-symbol">ß</span><span class="intro-symbol">λ</span><span class="intro-symbol">ش</span><span class="intro-symbol">え</span><span class="intro-symbol">Ж</span><span class="intro-symbol">م</span><span class="intro-symbol">あ</span><div class="intro-brand"><div class="intro-logo">لُغتي</div><div class="intro-tagline">رحلتك نحو إتقان اللغة الإنجليزية</div></div></div>
 <header class="shell"><div class="nav">
 <a class="brand" href="#home" aria-label="لُغتي الرئيسية"><span class="avatar-ring" aria-label="صورة صاحب موقع لُغتي"><span class="avatar-core"><img src="assets/profile-full.jpg" alt="صورة صاحب موقع لُغتي" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;border-radius:50%;display:block"></span></span><span>لُغتي</span></a>
 <nav class="navlinks" aria-label="القائمة"><a href="#home">الرئيسية</a><a class="nav-settings-link" href="settings.html" aria-label="الإعدادات" title="الإعدادات"><i class="fa-solid fa-gear" aria-hidden="true"></i></a></nav>
