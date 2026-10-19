@@ -207,6 +207,11 @@ footer:before{content:"";position:absolute;top:-1px;left:30%;width:40%;height:1p
 #lughati-intro .intro-tagline{margin:16px auto 0;min-height:1.8em;max-width:90vw;font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(15px,3.4vw,25px);font-weight:800;line-height:1.8;color:#eaf4ff;text-shadow:0 0 10px rgba(50,143,255,.48),0 0 24px rgba(35,108,219,.25);opacity:0;transform:translateY(8px);transition:opacity .55s ease,transform .55s ease;direction:rtl}
 #lughati-intro.tagline-visible .intro-tagline{opacity:1;transform:translateY(0)}
 #lughati-intro .intro-cursor{display:inline-block;width:2px;height:1.05em;margin-inline-start:4px;vertical-align:-.16em;background:#f2c568;box-shadow:0 0 9px rgba(246,195,91,.8);animation:intro-cursor-blink .75s steps(1,end) infinite}
+ #lughati-intro .intro-tagline{max-width:min(760px,90vw);white-space:pre-line;font-size:clamp(14px,2.7vw,21px);line-height:2.05}
+ #lughati-intro .intro-brand{width:min(850px,100%);padding:24px 20px 92px}
+ #lughati-intro .intro-skip{position:absolute;z-index:5;bottom:max(22px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:11px 22px;border:1px solid rgba(241,189,89,.42);border-radius:999px;background:rgba(8,20,35,.72);color:#f8e8bd;font:800 14px Cairo,Tahoma,sans-serif;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.24);backdrop-filter:blur(10px);transition:background .2s,border-color .2s,opacity .2s}
+ #lughati-intro .intro-skip:hover{background:rgba(26,48,69,.92);border-color:rgba(241,189,89,.8)}
+ @media(max-width:480px){#lughati-intro .intro-brand{padding:18px 14px 100px}#lughati-intro .intro-tagline{font-size:14px;line-height:1.95}}
 @keyframes intro-cursor-blink{0%,48%{opacity:1}49%,100%{opacity:0}}
 /* Scroll reveals stay invisible only when JS is available. */
 html.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
@@ -335,7 +340,7 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
 </style>
 </head>
 <body>
-<div id="lughati-intro" aria-label="مقدمة لُغتي" aria-hidden="true"><div class="intro-stars" aria-hidden="true"></div><div class="intro-brand"><div class="intro-logo">لُغتي</div><div class="intro-tagline" aria-label="رحلتك نحو إتقان اللغة الإنجليزية"><span class="intro-tagline-text"></span><span class="intro-cursor" aria-hidden="true"></span></div></div></div>
+<div id="lughati-intro" aria-label="مقدمة لُغتي" aria-hidden="true"><div class="intro-stars" aria-hidden="true"></div><div class="intro-brand"><div class="intro-logo">لُغتي</div><div class="intro-tagline" aria-label="رحلتك نحو إتقان اللغة الإنجليزية"><span class="intro-tagline-text"></span><span class="intro-cursor" aria-hidden="true"></span></div></div><button id="introSkip" class="intro-skip" type="button">تخطي المقدمة <i class="fa-solid fa-forward-step" aria-hidden="true"></i></button></div>
 <header class="shell"><div class="nav">
 <a class="brand" href="#home" aria-label="لُغتي الرئيسية"><span class="avatar-ring" aria-label="صورة صاحب موقع لُغتي"><span class="avatar-core"><img src="assets/profile-full.jpg" alt="صورة صاحب موقع لُغتي" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;border-radius:50%;display:block"></span></span><span>لُغتي</span></a>
 <nav class="navlinks" aria-label="القائمة"><a href="#home">الرئيسية</a><a class="nav-settings-link" href="settings.html" aria-label="الإعدادات" title="الإعدادات"><i class="fa-solid fa-gear" aria-hidden="true"></i></a></nav>
@@ -360,11 +365,11 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
 <div class="settings-panel" id="settingsPanel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="settingsTitle"><div class="settings-card"><div class="settings-head"><h2 id="settingsTitle">الإعدادات</h2><button class="close-btn" id="settingsClose" type="button">إغلاق ✕</button></div><section class="settings-section" aria-labelledby="colorsTitle"><h3 id="colorsTitle">ألوان الموقع</h3><label class="setting-label" for="accentSelect">اختار اللون الأساسي<select id="accentSelect"><option value="blue">أزرق سماوي</option><option value="purple">بنفسجي</option><option value="pink">وردي</option><option value="green">أخضر</option></select></label></section><section class="settings-section contact-settings" aria-labelledby="contactTitle"><h3 id="contactTitle">التواصل مع المنشئ / المطوّر</h3><p>لو عندك اقتراح أو واجهتك مشكلة في الموقع، تقدر تتواصل معايا مباشرة.</p><a class="wa-link" href="https://wa.me/201125260487?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9%20%D9%81%D9%8A%20%D9%85%D9%88%D9%82%D8%B9%20%D9%84%D8%BA%D8%AA%D9%8A" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">✆</span> تواصل عبر واتساب</a></section></div></div>
 <div class="settings-panel" id="stagePanel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="stageTitle"><div class="settings-card"><div class="settings-head"><h2 id="stageTitle">اختار المرحلة اللي تناسبك</h2><button class="close-btn" id="stageClose" type="button">إغلاق ✕</button></div><p class="stage-modal-description">ابدأ مباشرة في مسار الصف الثالث الثانوي.</p><div class="stage-modal-actions"><a class="primary" href="stage3.html?v=20261017-2">للصف الثالث الثانوي فقط ←</a></div></div></div>
 <script>
-(()=>{document.documentElement.classList.add('js');const $=id=>document.getElementById(id),intro=$('lughati-intro'),stage=$('stagePanel'),settings=$('settingsPanel');if(intro){
+(()=>{document.documentElement.classList.add('js');const $=id=>document.getElementById(id),intro=$('lughati-intro'),stage=$('stagePanel'),settings=$('settingsPanel');if(intro){try{if(sessionStorage.getItem('lughati-intro-seen')==='1'){intro.remove()}else{sessionStorage.setItem('lughati-intro-seen','1')}}catch{}if(intro.isConnected){
   const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stars=intro.querySelector('.intro-stars'),logo=intro.querySelector('.intro-logo'),tagline=intro.querySelector('.intro-tagline-text'),cursor=intro.querySelector('.intro-cursor');
-  const subtitle='رحلتك نحو إتقان اللغة الإنجليزية';
-  let typingAudio=null,typingGain=null,audioReady=false,typingTimer=null,removeTimer=null;
+  const subtitle='في لُغتي، كل كلمة جديدة بتقرّبك من هدفك.\\nابدأ من الأساسيات، اسمع النطق، ودرّب نفسك خطوة بخطوة.\\nخلّي كل دقيقة مذاكرة فرق حقيقي في مستواك.';
+  let typingAudio=null,typingGain=null,audioReady=false,typingTimer=null,removeTimer=null;const skipIntro=$('introSkip');if(skipIntro)skipIntro.addEventListener('click',finishIntro);
   function makeParticles(){
     if(!stars||stars.childElementCount)return;
     const colors=['#398cff','#63b5ff','#f1bd59','#ffd98a','#1768d8'];
@@ -410,7 +415,7 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
     intro.classList.add('logo-visible','tagline-visible');
     if(tagline)tagline.textContent=subtitle;
     if(cursor)cursor.style.display='none';
-    window.setTimeout(finishIntro,2800);
+    window.setTimeout(finishIntro,6500);
   }else{
     prepareTypingAudio();
     window.setTimeout(()=>intro.classList.add('logo-visible'),350);
@@ -427,17 +432,17 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
         if(index>=subtitle.length){
           window.clearInterval(typingTimer);typingTimer=null;
           window.setTimeout(()=>{if(cursor)cursor.style.display='none'},900);
-          window.setTimeout(finishIntro,1450);
+          window.setTimeout(finishIntro,2400);
         }
-      },78);
+      },48);
     },1350);
     // Some browsers block sound until the first user gesture; resume it if a gesture occurs during the intro.
     const unlockAudio=()=>{if(typingAudio&&typingAudio.state==='suspended')typingAudio.resume().catch(()=>{});window.removeEventListener('pointerdown',unlockAudio);window.removeEventListener('keydown',unlockAudio)};
     window.addEventListener('pointerdown',unlockAudio,{once:true,passive:true});
     window.addEventListener('keydown',unlockAudio,{once:true});
-    window.setTimeout(()=>{if(intro.isConnected&&(!tagline||tagline.textContent.length<subtitle.length)){if(tagline)tagline.textContent=subtitle;if(cursor)cursor.style.display='none';finishIntro()}},9000);
+    window.setTimeout(()=>{if(intro.isConnected&&(!tagline||tagline.textContent.length<subtitle.length)){if(tagline)tagline.textContent=subtitle;if(cursor)cursor.style.display='none';finishIntro()}},14000);
   }
-}function open(p){if(!p)return;p.classList.add('open');p.setAttribute('aria-hidden','false');const closeControl=p.querySelector('.close-btn');if(closeControl)closeControl.focus()}function close(p){if(!p)return;p.classList.remove('open');p.setAttribute('aria-hidden','true')}$('startTop').addEventListener('click',()=>open(stage));$('startMain').addEventListener('click',()=>open(stage));document.querySelectorAll('.choose-stage').forEach(b=>b.addEventListener('click',()=>location.href=b.dataset.href));$('stageClose').addEventListener('click',()=>close(stage));$('settingsOpen')?.addEventListener('click',()=>open(settings));$('settingsClose')?.addEventListener('click',()=>close(settings));stage.addEventListener('click',e=>{if(e.target===stage)close(stage)});settings?.addEventListener('click',e=>{if(e.target===settings)close(settings)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){close(stage);close(settings)}});const revealItems=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});revealItems.forEach(item=>revealObserver.observe(item))}else revealItems.forEach(item=>item.classList.add('is-visible'));const root=document.documentElement;const palettes={blue:['#11c9ff','#287bff','#9d4dff'],purple:['#b56aff','#6d5bff','#ed69ff'],pink:['#ff6bb8','#ff4bce','#8c6bff'],green:['#3ce8c1','#19a8ff','#76f5a6']};function accent(k){const c=palettes[k]||palettes.blue;root.style.setProperty('--cyan',c[0]);root.style.setProperty('--blue',c[1]);root.style.setProperty('--purple',c[2]);try{localStorage.setItem('lughati-accent',k)}catch{}}let color='blue';try{color=localStorage.getItem('lughati-accent')||'blue'}catch{}$('accentSelect').value=color;accent(color);$('accentSelect').addEventListener('change',e=>accent(e.target.value));})();
+}}function open(p){if(!p)return;p.classList.add('open');p.setAttribute('aria-hidden','false');const closeControl=p.querySelector('.close-btn');if(closeControl)closeControl.focus()}function close(p){if(!p)return;p.classList.remove('open');p.setAttribute('aria-hidden','true')}$('startTop').addEventListener('click',()=>open(stage));$('startMain').addEventListener('click',()=>open(stage));document.querySelectorAll('.choose-stage').forEach(b=>b.addEventListener('click',()=>location.href=b.dataset.href));$('stageClose').addEventListener('click',()=>close(stage));$('settingsOpen')?.addEventListener('click',()=>open(settings));$('settingsClose')?.addEventListener('click',()=>close(settings));stage.addEventListener('click',e=>{if(e.target===stage)close(stage)});settings?.addEventListener('click',e=>{if(e.target===settings)close(settings)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){close(stage);close(settings)}});const revealItems=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});revealItems.forEach(item=>revealObserver.observe(item))}else revealItems.forEach(item=>item.classList.add('is-visible'));const root=document.documentElement;const palettes={blue:['#11c9ff','#287bff','#9d4dff'],purple:['#b56aff','#6d5bff','#ed69ff'],pink:['#ff6bb8','#ff4bce','#8c6bff'],green:['#3ce8c1','#19a8ff','#76f5a6']};function accent(k){const c=palettes[k]||palettes.blue;root.style.setProperty('--cyan',c[0]);root.style.setProperty('--blue',c[1]);root.style.setProperty('--purple',c[2]);try{localStorage.setItem('lughati-accent',k)}catch{}}let color='blue';try{color=localStorage.getItem('lughati-accent')||'blue'}catch{}$('accentSelect').value=color;accent(color);$('accentSelect').addEventListener('change',e=>accent(e.target.value));})();
 </script>
 
 
