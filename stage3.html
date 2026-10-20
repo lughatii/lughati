@@ -436,7 +436,6 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
   <div class="stage" id="category">المستوى 1 من 100</div>
   <div class="emoji" id="emoji">📘</div>
   <div class="word" id="word"></div>
-  <div class="pronunciation" id="pronunciation" dir="rtl" aria-label="النطق التقريبي بالعربي"></div>
   <div class="meaning" id="meaning"></div>
   <div class="hint" id="lessonHint">راجع معنى الكلمة، ثم اختَر الإجابة التي تكمل الجملة بشكل صحيح.</div>
   <div class="row" id="preTestControls">
@@ -470,59 +469,6 @@ const words=[
 {en:"safe from",ar:"آمن من",spoken:"safe from",emoji:'📘',group:'تعبيرات وكلمات'},
 {en:"worry about",ar:"يقلق بشأن",spoken:"worry about",emoji:'📘',group:'تعبيرات وكلمات'}
 ];
-const arabicPronunciations = {
-  "consult / consulted": "كَنْسَلت / كَنْسَلتِد",
-  "distinguish / distinguished": "دِستِنْجْوِش / دِستِنْجْوِشْت",
-  "contributions": "كونتريبيوشِنز",
-  "intellectual": "إنتِلِكْتشُوَل",
-  "lunar calendar": "لونَر كالِندَر",
-  "facilities": "فَسِلِتيز",
-  "judicial system": "جوديشَل سِستَم",
-  "establish / established": "إستابْلِش / إستابْلِشْت",
-  "taxation": "تاكْسَيْشَن",
-  "regional rulers": "ريجَنَل رولَرز",
-  "citizens": "سِتِزِنز",
-  "justice": "جَستِس",
-  "convert into": "كَنْفِرت إنتو",
-  "Christians": "كريستشَنز",
-  "suppressive": "سَبرِسِف",
-  "expansion": "إكْسبانشَن",
-  "subjugated": "سَبجوجَيْتِد",
-  "knowledge": "نولِج",
-  "conquer / conquered": "كونكَر / كونكَرْد",
-  "institutions of": "إنستِتيوشَنز أُف",
-  "effect on": "إفِكت أون",
-  "Muslim": "مَسْلِم",
-  "revolutionized": "رِفَلوشَنايزْد",
-  "smoothly": "سموذلي",
-  "assassinate / assassinated": "أَسَسِنَيْت / أَسَسِنَيْتِد",
-  "confer / conferred": "كَنْفِر / كَنْفِرْد",
-  "fair": "فِير",
-  "establishment": "إستابْلِشْمَنت",
-  "freedom": "فريدم",
-  "census": "سِنْسَس",
-  "improve / improved": "إمبروف / إمبروفْد",
-  "economic system": "إيكونومِك سِستَم",
-  "military police": "مِلِتَري پَليس",
-  "public treasury": "بابْلِك تْرِجَري",
-  "interact with": "إنتَراكت وِذ",
-  "administration": "أَدْمِنِستْرَيْشَن",
-  "tolerant": "تالَرَنت",
-  "appeal to": "أَپيل تو",
-  "Jews": "جوز",
-  "recruited in": "ريكرُوتِد إن",
-  "Empire": "إمپاير",
-  "victories": "ڤِكتَريز",
-  "The Islamic State": "ذي إسلامِك ستيت",
-  "territories": "تيرِتوريز",
-  "law": "لو",
-  "the stability": "ذَ ستابِلِتي",
-  "non-Muslim": "نون مَسْلِم",
-  "conquered lands": "كونكَرْد لاندز",
-  "effectively": "إفِكتِڤلي",
-  "significant": "سِجْنِفِكَنت"
-};
-
 const $=id=>document.getElementById(id);
 const STORE='lughati-stage3-learning-v3';
 let index=0,attempt=1,phase='ready';
@@ -559,20 +505,8 @@ function speak(){
      englishVoices.find(v=>/^en[-_]US$/i.test(v.lang || '')) ||
      englishVoices.find(v=>/^en[-_]GB$/i.test(v.lang || '')) ||
      englishVoices[0];
-   const arabicVoices=voices.filter(v=>/^ar([_-]|$)/i.test(v.lang || ''));
-   const arabicVoice=arabicVoices.find(v=>/^ar[-_]EG$/i.test(v.lang || ''))||arabicVoices[0];
-   const arabicText=String(w.ar||'').trim();
-   const speakArabic=(count=0)=>{
-     if(!arabicText || count>=2) return;
-     const ar=new SpeechSynthesisUtterance(arabicText);
-     ar.lang=arabicVoice?arabicVoice.lang:'ar-EG';
-     ar.rate=0.9;
-     if(arabicVoice) ar.voice=arabicVoice;
-     ar.onend=()=>speakArabic(count+1);
-     synth.speak(ar);
-   };
    const speakEnglish=(count=0)=>{
-     if(count>=2){speakArabic();return;}
+     if(count>=2)return;
      const u=new SpeechSynthesisUtterance(text);
      u.lang=preferred?preferred.lang:'en-US';
      u.rate=0.86;
