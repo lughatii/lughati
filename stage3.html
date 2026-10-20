@@ -491,7 +491,7 @@ function speak(){
  const synth=window.speechSynthesis;
  synth.cancel();
  const w=words[index];
- const englishText=String(w.spoken || w.en || '').replace(/\\s*\\/\\s*/g, ', ').replace(/\\.{3,}/g, ' ').trim();
+ const englishText=String(w.spoken || w.en || '').replace(/\s*\/\s*/g, ', ').replace(/\.{3,}/g, ' ').trim();
  const arabicText=String(w.ar || '').trim();
  if(!englishText && !arabicText) return;
  let started=false;
