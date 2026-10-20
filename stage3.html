@@ -491,7 +491,7 @@ function speak(){
  const synth=window.speechSynthesis;
  synth.cancel();
  const w=words[index];
- const text=String(w.spoken || w.en || '').replace(/\s*\/\s*/g, ', ').trim();
+ const text=String(w.en || '').replace(/\s*\/\s*/g, ', ').trim();
  if(!text) return;
  let started=false;
  const speakNow=()=>{
@@ -575,12 +575,10 @@ function render(){
  const w=words[index];
  $('category').textContent=w.group||'مفردات إنجليزية';
  $('word').textContent=w.en;$('meaning').textContent=w.ar;$('emoji').textContent=w.emoji||'📘';
- $('pronunciation').textContent=arabicPronunciations[w.en]||'';
- $('progress').style.width=((index+1)/words.length*100)+'%';
+  $('progress').style.width=((index+1)/words.length*100)+'%';
  $('count').textContent='السؤال '+(index+1)+' من '+words.length;
  $('stageCount').textContent=phase==='write'?'اختيار من متعدد':'جاهز للتدريب';
  $('word').classList.toggle('hidden',phase!=='ready');$('meaning').classList.toggle('hidden',phase!=='ready');$('emoji').classList.toggle('hidden',phase!=='ready');
- $('pronunciation').classList.toggle('hidden',phase!=='ready');
  $('hear').classList.toggle('hidden',phase!=='ready');$('startTest').classList.toggle('hidden',phase!=='ready');$('lessonHint').classList.toggle('hidden',phase!=='ready');
  $('backToWordRow').classList.add('hidden');$('writing').classList.toggle('hidden',phase!=='write');$('feedback').textContent='';
  $('nextQuestion').disabled=true;selectedAnswer='';
