@@ -491,32 +491,48 @@ function speak(){
  const synth=window.speechSynthesis;
  synth.cancel();
  const w=words[index];
- const text=String(w.en || '').replace(/\s*\/\s*/g, ', ').trim();
- if(!text) return;
+ const englishText=String(w.spoken || w.en || '').replace(/\\s*\\/\\s*/g, ', ').replace(/\\.{3,}/g, ' ').trim();
+ const arabicText=String(w.ar || '').trim();
+ if(!englishText && !arabicText) return;
  let started=false;
  const speakNow=()=>{
    if(started) return;
    started=true;
    const voices=synth.getVoices();
    const englishVoices=voices.filter(v=>/^en([_-]|$)/i.test(v.lang || ''));
-   const preferred=
+   const preferredEnglish=
      englishVoices.find(v=>/^en[-_]EG$/i.test(v.lang || '')) ||
      englishVoices.find(v=>/egypt|egyptian|masri/i.test((v.name || '')+' '+(v.lang || ''))) ||
      englishVoices.find(v=>/^en[-_]US$/i.test(v.lang || '')) ||
      englishVoices.find(v=>/^en[-_]GB$/i.test(v.lang || '')) ||
      englishVoices[0];
-   const speakEnglish=(count=0)=>{
-     if(count>=2)return;
-     const u=new SpeechSynthesisUtterance(text);
-     u.lang=preferred?preferred.lang:'en-US';
-     u.rate=0.78;
-     u.pitch=1;
-     if(preferred) u.voice=preferred;
-     u.onerror=()=>{$('feedback').textContent='تعذّر تشغيل الصوت. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';};
-     u.onend=()=>speakEnglish(count+1);
-     synth.speak(u);
+   const arabicVoices=voices.filter(v=>/^ar([_-]|$)/i.test(v.lang || ''));
+   const preferredArabic=
+     arabicVoices.find(v=>/^ar[-_]EG$/i.test(v.lang || '')) ||
+     arabicVoices.find(v=>/^ar[-_]SA$/i.test(v.lang || '')) ||
+     arabicVoices[0];
+   const speakArabic=()=>{
+     if(!arabicText) return;
+     const ar=new SpeechSynthesisUtterance(arabicText);
+     ar.lang=preferredArabic?preferredArabic.lang:'ar-EG';
+     ar.rate=0.9;
+     ar.pitch=1;
+     if(preferredArabic) ar.voice=preferredArabic;
+     ar.onerror=()=>{$('feedback').textContent='تعذّر تشغيل النطق العربي. تأكد من تفعيل صوت عربي في إعدادات جهازك.';};
+     synth.speak(ar);
    };
-   speakEnglish();
+   if(englishText){
+     const en=new SpeechSynthesisUtterance(englishText);
+     en.lang=preferredEnglish?preferredEnglish.lang:'en-US';
+     en.rate=0.78;
+     en.pitch=1;
+     if(preferredEnglish) en.voice=preferredEnglish;
+     en.onerror=()=>{$('feedback').textContent='تعذّر تشغيل الصوت الإنجليزي. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';};
+     en.onend=speakArabic;
+     synth.speak(en);
+   }else{
+     speakArabic();
+   }
  };
  const voices=synth.getVoices();
  if(voices.length){
