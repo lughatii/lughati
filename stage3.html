@@ -509,7 +509,7 @@ function speak(){
      if(count>=2)return;
      const u=new SpeechSynthesisUtterance(text);
      u.lang=preferred?preferred.lang:'en-US';
-     u.rate=0.86;
+     u.rate=0.78;
      u.pitch=1;
      if(preferred) u.voice=preferred;
      u.onerror=()=>{$('feedback').textContent='تعذّر تشغيل الصوت. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';};
