@@ -449,7 +449,9 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
   <div class="row hidden" id="backToWordRow"><button class="btn" id="backToWord" type="button">← الرجوع للكلمة</button></div>
   <div id="writing" class="hidden">
     <p class="hint" id="instruction">اختر الكلمة التي تكمل الجملة.</p>
-    <div class="sentence" id="sentence" dir="ltr">The teacher explained the meaning of ____.</div>
+    <div class="sentence" id="sentence" dir="ltr">We ____ achieve our goals.</div>
+    <p class="hint sentence-meaning" id="sentenceMeaning" dir="rtl" aria-live="polite"></p>
+    <div class="row sentence-audio-row"><button class="btn" id="hearSentence" type="button">🔊 استمع للجملة</button></div>
     <div class="options" id="options" role="group" aria-label="اختيارات إكمال الجملة"></div>
     <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
     <div class="row"><button class="btn primary" id="nextQuestion" type="button" disabled>السؤال التالي ←</button></div>
@@ -531,33 +533,59 @@ function speak(){
  }
 }
 const sentenceTemplates={
- "consult / consulted":"The student ____ the teacher before the exam.",
- "distinguish / distinguished":"It is important to ____ facts from opinions.",
- "contributions":"Her ____ helped the whole team succeed.",
- "intellectual":"Reading can support ____ development.",
- "lunar calendar":"Some holidays are set using the ____.",
- "facilities":"The school has modern sports ____.",
- "judicial system":"The ____ helps interpret and apply the law.",
- "establish / established":"They plan to ____ a new library.",
- "taxation":"The government uses ____ to collect public money.",
- "regional rulers":"The ____ met to discuss the area's needs.",
- "citizens":"The new law protects all ____.",
- "justice":"Everyone deserves ____ and equal treatment.",
- "convert into":"Heat can ____ electrical energy.",
- "Christians":"Many ____ celebrate Christmas.",
- "suppressive":"The report described the policy as ____.",
- "expansion":"The city's ____ created new jobs.",
- "subjugated":"The people were ____ by the invading force.",
- "knowledge":"Practice helps build your ____.",
- "conquer / conquered":"The army tried to ____ the territory.",
- "institutions of":"Universities are important ____ learning.",
- "effect on":"Lack of sleep can have an ____ memory."
+ "aim to":"We ____ achieve our goals.",
+ "compared to":"____ last year, the results are much better.",
+ "contribute to":"Regular exercise can ____ better health.",
+ "essential to":"Clean water is ____ human life.",
+ "protect from":"A good coat helps ____ the cold.",
+ "range from ... to":"Temperatures ____ 10 degrees ____ 30 degrees.",
+ "safe from":"The helmet keeps cyclists ____ head injuries.",
+ "worry about":"Try not to ____ the exam."
+};
+const sentenceArabicMeanings={
+ "aim to":"يهدف إلى تحقيق أهدافنا.",
+ "compared to":"مقارنةً بالعام الماضي، النتائج أفضل بكثير.",
+ "contribute to":"تساهم التمارين المنتظمة في صحة أفضل.",
+ "essential to":"الماء النظيف ضروري لحياة الإنسان.",
+ "protect from":"يساعد المعطف الجيد على الحماية من البرد.",
+ "range from ... to":"تتراوح درجات الحرارة من 10 إلى 30 درجة.",
+ "safe from":"تحمي الخوذة راكبي الدراجات من إصابات الرأس.",
+ "worry about":"حاول ألا تقلق بشأن الامتحان."
+};
+const spokenSentences={
+ "aim to":"We aim to achieve our goals.",
+ "compared to":"Compared to last year, the results are much better.",
+ "contribute to":"Regular exercise can contribute to better health.",
+ "essential to":"Clean water is essential to human life.",
+ "protect from":"A good coat helps protect from the cold.",
+ "range from ... to":"Temperatures range from 10 degrees to 30 degrees.",
+ "safe from":"The helmet keeps cyclists safe from head injuries.",
+ "worry about":"Try not to worry about the exam."
 };
 let selectedAnswer='';
 function makeSentence(w){
- const template=sentenceTemplates[w.en];
- if(template)return template;
- return 'The teacher explained the meaning of ____.';
+ return sentenceTemplates[w.en] || 'Choose the phrase that completes the sentence.';
+}
+function speakSentence(){
+ if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
+   $('feedback').textContent='المتصفح لا يدعم النطق الصوتي.';
+   return;
+ }
+ const sentence=spokenSentences[words[index].en];
+ if(!sentence)return;
+ const synth=window.speechSynthesis;
+ synth.cancel();
+ const voices=synth.getVoices();
+ const englishVoices=voices.filter(v=>/^en([_-]|$)/i.test(v.lang || ''));
+ const voice=englishVoices.find(v=>/^en[-_]EG$/i.test(v.lang || '')) ||
+   englishVoices.find(v=>/egypt|egyptian|masri/i.test((v.name||'')+' '+(v.lang||''))) ||
+   englishVoices.find(v=>/^en[-_]US$/i.test(v.lang||'')) || englishVoices[0];
+ const utterance=new SpeechSynthesisUtterance(sentence);
+ utterance.lang=voice?voice.lang:'en-US';
+ utterance.rate=0.82;
+ if(voice)utterance.voice=voice;
+ utterance.onerror=()=>{$('feedback').textContent='تعذّر تشغيل صوت الجملة.';};
+ synth.speak(utterance);
 }
 function makeOptions(){
  const correct=String(words[index].en||'');
@@ -581,6 +609,8 @@ function render(){
  $('nextQuestion').disabled=true;selectedAnswer='';
  if(phase==='write'){
    $('sentence').textContent=makeSentence(w);
+   $('sentenceMeaning').textContent=sentenceArabicMeanings[w.en] || w.ar || '';
+   $('hearSentence').setAttribute('aria-label','استمع للجملة الإنجليزية');
    $('options').replaceChildren();
    makeOptions().forEach(option=>{
      const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent=option;btn.dir='ltr';
@@ -607,7 +637,7 @@ function nextQuestion(){
  if(!selectedAnswer)return;
  index=(index+1)%words.length;attempt=1;phase='write';render();window.scrollTo({top:0,behavior:'smooth'});
 }
-$('hear').onclick=speak;$('startTest').onclick=startTraining;
+$('hear').onclick=speak;$('hearSentence').onclick=speakSentence;$('startTest').onclick=startTraining;
 $('backToWord').onclick=()=>{phase='ready';attempt=1;render();};
 $('previousWord').onclick=()=>{if(index<=0)return;index--;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
 $('skipWord').onclick=()=>{index=(index+1)%words.length;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
