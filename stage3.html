@@ -71,7 +71,11 @@ body:before{content:"";position:fixed;inset:-18%;z-index:-1;pointer-events:none;
 
 .pronunciation{margin:5px auto 10px;color:#0f9f91;font-size:18px;font-weight:800;line-height:1.7;direction:rtl}
 .pronunciation{color:#67e8f9}
-</style><style id="lughati-mobile-app-redesign">
+
+
+/* --- CSS block merged without changing order --- */
+
+
 :root{--ink:#17202c;--muted:#707987;--line:#e7e9ee;--teal:#e51d35;--paper:#f5f6f9;--brand:#e51d35;--brand-soft:#fff0f2}
 html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
 body{background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.55}
@@ -91,14 +95,11 @@ a{color:var(--brand)}
 input,select,textarea{border-radius:13px;max-width:100%}
 @media(max-width:600px){.top{padding:13px 15px;font-size:19px}main{padding:12px 11px 24px}.hero,.intro{padding:20px 16px;border-radius:22px}.panel{padding:15px;border-radius:19px}h1{line-height:1.3;font-size:clamp(23px,6vw,30px)}.cards{grid-template-columns:1fr!important;gap:11px}button{min-height:46px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Cairo','Inter','sans-serif']},colors:{navy:{800:'#0f172a',900:'#020617'},primary:'#06b6d4',secondary:'#8b5cf6',accent:'#3b82f6'}}}};</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<style id="lughati-premium-dark-identity">
+
+
+/* --- CSS block merged without changing order --- */
+
+
 :root{color-scheme:dark;--lughati-bg:#020617;--lughati-panel:rgba(15,23,42,.72);--lughati-cyan:#06b6d4;--lughati-purple:#8b5cf6;--lughati-blue:#3b82f6;--lughati-text:#f8fafc;--lughati-muted:#a8b4c7;--lughati-border:rgba(255,255,255,.08)}
 html{background:#020617;color-scheme:dark}
 body{background:#020617!important;color:#f8fafc!important;font-family:'Cairo','Inter',sans-serif!important;isolation:isolate;min-height:100vh}
@@ -128,8 +129,11 @@ input::placeholder,textarea::placeholder{color:#64748b!important}
 .category,.tag,.eyebrow{background:rgba(6,182,212,.1)!important;color:#67e8f9!important;border-color:rgba(6,182,212,.28)!important}
 footer{border-color:rgba(148,163,184,.15)!important;color:#94a3b8!important}
 @media(prefers-reduced-motion:reduce){body:before{animation:none!important}}
-</style>
-<style id="lughati-motion-enhancement">
+
+
+/* --- CSS block merged without changing order --- */
+
+
 /* Lughati neon ambience + accessible theme palettes */
 :root{color-scheme:dark;--glow-cyan:#06b6d4;--glow-violet:#8b5cf6;--theme-bg:#020617;--theme-text:#f8fafc;--theme-panel:rgba(8,18,38,.78);--theme-line:rgba(103,190,255,.24)}
 body{transition:background-color .35s ease,color .35s ease}
@@ -146,7 +150,11 @@ body.lughati-neon:before{content:"";position:fixed;inset:0;z-index:-2;pointer-ev
 .lughati-neon .card,.lughati-neon .panel,.lughati-neon .unit,.lughati-neon .level,.lughati-neon .question{position:relative;overflow:hidden}
 @keyframes lughatiShimmer{0%{background-position:0% 50%;opacity:.3}50%{background-position:100% 50%;opacity:.85}100%{background-position:0% 50%;opacity:.3}}
 @media(prefers-reduced-motion:reduce){.lughati-orb,.lughati-neon .card:before,.lughati-neon .panel:before,.lughati-neon .unit:before,.lughati-neon .level:before,.lughati-neon .question:before{animation:none!important}*{scroll-behavior:auto!important;transition-duration:.01ms!important}}
-</style><style id="lughati-neon-motion-fix">
+
+
+/* --- CSS block merged without changing order --- */
+
+
 /* Neon motion polish: visual-only overrides; existing HTML, IDs and JavaScript stay intact. */
 @keyframes lughati-float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-7px,0)}}
 @keyframes lughati-neon-pulse{0%,100%{text-shadow:0 0 7px rgba(103,232,249,.35),0 0 18px rgba(6,182,212,.18);filter:brightness(1)}50%{text-shadow:0 0 10px rgba(103,232,249,.9),0 0 26px rgba(6,182,212,.5),0 0 38px rgba(139,92,246,.24);filter:brightness(1.12)}}
@@ -217,9 +225,11 @@ button:focus-visible,.btn:focus-visible,.letters button:focus-visible,.options b
     transition-duration: 0.01ms !important;
   }
 }
-</style>
 
-<style id="lughati-low-end-device-optimization">
+
+/* --- CSS block merged without changing order --- */
+
+
 /* Keep the site responsive on phones and tablets without changing learning logic. */
 @media (max-width: 850px) {
   *, *::before, *::after {
@@ -240,10 +250,11 @@ button:focus-visible,.btn:focus-visible,.letters button:focus-visible,.options b
   .book-stack, .cap, .headphones, .path-art { filter: none !important; }
   .halo, .ring, .book, .floating-word, .spark { box-shadow: none !important; }
 }
-</style>
 
 
-<style id="lughati-game-performance">
+/* --- CSS block merged without changing order --- */
+
+
 /* Lightweight game-like motion: animate only transform and opacity. */
 html { scroll-behavior: smooth; }
 @keyframes lughati-gpu-pulse {
@@ -316,10 +327,11 @@ button:active, .btn:active, .primary:active, .top-cta:active,
     scroll-behavior: auto !important;
   }
 }
-</style>
 
 
-<style id="lughati-ghost-visibility-fix">
+/* --- CSS block merged without changing order --- */
+
+
 /* Keep the hint layer visible through the typing field in dark mode. */
 .write-area{isolation:isolate}
 .write-input{background:transparent!important;position:relative;z-index:2;-webkit-text-fill-color:var(--ink,#f2f6ff)!important}
@@ -328,16 +340,21 @@ body.lughati-dark .write-input{background:transparent!important}
 body.lughati-dark .ghost-overlay{color:rgba(226,232,240,.52)!important;-webkit-text-fill-color:rgba(226,232,240,.52)!important;text-shadow:0 0 4px rgba(103,232,249,.32)!important}
 #backToWordRow{margin-top:12px}
 #backToWord{border-color:rgba(6,182,212,.45)!important}
-</style>
 
-<style id="lughati-word-navigation">
+
+/* --- CSS block merged without changing order --- */
+
+
 #wordNavigation{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:12px auto}
 #wordNavigation .btn{min-width:145px}
 #wordNavigation .btn:disabled{opacity:.42;cursor:not-allowed;transform:none;box-shadow:none!important}
 @media(max-width:420px){#wordNavigation .btn{flex:1 1 135px;min-width:0}}
 .sentence{margin:18px auto 12px;padding:18px 14px;max-width:600px;border:1px solid rgba(148,163,184,.2);border-radius:16px;background:rgba(255,255,255,.025);font-size:clamp(20px,4.8vw,27px);font-weight:800;line-height:1.7;color:var(--ink,#f8fafc)}.options button{background:rgba(255,255,255,.035)!important;color:inherit!important;border:1px solid rgba(148,163,184,.25)!important;border-radius:14px;padding:13px 12px;min-height:52px}.options button:hover{border-color:var(--glow-color,#06b6d4)!important;background:rgba(255,255,255,.08)!important}.options button.selected{border-color:var(--glow-color,#06b6d4)!important;background:rgba(6,182,212,.12)!important}.options button.correct{border-color:#34d399!important;background:rgba(52,211,153,.12)!important}.options button.wrong{border-color:#fb7185!important;background:rgba(251,113,133,.12)!important}.btn:disabled{opacity:.45;cursor:not-allowed}@media(max-width:520px){.sentence{padding:14px 11px}.options{grid-template-columns:1fr!important}}
-</style>
-<style id="lughati-stage3-premium-redesign">
+
+
+/* --- CSS block merged without changing order --- */
+
+
 :root{--stage-bg:#050a14;--stage-panel:rgba(12,23,40,.82);--stage-panel-2:rgba(16,31,51,.76);--stage-line:rgba(134,177,214,.17);--stage-text:#edf6ff;--stage-muted:#9aafc5;--stage-glow:rgba(37,180,255,.13)}
 html{min-height:100%;background:var(--stage-bg);scroll-behavior:smooth}
 body{min-height:100vh!important;margin:0!important;color:var(--stage-text)!important;background:radial-gradient(ellipse at 12% 0%,rgba(25,112,185,.17),transparent 38%),radial-gradient(ellipse at 90% 16%,rgba(23,198,174,.09),transparent 30%),linear-gradient(160deg,#07101e 0%,#040812 64%,#071321 100%)!important;font-family:'Cairo',system-ui,Tahoma,Arial,sans-serif!important;overflow-x:hidden}
@@ -386,9 +403,11 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
 @media(min-width:850px){.panel{padding:42px!important}.hero{padding:34px 40px!important}}
 @media(max-width:600px){.top{padding:12px 16px!important;font-size:19px!important}.top:after{font-size:8px;letter-spacing:1px;padding:6px 8px}main{width:calc(100% - 24px)!important;padding:16px 0 32px!important}.hero,.panel{border-radius:20px!important}.hero{padding:21px 19px!important}.panel{padding:20px 15px!important}.hero h1{font-size:23px!important}.hero .muted{font-size:12px}.emoji{width:70px;height:70px;border-radius:21px;font-size:39px!important;margin-top:18px!important}.word{font-size:clamp(31px,9vw,44px)!important}.meaning{font-size:20px!important}.row{gap:8px!important}.row .btn{flex:1 1 auto;min-width:0;padding:10px 12px!important}.options{grid-template-columns:1fr!important;gap:9px!important}.options button{min-height:52px}.sentence{font-size:18px;border-radius:15px;padding:17px 12px}.back{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.emoji{animation:none!important}.btn,.back,.options button{transition:none!important}.fill{transition:none!important}}
-</style>
 
-<style id="lughati-header-polish">
+
+/* --- CSS block merged without changing order --- */
+
+
 /* Clean, aligned responsive header — visual-only navigation treatment */
 .top{
   position:sticky!important;top:0;z-index:100;isolation:isolate;
@@ -428,6 +447,27 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
 @media(max-width:350px){.top{padding-inline:9px!important;gap:6px}.top-brand{gap:7px}.top-mark{width:35px;height:35px;flex-basis:35px}.top-brand-subtitle{letter-spacing:.7px;font-size:7px}.top-home{padding-inline:8px}}
 @media(prefers-reduced-motion:reduce){.top-home{transition:none!important}.top-home:hover{transform:none}}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Cairo','Inter','sans-serif']},colors:{navy:{800:'#0f172a',900:'#020617'},primary:'#06b6d4',secondary:'#8b5cf6',accent:'#3b82f6'}}}};</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body><header class="top"><a class="top-brand" href="index.html" aria-label="لُغتي — الصفحة الرئيسية"><span class="top-mark" aria-hidden="true">ل</span><span class="top-brand-copy"><span class="top-brand-name">لُغتي</span><span class="top-brand-subtitle">ENGLISH LEARNING</span></span></a><nav class="top-nav" aria-label="التنقل الرئيسي"><a class="top-home" href="index.html"><span aria-hidden="true">⌂</span><span>الرئيسية</span></a></nav></header>
 <main>
