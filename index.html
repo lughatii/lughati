@@ -380,6 +380,47 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
 @media(max-width:480px){#lughati-intro .intro-brand{padding:20px 12px 78px;width:100%}#lughati-intro .intro-brand:before{width:90vw;height:65vw}#lughati-intro .intro-kicker{font-size:10px;gap:8px}#lughati-intro .intro-track{font-size:8px;letter-spacing:1.4px;gap:6px;margin-top:11px}#lughati-intro .intro-track span{width:10px}#lughati-intro .intro-tagline{margin-top:19px;font-size:14px;line-height:1.95;max-width:340px}#lughati-intro .intro-edition{font-size:10px;gap:6px;margin-top:17px}}
 @media(max-height:620px){#lughati-intro .intro-brand{padding-top:8px;padding-bottom:60px}#lughati-intro .intro-brand:before{width:min(70vw,420px);height:min(52vh,260px)}#lughati-intro .intro-logo{font-size:clamp(54px,10vh,82px)}#lughati-intro .intro-tagline{margin-top:12px;line-height:1.65}#lughati-intro .intro-edition{margin-top:12px}#lughati-intro .intro-skip{bottom:max(10px,env(safe-area-inset-bottom));min-height:38px;padding:7px 17px}}
 @media(prefers-reduced-motion:reduce){#lughati-intro .intro-stars:before,#lughati-intro .intro-stars:after,#lughati-intro .intro-brand:before{animation:none}#lughati-intro.logo-visible .intro-logo{animation:none}}
+
+/* Final luxury pass: cinematic light sweep, clean geometry, no particles or orbital effects */
+#lughati-intro{background:#03060c!important;background-image:linear-gradient(118deg,#03060c 0%,#07111f 47%,#02040a 100%)!important}
+#lughati-intro .intro-stars{display:none!important}
+#lughati-intro:before{
+  background:
+    linear-gradient(112deg,transparent 0%,rgba(26,80,132,.07) 27%,transparent 48%),
+    linear-gradient(106deg,transparent 40%,rgba(228,177,82,.065) 49%,rgba(228,177,82,.012) 51%,transparent 61%),
+    linear-gradient(90deg,transparent 0%,rgba(0,0,0,.12) 40%,rgba(0,0,0,.66) 100%);
+}
+#lughati-intro:after{
+  border-color:rgba(201,164,91,.14);
+  animation:intro-frame-arrive 1.25s cubic-bezier(.2,.75,.25,1) both;
+}
+@keyframes intro-frame-arrive{0%{opacity:0;inset:clamp(22px,4vw,48px)}100%{opacity:.9;inset:clamp(14px,3vw,34px)}}
+#lughati-intro .intro-brand:before{
+  content:"";position:absolute;z-index:-1;left:50%;top:48%;width:min(78vw,780px);height:1px;
+  transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(105,156,202,.2) 22%,rgba(218,181,104,.58) 50%,rgba(105,156,202,.2) 78%,transparent);
+  animation:intro-signature-line 1.5s cubic-bezier(.2,.75,.25,1) .2s both;
+}
+@keyframes intro-signature-line{0%{opacity:0;scale:.45 1}100%{opacity:1;scale:1 1}}
+#lughati-intro .intro-brand:after{
+  content:"";position:absolute;z-index:-1;top:48%;left:50%;width:min(78vw,780px);height:110px;
+  transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(26,72,113,.11),rgba(19,41,65,.12),rgba(26,72,113,.11),transparent);
+  filter:none;border-radius:0;pointer-events:none;
+}
+#lughati-intro .intro-logo{letter-spacing:-3px}
+#lughati-intro.logo-visible .intro-logo{animation:intro-title-impact 1.05s cubic-bezier(.16,1,.3,1) both}
+@keyframes intro-title-impact{0%{opacity:0;transform:translateY(19px) scale(.96);filter:blur(5px)}72%{opacity:1;transform:translateY(-2px) scale(1.008);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+#lughati-intro .intro-logo:after{box-shadow:0 0 10px rgba(201,164,91,.12)}
+#lughati-intro .intro-tagline{max-width:min(680px,88vw);text-wrap:balance}
+#lughati-intro .intro-skip{transition:background .25s,border-color .25s,color .25s}
+@media(max-width:520px){
+  #lughati-intro .intro-brand:before{width:88vw}
+  #lughati-intro .intro-brand:after{width:88vw;height:82px}
+}
+@media(prefers-reduced-motion:reduce){
+  #lughati-intro:after,#lughati-intro .intro-brand:before{animation:none!important}
+  #lughati-intro.logo-visible .intro-logo{animation:none!important}
+}
+
 </style>
 </head>
 <body>
