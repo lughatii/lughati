@@ -492,7 +492,7 @@ function speak(){
  synth.cancel();
  const w=words[index];
  const englishText=String(w.spoken || w.en || '')
-   .replace(/\\s*\\/\\s*/g, ', ')
+   .replace(/\s*\/\s*/g, ', ')
    .replace(/\\.{3,}/g, ' ')
    .trim();
  if(!englishText) return;
