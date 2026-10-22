@@ -419,7 +419,7 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
 <div class="settings-panel" id="settingsPanel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="settingsTitle"><div class="settings-card"><div class="settings-head"><h2 id="settingsTitle">الإعدادات</h2><button class="close-btn" id="settingsClose" type="button">إغلاق ✕</button></div><section class="settings-section" aria-labelledby="colorsTitle"><h3 id="colorsTitle">ألوان الموقع</h3><label class="setting-label" for="accentSelect">اختار اللون الأساسي<select id="accentSelect"><option value="blue">أزرق سماوي</option><option value="purple">بنفسجي</option><option value="pink">وردي</option><option value="green">أخضر</option></select></label></section><section class="settings-section contact-settings" aria-labelledby="contactTitle"><h3 id="contactTitle">التواصل مع المنشئ / المطوّر</h3><p>لو عندك اقتراح أو واجهتك مشكلة في الموقع، تقدر تتواصل معايا مباشرة.</p><a class="wa-link" href="https://wa.me/201125260487?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9%20%D9%81%D9%8A%20%D9%85%D9%88%D9%82%D8%B9%20%D9%84%D8%BA%D8%AA%D9%8A" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">✆</span> تواصل عبر واتساب</a></section></div></div>
 <div class="settings-panel" id="stagePanel" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="stageTitle"><div class="settings-card"><div class="settings-head"><h2 id="stageTitle">اختار المرحلة اللي تناسبك</h2><button class="close-btn" id="stageClose" type="button">إغلاق ✕</button></div><p class="stage-modal-description">ابدأ مباشرة في مسار الصف الثالث الثانوي.</p><div class="stage-modal-actions"><a class="primary" href="stage3.html?v=20261017-2">للصف الثالث الثانوي فقط ←</a></div></div></div>
 <script>
-(()=>{document.documentElement.classList.add('js');const $=id=>document.getElementById(id),intro=$('lughati-intro'),stage=$('stagePanel'),settings=$('settingsPanel');if(intro){if(intro.isConnected){
+(()=>{document.documentElement.classList.add('js');const $=id=>document.getElementById(id),intro=$('lughati-intro'),stage=$('stagePanel'),settings=$('settingsPanel');if(intro){let introSeen=false;try{introSeen=sessionStorage.getItem('lughati-intro-seen')==='1'}catch{}if(introSeen){intro.remove()}else if(intro.isConnected){
   const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stars=intro.querySelector('.intro-stars'),logo=intro.querySelector('.intro-logo'),tagline=intro.querySelector('.intro-tagline-text'),cursor=intro.querySelector('.intro-cursor');
   if(stars&&!stars.childElementCount){
@@ -458,6 +458,7 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
     }catch{}
   }
   function finishIntro(){
+    try{sessionStorage.setItem('lughati-intro-seen','1')}catch{}
     if(!intro.isConnected)return;
     if(typingTimer)window.clearInterval(typingTimer);
     if(cursor)cursor.style.display='none';
