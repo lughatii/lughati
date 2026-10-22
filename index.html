@@ -207,30 +207,6 @@ footer:before{content:"";position:absolute;top:-1px;left:30%;width:40%;height:1p
 #lughati-intro .intro-edition{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin:18px auto 0;color:#91a9bd;font:700 12px Cairo,Tahoma,sans-serif;opacity:0;transform:translateY(7px);transition:opacity .6s ease .25s,transform .6s ease .25s}
 #lughati-intro .intro-edition i,#lughati-intro .intro-edition span{color:#f1bd59}
 #lughati-intro.tagline-visible .intro-edition{opacity:1;transform:translateY(0)}
-/* Cinematic intro: open space, luminous orbit and refined typography */
-#lughati-intro{background:#020711;background-image:radial-gradient(ellipse at 50% 48%,rgba(15,55,87,.68) 0%,rgba(4,17,32,.82) 32%,transparent 65%),radial-gradient(ellipse at 15% 20%,rgba(23,103,177,.16),transparent 34%),radial-gradient(ellipse at 86% 78%,rgba(24,177,173,.11),transparent 30%)}
-#lughati-intro:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.05),transparent 28%,transparent 68%,rgba(0,0,0,.38));}
-#lughati-intro .intro-brand{isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(900px,100%);padding:24px 20px 76px}
-#lughati-intro .intro-brand:before{content:"";position:absolute;z-index:-1;left:50%;top:47%;width:min(76vw,590px);aspect-ratio:1;transform:translate(-50%,-50%);border:1px solid rgba(99,230,226,.12);border-radius:50%;box-shadow:0 0 0 32px rgba(57,140,255,.018),0 0 0 76px rgba(99,230,226,.014),inset 0 0 70px rgba(57,140,255,.035);animation:intro-orbit-breathe 7s ease-in-out infinite}
-#lughati-intro .intro-brand:after{content:"";position:absolute;z-index:-1;left:50%;top:43%;width:min(54vw,380px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(45,144,255,.22) 0%,rgba(33,151,184,.09) 37%,transparent 70%);filter:blur(9px);pointer-events:none}
-@keyframes intro-orbit-breathe{0%,100%{opacity:.45;scale:.96}50%{opacity:1;scale:1.03}}
-#lughati-intro .intro-kicker{font-size:12px;letter-spacing:.4px;margin-bottom:12px;color:#b9e9f1;gap:13px}
-#lughati-intro .intro-kicker span{width:30px;background:linear-gradient(90deg,transparent,#63e6e2)}
-#lughati-intro .intro-logo{font-size:clamp(76px,13vw,124px);letter-spacing:-2px;text-shadow:0 2px 0 rgba(255,255,255,.28),0 0 24px rgba(60,151,255,.45),0 0 72px rgba(20,102,222,.32)}
-#lughati-intro .intro-logo:after{margin-top:5px;width:clamp(96px,17vw,148px);height:2px;box-shadow:0 0 18px rgba(245,190,82,.62)}
-#lughati-intro .intro-track{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 0;color:#8eb8d2;font:800 9px Inter,Arial,sans-serif;letter-spacing:2.6px;opacity:0;transform:translateY(6px);transition:opacity .65s ease .12s,transform .65s ease .12s}
-#lughati-intro .intro-track span{width:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(99,230,226,.8))}
-#lughati-intro .intro-track span:last-child{transform:rotate(180deg)}
-#lughati-intro .intro-track b{color:#f1bd59;font-weight:700}
-#lughati-intro.logo-visible .intro-track{opacity:1;transform:translateY(0)}
-#lughati-intro .intro-tagline{margin-top:25px;max-width:650px;font-size:clamp(15px,2.5vw,22px);line-height:2.05;color:#edf7ff;text-shadow:0 2px 20px rgba(0,0,0,.3)}
-#lughati-intro .intro-edition{margin-top:23px;padding:0;border:0;border-radius:0;background:transparent;width:auto;max-width:100%;font-size:12px;color:#a5bfd1;letter-spacing:.1px}
-#lughati-intro .intro-edition i,#lughati-intro .intro-edition span{color:#f1bd59}
-#lughati-intro .intro-skip{bottom:max(26px,env(safe-area-inset-bottom));border-color:rgba(130,190,220,.24);background:rgba(5,16,29,.58);box-shadow:0 8px 28px rgba(0,0,0,.22);color:#d7e8f5}
-#lughati-intro .intro-skip:hover{background:rgba(20,49,72,.8);border-color:rgba(99,230,226,.55)}
-@media(max-width:480px){#lughati-intro .intro-brand{padding:20px 12px 78px;width:100%}#lughati-intro .intro-brand:before{width:min(94vw,420px)}#lughati-intro .intro-kicker{font-size:10px;gap:8px}#lughati-intro .intro-track{font-size:8px;letter-spacing:1.7px;gap:7px;margin-top:11px}#lughati-intro .intro-track span{width:12px}#lughati-intro .intro-tagline{margin-top:20px;font-size:14px;line-height:1.95;max-width:340px}#lughati-intro .intro-edition{font-size:10px;gap:6px;margin-top:18px}}
-@media(max-height:620px){#lughati-intro .intro-brand{padding-top:8px;padding-bottom:60px}#lughati-intro .intro-brand:before{width:min(64vh,440px)}#lughati-intro .intro-logo{font-size:clamp(54px,10vh,82px)}#lughati-intro .intro-tagline{margin-top:12px;line-height:1.65}#lughati-intro .intro-edition{margin-top:12px}#lughati-intro .intro-skip{bottom:max(10px,env(safe-area-inset-bottom));min-height:38px;padding:7px 17px}}
-@media(prefers-reduced-motion:reduce){#lughati-intro .intro-brand:before{animation:none}}
 #lughati-intro .intro-logo{position:relative;font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(64px,13vw,112px);font-weight:1000;line-height:1.25;letter-spacing:-3px;color:#f7fbff;text-shadow:0 1px 0 rgba(255,255,255,.3),0 0 14px rgba(60,151,255,.42),0 0 38px rgba(20,102,222,.28);opacity:0;transform:translateY(9px) scale(.975);filter:blur(2px);transition:opacity .8s var(--ease),transform .8s var(--ease),filter .8s ease}
 #lughati-intro .intro-logo:after{content:"";display:block;width:clamp(72px,14vw,116px);height:2px;margin:8px auto 0;border-radius:99px;background:linear-gradient(90deg,transparent,#f5c76a 22%,#fff0bd 50%,#e9a83c 78%,transparent);box-shadow:0 0 12px rgba(245,190,82,.48);transform:scaleX(.55);opacity:0;transition:transform .8s ease .2s,opacity .8s ease .2s}
 #lughati-intro.logo-visible .intro-logo{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
@@ -369,6 +345,32 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
   #lughati-intro .intro-tagline{opacity:1!important;transform:none!important}
   #lughati-intro .intro-cursor{display:none!important}
 }
+
+/* Cinematic intro: open space, luminous orbit and refined typography */
+#lughati-intro{background:#020711;background-image:radial-gradient(ellipse at 50% 48%,rgba(15,55,87,.68) 0%,rgba(4,17,32,.82) 32%,transparent 65%),radial-gradient(ellipse at 15% 20%,rgba(23,103,177,.16),transparent 34%),radial-gradient(ellipse at 86% 78%,rgba(24,177,173,.11),transparent 30%)}
+#lughati-intro:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.05),transparent 28%,transparent 68%,rgba(0,0,0,.38));}
+#lughati-intro .intro-brand{isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(900px,100%);padding:24px 20px 76px}
+#lughati-intro .intro-brand:before{content:"";position:absolute;z-index:-1;left:50%;top:47%;width:min(76vw,590px);aspect-ratio:1;transform:translate(-50%,-50%);border:1px solid rgba(99,230,226,.12);border-radius:50%;box-shadow:0 0 0 32px rgba(57,140,255,.018),0 0 0 76px rgba(99,230,226,.014),inset 0 0 70px rgba(57,140,255,.035);animation:intro-orbit-breathe 7s ease-in-out infinite}
+#lughati-intro .intro-brand:after{content:"";position:absolute;z-index:-1;left:50%;top:43%;width:min(54vw,380px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(45,144,255,.22) 0%,rgba(33,151,184,.09) 37%,transparent 70%);filter:blur(9px);pointer-events:none}
+@keyframes intro-orbit-breathe{0%,100%{opacity:.45;scale:.96}50%{opacity:1;scale:1.03}}
+#lughati-intro .intro-kicker{font-size:12px;letter-spacing:.4px;margin-bottom:12px;color:#b9e9f1;gap:13px}
+#lughati-intro .intro-kicker span{width:30px;background:linear-gradient(90deg,transparent,#63e6e2)}
+#lughati-intro .intro-logo{font-size:clamp(76px,13vw,124px);letter-spacing:-2px;text-shadow:0 2px 0 rgba(255,255,255,.28),0 0 24px rgba(60,151,255,.45),0 0 72px rgba(20,102,222,.32)}
+#lughati-intro .intro-logo:after{margin-top:5px;width:clamp(96px,17vw,148px);height:2px;box-shadow:0 0 18px rgba(245,190,82,.62)}
+#lughati-intro .intro-track{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 0;color:#8eb8d2;font:800 9px Inter,Arial,sans-serif;letter-spacing:2.6px;opacity:0;transform:translateY(6px);transition:opacity .65s ease .12s,transform .65s ease .12s}
+#lughati-intro .intro-track span{width:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(99,230,226,.8))}
+#lughati-intro .intro-track span:last-child{transform:rotate(180deg)}
+#lughati-intro .intro-track b{color:#f1bd59;font-weight:700}
+#lughati-intro.logo-visible .intro-track{opacity:1;transform:translateY(0)}
+#lughati-intro .intro-tagline{margin-top:25px;max-width:650px;font-size:clamp(15px,2.5vw,22px);line-height:2.05;color:#edf7ff;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+#lughati-intro .intro-edition{margin-top:23px;padding:0;border:0;border-radius:0;background:transparent;width:auto;max-width:100%;font-size:12px;color:#a5bfd1;letter-spacing:.1px}
+#lughati-intro .intro-edition i,#lughati-intro .intro-edition span{color:#f1bd59}
+#lughati-intro .intro-skip{bottom:max(26px,env(safe-area-inset-bottom));border-color:rgba(130,190,220,.24);background:rgba(5,16,29,.58);box-shadow:0 8px 28px rgba(0,0,0,.22);color:#d7e8f5}
+#lughati-intro .intro-skip:hover{background:rgba(20,49,72,.8);border-color:rgba(99,230,226,.55)}
+@media(max-width:480px){#lughati-intro .intro-brand{padding:20px 12px 78px;width:100%}#lughati-intro .intro-brand:before{width:min(94vw,420px)}#lughati-intro .intro-kicker{font-size:10px;gap:8px}#lughati-intro .intro-track{font-size:8px;letter-spacing:1.7px;gap:7px;margin-top:11px}#lughati-intro .intro-track span{width:12px}#lughati-intro .intro-tagline{margin-top:20px;font-size:14px;line-height:1.95;max-width:340px}#lughati-intro .intro-edition{font-size:10px;gap:6px;margin-top:18px}}
+@media(max-height:620px){#lughati-intro .intro-brand{padding-top:8px;padding-bottom:60px}#lughati-intro .intro-brand:before{width:min(64vh,440px)}#lughati-intro .intro-logo{font-size:clamp(54px,10vh,82px)}#lughati-intro .intro-tagline{margin-top:12px;line-height:1.65}#lughati-intro .intro-edition{margin-top:12px}#lughati-intro .intro-skip{bottom:max(10px,env(safe-area-inset-bottom));min-height:38px;padding:7px 17px}}
+@media(prefers-reduced-motion:reduce){#lughati-intro .intro-brand:before{animation:none}}
+
 </style>
 </head>
 <body>
