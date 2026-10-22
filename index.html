@@ -207,6 +207,26 @@ footer:before{content:"";position:absolute;top:-1px;left:30%;width:40%;height:1p
 #lughati-intro .intro-edition{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin:18px auto 0;color:#91a9bd;font:700 12px Cairo,Tahoma,sans-serif;opacity:0;transform:translateY(7px);transition:opacity .6s ease .25s,transform .6s ease .25s}
 #lughati-intro .intro-edition i,#lughati-intro .intro-edition span{color:#f1bd59}
 #lughati-intro.tagline-visible .intro-edition{opacity:1;transform:translateY(0)}
+/* Premium intro polish: restrained glass panel, layered light and editorial type */
+#lughati-intro{background:radial-gradient(ellipse at 50% 38%,rgba(24,69,105,.72) 0%,rgba(7,20,36,.96) 37%,#020711 76%,#010309 100%)}
+#lughati-intro:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(118,174,208,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(118,174,208,.055) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at center,#000 0%,transparent 76%)}
+#lughati-intro .intro-brand{isolation:isolate;padding:clamp(28px,5vh,54px) clamp(18px,4vw,48px) 42px;width:min(820px,calc(100% - 32px))}
+#lughati-intro .intro-brand:before{content:"";position:absolute;z-index:-1;inset:0;border:1px solid rgba(135,196,224,.17);border-radius:32px;background:linear-gradient(145deg,rgba(18,39,60,.48),rgba(3,11,23,.35) 58%,rgba(12,31,47,.3));box-shadow:0 28px 90px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.045);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#lughati-intro .intro-brand:after{content:"";position:absolute;z-index:-1;top:-65px;left:50%;width:min(470px,75vw);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(44,145,255,.2) 0%,rgba(37,177,199,.08) 34%,transparent 69%);filter:blur(12px);pointer-events:none}
+#lughati-intro .intro-kicker{font-size:12px;letter-spacing:.6px;margin-bottom:16px;color:#b9e9f1}
+#lughati-intro .intro-kicker span{width:34px;background:linear-gradient(90deg,transparent,#63e6e2)}
+#lughati-intro .intro-logo{font-size:clamp(72px,12vw,118px);letter-spacing:-2px;text-shadow:0 2px 0 rgba(255,255,255,.35),0 0 20px rgba(60,151,255,.35),0 0 58px rgba(20,102,222,.3)}
+#lughati-intro .intro-logo:after{margin-top:2px;width:clamp(90px,16vw,136px);height:3px}
+#lughati-intro .intro-track{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px auto 0;color:#8eb8d2;font:800 9px Inter,Arial,sans-serif;letter-spacing:2px;opacity:0;transform:translateY(6px);transition:opacity .55s ease .12s,transform .55s ease .12s}
+#lughati-intro .intro-track span{width:17px;height:1px;background:linear-gradient(90deg,transparent,rgba(99,230,226,.75))}
+#lughati-intro .intro-track span:last-child{transform:rotate(180deg)}
+#lughati-intro .intro-track b{color:#f1bd59;font-weight:700}
+#lughati-intro.logo-visible .intro-track{opacity:1;transform:translateY(0)}
+#lughati-intro .intro-tagline{margin-top:22px;max-width:640px;font-size:clamp(15px,2.5vw,22px);line-height:2.05;text-shadow:0 2px 18px rgba(0,0,0,.25)}
+#lughati-intro .intro-edition{margin-top:22px;padding:10px 16px;border:1px solid rgba(241,189,89,.2);border-radius:999px;background:rgba(241,189,89,.045);width:fit-content;max-width:100%;font-size:12px}
+#lughati-intro .intro-skip{bottom:max(24px,env(safe-area-inset-bottom));border-color:rgba(241,189,89,.5);background:rgba(5,16,29,.88);box-shadow:0 10px 32px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.06)}
+@media(max-width:480px){#lughati-intro .intro-brand{padding:25px 14px 30px;width:calc(100% - 24px);border-radius:24px}#lughati-intro .intro-brand:before{border-radius:24px}#lughati-intro .intro-kicker{font-size:10px;gap:8px}#lughati-intro .intro-track{font-size:8px;letter-spacing:1.4px;gap:7px;margin-top:12px}#lughati-intro .intro-track span{width:10px}#lughati-intro .intro-tagline{margin-top:17px;font-size:14px;line-height:1.9}#lughati-intro .intro-edition{font-size:10px;gap:6px;padding:8px 11px;margin-top:16px}}
+@media(max-height:620px){#lughati-intro .intro-brand{padding-top:14px;padding-bottom:18px}#lughati-intro .intro-logo{font-size:clamp(54px,10vh,78px)}#lughati-intro .intro-tagline{margin-top:10px;line-height:1.65}#lughati-intro .intro-edition{margin-top:12px;padding-top:6px;padding-bottom:6px}#lughati-intro .intro-skip{bottom:max(10px,env(safe-area-inset-bottom));min-height:38px;padding:7px 17px}}
 #lughati-intro .intro-logo{position:relative;font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(64px,13vw,112px);font-weight:1000;line-height:1.25;letter-spacing:-3px;color:#f7fbff;text-shadow:0 1px 0 rgba(255,255,255,.3),0 0 14px rgba(60,151,255,.42),0 0 38px rgba(20,102,222,.28);opacity:0;transform:translateY(9px) scale(.975);filter:blur(2px);transition:opacity .8s var(--ease),transform .8s var(--ease),filter .8s ease}
 #lughati-intro .intro-logo:after{content:"";display:block;width:clamp(72px,14vw,116px);height:2px;margin:8px auto 0;border-radius:99px;background:linear-gradient(90deg,transparent,#f5c76a 22%,#fff0bd 50%,#e9a83c 78%,transparent);box-shadow:0 0 12px rgba(245,190,82,.48);transform:scaleX(.55);opacity:0;transition:transform .8s ease .2s,opacity .8s ease .2s}
 #lughati-intro.logo-visible .intro-logo{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
@@ -348,7 +368,7 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
 </style>
 </head>
 <body>
-<div id="lughati-intro" aria-label="مقدمة لُغتي" aria-hidden="true"><div class="intro-stars" aria-hidden="true"></div><div class="intro-brand"><div class="intro-kicker"><span></span> منصة لُغتي التعليمية <span></span></div><div class="intro-logo">لُغتي</div><div class="intro-tagline" aria-label="خطوة بخطوة نحو ثقة أكبر في الإنجليزية"><span class="intro-tagline-text"></span><span class="intro-cursor" aria-hidden="true"></span></div><div class="intro-edition"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> الصف الثالث الثانوي <span>·</span> تعلّم بتركيز، وتقدّم بثقة</div></div><button id="introSkip" class="intro-skip" type="button">تخطي المقدمة <i class="fa-solid fa-forward-step" aria-hidden="true"></i></button></div>
+<div id="lughati-intro" aria-label="مقدمة لُغتي" aria-hidden="true"><div class="intro-stars" aria-hidden="true"></div><div class="intro-brand"><div class="intro-kicker"><span></span> منصة لُغتي التعليمية <span></span></div><div class="intro-logo">لُغتي</div><div class="intro-track" dir="ltr"><span></span> ENGLISH LEARNING <b>·</b> THIRD SECONDARY <span></span></div><div class="intro-tagline" aria-label="خطوة بخطوة نحو ثقة أكبر في الإنجليزية"><span class="intro-tagline-text"></span><span class="intro-cursor" aria-hidden="true"></span></div><div class="intro-edition"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> الصف الثالث الثانوي <span>·</span> تعلّم بتركيز، وتقدّم بثقة</div></div><button id="introSkip" class="intro-skip" type="button">تخطي المقدمة <i class="fa-solid fa-forward-step" aria-hidden="true"></i></button></div>
 <header class="shell"><div class="nav">
 <a class="brand" href="#home" aria-label="لُغتي الرئيسية"><span class="avatar-ring" aria-label="صورة صاحب موقع لُغتي"><span class="avatar-core"><img src="assets/profile-full.jpg" alt="صورة صاحب موقع لُغتي" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;border-radius:50%;display:block"></span></span><span>لُغتي</span></a>
 <nav class="navlinks" aria-label="القائمة"><a href="#home">الرئيسية</a><a class="nav-settings-link" href="settings.html" aria-label="الإعدادات" title="الإعدادات"><i class="fa-solid fa-gear" aria-hidden="true"></i></a></nav>
@@ -376,7 +396,7 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
 (()=>{document.documentElement.classList.add('js');const $=id=>document.getElementById(id),intro=$('lughati-intro'),stage=$('stagePanel'),settings=$('settingsPanel');if(intro){try{if(sessionStorage.getItem('lughati-intro-seen')==='1'){intro.remove()}else{sessionStorage.setItem('lughati-intro-seen','1')}}catch{}if(intro.isConnected){
   const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stars=intro.querySelector('.intro-stars'),logo=intro.querySelector('.intro-logo'),tagline=intro.querySelector('.intro-tagline-text'),cursor=intro.querySelector('.intro-cursor');
-  const subtitle='كل كلمة بتتعلّمها هي خطوة لقدّام.\nاتدرّب على الإنجليزي بأسلوب واضح وتفاعلي.\nركّز على هدفك… وسيب التقدّم يتكلم عنك.';
+  const subtitle='خطوة بخطوة، تبني ثقتك في اللغة الإنجليزية.\nتعلّم بذكاء، استمع للنطق، واختبر مستواك.\nهدفك أوضح… ورحلتك تبدأ من هنا.';
   let typingAudio=null,typingGain=null,audioReady=false,typingTimer=null,removeTimer=null;const skipIntro=$('introSkip');if(skipIntro)skipIntro.addEventListener('click',finishIntro);
   function makeParticles(){
     if(!stars||stars.childElementCount)return;
