@@ -346,86 +346,42 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
   #lughati-intro .intro-cursor{display:none!important}
 }
 
-/* Lughati intro — cinematic editorial identity, no space motifs */
-#lughati-intro{background:#03060c;background-image:linear-gradient(112deg,#03060c 0%,#07111f 52%,#030811 100%)}
-#lughati-intro:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 0 54%,rgba(20,64,101,.18) 54.1%,rgba(20,64,101,.04) 76%,transparent 76.1%)}
-#lughati-intro:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.22),transparent 22%,transparent 72%,rgba(0,0,0,.48))}
-#lughati-intro .intro-stars{opacity:1;overflow:hidden}
-#lughati-intro .intro-particle{display:none!important}
-#lughati-intro .intro-stars:before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:linear-gradient(180deg,transparent,rgba(35,132,203,.6) 25%,rgba(241,189,89,.8) 72%,transparent);opacity:.7;animation:intro-edge-reveal 1.4s ease-out both}
-#lughati-intro .intro-stars:after{content:"";position:absolute;left:-55%;top:0;width:30%;height:100%;transform:skewX(-18deg);pointer-events:none;background:linear-gradient(90deg,transparent,rgba(84,166,227,.025) 25%,rgba(134,202,245,.11) 50%,rgba(84,166,227,.025) 75%,transparent);animation:intro-light-sweep 1.8s cubic-bezier(.16,.7,.22,1) .2s both}
-#lughati-intro .intro-brand{isolation:isolate;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(900px,100%);padding:24px 20px 76px}
-#lughati-intro .intro-brand:before{content:"";position:absolute;z-index:-1;left:50%;top:44%;width:min(68vw,510px);height:min(47vw,330px);transform:translate(-50%,-50%) skewX(-13deg);border-radius:2px;border-top:1px solid rgba(113,181,220,.22);border-bottom:1px solid rgba(113,181,220,.10);background:linear-gradient(110deg,transparent 4%,rgba(14,43,69,.10) 28%,rgba(18,57,87,.34) 51%,rgba(9,28,47,.16) 73%,transparent 96%);box-shadow:inset 0 1px rgba(255,255,255,.018);animation:intro-panel-arrive .9s cubic-bezier(.16,.75,.22,1) both}
-#lughati-intro .intro-brand:after{content:"";position:absolute;z-index:-1;left:50%;top:44%;width:min(45vw,360px);height:1px;transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(241,189,89,.75),rgba(241,189,89,.08),transparent);box-shadow:0 0 22px rgba(241,189,89,.14);pointer-events:none}
-@keyframes intro-panel-arrive{0%{opacity:0;transform:translate(-50%,-46%) skewX(-13deg);clip-path:inset(0 50% 0 50%)}100%{opacity:1;transform:translate(-50%,-50%) skewX(-13deg);clip-path:inset(0 0 0 0)}}
-@keyframes intro-edge-reveal{0%{transform:scaleY(0);transform-origin:top;opacity:0}100%{transform:scaleY(1);opacity:.7}}
-@keyframes intro-light-sweep{0%{left:-55%;opacity:0}20%{opacity:1}100%{left:125%;opacity:0}}
-#lughati-intro .intro-kicker{font-size:11px;letter-spacing:.3px;margin-bottom:14px;color:#c7dce9;gap:12px}
-#lughati-intro .intro-kicker span{width:25px;background:linear-gradient(90deg,transparent,#d8ad59)}
+/* Lughati intro — cinematic gold reveal, no space, stars, or glowing circles */
+#lughati-intro{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:hidden;background:#050505!important;background-image:linear-gradient(180deg,#080807 0%,#030303 56%,#070706 100%)!important;opacity:1;visibility:visible;pointer-events:none;isolation:isolate;transition:opacity .9s ease,visibility .9s ease}
+#lughati-intro.is-hiding{opacity:0;visibility:hidden}
+#lughati-intro:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 0%,rgba(194,151,65,.025) 49.8%,rgba(194,151,65,.06) 50%,rgba(194,151,65,.025) 50.2%,transparent 100%)}
+#lughati-intro:after,#lughati-intro .intro-stars,#lughati-intro .intro-particle{content:none!important;display:none!important}
+#lughati-intro .intro-brand{position:relative;z-index:2;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:center;width:min(900px,100%);padding:24px 20px 86px;text-align:center}
+#lughati-intro .intro-brand:before,#lughati-intro .intro-brand:after{content:none!important;display:none!important}
+#lughati-intro .intro-kicker{display:flex;align-items:center;justify-content:center;gap:13px;margin:0 auto 18px;color:#b9ad91;font:700 10px Cairo,Tahoma,sans-serif;letter-spacing:2px;opacity:0;transform:translateY(5px);transition:opacity .75s ease,transform .75s ease}
+#lughati-intro .intro-kicker span{display:block;width:22px;height:1px;background:linear-gradient(90deg,transparent,#b99a5b)}
 #lughati-intro .intro-kicker span:last-child{transform:rotate(180deg)}
-#lughati-intro .intro-logo{position:relative;font-size:clamp(78px,13vw,126px);letter-spacing:-2px;color:#f7f5ef;text-shadow:0 2px 0 rgba(255,255,255,.16),0 8px 36px rgba(0,0,0,.5)}
-#lughati-intro.logo-visible .intro-logo{animation:intro-logo-reveal .85s cubic-bezier(.2,.8,.2,1) both}
-@keyframes intro-logo-reveal{0%{opacity:0;transform:translateY(20px);filter:blur(5px);letter-spacing:5px}70%{opacity:1;filter:blur(0);letter-spacing:-1px}100%{opacity:1;transform:translateY(0);filter:blur(0);letter-spacing:-2px}}
-#lughati-intro .intro-logo:after{margin-top:7px;width:clamp(90px,15vw,132px);height:2px;background:linear-gradient(90deg,transparent,#b98736 22%,#f1d28c 50%,#b98736 78%,transparent);box-shadow:0 0 12px rgba(241,189,89,.24)}
-#lughati-intro .intro-track{display:flex;align-items:center;justify-content:center;gap:9px;margin:13px auto 0;color:#9db8ca;font:800 9px Inter,Arial,sans-serif;letter-spacing:2.2px;opacity:0;transform:translateY(6px);transition:opacity .65s ease .12s,transform .65s ease .12s}
-#lughati-intro .intro-track span{width:17px;height:1px;background:linear-gradient(90deg,transparent,rgba(241,189,89,.72))}
+#lughati-intro.logo-visible .intro-kicker{opacity:1;transform:translateY(0)}
+#lughati-intro .intro-logo{position:relative;margin:0;font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(70px,13vw,122px);font-weight:1000;line-height:1.35;letter-spacing:-2px;color:#e8dfc8!important;background:linear-gradient(100deg,#78623b 0%,#c3a15d 24%,#fff0bd 47%,#d9bd7b 62%,#8d713d 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none!important;filter:none;opacity:0;transform:translateY(10px);clip-path:inset(0 100% 0 0);transition:clip-path 1.35s cubic-bezier(.2,.75,.2,1),opacity .45s ease,transform .9s ease}
+#lughati-intro.logo-visible .intro-logo{opacity:1;transform:translateY(0);clip-path:inset(0 0 0 0);animation:intro-gold-sheen 2.2s ease .35s both}
+@keyframes intro-gold-sheen{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+#lughati-intro .intro-logo:after{content:"";display:block;width:clamp(70px,12vw,112px);height:1px;margin:8px auto 0;border-radius:0;background:linear-gradient(90deg,transparent,#8c6d32 18%,#e5c77f 50%,#8c6d32 82%,transparent);box-shadow:none!important;transform:scaleX(.1);transform-origin:center;opacity:0;transition:transform .9s ease .55s,opacity .7s ease .55s}
+#lughati-intro.logo-visible .intro-logo:after{opacity:1;transform:scaleX(1)}
+#lughati-intro .intro-track{display:flex;align-items:center;justify-content:center;gap:9px;margin:17px auto 0;color:#756d5b;font:700 9px Inter,Arial,sans-serif;letter-spacing:2.2px;opacity:0;transform:translateY(5px);transition:opacity .8s ease .4s,transform .8s ease .4s}
+#lughati-intro .intro-track span{width:17px;height:1px;background:linear-gradient(90deg,transparent,#8c713c)}
 #lughati-intro .intro-track span:last-child{transform:rotate(180deg)}
-#lughati-intro .intro-track b{color:#d9b66d;font-weight:700}
+#lughati-intro .intro-track b{color:#b99a5b;font-weight:700}
 #lughati-intro.logo-visible .intro-track{opacity:1;transform:translateY(0)}
-#lughati-intro .intro-tagline{margin-top:25px;max-width:650px;font-size:clamp(15px,2.5vw,22px);line-height:2.05;color:#e9f0f6;text-shadow:0 2px 18px rgba(0,0,0,.42)}
-#lughati-intro .intro-edition{margin-top:22px;padding:0;border:0;border-radius:0;background:transparent;width:auto;max-width:100%;font-size:11px;color:#8fa8ba;letter-spacing:.1px}
-#lughati-intro .intro-edition i,#lughati-intro .intro-edition span{color:#d9b66d}
-#lughati-intro .intro-skip{bottom:max(26px,env(safe-area-inset-bottom));border:1px solid rgba(173,192,208,.2);background:rgba(5,12,21,.78);box-shadow:0 8px 26px rgba(0,0,0,.22);color:#d7e2ec;backdrop-filter:blur(8px)}
-#lughati-intro .intro-skip:hover{background:rgba(17,35,52,.92);border-color:rgba(217,182,109,.48)}
-@media(max-width:480px){#lughati-intro .intro-brand{padding:20px 12px 78px;width:100%}#lughati-intro .intro-brand:before{width:90vw;height:65vw}#lughati-intro .intro-kicker{font-size:10px;gap:8px}#lughati-intro .intro-track{font-size:8px;letter-spacing:1.4px;gap:6px;margin-top:11px}#lughati-intro .intro-track span{width:10px}#lughati-intro .intro-tagline{margin-top:19px;font-size:14px;line-height:1.95;max-width:340px}#lughati-intro .intro-edition{font-size:10px;gap:6px;margin-top:17px}}
-@media(max-height:620px){#lughati-intro .intro-brand{padding-top:8px;padding-bottom:60px}#lughati-intro .intro-brand:before{width:min(70vw,420px);height:min(52vh,260px)}#lughati-intro .intro-logo{font-size:clamp(54px,10vh,82px)}#lughati-intro .intro-tagline{margin-top:12px;line-height:1.65}#lughati-intro .intro-edition{margin-top:12px}#lughati-intro .intro-skip{bottom:max(10px,env(safe-area-inset-bottom));min-height:38px;padding:7px 17px}}
-@media(prefers-reduced-motion:reduce){#lughati-intro .intro-stars:before,#lughati-intro .intro-stars:after,#lughati-intro .intro-brand:before{animation:none}#lughati-intro.logo-visible .intro-logo{animation:none}}
-
-/* Final luxury pass: cinematic light sweep, clean geometry, no particles or orbital effects */
-#lughati-intro{background:#03060c!important;background-image:linear-gradient(118deg,#03060c 0%,#07111f 47%,#02040a 100%)!important}
-#lughati-intro .intro-stars{display:none!important}
-#lughati-intro:before{
-  background:
-    linear-gradient(112deg,transparent 0%,rgba(26,80,132,.07) 27%,transparent 48%),
-    linear-gradient(106deg,transparent 40%,rgba(228,177,82,.065) 49%,rgba(228,177,82,.012) 51%,transparent 61%),
-    linear-gradient(90deg,transparent 0%,rgba(0,0,0,.12) 40%,rgba(0,0,0,.66) 100%);
-}
-#lughati-intro:after{
-  border-color:rgba(201,164,91,.14);
-  animation:intro-frame-arrive 1.25s cubic-bezier(.2,.75,.25,1) both;
-}
-@keyframes intro-frame-arrive{0%{opacity:0;inset:clamp(22px,4vw,48px)}100%{opacity:.9;inset:clamp(14px,3vw,34px)}}
-#lughati-intro .intro-brand:before{
-  content:"";position:absolute;z-index:-1;left:50%;top:48%;width:min(78vw,780px);height:1px;
-  transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(105,156,202,.2) 22%,rgba(218,181,104,.58) 50%,rgba(105,156,202,.2) 78%,transparent);
-  animation:intro-signature-line 1.5s cubic-bezier(.2,.75,.25,1) .2s both;
-}
-@keyframes intro-signature-line{0%{opacity:0;scale:.45 1}100%{opacity:1;scale:1 1}}
-#lughati-intro .intro-brand:after{
-  content:"";position:absolute;z-index:-1;top:48%;left:50%;width:min(78vw,780px);height:110px;
-  transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(26,72,113,.11),rgba(19,41,65,.12),rgba(26,72,113,.11),transparent);
-  filter:none;border-radius:0;pointer-events:none;
-}
-#lughati-intro .intro-logo{letter-spacing:-3px}
-#lughati-intro.logo-visible .intro-logo{animation:intro-title-impact 1.05s cubic-bezier(.16,1,.3,1) both}
-@keyframes intro-title-impact{0%{opacity:0;transform:translateY(19px) scale(.96);filter:blur(5px)}72%{opacity:1;transform:translateY(-2px) scale(1.008);filter:blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
-#lughati-intro .intro-logo:after{box-shadow:0 0 10px rgba(201,164,91,.12)}
-#lughati-intro .intro-tagline{max-width:min(680px,88vw);text-wrap:balance}
-#lughati-intro .intro-skip{transition:background .25s,border-color .25s,color .25s}
-@media(max-width:520px){
-  #lughati-intro .intro-brand:before{width:88vw}
-  #lughati-intro .intro-brand:after{width:88vw;height:82px}
-}
-@media(prefers-reduced-motion:reduce){
-  #lughati-intro:after,#lughati-intro .intro-brand:before{animation:none!important}
-  #lughati-intro.logo-visible .intro-logo{animation:none!important}
-}
-
-
+#lughati-intro .intro-tagline{margin:24px auto 0;min-height:1.8em;max-width:min(680px,88vw);font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:clamp(14px,2.5vw,21px);font-weight:600;line-height:2;color:#c7c1b4;text-shadow:none!important;opacity:0;transform:translateY(7px);transition:opacity .7s ease,transform .7s ease;direction:rtl;white-space:pre-line}
+#lughati-intro.tagline-visible .intro-tagline{opacity:1;transform:translateY(0)}
+#lughati-intro .intro-cursor{display:inline-block;width:1px;height:1.05em;margin-inline-start:4px;vertical-align:-.16em;background:#c6a45f;box-shadow:none!important;animation:intro-cursor-blink .75s steps(1,end) infinite}
+#lughati-intro .intro-edition{display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;margin:20px auto 0;color:#777064;font:600 11px Cairo,Tahoma,sans-serif;opacity:0;transform:translateY(5px);transition:opacity .7s ease .2s,transform .7s ease .2s}
+#lughati-intro .intro-edition i,#lughati-intro .intro-edition span{color:#b99a5b}
+#lughati-intro.tagline-visible .intro-edition{opacity:1;transform:translateY(0)}
+#lughati-intro .intro-skip{position:absolute;z-index:5;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:42px;padding:10px 20px;border:1px solid rgba(190,157,91,.28);border-radius:3px;background:rgba(10,10,9,.85);color:#b9ad91;font:700 12px Cairo,Tahoma,sans-serif;cursor:pointer;box-shadow:none!important;backdrop-filter:none;transition:background .25s,border-color .25s,color .25s}
+#lughati-intro .intro-skip:hover{background:#15130e;border-color:rgba(210,178,112,.65);color:#ead9b1}
+@media(max-width:520px){#lughati-intro .intro-brand{padding:20px 14px 82px;width:100%}#lughati-intro .intro-kicker{font-size:9px;letter-spacing:1.3px;gap:8px}#lughati-intro .intro-track{font-size:8px;letter-spacing:1.25px;gap:6px;margin-top:12px}#lughati-intro .intro-track span{width:10px}#lughati-intro .intro-tagline{margin-top:18px;font-size:14px;line-height:1.95;max-width:340px}#lughati-intro .intro-edition{font-size:10px;gap:6px;margin-top:16px}}
+@media(max-height:620px){#lughati-intro .intro-brand{padding-top:8px;padding-bottom:60px}#lughati-intro .intro-logo{font-size:clamp(54px,10vh,82px)}#lughati-intro .intro-tagline{margin-top:12px;line-height:1.65}#lughati-intro .intro-edition{margin-top:12px}#lughati-intro .intro-skip{bottom:max(10px,env(safe-area-inset-bottom));min-height:38px;padding:7px 17px}}
+@media(prefers-reduced-motion:reduce){#lughati-intro .intro-logo,#lughati-intro .intro-logo:after{animation:none!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
-<div id="lughati-intro" aria-label="مقدمة لُغتي" aria-hidden="true"><div class="intro-stars" aria-hidden="true"></div><div class="intro-brand"><div class="intro-kicker"><span></span> منصة لُغتي التعليمية <span></span></div><div class="intro-logo">لُغتي</div><div class="intro-track" dir="ltr"><span></span> ENGLISH LEARNING <b>·</b> THIRD SECONDARY <span></span></div><div class="intro-tagline" aria-label="خطوة بخطوة نحو ثقة أكبر في الإنجليزية"><span class="intro-tagline-text"></span><span class="intro-cursor" aria-hidden="true"></span></div><div class="intro-edition"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> الصف الثالث الثانوي <span>·</span> تعلّم بتركيز، وتقدّم بثقة</div></div><button id="introSkip" class="intro-skip" type="button">تخطي المقدمة <i class="fa-solid fa-forward-step" aria-hidden="true"></i></button></div>
+<div id="lughati-intro" aria-label="مقدمة لُغتي" aria-hidden="true"><div class="intro-brand"><div class="intro-kicker"><span></span> منصة لُغتي التعليمية <span></span></div><div class="intro-logo">لُغتي</div><div class="intro-track" dir="ltr"><span></span> ENGLISH LEARNING <b>·</b> THIRD SECONDARY <span></span></div><div class="intro-tagline" aria-label="خطوة بخطوة نحو ثقة أكبر في الإنجليزية"><span class="intro-tagline-text"></span><span class="intro-cursor" aria-hidden="true"></span></div><div class="intro-edition"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> الصف الثالث الثانوي <span>·</span> تعلّم بتركيز، وتقدّم بثقة</div></div><button id="introSkip" class="intro-skip" type="button">تخطي المقدمة <i class="fa-solid fa-forward-step" aria-hidden="true"></i></button></div>
 <header class="shell"><div class="nav">
 <a class="brand" href="#home" aria-label="لُغتي الرئيسية"><span class="avatar-ring" aria-label="صورة صاحب موقع لُغتي"><span class="avatar-core"><img src="assets/profile-full.jpg" alt="صورة صاحب موقع لُغتي" style="width:100%;height:100%;object-fit:cover;object-position:center 24%;border-radius:50%;display:block"></span></span><span>لُغتي</span></a>
 <nav class="navlinks" aria-label="القائمة"><a href="#home">الرئيسية</a><a class="nav-settings-link" href="settings.html" aria-label="الإعدادات" title="الإعدادات"><i class="fa-solid fa-gear" aria-hidden="true"></i></a></nav>
@@ -455,24 +411,6 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
   const stars=intro.querySelector('.intro-stars'),logo=intro.querySelector('.intro-logo'),tagline=intro.querySelector('.intro-tagline-text'),cursor=intro.querySelector('.intro-cursor');
   const subtitle='مشوارك نحو الإنجليزية يبدأ بخطوة.\nافهم، اسمع، ودرّب نفسك بثقة.\nكل يوم أقرب لهدفك.';
   let typingAudio=null,typingGain=null,audioReady=false,typingTimer=null,removeTimer=null;const skipIntro=$('introSkip');if(skipIntro)skipIntro.addEventListener('click',finishIntro);
-  function makeParticles(){
-    if(!stars||stars.childElementCount)return;
-    const colors=['#398cff','#63b5ff','#f1bd59','#ffd98a','#1768d8'];
-    const count=window.matchMedia&&window.matchMedia('(max-width: 600px)').matches?24:38;
-    for(let i=0;i<count;i++){
-      const p=document.createElement('span');p.className='intro-particle';
-      p.style.setProperty('--px',(Math.random()*100).toFixed(2)+'%');
-      p.style.setProperty('--py',(Math.random()*100).toFixed(2)+'%');
-      p.style.setProperty('--size',(1+Math.random()*2.2).toFixed(1)+'px');
-      p.style.setProperty('--particle-color',colors[i%colors.length]);
-      p.style.setProperty('--dx',((Math.random()-.5)*95).toFixed(1)+'px');
-      p.style.setProperty('--dy',((Math.random()-.5)*85).toFixed(1)+'px');
-      p.style.setProperty('--duration',(5+Math.random()*7).toFixed(2)+'s');
-      p.style.setProperty('--delay',(-Math.random()*8).toFixed(2)+'s');
-      p.style.setProperty('--particle-opacity',(0.35+Math.random()*.45).toFixed(2));
-      stars.appendChild(p);
-    }
-  }
   function prepareTypingAudio(){
     if(audioReady)return true;
     const AudioContextClass=window.AudioContext||window.webkitAudioContext;
@@ -495,7 +433,6 @@ html.js .reveal[data-delay="3"]{transition-delay:.24s}
     intro.classList.add('is-hiding');
     removeTimer=window.setTimeout(()=>{if(intro.isConnected)intro.remove();if(typingAudio&&typingAudio.state!=='closed')typingAudio.close().catch(()=>{})},850);
   }
-  makeParticles();
   if(reduceMotion){
     intro.classList.add('logo-visible','tagline-visible');
     if(tagline)tagline.textContent=subtitle;
