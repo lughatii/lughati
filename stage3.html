@@ -491,9 +491,11 @@ function speak(){
  const synth=window.speechSynthesis;
  synth.cancel();
  const w=words[index];
- const englishText=String(w.spoken || w.en || '').replace(/\s*\/\s*/g, ', ').replace(/\.{3,}/g, ' ').trim();
- const arabicText=String(w.ar || '').trim();
- if(!englishText && !arabicText) return;
+ const englishText=String(w.spoken || w.en || '')
+   .replace(/\\s*\\/\\s*/g, ', ')
+   .replace(/\\.{3,}/g, ' ')
+   .trim();
+ if(!englishText) return;
  let started=false;
  const speakNow=()=>{
    if(started) return;
@@ -506,36 +508,15 @@ function speak(){
      englishVoices.find(v=>/^en[-_]US$/i.test(v.lang || '')) ||
      englishVoices.find(v=>/^en[-_]GB$/i.test(v.lang || '')) ||
      englishVoices[0];
-   const arabicVoices=voices.filter(v=>/^ar([_-]|$)/i.test(v.lang || ''));
-   const preferredArabic=
-     arabicVoices.find(v=>/^ar[-_]EG$/i.test(v.lang || '')) ||
-     arabicVoices.find(v=>/^ar[-_]SA$/i.test(v.lang || '')) ||
-     arabicVoices[0];
-   const speakArabic=()=>{
-     if(!arabicText) return;
-     const ar=new SpeechSynthesisUtterance(arabicText);
-     ar.lang=preferredArabic?preferredArabic.lang:'ar-EG';
-     ar.rate=0.9;
-     ar.pitch=1;
-     if(preferredArabic) ar.voice=preferredArabic;
-     ar.onerror=()=>{$('feedback').textContent='تعذّر تشغيل النطق العربي. تأكد من تفعيل صوت عربي في إعدادات جهازك.';};
-     synth.speak(ar);
-   };
-   if(englishText){
-     const en=new SpeechSynthesisUtterance(englishText);
-     en.lang=preferredEnglish?preferredEnglish.lang:'en-US';
-     en.rate=0.78;
-     en.pitch=1;
-     if(preferredEnglish) en.voice=preferredEnglish;
-     en.onerror=()=>{$('feedback').textContent='تعذّر تشغيل الصوت الإنجليزي. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';};
-     en.onend=speakArabic;
-     synth.speak(en);
-   }else{
-     speakArabic();
-   }
+   const utterance=new SpeechSynthesisUtterance(englishText);
+   utterance.lang=preferredEnglish?preferredEnglish.lang:'en-US';
+   utterance.rate=0.82;
+   utterance.pitch=1;
+   if(preferredEnglish) utterance.voice=preferredEnglish;
+   utterance.onerror=()=>{$('feedback').textContent='تعذّر تشغيل الصوت الإنجليزي. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';};
+   synth.speak(utterance);
  };
- const voices=synth.getVoices();
- if(voices.length){
+ if(synth.getVoices().length){
    speakNow();
  }else{
    const onVoicesChanged=()=>{
