@@ -591,26 +591,6 @@ function speak(){
    },700);
  }
 }
-const sentenceTemplates={
- "aim to":"We ____ achieve our goals.",
- "compared to":"____ last year, the results are much better.",
- "contribute to":"Regular exercise can ____ better health.",
- "essential to":"Clean water is ____ human life.",
- "protect from":"A good coat helps ____ the cold.",
- "range from ... to":"Temperatures ____ 10 degrees ____ 30 degrees.",
- "safe from":"The helmet keeps cyclists ____ head injuries.",
- "worry about":"Try not to ____ the exam."
-};
-const sentenceArabicMeanings={
- "aim to":"يهدف إلى تحقيق أهدافنا.",
- "compared to":"مقارنةً بالعام الماضي، النتائج أفضل بكثير.",
- "contribute to":"تساهم التمارين المنتظمة في صحة أفضل.",
- "essential to":"الماء النظيف ضروري لحياة الإنسان.",
- "protect from":"يساعد المعطف الجيد على الحماية من البرد.",
- "range from ... to":"تتراوح درجات الحرارة من 10 إلى 30 درجة.",
- "safe from":"تحمي الخوذة راكبي الدراجات من إصابات الرأس.",
- "worry about":"حاول ألا تقلق بشأن الامتحان."
-};
 const spokenSentences={
  "aim to":"We aim to achieve our goals.",
  "compared to":"Compared to last year, the results are much better.",
@@ -651,7 +631,7 @@ function setGameMode(mode){
 function questionContent(w){
  if(gameMode==='scenario')return {prompt:scenarioPrompts[w.en]||'ما التعبير الأنسب لهذا الموقف؟',dir:'rtl',instruction:'🎭 اقرأ الموقف وحدد التعبير الإنجليزي الأنسب.',meaning:'اختَر التعبير الذي يعبّر عن الموقف بدقة.'};
  if(gameMode==='sentence')return {prompt:w.ar,dir:'rtl',instruction:'🕵️ اختَر الجملة الإنجليزية التي تعبّر عن هذا المعنى.',meaning:'اقرأ الجمل كاملة وانتبه للسياق.'};
- return {prompt:sentenceTemplates[w.en]||'Choose the best meaning.',dir:'ltr',instruction:'⚡ اقرأ الجملة الإنجليزية ثم اختَر معناها بالعربية.',meaning:'ركز على معنى التعبير داخل الجملة.'};
+ return {prompt:spokenSentences[w.en]||'Choose the best meaning.',dir:'ltr',instruction:'⚡ اقرأ الجملة الإنجليزية ثم اختَر معناها بالعربية.',meaning:'ركز على معنى التعبير داخل الجملة.'};
 }
 function getQuestionOptions(w){
  if(gameMode==='scenario')return shuffle([w.en,...shuffle(words.filter(x=>x.en!==w.en).map(x=>x.en)).slice(0,3)]);
