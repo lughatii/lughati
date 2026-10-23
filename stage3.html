@@ -490,14 +490,14 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
 </head>
 <body><header class="top"><a class="top-brand" href="index.html" aria-label="لُغتي — الصفحة الرئيسية"><span class="top-mark" aria-hidden="true">ل</span><span class="top-brand-copy"><span class="top-brand-name">لُغتي</span><span class="top-brand-subtitle">ENGLISH LEARNING</span></span></a><nav class="top-nav" aria-label="التنقل الرئيسي"><a class="top-home" href="index.html"><span aria-hidden="true">⌂</span><span>الرئيسية</span></a></nav></header>
 <main>
-<section class="hero"><h1>مرحلتي الخاصة — للصف الثالث الثانوي</h1><p class="muted" style="margin:0">حوّل المراجعة إلى تحدّي سريع! اختَر العبارة المناسبة، اجمع نقاط لُغتي، وابنِ سلسلة إجابات صحيحة. كل جولة مختلفة عن اللي قبلها.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">التحدّي 1 من 8</span><span id="stageCount">جاهز للانطلاق</span></div><div class="game-stats" aria-live="polite"><span>⚡ النقاط <b id="score">0</b></span><span>🔥 السلسلة <b id="streak">0</b></span><span>🏆 أفضل نتيجة <b id="bestScore">0</b></span></div></section>
+<section class="hero"><h1>مرحلتي الخاصة — للصف الثالث الثانوي</h1><p class="muted" style="margin:0">اختبارات متنوعة تقيس فهمك الحقيقي: مواقف واقعية، تحليل الجمل، وتحدّي المعنى. ركّز في السياق واختَر الإجابة الأدق.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">التحدّي 1 من 8</span><span id="stageCount">جاهز للانطلاق</span></div><div class="game-stats" aria-live="polite"><span>⚡ النقاط <b id="score">0</b></span><span>🔥 السلسلة <b id="streak">0</b></span><span>🏆 أفضل نتيجة <b id="bestScore">0</b></span></div></section>
 <section class="panel" id="lesson">
   <div class="stage" id="category">المستوى 1 من 100</div>
   <div class="emoji" id="emoji">📘</div>
   <div class="word" id="word"></div>
   <div class="meaning" id="meaning"></div>
   <div class="hint" id="lessonHint">راجع معنى الكلمة، ثم اختَر الإجابة التي تكمل الجملة بشكل صحيح.</div>
-  <div class="game-modes" id="gameModes"><p class="hint">اختار طريقة اللعب:</p><button class="mode-card active" type="button" data-mode="classic"><span>🎯</span><b>تحدّي المعنى</b><small>اختار العبارة المناسبة للجملة</small></button><button class="mode-card" type="button" data-mode="reverse"><span>🧩</span><b>اختبر تركيزك</b><small>شوف المعنى العربي واختار العبارة</small></button></div><div class="row" id="preTestControls">
+  <div class="game-modes" id="gameModes"><p class="hint">اختار نوع الاختبار:</p><button class="mode-card active" type="button" data-mode="scenario"><span>🎭</span><b>مواقف واقعية</b><small>افهم الموقف واختار التعبير الأنسب</small></button><button class="mode-card" type="button" data-mode="sentence"><span>🕵️</span><b>محقق الجمل</b><small>اختار الجملة الإنجليزية المطابقة للمعنى</small></button><button class="mode-card" type="button" data-mode="meaning"><span>⚡</span><b>تحدّي المعنى</b><small>اقرأ الجملة وحدد معناها الصحيح</small></button></div><div class="row" id="preTestControls">
     <button class="btn" id="hear" type="button">🔊 استمع للكلمة</button>
     <button class="btn primary" id="startTest" type="button">ابدأ التدريب</button>
   </div>
@@ -507,8 +507,8 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
   </div>
   <div class="row hidden" id="backToWordRow"><button class="btn" id="backToWord" type="button">← الرجوع للكلمة</button></div>
   <div id="writing" class="hidden">
-    <div class="round-banner" id="roundBanner">🎮 الجولة بدأت — ركّز واختار الصح!</div><p class="hint" id="instruction">اختر العبارة التي تكمل الجملة بشكل صحيح.</p>
-    <div class="sentence" id="sentence" dir="ltr">We ____ achieve our goals.</div>
+    <div class="round-banner" id="roundBanner">🎓 اختبر فهمك للتعبيرات في سياقها</div><p class="hint" id="instruction">اقرأ السؤال بهدوء ثم اختر الإجابة الأدق.</p>
+    <div class="sentence" id="sentence" dir="rtl">اقرأ السؤال واختر الإجابة الأنسب.</div>
     <p class="hint sentence-meaning" id="sentenceMeaning" dir="rtl" aria-live="polite"></p>
     <div class="row sentence-audio-row"><button class="btn" id="hearSentence" type="button">🔊 استمع للجملة</button></div>
     <div class="options" id="options" role="group" aria-label="اختيارات إكمال الجملة"></div>
@@ -532,7 +532,7 @@ const words=[
 ];
 const $=id=>document.getElementById(id);
 const STORE='lughati-stage3-learning-v3';
-let index=0,attempt=1,phase='ready',score=0,streak=0,gameMode='classic',roundOrder=[];const BEST_KEY='lughati-stage3-best-score-v1';
+let index=0,attempt=1,phase='ready',score=0,streak=0,gameMode='scenario';
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 function save(){try{localStorage.setItem(STORE,JSON.stringify({index,attempt,phase}));}catch(e){console.warn('تعذر حفظ التقدم',e);}}
 function load(){
@@ -622,28 +622,49 @@ const spokenSentences={
  "worry about":"Try not to worry about the exam."
 };
 let selectedAnswer='';
-function makeSentence(w){
- if(gameMode==='reverse')return 'Which phrase means: "'+w.ar+'"?';
- return sentenceTemplates[w.en] || 'Choose the phrase that completes the sentence.';
+const BEST_KEY='lughati-stage3-best-score-v2';
+const scenarioPrompts={
+ "aim to":"مدرسة وضعت خطة للوصول إلى نتيجة محددة هذا العام. أي تعبير يوضح أنها تسعى لتحقيق هدف؟",
+ "compared to":"أنت تقارن درجات هذا العام بدرجات العام الماضي. أي تعبير يناسب المقارنة؟",
+ "contribute to":"تريد أن تقول إن ممارسة الرياضة تساعد في تحسين الصحة. أي تعبير يوضح المساهمة في نتيجة؟",
+ "essential to":"تشرح أن الماء النظيف شيء لا غنى عنه لحياة الإنسان. أي تعبير يناسب المعنى؟",
+ "protect from":"تتحدث عن معطف يساعد على الوقاية من البرد. أي تعبير يوضح الحماية من شيء؟",
+ "range from ... to":"تشرح أن درجات الحرارة تبدأ من 10 وتصل إلى 30 درجة. أي تعبير يصف هذا النطاق؟",
+ "safe from":"تشرح أن الخوذة تقلل خطر إصابات الرأس وتحافظ على سلامة راكبي الدراجات. أي تعبير يناسب؟",
+ "worry about":"صديقك قلق بسبب الامتحان، وتريد وصف شعوره بالإنجليزية. أي تعبير تختار؟"
+};
+function shuffle(items){
+ const a=[...items];
+ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+ return a;
 }
 function updateGameStats(){
  $('score').textContent=score;$('streak').textContent=streak;
  let best=0;try{best=Number(localStorage.getItem(BEST_KEY)||0)}catch{}
  $('bestScore').textContent=best;
 }
-function shuffleRoundOrder(){
- roundOrder=words.map((_,i)=>i);
- for(let i=roundOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[roundOrder[i],roundOrder[j]]=[roundOrder[j],roundOrder[i]];}
-}
 function setGameMode(mode){
  gameMode=mode;
  document.querySelectorAll('.mode-card').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));
- $('sentence').dir=mode==='reverse'?'rtl':'ltr';
- $('sentence').style.textAlign=mode==='reverse'?'center':'left';
- $('instruction').textContent=mode==='reverse'?'اختار التعبير الإنجليزي اللي معناه ظاهر قدامك.':'اختار العبارة التي تكمل الجملة بشكل صحيح.';
  if(phase==='write')render();
 }
+function questionContent(w){
+ if(gameMode==='scenario')return {prompt:scenarioPrompts[w.en]||'ما التعبير الأنسب لهذا الموقف؟',dir:'rtl',instruction:'🎭 اقرأ الموقف وحدد التعبير الإنجليزي الأنسب.',meaning:'اختَر التعبير الذي يعبّر عن الموقف بدقة.'};
+ if(gameMode==='sentence')return {prompt:w.ar,dir:'rtl',instruction:'🕵️ اختَر الجملة الإنجليزية التي تعبّر عن هذا المعنى.',meaning:'اقرأ الجمل كاملة وانتبه للسياق.'};
+ return {prompt:sentenceTemplates[w.en]||'Choose the best meaning.',dir:'ltr',instruction:'⚡ اقرأ الجملة الإنجليزية ثم اختَر معناها بالعربية.',meaning:'ركز على معنى التعبير داخل الجملة.'};
+}
+function getQuestionOptions(w){
+ if(gameMode==='scenario')return shuffle([w.en,...shuffle(words.filter(x=>x.en!==w.en).map(x=>x.en)).slice(0,3)]);
+ if(gameMode==='sentence')return shuffle([sentenceTemplates[w.en],...shuffle(words.filter(x=>x.en!==w.en).map(x=>sentenceTemplates[x.en])).slice(0,3)]);
+ return shuffle([w.ar,...shuffle(words.filter(x=>x.en!==w.en).map(x=>x.ar)).slice(0,3)]);
+}
+function getCorrectOption(w){
+ if(gameMode==='scenario')return w.en;
+ if(gameMode==='sentence')return sentenceTemplates[w.en];
+ return w.ar;
+}
 function speakSentence(){
+ if(gameMode!=='meaning'){return;}
  if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
    $('feedback').textContent='المتصفح لا يدعم النطق الصوتي.';
    return;
@@ -664,37 +685,35 @@ function speakSentence(){
  utterance.onerror=()=>{$('feedback').textContent='تعذّر تشغيل صوت الجملة.';};
  synth.speak(utterance);
 }
-function makeOptions(){
- const correct=String(words[index].en||'');
- const pool=words.map(w=>String(w.en||'')).filter(v=>v&&v!==correct);
- for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
- const choices=[correct,...pool.slice(0,3)];
- for(let i=choices.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]];}
- return choices;
-}
 function render(){
  const w=words[index];
- $('category').textContent=w.group||'مفردات إنجليزية';
+ $('category').textContent='تعبيرات إنجليزية • '+(index+1)+' / '+words.length;
  $('word').textContent=w.en;$('meaning').textContent=w.ar;$('emoji').textContent=w.emoji||'📘';
-  $('progress').style.width=((index+1)/words.length*100)+'%';
- $('count').textContent='الجولة '+(index+1)+' من '+words.length;
- $('stageCount').textContent=phase==='write'?'اختيار من متعدد':'جاهز للتدريب';
+ $('progress').style.width=((index+1)/words.length*100)+'%';
+ $('count').textContent='السؤال '+(index+1)+' من '+words.length;
+ $('stageCount').textContent=phase==='write'?'اختبار تفاعلي':'جاهز للاختبار';
  $('word').classList.toggle('hidden',phase!=='ready');$('meaning').classList.toggle('hidden',phase!=='ready');$('emoji').classList.toggle('hidden',phase!=='ready');
  $('hear').classList.toggle('hidden',phase!=='ready');$('startTest').classList.toggle('hidden',phase!=='ready');$('lessonHint').classList.toggle('hidden',phase!=='ready');
- $('backToWordRow').classList.add('hidden');$('writing').classList.toggle('hidden',phase!=='write');$('feedback').textContent='';
- $('nextQuestion').disabled=true;selectedAnswer='';
+ $('gameModes').classList.toggle('hidden',phase!=='ready');
+ $('wordNavigation').classList.toggle('hidden',phase!=='ready');
+ $('backToWordRow').classList.toggle('hidden',phase!=='write');
+ $('writing').classList.toggle('hidden',phase!=='write');
+ $('feedback').textContent='';$('nextQuestion').disabled=true;selectedAnswer='';
  if(phase==='write'){
-   $('sentence').textContent=makeSentence(w);
-   $('sentenceMeaning').textContent=gameMode==='reverse'?'اختار التعبير الإنجليزي المطابق للمعنى.':(sentenceArabicMeanings[w.en] || w.ar || '');
-   $('roundBanner').textContent=gameMode==='reverse'?'🧩 تحدّي التركيز: طابق المعنى بالتعبير!':'🎯 تحدّي الجملة: كمّلها بأدق تعبير!';
-   $('sentence').style.direction=gameMode==='reverse'?'rtl':'ltr';
-   $('sentence').style.textAlign=gameMode==='reverse'?'center':'left';
-   $('hearSentence').setAttribute('aria-label','استمع للجملة الإنجليزية');
-   $('options').replaceChildren();
-   makeOptions().forEach(option=>{
-     const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent=option;btn.dir='ltr';
-     btn.addEventListener('click',()=>chooseAnswer(option,btn));$('options').appendChild(btn);
-   });
+  const q=questionContent(w);
+  $('instruction').textContent=q.instruction;
+  $('sentence').textContent=q.prompt;
+  $('sentence').dir=q.dir;
+  $('sentence').style.textAlign=q.dir==='ltr'?'left':'right';
+  $('sentenceMeaning').textContent=q.meaning;
+  $('roundBanner').textContent=gameMode==='scenario'?'🎭 الجولة الأولى: فهم الموقف':gameMode==='sentence'?'🕵️ ملف التحقيق: حلّل الجمل':'⚡ تحدّي المعنى: ركّز في كل كلمة';
+  $('hearSentence').classList.toggle('hidden',gameMode!=='meaning');
+  $('options').replaceChildren();
+  getQuestionOptions(w).forEach(option=>{
+   const btn=document.createElement('button');btn.type='button';btn.className='btn';btn.textContent=option;
+   btn.dir=gameMode==='meaning'?'rtl':'ltr';
+   btn.addEventListener('click',()=>chooseAnswer(option,btn));$('options').appendChild(btn);
+  });
  }
  $('previousWord').disabled=index===0;
  save();
@@ -703,24 +722,26 @@ function startTraining(){phase='write';attempt=1;render();}
 function chooseAnswer(option,button){
  if(selectedAnswer||phase!=='write')return;
  selectedAnswer=option;
- const correct=String(words[index].en||'');
+ const correct=getCorrectOption(words[index]);
  document.querySelectorAll('#options button').forEach(b=>{b.disabled=true;if(b.textContent===correct)b.classList.add('correct');});
+ const earned=10+Math.min(streak,5)*2;
  if(option===correct){
-   streak++;score+=10+Math.min(streak-1,5)*2;
-   $('feedback').textContent=streak>=3?'🔥 جامد! سلسلة '+streak+' إجابات صحيحة! +نقاط':'برافو! إجابة صحيحة 👏 +'+(10+Math.min(streak-1,5)*2)+' نقطة';
-   $('feedback').style.color='#34d399';
-   try{const best=Number(localStorage.getItem(BEST_KEY)||0);if(score>best)localStorage.setItem(BEST_KEY,String(score))}catch{}
-   $('roundBanner').textContent=streak>=3?'🚀 سلسلة نار! كمّل بنفس القوة!':'✨ صح عليك! جاهز للتحدّي اللي بعده؟';
+  streak++;score+=earned;
+  $('feedback').textContent=streak>=3?'إجابة دقيقة! 🔥 سلسلة '+streak+' صحيحة — +'+earned+' نقطة':'إجابة صحيحة 👏 +'+earned+' نقطة';
+  $('feedback').style.color='#34d399';
+  try{const best=Number(localStorage.getItem(BEST_KEY)||0);if(score>best)localStorage.setItem(BEST_KEY,String(score))}catch{}
+  $('roundBanner').textContent=streak>=3?'🏆 أداء ممتاز! حافظ على تركيزك.':'✨ ممتاز! انتقل للسؤال التالي.';
  }else{
-   streak=0;button.classList.add('wrong');
-   $('feedback').textContent='قريبة! الإجابة الصحيحة: '+correct+' — خُدها معلومة للسؤال الجاي.';$('feedback').style.color='#fb7185';
-   $('roundBanner').textContent='💡 الغلط جزء من التعلّم. جرّب تاني في السؤال الجاي!';
+  streak=0;button.classList.add('wrong');
+  $('feedback').textContent='الإجابة الأدق: '+correct+' — راجعها لتثبت في ذاكرتك.';
+  $('feedback').style.color='#fb7185';
+  $('roundBanner').textContent='💡 كل سؤال فرصة للتعلّم. لاحظ الإجابة الصحيحة.';
  }
  updateGameStats();$('nextQuestion').disabled=false;
 }
 function nextQuestion(){
  if(!selectedAnswer)return;
- index=(index+1)%words.length;if(index===0)shuffleRoundOrder();attempt=1;phase='write';render();window.scrollTo({top:0,behavior:'smooth'});
+ index=(index+1)%words.length;if(index===0){score=0;streak=0;updateGameStats();}attempt=1;phase='write';render();window.scrollTo({top:0,behavior:'smooth'});
 }
 $('hear').onclick=speak;$('hearSentence').onclick=speakSentence;$('startTest').onclick=startTraining;
 $('backToWord').onclick=()=>{phase='ready';attempt=1;render();};
@@ -728,7 +749,7 @@ $('previousWord').onclick=()=>{if(index<=0)return;index--;attempt=1;phase='ready
 $('skipWord').onclick=()=>{index=(index+1)%words.length;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
 $('nextQuestion').onclick=nextQuestion;
 document.querySelectorAll('.mode-card').forEach(b=>b.addEventListener('click',()=>setGameMode(b.dataset.mode)));
-load();shuffleRoundOrder();updateGameStats();render();
+load();updateGameStats();render();
 
 })();
 </script>
