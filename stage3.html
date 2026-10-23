@@ -446,6 +446,25 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
 }
 @media(max-width:350px){.top{padding-inline:9px!important;gap:6px}.top-brand{gap:7px}.top-mark{width:35px;height:35px;flex-basis:35px}.top-brand-subtitle{letter-spacing:.7px;font-size:7px}.top-home{padding-inline:8px}}
 @media(prefers-reduced-motion:reduce){.top-home{transition:none!important}.top-home:hover{transform:none}}
+
+/* Modern playful quiz experience */
+.game-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:13px}
+.game-stats span{padding:10px 7px;border:1px solid rgba(103,232,249,.18);border-radius:14px;background:rgba(8,24,43,.58);font-size:12px;color:#b8d6e8}
+.game-stats b{display:block;margin-top:3px;font-size:20px;color:#67e8f9}
+.game-modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:16px 0}
+.game-modes .hint{grid-column:1/-1;margin:0}
+.mode-card{display:flex;flex-direction:column;align-items:flex-start;text-align:right;gap:5px;padding:13px;border:1px solid rgba(148,163,184,.2);border-radius:16px;background:rgba(15,23,42,.6);color:#eaf6ff}
+.mode-card span{font-size:25px}.mode-card b{font-size:14px}.mode-card small{font-size:11px;line-height:1.6;color:#a8b4c7}
+.mode-card.active{border-color:#67e8f9;background:linear-gradient(145deg,rgba(6,182,212,.18),rgba(15,23,42,.72));box-shadow:0 0 0 1px rgba(103,232,249,.15),0 0 20px rgba(6,182,212,.09)}
+.round-banner{padding:11px 13px;margin:10px 0;border:1px solid rgba(103,232,249,.2);border-radius:13px;background:rgba(6,182,212,.08);color:#a5f3fc;font-weight:800;font-size:13px}
+.options button{transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.options button.correct{border-color:#34d399!important;background:rgba(16,185,129,.18)!important;color:#a7f3d0!important;box-shadow:0 0 18px rgba(52,211,153,.13)}
+.options button.wrong{border-color:#fb7185!important;background:rgba(244,63,94,.13)!important;color:#fecdd3!important}
+.options button:disabled{opacity:1}
+#nextQuestion:disabled{opacity:.42;filter:grayscale(.3)}
+@media(max-width:520px){.game-stats{gap:5px}.game-stats span{font-size:10px;padding:8px 3px}.game-stats b{font-size:18px}.game-modes{gap:7px}.mode-card{padding:10px}.mode-card small{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.options button,.mode-card{transition:none!important}}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -471,14 +490,14 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
 </head>
 <body><header class="top"><a class="top-brand" href="index.html" aria-label="لُغتي — الصفحة الرئيسية"><span class="top-mark" aria-hidden="true">ل</span><span class="top-brand-copy"><span class="top-brand-name">لُغتي</span><span class="top-brand-subtitle">ENGLISH LEARNING</span></span></a><nav class="top-nav" aria-label="التنقل الرئيسي"><a class="top-home" href="index.html"><span aria-hidden="true">⌂</span><span>الرئيسية</span></a></nav></header>
 <main>
-<section class="hero"><h1>مرحلتي الخاصة — للصف الثالث الثانوي</h1><p class="muted" style="margin:0">أكمل الجملة باختيار الكلمة الإنجليزية الصحيحة من الاختيارات. كل إجابة صحيحة تنقلك للسؤال التالي.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">الكلمة 1</span><span id="stageCount">الكتابة 1 من 3</span></div></section>
+<section class="hero"><h1>مرحلتي الخاصة — للصف الثالث الثانوي</h1><p class="muted" style="margin:0">حوّل المراجعة إلى تحدّي سريع! اختَر العبارة المناسبة، اجمع نقاط لُغتي، وابنِ سلسلة إجابات صحيحة. كل جولة مختلفة عن اللي قبلها.</p><div class="progress"><div class="fill" id="progress"></div></div><div class="caption"><span id="count">التحدّي 1 من 8</span><span id="stageCount">جاهز للانطلاق</span></div><div class="game-stats" aria-live="polite"><span>⚡ النقاط <b id="score">0</b></span><span>🔥 السلسلة <b id="streak">0</b></span><span>🏆 أفضل نتيجة <b id="bestScore">0</b></span></div></section>
 <section class="panel" id="lesson">
   <div class="stage" id="category">المستوى 1 من 100</div>
   <div class="emoji" id="emoji">📘</div>
   <div class="word" id="word"></div>
   <div class="meaning" id="meaning"></div>
   <div class="hint" id="lessonHint">راجع معنى الكلمة، ثم اختَر الإجابة التي تكمل الجملة بشكل صحيح.</div>
-  <div class="row" id="preTestControls">
+  <div class="game-modes" id="gameModes"><p class="hint">اختار طريقة اللعب:</p><button class="mode-card active" type="button" data-mode="classic"><span>🎯</span><b>تحدّي المعنى</b><small>اختار العبارة المناسبة للجملة</small></button><button class="mode-card" type="button" data-mode="reverse"><span>🧩</span><b>اختبر تركيزك</b><small>شوف المعنى العربي واختار العبارة</small></button></div><div class="row" id="preTestControls">
     <button class="btn" id="hear" type="button">🔊 استمع للكلمة</button>
     <button class="btn primary" id="startTest" type="button">ابدأ التدريب</button>
   </div>
@@ -488,7 +507,7 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
   </div>
   <div class="row hidden" id="backToWordRow"><button class="btn" id="backToWord" type="button">← الرجوع للكلمة</button></div>
   <div id="writing" class="hidden">
-    <p class="hint" id="instruction">اختر الكلمة التي تكمل الجملة.</p>
+    <div class="round-banner" id="roundBanner">🎮 الجولة بدأت — ركّز واختار الصح!</div><p class="hint" id="instruction">اختر العبارة التي تكمل الجملة بشكل صحيح.</p>
     <div class="sentence" id="sentence" dir="ltr">We ____ achieve our goals.</div>
     <p class="hint sentence-meaning" id="sentenceMeaning" dir="rtl" aria-live="polite"></p>
     <div class="row sentence-audio-row"><button class="btn" id="hearSentence" type="button">🔊 استمع للجملة</button></div>
@@ -513,7 +532,7 @@ const words=[
 ];
 const $=id=>document.getElementById(id);
 const STORE='lughati-stage3-learning-v3';
-let index=0,attempt=1,phase='ready';
+let index=0,attempt=1,phase='ready',score=0,streak=0,gameMode='classic',roundOrder=[];const BEST_KEY='lughati-stage3-best-score-v1';
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
 function save(){try{localStorage.setItem(STORE,JSON.stringify({index,attempt,phase}));}catch(e){console.warn('تعذر حفظ التقدم',e);}}
 function load(){
@@ -604,7 +623,25 @@ const spokenSentences={
 };
 let selectedAnswer='';
 function makeSentence(w){
+ if(gameMode==='reverse')return 'Which phrase means: "'+w.ar+'"?';
  return sentenceTemplates[w.en] || 'Choose the phrase that completes the sentence.';
+}
+function updateGameStats(){
+ $('score').textContent=score;$('streak').textContent=streak;
+ let best=0;try{best=Number(localStorage.getItem(BEST_KEY)||0)}catch{}
+ $('bestScore').textContent=best;
+}
+function shuffleRoundOrder(){
+ roundOrder=words.map((_,i)=>i);
+ for(let i=roundOrder.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[roundOrder[i],roundOrder[j]]=[roundOrder[j],roundOrder[i]];}
+}
+function setGameMode(mode){
+ gameMode=mode;
+ document.querySelectorAll('.mode-card').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));
+ $('sentence').dir=mode==='reverse'?'rtl':'ltr';
+ $('sentence').style.textAlign=mode==='reverse'?'center':'left';
+ $('instruction').textContent=mode==='reverse'?'اختار التعبير الإنجليزي اللي معناه ظاهر قدامك.':'اختار العبارة التي تكمل الجملة بشكل صحيح.';
+ if(phase==='write')render();
 }
 function speakSentence(){
  if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
@@ -630,9 +667,8 @@ function speakSentence(){
 function makeOptions(){
  const correct=String(words[index].en||'');
  const pool=words.map(w=>String(w.en||'')).filter(v=>v&&v!==correct);
- const unique=[...new Set(pool)];
- for(let i=unique.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[unique[i],unique[j]]=[unique[j],unique[i]];}
- const choices=[correct,...unique.slice(0,3)];
+ for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+ const choices=[correct,...pool.slice(0,3)];
  for(let i=choices.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]];}
  return choices;
 }
@@ -641,7 +677,7 @@ function render(){
  $('category').textContent=w.group||'مفردات إنجليزية';
  $('word').textContent=w.en;$('meaning').textContent=w.ar;$('emoji').textContent=w.emoji||'📘';
   $('progress').style.width=((index+1)/words.length*100)+'%';
- $('count').textContent='السؤال '+(index+1)+' من '+words.length;
+ $('count').textContent='الجولة '+(index+1)+' من '+words.length;
  $('stageCount').textContent=phase==='write'?'اختيار من متعدد':'جاهز للتدريب';
  $('word').classList.toggle('hidden',phase!=='ready');$('meaning').classList.toggle('hidden',phase!=='ready');$('emoji').classList.toggle('hidden',phase!=='ready');
  $('hear').classList.toggle('hidden',phase!=='ready');$('startTest').classList.toggle('hidden',phase!=='ready');$('lessonHint').classList.toggle('hidden',phase!=='ready');
@@ -649,7 +685,10 @@ function render(){
  $('nextQuestion').disabled=true;selectedAnswer='';
  if(phase==='write'){
    $('sentence').textContent=makeSentence(w);
-   $('sentenceMeaning').textContent=sentenceArabicMeanings[w.en] || w.ar || '';
+   $('sentenceMeaning').textContent=gameMode==='reverse'?'اختار التعبير الإنجليزي المطابق للمعنى.':(sentenceArabicMeanings[w.en] || w.ar || '');
+   $('roundBanner').textContent=gameMode==='reverse'?'🧩 تحدّي التركيز: طابق المعنى بالتعبير!':'🎯 تحدّي الجملة: كمّلها بأدق تعبير!';
+   $('sentence').style.direction=gameMode==='reverse'?'rtl':'ltr';
+   $('sentence').style.textAlign=gameMode==='reverse'?'center':'left';
    $('hearSentence').setAttribute('aria-label','استمع للجملة الإنجليزية');
    $('options').replaceChildren();
    makeOptions().forEach(option=>{
@@ -667,22 +706,29 @@ function chooseAnswer(option,button){
  const correct=String(words[index].en||'');
  document.querySelectorAll('#options button').forEach(b=>{b.disabled=true;if(b.textContent===correct)b.classList.add('correct');});
  if(option===correct){
-   $('feedback').textContent='برافو! إجابة صحيحة 👏';$('feedback').style.color='#34d399';
+   streak++;score+=10+Math.min(streak-1,5)*2;
+   $('feedback').textContent=streak>=3?'🔥 جامد! سلسلة '+streak+' إجابات صحيحة! +نقاط':'برافو! إجابة صحيحة 👏 +'+(10+Math.min(streak-1,5)*2)+' نقطة';
+   $('feedback').style.color='#34d399';
+   try{const best=Number(localStorage.getItem(BEST_KEY)||0);if(score>best)localStorage.setItem(BEST_KEY,String(score))}catch{}
+   $('roundBanner').textContent=streak>=3?'🚀 سلسلة نار! كمّل بنفس القوة!':'✨ صح عليك! جاهز للتحدّي اللي بعده؟';
  }else{
-   button.classList.add('wrong');$('feedback').textContent='مش دي الإجابة الصحيحة. جرّب في السؤال الجاي.';$('feedback').style.color='#fb7185';
+   streak=0;button.classList.add('wrong');
+   $('feedback').textContent='قريبة! الإجابة الصحيحة: '+correct+' — خُدها معلومة للسؤال الجاي.';$('feedback').style.color='#fb7185';
+   $('roundBanner').textContent='💡 الغلط جزء من التعلّم. جرّب تاني في السؤال الجاي!';
  }
- $('nextQuestion').disabled=false;
+ updateGameStats();$('nextQuestion').disabled=false;
 }
 function nextQuestion(){
  if(!selectedAnswer)return;
- index=(index+1)%words.length;attempt=1;phase='write';render();window.scrollTo({top:0,behavior:'smooth'});
+ index=(index+1)%words.length;if(index===0)shuffleRoundOrder();attempt=1;phase='write';render();window.scrollTo({top:0,behavior:'smooth'});
 }
 $('hear').onclick=speak;$('hearSentence').onclick=speakSentence;$('startTest').onclick=startTraining;
 $('backToWord').onclick=()=>{phase='ready';attempt=1;render();};
 $('previousWord').onclick=()=>{if(index<=0)return;index--;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
 $('skipWord').onclick=()=>{index=(index+1)%words.length;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
 $('nextQuestion').onclick=nextQuestion;
-load();render();
+document.querySelectorAll('.mode-card').forEach(b=>b.addEventListener('click',()=>setGameMode(b.dataset.mode)));
+load();shuffleRoundOrder();updateGameStats();render();
 
 })();
 </script>
