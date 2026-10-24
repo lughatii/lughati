@@ -499,7 +499,6 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
   <div class="hint" id="lessonHint">راجع معنى الكلمة، ثم اختَر الإجابة التي تكمل الجملة بشكل صحيح.</div>
   <div class="game-modes" id="gameModes"><p class="hint">اختار نوع الاختبار:</p><button class="mode-card active" type="button" data-mode="scenario"><span>🎭</span><b>مواقف واقعية</b><small>افهم الموقف واختار التعبير الأنسب</small></button><button class="mode-card" type="button" data-mode="sentence"><span>🕵️</span><b>محقق الجمل</b><small>اختار الجملة الإنجليزية المطابقة للمعنى</small></button><button class="mode-card" type="button" data-mode="meaning"><span>⚡</span><b>تحدّي المعنى</b><small>اقرأ الجملة وحدد معناها الصحيح</small></button></div><div class="row" id="preTestControls">
     <button class="btn" id="hear" type="button">🔊 استمع للكلمة ومعناها</button>
-    <button class="btn primary" id="startTest" type="button">ابدأ التدريب</button>
   </div>
   <div class="row" id="wordNavigation">
     <button class="btn" id="previousWord" type="button">← الكلمة السابقة</button>
@@ -541,13 +540,16 @@ const words=[
 const $=id=>document.getElementById(id);
 const STORE='lughati-stage3-learning-v3';
 let index=0,attempt=1,phase='ready',score=0,streak=0,gameMode='scenario';
+const heardWords=new Set();
 const clamp=(v,min,max)=>Math.min(max,Math.max(min,v));
-function save(){try{localStorage.setItem(STORE,JSON.stringify({index,attempt,phase}));}catch(e){console.warn('تعذر حفظ التقدم',e);}}
+function save(){try{localStorage.setItem(STORE,JSON.stringify({index,attempt,phase,heard:[...heardWords],order:phase==='write'?words.map(w=>w.en):null}));}catch(e){console.warn('تعذر حفظ التقدم',e);}}
 function load(){
  try{
   const s=JSON.parse(localStorage.getItem(STORE)||'null');
   if(!s||typeof s!=='object')return;
+  if(Array.isArray(s.order)&&s.order.length===words.length){const byKey=new Map(words.map(w=>[w.en,w]));if(s.order.every(k=>byKey.has(k)))words.splice(0,words.length,...s.order.map(k=>byKey.get(k)));}
   index=clamp(Number.isInteger(Number(s.index))?Number(s.index):0,0,words.length-1);
+  if(Array.isArray(s.heard))s.heard.filter(k=>words.some(w=>w.en===k)).forEach(k=>heardWords.add(k));
   if(s.phase==='write'){attempt=clamp(Number(s.attempt)||1,1,3);phase='write';}
   else{attempt=1;phase='ready';}
  }catch(e){console.warn('تعذر استرجاع التقدم',e);}
@@ -593,6 +595,13 @@ function speak(){
     arabicUtterance.rate=0.9;
     arabicUtterance.pitch=1;
     if(preferredArabic) arabicUtterance.voice=preferredArabic;
+    arabicUtterance.onend=()=>{
+     heardWords.add(w.en);save();
+     if(phase==='ready'&&heardWords.size===words.length){
+      words.splice(0,words.length,...shuffle(words));index=0;phase='write';attempt=1;
+      $('stageCount').textContent='اكتملت مراجعة الكلمات — بدأ التدريب تلقائيًا';render();window.scrollTo({top:0,behavior:'smooth'});
+     }else if(phase==='ready'){$('stageCount').textContent='سمعت '+heardWords.size+' من '+words.length+' كلمات';}
+    };
     synth.speak(arabicUtterance);
    };
    synth.speak(utterance);
@@ -707,9 +716,9 @@ function render(){
  $('word').textContent=w.en;$('meaning').textContent=w.ar;$('emoji').textContent=w.emoji||'📘';
  $('progress').style.width=((index+1)/words.length*100)+'%';
  $('count').textContent='السؤال '+(index+1)+' من '+words.length;
- $('stageCount').textContent=phase==='write'?'اختبار تفاعلي':'جاهز للاختبار';
+ $('stageCount').textContent=phase==='write'?'اختبار تفاعلي':'استمع لكل الكلمات لبدء التدريب تلقائيًا';
  $('word').classList.toggle('hidden',phase!=='ready');$('meaning').classList.toggle('hidden',phase!=='ready');$('emoji').classList.toggle('hidden',phase!=='ready');
- $('hear').classList.toggle('hidden',phase!=='ready');$('startTest').classList.toggle('hidden',phase!=='ready');$('lessonHint').classList.toggle('hidden',phase!=='ready');
+ $('hear').classList.toggle('hidden',phase!=='ready');$('lessonHint').classList.toggle('hidden',phase!=='ready');
  $('gameModes').classList.toggle('hidden',phase!=='ready');
  $('wordNavigation').classList.toggle('hidden',phase!=='ready');
  $('backToWordRow').classList.toggle('hidden',phase!=='write');
@@ -734,7 +743,6 @@ function render(){
  $('previousWord').disabled=index===0;
  save();
 }
-function startTraining(){phase='write';attempt=1;render();}
 function chooseAnswer(option,button){
  if(selectedAnswer||phase!=='write')return;
  selectedAnswer=option;
@@ -759,7 +767,7 @@ function nextQuestion(){
  if(!selectedAnswer)return;
  index=(index+1)%words.length;if(index===0){score=0;streak=0;updateGameStats();}attempt=1;phase='write';render();window.scrollTo({top:0,behavior:'smooth'});
 }
-$('hear').onclick=speak;$('hearSentence').onclick=speakSentence;$('startTest').onclick=startTraining;
+$('hear').onclick=speak;$('hearSentence').onclick=speakSentence;
 $('backToWord').onclick=()=>{phase='ready';attempt=1;render();};
 $('previousWord').onclick=()=>{if(index<=0)return;index--;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
 $('skipWord').onclick=()=>{index=(index+1)%words.length;attempt=1;phase='ready';render();window.scrollTo({top:0,behavior:'smooth'});};
