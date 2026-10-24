@@ -503,6 +503,25 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
   .row .btn{font-size:12px!important}
 }
 
+
+/* Keep the listen action immediately beside the displayed word on phones */
+#preTestControls{margin:7px auto 10px!important;justify-content:center!important}
+#preTestControls #hear{min-height:42px!important;padding:9px 16px!important}
+@media(max-width:600px){
+  #lesson{display:flex;flex-direction:column}
+  #category{order:0}
+  #emoji{order:1}
+  #word{order:2;margin:3px 0!important}
+  #meaning{order:3;margin:2px 0!important}
+  #preTestControls{order:4;width:100%;margin:7px auto 8px!important}
+  #preTestControls #hear{width:100%;max-width:320px;font-size:14px!important}
+  #lessonHint{order:5;margin:4px 0 8px!important}
+  #gameModes{order:6}
+  #wordNavigation{order:7}
+  #backToWordRow{order:8}
+  #writing{order:9}
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -534,10 +553,11 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
   <div class="emoji" id="emoji">📘</div>
   <div class="word" id="word"></div>
   <div class="meaning" id="meaning"></div>
-  <div class="hint" id="lessonHint">راجع معنى الكلمة، ثم اختَر الإجابة التي تكمل الجملة بشكل صحيح.</div>
-  <div class="game-modes" id="gameModes"><p class="hint">اختار نوع الاختبار:</p><button class="mode-card active" type="button" data-mode="scenario"><span>🎭</span><b>مواقف واقعية</b><small>افهم الموقف واختار التعبير الأنسب</small></button><button class="mode-card" type="button" data-mode="sentence"><span>🕵️</span><b>محقق الجمل</b><small>اختار الجملة الإنجليزية المطابقة للمعنى</small></button><button class="mode-card" type="button" data-mode="meaning"><span>⚡</span><b>تحدّي المعنى</b><small>اقرأ الجملة وحدد معناها الصحيح</small></button></div><div class="row" id="preTestControls">
+  <div class="row" id="preTestControls">
     <button class="btn" id="hear" type="button">🔊 استمع للكلمة ومعناها</button>
   </div>
+  <div class="hint" id="lessonHint">راجع معنى الكلمة، ثم اختَر الإجابة التي تكمل الجملة بشكل صحيح.</div>
+  <div class="game-modes" id="gameModes"><p class="hint">اختار نوع الاختبار:</p><button class="mode-card active" type="button" data-mode="scenario"><span>🎭</span><b>مواقف واقعية</b><small>افهم الموقف واختار التعبير الأنسب</small></button><button class="mode-card" type="button" data-mode="sentence"><span>🕵️</span><b>محقق الجمل</b><small>اختار الجملة الإنجليزية المطابقة للمعنى</small></button><button class="mode-card" type="button" data-mode="meaning"><span>⚡</span><b>تحدّي المعنى</b><small>اقرأ الجملة وحدد معناها الصحيح</small></button></div>
   <div class="row" id="wordNavigation">
     <button class="btn" id="previousWord" type="button">← الكلمة السابقة</button>
     <button class="btn" id="skipWord" type="button">تخطي الكلمة ⟶</button>
