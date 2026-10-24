@@ -498,7 +498,7 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
   <div class="meaning" id="meaning"></div>
   <div class="hint" id="lessonHint">راجع معنى الكلمة، ثم اختَر الإجابة التي تكمل الجملة بشكل صحيح.</div>
   <div class="game-modes" id="gameModes"><p class="hint">اختار نوع الاختبار:</p><button class="mode-card active" type="button" data-mode="scenario"><span>🎭</span><b>مواقف واقعية</b><small>افهم الموقف واختار التعبير الأنسب</small></button><button class="mode-card" type="button" data-mode="sentence"><span>🕵️</span><b>محقق الجمل</b><small>اختار الجملة الإنجليزية المطابقة للمعنى</small></button><button class="mode-card" type="button" data-mode="meaning"><span>⚡</span><b>تحدّي المعنى</b><small>اقرأ الجملة وحدد معناها الصحيح</small></button></div><div class="row" id="preTestControls">
-    <button class="btn" id="hear" type="button">🔊 استمع للكلمة</button>
+    <button class="btn" id="hear" type="button">🔊 استمع للكلمة ومعناها</button>
     <button class="btn primary" id="startTest" type="button">ابدأ التدريب</button>
   </div>
   <div class="row" id="wordNavigation">
@@ -583,6 +583,18 @@ function speak(){
    utterance.pitch=1;
    if(preferredEnglish) utterance.voice=preferredEnglish;
    utterance.onerror=()=>{$('feedback').textContent='تعذّر تشغيل الصوت الإنجليزي. تأكد من تفعيل صوت إنجليزي في إعدادات جهازك.';};
+   utterance.onend=()=>{
+    const arabicText=String(w.ar||'').replace(/\s*\/\s*/g,' أو ').trim();
+    if(!arabicText) return;
+    const arabicVoices=synth.getVoices().filter(v=>/^ar([_-]|$)/i.test(v.lang||''));
+    const preferredArabic=arabicVoices.find(v=>/^ar[-_]EG$/i.test(v.lang||''))||arabicVoices.find(v=>/arabic|egypt/i.test((v.name||'')+' '+(v.lang||'')))||arabicVoices[0];
+    const arabicUtterance=new SpeechSynthesisUtterance(arabicText);
+    arabicUtterance.lang=preferredArabic?preferredArabic.lang:'ar-EG';
+    arabicUtterance.rate=0.9;
+    arabicUtterance.pitch=1;
+    if(preferredArabic) arabicUtterance.voice=preferredArabic;
+    synth.speak(arabicUtterance);
+   };
    synth.speak(utterance);
  };
  if(synth.getVoices().length){
