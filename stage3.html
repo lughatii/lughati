@@ -716,7 +716,7 @@ function render(){
  $('word').textContent=w.en;$('meaning').textContent=w.ar;$('emoji').textContent=w.emoji||'📘';
  $('progress').style.width=((index+1)/words.length*100)+'%';
  $('count').textContent='السؤال '+(index+1)+' من '+words.length;
- $('stageCount').textContent=phase==='write'?'اختبار تفاعلي':'استمع لكل الكلمات لبدء التدريب تلقائيًا';
+ $('stageCount').textContent=phase==='write'?'اختبار تفاعلي':'تم سماع '+heardWords.size+' من '+words.length+' كلمات — استمع للباقي لبدء التدريب تلقائيًا';
  $('word').classList.toggle('hidden',phase!=='ready');$('meaning').classList.toggle('hidden',phase!=='ready');$('emoji').classList.toggle('hidden',phase!=='ready');
  $('hear').classList.toggle('hidden',phase!=='ready');$('lessonHint').classList.toggle('hidden',phase!=='ready');
  $('gameModes').classList.toggle('hidden',phase!=='ready');
