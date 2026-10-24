@@ -595,14 +595,25 @@ function speak(){
     arabicUtterance.rate=0.9;
     arabicUtterance.pitch=1;
     if(preferredArabic) arabicUtterance.voice=preferredArabic;
-    arabicUtterance.onend=()=>{
+    let wordCounted=false;
+    const finishWordAudio=()=>{
+     if(wordCounted)return;
+     wordCounted=true;
      heardWords.add(w.en);save();
-     if(phase==='ready'&&heardWords.size===words.length){
+     if(phase==='ready'&&heardWords.size>=words.length){
       words.splice(0,words.length,...shuffle(words));index=0;phase='write';attempt=1;
-      $('stageCount').textContent='اكتملت مراجعة الكلمات — بدأ التدريب تلقائيًا';render();window.scrollTo({top:0,behavior:'smooth'});
-     }else if(phase==='ready'){$('stageCount').textContent='سمعت '+heardWords.size+' من '+words.length+' كلمات';}
+      render();
+      $('stageCount').textContent='اكتملت مراجعة الكلمات — بدأ التدريب تلقائيًا';
+      $('gameModes').classList.add('hidden');
+      $('writing').classList.remove('hidden');
+      window.scrollTo({top:0,behavior:'smooth'});
+     }else if(phase==='ready'){$('stageCount').textContent='تم سماع '+heardWords.size+' من '+words.length+' كلمات — استمع للباقي لبدء التدريب تلقائيًا';}
     };
+    arabicUtterance.onend=finishWordAudio;
+    arabicUtterance.onerror=finishWordAudio;
     synth.speak(arabicUtterance);
+    // Fallback for mobile browsers that fail to fire speech synthesis end events.
+    setTimeout(finishWordAudio,Math.max(1800,arabicText.length*110));
    };
    synth.speak(utterance);
  };
