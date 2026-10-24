@@ -521,14 +521,22 @@ button:focus-visible,a:focus-visible{outline:2px solid #63e6df!important;outline
 (()=> {
 'use strict';
 const words=[
-{en:"aim to",ar:"يهدف إلى",spoken:"aim to",emoji:'📘',group:'تعبيرات وكلمات'},
-{en:"compared to",ar:"مقارنة بـ",spoken:"compared to",emoji:'📘',group:'تعبيرات وكلمات'},
-{en:"contribute to",ar:"يساهم في",spoken:"contribute to",emoji:'📘',group:'تعبيرات وكلمات'},
-{en:"essential to",ar:"ضروري لـ",spoken:"essential to",emoji:'📘',group:'تعبيرات وكلمات'},
-{en:"protect from",ar:"يحمي من",spoken:"protect from",emoji:'📘',group:'تعبيرات وكلمات'},
-{en:"range from ... to",ar:"يتراوح من ... إلى",spoken:"range from to",emoji:'📘',group:'تعبيرات وكلمات'},
-{en:"safe from",ar:"آمن من",spoken:"safe from",emoji:'📘',group:'تعبيرات وكلمات'},
-{en:"worry about",ar:"يقلق بشأن",spoken:"worry about",emoji:'📘',group:'تعبيرات وكلمات'}
+{en:"accusations",ar:"اتهامات",spoken:"accusations",emoji:'📘',group:'كلمات الدرس'},
+{en:"charity",ar:"إحسان / صدقة",spoken:"charity",emoji:'📘',group:'كلمات الدرس'},
+{en:"condemned",ar:"مدان / محكوم عليه",spoken:"condemned",emoji:'📘',group:'كلمات الدرس'},
+{en:"denunciation",ar:"وشاية / اتهام",spoken:"denunciation",emoji:'📘',group:'كلمات الدرس'},
+{en:"despair",ar:"يأس",spoken:"despair",emoji:'📘',group:'كلمات الدرس'},
+{en:"etched",ar:"منقوش / محفور في الذاكرة",spoken:"etched",emoji:'📘',group:'كلمات الدرس'},
+{en:"fortress",ar:"قلعة / حصن",spoken:"fortress",emoji:'📘',group:'كلمات الدرس'},
+{en:"frail",ar:"ضعيف / واهن",spoken:"frail",emoji:'📘',group:'كلمات الدرس'},
+{en:"loyalty",ar:"ولاء",spoken:"loyalty",emoji:'📘',group:'كلمات الدرس'},
+{en:"mildew",ar:"عفن / فطر",spoken:"mildew",emoji:'📘',group:'كلمات الدرس'},
+{en:"obsession",ar:"هوس",spoken:"obsession",emoji:'📘',group:'كلمات الدرس'},
+{en:"pity",ar:"يشفق على",spoken:"pity",emoji:'📘',group:'كلمات الدرس'},
+{en:"pleading",ar:"متوسل / مستعطف",spoken:"pleading",emoji:'📘',group:'كلمات الدرس'},
+{en:"rejoiced",ar:"ابتهجوا / فرحوا",spoken:"rejoiced",emoji:'📘',group:'كلمات الدرس'},
+{en:"traitor",ar:"خائن",spoken:"traitor",emoji:'📘',group:'كلمات الدرس'},
+{en:"treacherous",ar:"خائن / غادر",spoken:"treacherous",emoji:'📘',group:'كلمات الدرس'}
 ];
 const $=id=>document.getElementById(id);
 const STORE='lughati-stage3-learning-v3';
@@ -592,26 +600,42 @@ function speak(){
  }
 }
 const spokenSentences={
- "aim to":"We aim to achieve our goals.",
- "compared to":"Compared to last year, the results are much better.",
- "contribute to":"Regular exercise can contribute to better health.",
- "essential to":"Clean water is essential to human life.",
- "protect from":"A good coat helps protect from the cold.",
- "range from ... to":"Temperatures range from 10 degrees to 30 degrees.",
- "safe from":"The helmet keeps cyclists safe from head injuries.",
- "worry about":"Try not to worry about the exam."
+ "accusations":"He denied the accusations.",
+ "charity":"They gave money to charity.",
+ "condemned":"The condemned man waited quietly.",
+ "denunciation":"The letter was a public denunciation.",
+ "despair":"She felt despair after the bad news.",
+ "etched":"The memory was etched in his mind.",
+ "fortress":"The soldiers guarded the fortress.",
+ "frail":"The frail old man walked slowly.",
+ "loyalty":"Her loyalty to her friends was clear.",
+ "mildew":"Mildew grew on the damp wall.",
+ "obsession":"His obsession with the case grew.",
+ "pity":"I pity anyone who has to suffer.",
+ "pleading":"He was pleading for another chance.",
+ "rejoiced":"They rejoiced at the good news.",
+ "traitor":"The traitor betrayed his country.",
+ "treacherous":"They crossed the treacherous path."
 };
 let selectedAnswer='';
 const BEST_KEY='lughati-stage3-best-score-v2';
 const scenarioPrompts={
- "aim to":"مدرسة وضعت خطة للوصول إلى نتيجة محددة هذا العام. أي تعبير يوضح أنها تسعى لتحقيق هدف؟",
- "compared to":"أنت تقارن درجات هذا العام بدرجات العام الماضي. أي تعبير يناسب المقارنة؟",
- "contribute to":"تريد أن تقول إن ممارسة الرياضة تساعد في تحسين الصحة. أي تعبير يوضح المساهمة في نتيجة؟",
- "essential to":"تشرح أن الماء النظيف شيء لا غنى عنه لحياة الإنسان. أي تعبير يناسب المعنى؟",
- "protect from":"تتحدث عن معطف يساعد على الوقاية من البرد. أي تعبير يوضح الحماية من شيء؟",
- "range from ... to":"تشرح أن درجات الحرارة تبدأ من 10 وتصل إلى 30 درجة. أي تعبير يصف هذا النطاق؟",
- "safe from":"تشرح أن الخوذة تقلل خطر إصابات الرأس وتحافظ على سلامة راكبي الدراجات. أي تعبير يناسب؟",
- "worry about":"صديقك قلق بسبب الامتحان، وتريد وصف شعوره بالإنجليزية. أي تعبير تختار؟"
+ "accusations":"شخص يوجّه لشخص آخر ادعاءات بأنه ارتكب خطأ. ما الكلمة التي تعني اتهامات؟",
+ "charity":"تتبرع بالمال لمساعدة المحتاجين. ما الكلمة المناسبة للإحسان أو الصدقة؟",
+ "condemned":"شخص صدر عليه حكم بالإدانة. ما الكلمة التي تصفه؟",
+ "denunciation":"تصريح أو كلام يعلن فيه شخص اتهامه أو شجبه لشخص آخر. ما الكلمة المناسبة؟",
+ "despair":"شعور بفقدان الأمل تمامًا. ما الكلمة المناسبة؟",
+ "etched":"ذكرى محفورة بقوة في الذاكرة. ما الكلمة المناسبة؟",
+ "fortress":"مبنى قوي يُستخدم للدفاع والحماية. ما الكلمة المناسبة؟",
+ "frail":"شخص ضعيف البنية وسهل التأثر. ما الكلمة المناسبة؟",
+ "loyalty":"الإخلاص والوفاء لشخص أو جهة. ما الكلمة المناسبة؟",
+ "mildew":"فطر ينمو في الأماكن الرطبة. ما الكلمة المناسبة؟",
+ "obsession":"تفكير مستمر ومفرط في شيء ما. ما الكلمة المناسبة؟",
+ "pity":"تشعر بالأسف تجاه شخص يعاني. ما الكلمة المناسبة؟",
+ "pleading":"شخص يطلب شيئًا بإلحاح ويتوسل. ما الكلمة المناسبة؟",
+ "rejoiced":"مجموعة من الناس شعروا بفرح كبير. ما الكلمة المناسبة؟",
+ "traitor":"شخص يخون بلده أو أصدقاءه. ما الكلمة المناسبة؟",
+ "treacherous":"شخص أو شيء غادر أو غير مأمون. ما الكلمة المناسبة؟"
 };
 function shuffle(items){
  const a=[...items];
